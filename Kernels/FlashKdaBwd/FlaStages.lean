@@ -67,6 +67,21 @@ theorem inverse_pull (a inv da dinv bar : Matrix (Fin n) (Fin n) ℝ)
   have a2 := mul_left da inv (invᵀ * bar)
   simpa only [inner, transpose_mul] using a1.trans a2
 
+/-- The inverse is reused for both weighted values and weighted keys. Its gradient
+collects both products before the two transpose multiplications in the inverse solve. -/
+theorem weighted_products {d v : ℕ} (a inv da dinv : Matrix (Fin n) (Fin n) ℝ)
+    (val dval bu : Matrix (Fin n) (Fin v) ℝ) (key dkey bw : Matrix (Fin n) (Fin d) ℝ)
+    (hi : inv * a = 1) (hd : a * dinv + da * inv = 0) :
+    inner (dinv * val + inv * dval) bu + inner (dinv * key + inv * dkey) bw =
+      inner da (-(invᵀ * (bu * valᵀ + bw * keyᵀ) * invᵀ)) +
+      inner dval (invᵀ * bu) + inner dkey (invᵀ * bw) := by
+  rw [← inverse_pull _ _ _ _ _ hi hd, inner_sum, inner_sum, mul_right inv dval,
+    mul_right inv dkey, mul_left dinv val, mul_left dinv key]
+  have add (x y : Matrix (Fin n) (Fin n) ℝ) :
+      inner dinv (x+y) = inner dinv x + inner dinv y := by simp [inner, Matrix.mul_add]
+  rw [add]
+  ring
+
 /-- Transposing the inclusive prefix sum accumulates all later gradient contributions.
 Chunk-local indices select exactly the live entries in that chunk. -/
 theorem reverse_prefix (dx w : Fin n → ℝ) :
@@ -108,6 +123,34 @@ theorem state_scan {d n v : ℕ}
     mul_left da, mul_left dk, mul_right a, mul_right k, leftSub, inner_sum,
     mul_left dw h, mul_right w dh]
   ring
+
+/-- Reverse the output and state contractions and both uses of the triangular inverse in one
+chunk. Each term on the right pairs one independent input variation with its gradient. -/
+theorem factorized_scan {d v : ℕ} (sys inv dsys dinv : Matrix (Fin n) (Fin n) ℝ)
+    (val dval outBar : Matrix (Fin n) (Fin v) ℝ) (key dkey q dq : Matrix (Fin n) (Fin d) ℝ)
+    (h dh last : Matrix (Fin d) (Fin v) ℝ) (a da : Matrix (Fin n) (Fin n) ℝ)
+    (e de : Matrix (Fin d) (Fin d) ℝ) (k dk : Matrix (Fin d) (Fin n) ℝ)
+    (hi : inv * sys = 1) (hd : sys * dinv + dsys * inv = 0) :
+    let w := inv * key
+    let f := inv * val - w * h
+    let du := dinv * val + inv * dval
+    let dw := dinv * key + inv * dkey
+    let df := du - (dw * h + w * dh)
+    let bf := aᵀ * outBar + kᵀ * last
+    let bw := -(bf * hᵀ)
+    inner (dq*h + q*dh + da*f + a*df) outBar + inner (de*h + e*dh + dk*f + k*df) last =
+      inner dh (qᵀ * outBar + eᵀ * last - wᵀ * bf) +
+      inner dsys (-(invᵀ * (bf * valᵀ + bw * keyᵀ) * invᵀ)) +
+      inner dval (invᵀ * bf) + inner dkey (invᵀ * bw) + inner dq (outBar * hᵀ) +
+      inner da (outBar * fᵀ) + inner de (last * hᵀ) + inner dk (last * fᵀ) := by
+  dsimp only
+  rw [state_scan]
+  have weighted := weighted_products sys inv dsys dinv val dval (aᵀ * outBar + kᵀ * last)
+    key dkey (-((aᵀ * outBar + kᵀ * last) * hᵀ)) hi hd
+  have neg (x y : Matrix (Fin n) (Fin d) ℝ) : inner x (-y) = -inner x y := by
+    simp [inner]
+  rw [neg] at weighted
+  linarith only [weighted]
 
 /-- The bounded gate in FLA computes the slope using exp(-abs(z)) for both signs. -/
 theorem stable_sigmoid (z : ℝ) :

@@ -19,9 +19,17 @@ exports a forward entry.
   sigmoid and the bounded per-coordinate gate. [Public.lean](Public.lean) composes these results
   for every value channel of a head. Shared parameters receive contributions from every use.
   The theorem gives the derivative along any differentiable path through the raw inputs.
+- [Chunk.lean](Chunk.lean) follows the FLA factorization. The chunk solves for the weighted
+  values and weighted keys, then subtracts the contribution of the incoming state. The proof
+  derives the solve from its triangular coefficients. It shows that, for any partition into
+  chunks, the same raw-input gradient differentiates this chunked computation, including the
+  final partial chunk. [Upstream weighted products](https://github.com/fla-org/flash-linear-attention/blob/7cecb9233b2331f725585d0f868a541f1a478388/fla/ops/kda/wy_fast.py)
 - [FlaStages.lean](FlaStages.lean) checks the real-arithmetic identities for FLA's masked causal
   product, inverse triangular solve, chunk-state gradient propagation, reverse cumulative sum and
-  stable evaluation of the bounded gate derivative. These correspond to the
+  stable evaluation of the bounded gate derivative. A single identity combines both uses of
+  the inverse with the output and state contractions. The triangular inverse in the chunk
+  satisfies its differentiated solve equation along any differentiable coefficient path.
+  These correspond to the
   [chunk backward](https://github.com/fla-org/flash-linear-attention/blob/7cecb9233b2331f725585d0f868a541f1a478388/fla/ops/kda/chunk_bwd.py)
   and [gate backward](https://github.com/fla-org/flash-linear-attention/blob/7cecb9233b2331f725585d0f868a541f1a478388/fla/ops/kda/gate.py#L214-L245).
 
@@ -47,9 +55,9 @@ logit to zero and the GPU returns the correctly rounded reference gradient.
 [specialization](beta_bwd_sm103a.ptx) captured from the public call. In one unrolled lane the
 code adds one to the exponential, divides one by the result, subtracts the sigmoid from one
 and multiplies. Lean checks that any positive exponential below 2⁻²⁴ rounds away in that
-single-precision addition. The complete GPU launch and its final stores are measured.
-A whole-program PTX proof of all kernels, numerical agreement on all inputs, and memory safety
-and progress of the launch remain open.
+single-precision addition. The probe measures the gradient returned by the complete GPU launch.
+This finite input refutes correctly rounded agreement for every input. Whole-launch memory
+safety, progress and the relation between every emitted instruction and the real chunk graph remain open.
 
 ## Reproduce
 
@@ -58,8 +66,7 @@ the PyTorch/Triton versions in the records, run:
 
 ```sh
 kda=Kernels/FlashKdaBwd
-lake --wfail build +Kernels.FlashKdaBwd.Public +Kernels.FlashKdaBwd.FlaStages \
-  +Kernels.FlashKdaBwd.Compiled +Kernels.FlashKdaBwd.Saturation
+lake --wfail build +Kernels.FlashKdaBwd.Audit
 python "$kda/checks/gradients.py"
 python "$kda/checks/saturation.py" --ptx /tmp/fla-beta-bwd.ptx
 cmp /tmp/fla-beta-bwd.ptx "$kda/beta_bwd_sm103a.ptx"

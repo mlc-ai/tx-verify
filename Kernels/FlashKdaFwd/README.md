@@ -54,6 +54,17 @@ records relative to the FlashKDA and CUDA roots and strips trailing whitespace. 
 records the raw and normalized SHA-256 fingerprints. After normalization the GB300 PTX differs
 from the checked-in file only in its architecture directive, `sm_103a` versus `sm_100a`.
 
+The PTX file has 337,299 text lines. The upstream build enables source line information
+with [`-lineinfo`](https://github.com/MoonshotAI/FlashKDA/blob/b8a96a6db49e785ba0ee103e9d87d2588ffcc4f2/setup.py#L80).
+The debug string table stores 470 encoded C++ function names, one byte per line on 234,225
+lines. There are 32,559 source-location directives. For example, the [directive at line
+396](flash_kda_sm100a.ptx#L396) identifies an inlined barrier initialization by name and gives
+its call site. Across the 17 entries (one tile-prefix builder,
+two preparation variants and fourteen state-recurrence variants), Lean counts 41,607 static
+instructions. These counts describe the whole compiled file. Each call selects its own entries.
+The [import theorem](Audit/Import.lean) checks the counts. The table above lists the execution
+properties proved for particular entries and instruction sites.
+
 A fresh build from the pinned FlashKDA and CUTLASS sources reproduced the GB300 PTX and the
 native GPU program byte for byte. CUDA's binary inspector found a single native image in
 each loaded Python extension. Its SHA-256 matched the image used for the instruction audit.

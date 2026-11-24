@@ -64,7 +64,8 @@ GPU counterexamples on constructed inputs. Safety, progress, termination, and th
 of the complete compiled forward launch remain open.
 
 The [FLA KDA backward verification](Kernels/FlashKdaBwd/README.md) derives the gradients of the
-real forward recurrence, checks identities used by FLA's chunk backward, and compares eight
+real forward recurrence and proves they also differentiate FLA's chunk factorization for any
+partition of the sequence. It checks FLA's chunk backward identities and compares eight
 GPU input gradients to a double-precision reference. A one-token case exposes a zero update-logit
 gradient whose real derivative exceeds two.
 

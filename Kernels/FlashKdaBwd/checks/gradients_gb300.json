@@ -1,6 +1,8 @@
 {
   "fla_commit": "7cecb9233b2331f725585d0f868a541f1a478388",
   "device": "NVIDIA GB300",
+  "torch": "2.11.0+cu132.a6a981f",
+  "triton_base_version": "3.8.0",
   "cases": [
     {
       "lengths": [
