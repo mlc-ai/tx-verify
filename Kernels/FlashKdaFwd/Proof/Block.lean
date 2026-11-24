@@ -45,7 +45,6 @@ theorem half_right_inverse (a : ℕ → ℕ → ℝ) : system 8 a * halfRegs a =
     Matrix.ext fun i j => seven_pivots a i j
   rw [h, diagonal_inverse]
 
-/-- The two matrix products and the final add in the production 16-by-16 inverse. -/
 def blockInverse (a : ℕ → ℕ → ℝ) : Matrix Full Full ℝ :=
   let p := fromBlocks (halfRegs a) 0 0 (halfRegs (second a))
   let m := fromBlocks 0 0 (cross a) 0
@@ -62,11 +61,9 @@ theorem right_inverse (a : ℕ → ℕ → ℝ) : system 16 a * blockInverse a =
 
 variable {d : ℕ}
 
-/-- An unmasked row coefficient. The unit-lower matrix discards this at and above the diagonal. -/
 def coefficient (cum key : ℕ → Row d) (beta : ℕ → ℝ) (t j : ℕ) : ℝ :=
   beta t * dot (restored cum key j) (weighted cum key t)
 
-/-- Step 1 of the recurrence kernel subtracts its entry-state prediction before scaling. -/
 def rhs (initial : Row d) (cum key : ℕ → Row d) (v beta : ℕ → ℝ) (t : Full) : ℝ :=
   beta t * (v t - dot initial (weighted cum key t))
 

@@ -8,21 +8,12 @@ import Mathlib.Tactic.Ring
 
 @[expose] public section
 
-/-!
-# The two diagonal solves and their merge
-
-In the exact-real interpretation each of the eight lanes in a subgroup owns a row.
-Initially the registers hold the strict lower entries and a unit diagonal. At pivot s,
-each row below s subtracts its column-s multiplier times the finalized pivot row.
--/
-
 namespace FlashKda.Inverse
 noncomputable section
 open Finset Matrix
 
 def delta (i j : ℕ) : ℝ := if i = j then 1 else 0
 
-/-- Forward substitution against one column of the identity matrix. -/
 def inverseEntry (lower : ℕ → ℕ → ℝ) (r c : ℕ) : ℝ :=
   delta r c - ∑ j : Fin r, lower r j * inverseEntry lower j c
 termination_by r
@@ -47,7 +38,6 @@ theorem diagonal (a : ℕ → ℕ → ℝ) (r : ℕ) : inverseEntry a r r = 1 :=
     rw [above a (mem_range.mp hj), mul_zero]
   simp [delta, sum_eq_zero zero]
 
-/-- Register invariant after processing the first s pivots. -/
 def partialRow (a : ℕ → ℕ → ℝ) (s r c : ℕ) : ℝ :=
   if s ≤ c ∧ c < r then a r c else
     delta r c - ∑ j ∈ range (min s r), a r j * inverseEntry a j c
@@ -60,8 +50,6 @@ theorem finished (a : ℕ → ℕ → ℝ) {s r : ℕ} (h : r ≤ s) (c : ℕ) :
   have hn : ¬(s ≤ c ∧ c < r) := by omega
   rw [partialRow, ite_eq_right hn, min_eq_right h, ← entry_eq]
 
-/-- The actual register update: add the negative multiplier times the pivot row at columns
-below s; negate the multiplier at s; keep the other columns and the pivot row intact. -/
 def pivot (old : ℕ → ℕ → ℝ) (s r c : ℕ) : ℝ :=
   if s < r then
     if c < s then old r c - old r s * old s c
@@ -94,7 +82,6 @@ theorem next (a : ℕ → ℕ → ℝ) (s r c : ℕ) :
   · have hle : r ≤ s := by omega
     rw [pivot, ite_eq_right hr, finished a hle, finished a (by omega : r ≤ s+1)]
 
-/-- Exact contents of the row registers after s unrolled iterations. -/
 def registers (a : ℕ → ℕ → ℝ) : ℕ → ℕ → ℕ → ℝ
   | 0 => fun r c => if c < r then a r c else delta r c
   | s+1 => pivot (registers a s) s
@@ -108,11 +95,9 @@ theorem seven_pivots (a : ℕ → ℕ → ℝ) (r c : Fin 8) :
     registers a 7 r c = inverseEntry a r c := by
   rw [registers_eq, finished a (by omega : r.val ≤ 7)]
 
-/-- Unit-lower matrix, with arbitrary entries below its diagonal. -/
 def system (n : ℕ) (a : ℕ → ℕ → ℝ) : Matrix (Fin n) (Fin n) ℝ :=
   fun i j => if j.val < i.val then a i j else delta i j
 
-/-- Effect of one unit-lower matrix row, with indices written as natural numbers. -/
 theorem row_sum {n r : ℕ} (hr : r < n) (a x : ℕ → ℝ) :
     ∑ j ∈ range n, (if j < r then a j else delta r j) * x j =
       x r + ∑ j ∈ range r, a j * x j := by
@@ -149,7 +134,6 @@ theorem diagonal_inverse (n : ℕ) (a : ℕ → ℕ → ℝ) :
   change _ = if i = j then 1 else 0
   simp only [sub_add_cancel, delta, Fin.val_inj]
 
-/-- Two diagonal inverses and the two matrix products implementing the off-diagonal block. -/
 theorem merge {ι : Type*} [Fintype ι] [DecidableEq ι]
     (a b c ai bi : Matrix ι ι ℝ) (ha : a * ai = 1) (hb : b * bi = 1) :
     let p := Matrix.fromBlocks ai 0 0 bi

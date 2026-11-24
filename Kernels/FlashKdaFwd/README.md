@@ -50,3 +50,8 @@ descriptors. [The address proof](Packed/StateMap.lean) maps each byte of the 128
 to one strip and connects completed copy effects to those bytes. [The shared-memory layout
 proof](Packed/StateSwizzle.lean) establishes that the three bit operations used to address
 a state element implement the same 32-byte swizzle as the tensor map.
+
+[The warp matrix proof](Packed/Matrix.lean) follows the operand bytes contributed by all 32
+threads to one 16-by-8 matrix multiply. For arbitrary real inputs in those registers, each
+thread receives its four entries of the product plus the accumulator, including all sixteen
+terms in each dot product. Instruction 2,199 (numbering from zero) uses this operation.

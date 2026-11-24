@@ -3,14 +3,11 @@ module
 
 public import Kernels.FlashKdaFwd.Algorithm
 
-/-! # Exact-arithmetic forward result for any number of full blocks and a partial last block. -/
 @[expose] public section
 namespace FlashKda.Sequence
 noncomputable section
 open Chunk Block Algorithm
 
-/-- One head, one value coordinate. The value vector and state matrix are reconstructed by
-applying the theorem independently at every value coordinate. -/
 structure Tokens (d : ℕ) where
   key : ℕ → Row d
   query : ℕ → Row d
@@ -18,7 +15,6 @@ structure Tokens (d : ℕ) where
   strength : ℕ → ℝ
   logDecay : ℕ → Row d
 
-/-- Convert the public raw inputs using the exact-real gate and normalization definitions. -/
 def activate {d : ℕ} (q k gate : ℕ → Row d) (v logits : ℕ → ℝ)
     (lower parameter : ℝ) (bias : Row d) : Tokens d where
   key t := normalize (k t)
@@ -48,7 +44,6 @@ theorem state_shift (x : Tokens d) (s : Row d) (offset t : ℕ) :
     rw [ih]
     rfl
 
-/-- Exact block program. The first component is its output row functional, the second its carry. -/
 def runBlock (x : Tokens d) (s : Row d) (len : ℕ) (scale : ℝ) : (ℕ → ℝ) × Row d :=
   let k := fun t => if t < len then x.key t else fun _ => 0
   let p := cum (fun t => if t < len then x.logDecay t else fun _ => 0)
@@ -70,7 +65,6 @@ theorem next_cursor (total b : ℕ) :
   simp only [cursor, liveRows, Nat.mul_succ]
   omega
 
-/-- The recurrence kernel uses the previous block's computed carry as its input. -/
 def carry (x : Tokens d) (initial : Row d) (total : ℕ) (scale : ℝ) : ℕ → Row d
   | 0 => initial
   | b+1 => (runBlock (suffix x (cursor total b)) (carry x initial total scale b)
@@ -83,7 +77,6 @@ theorem carry_eq (x : Tokens d) (initial : Row d) (total b : ℕ) (scale : ℝ) 
   | succ b ih =>
     rw [carry, ih, (runBlock_eq _ _ (live_le total b) scale).2, state_shift, next_cursor]
 
-/-- Each live token is assigned to its own block by quotient and remainder. -/
 def output (x : Tokens d) (initial : Row d) (total : ℕ) (scale : ℝ) (t : ℕ) : ℝ :=
   let b := t / 16
   (runBlock (suffix x (cursor total b)) (carry x initial total scale b)

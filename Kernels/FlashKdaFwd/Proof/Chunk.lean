@@ -9,14 +9,6 @@ import Mathlib.Tactic.FieldSimp
 
 @[expose] public section
 
-/-!
-# Exact block recurrence for Kimi Delta Attention
-
-Work on one value coordinate. Every state row and query/key has one entry per key
-coordinate. Time starts at zero. All sums below are over real numbers.
-The cumulative after token t includes that token's decay.
--/
-
 namespace FlashKda.Chunk
 noncomputable section
 
@@ -32,7 +24,6 @@ def weighted (cumulative : ℕ → Row d) (x : ℕ → Row d) (t : ℕ) : Row d 
 def restored (cumulative key : ℕ → Row d) (t : ℕ) : Row d :=
   fun i => key t i / cumulative (t + 1) i
 
-/-- State in block-entry coordinates, after the first n corrections. -/
 def history (initial : Row d) (invKey : ℕ → Row d) (u : ℕ → ℝ) (n : ℕ) : Row d :=
   fun i => initial i + ∑ j ∈ range n, u j * invKey j i
 
@@ -44,7 +35,6 @@ theorem history_projection (initial x : Row d) (invKey : ℕ → Row d) (u : ℕ
   congr 1
   exact sum_comm
 
-/-- The block's strict-lower solve, with the diagonal one moved to the left. -/
 def Solves (n : ℕ) (initial : Row d) (cumulative key : ℕ → Row d) (v beta u : ℕ → ℝ) : Prop :=
   ∀ t < n, u t = beta t * (v t - dot initial (weighted cumulative key t) -
     ∑ j ∈ range t, u j * dot (restored cumulative key j) (weighted cumulative key t))
@@ -64,7 +54,6 @@ theorem solve_unique {n : ℕ} {initial : Row d} {cumulative key : ℕ → Row d
     intro j hj
     rw [ih j (mem_range.mp hj) (lt_trans (mem_range.mp hj) ht)]
 
-/-- Independent token-by-token specification, in physical state coordinates. -/
 def step (old decay key : Row d) (value strength : ℝ) : Row d :=
   let before := fun i => old i * decay i
   let correction := strength * (value - dot before key)
@@ -74,7 +63,6 @@ def sequential (initial : Row d) (decay key : ℕ → Row d) (v beta : ℕ → �
   | 0 => initial
   | t + 1 => step (sequential initial decay key v beta t) (decay t) (key t) (v t) (beta t)
 
-/-- FP32 carry in the ideal-real interpretation, expressed in physical coordinates. -/
 def blockState (initial : Row d) (cumulative key : ℕ → Row d) (u : ℕ → ℝ) (n : ℕ) : Row d :=
   fun i => cumulative n i * history initial (restored cumulative key) u n i
 
@@ -113,7 +101,6 @@ theorem block_state_eq {n : ℕ} (initial : Row d) (cumulative decay key : ℕ �
     rw [← add_assoc, mul_add, cancel, advance]
     ring
 
-/-- The inclusive causal output matrix applies all corrections through the current token. -/
 def blockOutput (initial : Row d) (cumulative key query : ℕ → Row d)
     (u : ℕ → ℝ) (scale : ℝ) (t : ℕ) : ℝ :=
   let x := fun i => scale * weighted cumulative query t i

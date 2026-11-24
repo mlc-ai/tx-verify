@@ -6,15 +6,6 @@ public import Mathlib.Analysis.SpecialFunctions.Exp
 public import Mathlib.Analysis.Real.Sqrt
 import Mathlib.Tactic.Ring
 
-/-!
-# Kimi Delta Attention in exact arithmetic
-
-The result is stated for each value coordinate. The row entering a chunk is arbitrary;
-the query and key coordinates, the two gates, and the output scale are independent inputs.
-For a short chunk the preparation stage zeroes the padded keys and log decays. Values and
-update strengths on padded rows can be arbitrary. Each matrix product below has the shape
-and causal mask of the two forward kernels, in the exact-real interpretation.
--/
 @[expose] public section
 namespace FlashKda.Algorithm
 noncomputable section
@@ -28,11 +19,9 @@ def normalize {d : ℕ} (x : Row d) : Row d :=
 def logGate {d : ℕ} (lower parameter : ℝ) (bias gate : Row d) : Row d :=
   fun i => lower * sigmoid (Real.exp parameter * (gate i + bias i))
 
-/-- Cumulative physical attenuation at each key coordinate. -/
 def cum {d : ℕ} (logDecay : ℕ → Row d) (t : ℕ) : Row d :=
   fun i => Real.exp (∑ j ∈ range t, logDecay j i)
 
-/-- The carry update written as the sum of the decayed entering state and restored-key product. -/
 def exitState {d : ℕ} (initial : Row d) (cum key : ℕ → Row d) (u : ℕ → ℝ) : Row d :=
   fun i => initial i * cum 16 i +
     ∑ j ∈ range 16, (restored cum key j i * cum 16 i) * u j
@@ -47,13 +36,11 @@ theorem exit_eq {d : ℕ} (initial : Row d) (cum key : ℕ → Row d) (u : ℕ �
   intro j _
   ring
 
-/-- The sequential specification stutters on a padded row. Its value and strength are unused. -/
 theorem padded_step {d : ℕ} (old : Row d) (v beta : ℝ) :
     step old (fun _ => 1) (fun _ => 0) v beta = old := by
   funext i
   simp [step]
 
-/-- A 16-row block, including all finite lengths from zero through sixteen. -/
 theorem forward_chunk {d : ℕ} {len : ℕ} (hlen : len ≤ 16) (initial : Row d)
     (logDecay key query : ℕ → Row d) (v beta : ℕ → ℝ) (scale : ℝ) :
     let lg := fun t => if t < len then logDecay t else fun _ => 0

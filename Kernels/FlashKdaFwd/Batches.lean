@@ -3,12 +3,6 @@ module
 
 public import Kernels.FlashKdaFwd.Sequence
 
-/-!
-# Tile assignment for packed sequences
-
-The small prefix kernel rounds each sequence length separately. The recurrence kernel computes
-the same offset by scanning the preceding lengths. The prepare launch may schedule extra blocks.
--/
 @[expose] public section
 namespace FlashKda.Batches
 open Finset
@@ -25,7 +19,6 @@ def firstToken (length : ℕ → ℕ) (i : ℕ) := ∑ j ∈ range i, length j
 theorem monotone_tile (length : ℕ → ℕ) : Monotone (firstTile length) :=
   monotone_nat_of_le_succ fun i => by rw [firstTile_succ]; omega
 
-/-- The allocation and grid reserve ceil(total / 16) + count tiles. -/
 theorem allocation (length : ℕ → ℕ) (count : ℕ) :
     firstTile length count ≤ tiles (firstToken length count) + count := by
   induction count with
@@ -38,7 +31,6 @@ theorem allocation (length : ℕ → ℕ) (count : ℕ) :
     unfold tiles at *
     omega
 
-/-- Distinct nonempty tile intervals cannot own the same block, even with empty sequences. -/
 theorem unique_owner (length : ℕ → ℕ) {i j tile : ℕ}
     (hi : firstTile length i ≤ tile) (ei : tile < firstTile length (i+1))
     (hj : firstTile length j ≤ tile) (ej : tile < firstTile length (j+1)) : i = j := by
@@ -49,7 +41,6 @@ theorem unique_owner (length : ℕ → ℕ) {i j tile : ℕ}
   · exact False.elim ((not_lt_of_ge (monotone_tile length (Nat.succ_le_of_lt h)))
       (lt_of_le_of_lt hi ej))
 
-/-- The binary search executed by the prepare kernel. The last index is the excluded upper end. -/
 def search (starts : ℕ → ℕ) (tile lo hi : ℕ) : ℕ :=
   if h : lo+1 < hi then
     let mid := (lo+hi)/2
@@ -81,8 +72,6 @@ theorem search_owner (starts : ℕ → ℕ) (tile lo hi : ℕ)
 termination_by hi-lo
 decreasing_by all_goals omega
 
-/-- Surplus launch blocks take the prepare kernel's early return even in the presence of trailing
-empty sequences. -/
 theorem search_surplus (starts : ℕ → ℕ) (mono : Monotone starts) (tile lo hi : ℕ)
     (h : lo < hi) (excess : starts hi ≤ tile) : search starts tile lo hi + 1 = hi := by
   rw [search]
@@ -94,7 +83,6 @@ theorem search_surplus (starts : ℕ → ℕ) (mono : Monotone starts) (tile lo 
 termination_by hi-lo
 decreasing_by omega
 
-/-- Sequence and head coordinates produce disjoint workspace indices. -/
 theorem workspace_index {stride h₁ h₂ t₁ t₂ : ℕ} (ht₁ : t₁ < stride) (ht₂ : t₂ < stride)
     (heq : h₁*stride+t₁ = h₂*stride+t₂) : h₁ = h₂ ∧ t₁ = t₂ := by
   have pos := Nat.zero_lt_of_lt ht₁
