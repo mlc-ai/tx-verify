@@ -3,7 +3,7 @@ module
 
 public import Lemmas.Flow.Step.SegSym
 public import Lemmas.Flow.FloatOutcome
-public import Kernels.TmlFa4Fwd.Proof2.Epilogue.Base
+public import Kernels.TmlFa4Fwd.Proof.Epilogue.Base
 public import Kernels.TmlFa4Fwd.Flow.Code
 public import Kernels.TmlFa4Fwd.Flow.Sites
 

@@ -1,8 +1,10 @@
 -- SPDX-License-Identifier: Apache-2.0
 module
 
-public import Kernels.TmlFa4Fwd.Proof2.Epilogue.Steps
-public import Kernels.TmlFa4Fwd.Proof2.Epilogue.Shape
+public import Kernels.TmlFa4Fwd.Proof.Epilogue.StepsWrite
+public import Kernels.TmlFa4Fwd.Proof.Epilogue.Base
+public import Kernels.TmlFa4Fwd.Proof.Epilogue.Steps
+public import Kernels.TmlFa4Fwd.Proof.Epilogue.Shape
 
 /-! # Family entries of `site_cases` and `site_shape`
 
@@ -13,7 +15,7 @@ are closed by its family theorems. If an entry split its family, `st` and `b` wo
 names in scope and the proofs below would not elaborate. -/
 
 namespace PTX.Tests.SiteFamily
-open PTX PTX.Proof PTX.Flow PTX.Kernels.TmlFa4Fwd PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue
+open PTX PTX.Proof PTX.Flow PTX.Kernels.TmlFa4Fwd PTX.Kernels.TmlFa4Fwd.Proof.Epilogue
 
 -- the sites outside the families are closed by `skip_by`; no segment, invariant or guard tactic
 -- runs

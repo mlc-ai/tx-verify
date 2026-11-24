@@ -291,7 +291,9 @@ end Code
 end
 
 /-- `advances` also passes `bar.arrive` with a count and `tcgen05.wait::st`. -/
-macro_rules | `(tactic| advances) => `(tactic| exact fun hf => PTX.Flow.fires_barArrive_next hf)
-macro_rules | `(tactic| advances) => `(tactic| exact fun hf => PTX.Flow.fires_tcWaitSt_next hf)
+macro_rules
+  | `(tactic| advances) => `(tactic| advances_of PTX.Op.barArrive PTX.Flow.fires_barArrive_next)
+macro_rules
+  | `(tactic| advances) => `(tactic| advances_of PTX.Op.tcWaitSt PTX.Flow.fires_tcWaitSt_next)
 
 end PTX.Flow

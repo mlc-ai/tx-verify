@@ -5,9 +5,8 @@ public import Kernels.TmlFa4Fwd.Spec
 public import Tactics.KernelRfl
 public import Mathlib.Tactic.NormNum
 import Core.Async.Tensor.TensorStoreMemory
-import Kernels.TmlFa4Fwd.Proof.EpilogueCoordinates
-import Kernels.TmlFa4Fwd.Proof.EpilogueWriteback
-import Kernels.TmlFa4Fwd.Proof.EpilogueWarpReady
+import Kernels.TmlFa4Fwd.Audit.OutputStep
+import Kernels.TmlFa4Fwd.Proof.Lib.ScheduleCoords
 import all Init.Data.ToString.Extra
 import all Init.Data.Repr
 

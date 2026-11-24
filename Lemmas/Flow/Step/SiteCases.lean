@@ -63,20 +63,32 @@ namespace PTX.Flow
 open PTX PTX.Proof
 open Lean Meta Elab Tactic
 
+/-- `advances_of c l`: close the goal `advances` proves with `l`, only if the operation
+is the constructor `c`. The check reads the operation off the goal; trying `l` on another operation
+would unify two event templates, which unfolds both (seconds per site). -/
+elab "advances_of " c:ident l:ident : tactic => withMainContext do
+  let ty ← instantiateMVars (← getMainTarget)
+  let some e := ty.find? (·.isAppOfArity ``PTX.eventTmpl 5) | throwError "advances_of: no template"
+  let op := e.getArg! 4
+  let op ← if op.hasLooseBVars then pure op else whnfR op
+  unless op.getAppFn.constName? == some (← realizeGlobalConstNoOverload c) do
+    throwError "advances_of: another operation"
+  evalTactic (← `(tactic| exact fun hf => $l hf))
+
 /-- `advances`: an event instruction whose only continuation is the next instruction. -/
 macro "advances" : tactic => `(tactic| first
+  | advances_of PTX.Op.tcCommit PTX.Flow.fires_tcCommit
+  | advances_of PTX.Op.clcTryCancel PTX.Flow.fires_clcTryCancel
+  | advances_of PTX.Op.barSyncN PTX.Flow.fires_barSyncN_next
+  | advances_of PTX.Op.tcRelinquish PTX.Flow.fires_tcRelinquish_next
+  | advances_of PTX.Op.tcDealloc PTX.Flow.fires_tcDealloc_next
+  | advances_of PTX.Op.cpAsync PTX.Flow.fires_cpAsync_next
+  | advances_of PTX.Op.cpAsyncCommit PTX.Flow.fires_cpAsyncCommit_next
+  | advances_of PTX.Op.cpAsyncArrive PTX.Flow.fires_cpAsyncArrive_next
   | exact fun hf => PTX.Flow.fires_next (by exact trivial) hf
   | exact fun hf => PTX.Flow.fires_async_next (by exact trivial) hf
   | exact fun hf => PTX.Flow.fires_tcMma (by simp) hf
   | exact fun hf => PTX.Flow.fires_tcMmaTs hf
-  | exact fun hf => PTX.Flow.fires_tcCommit hf
-  | exact fun hf => PTX.Flow.fires_clcTryCancel hf
-  | exact fun hf => PTX.Flow.fires_barSyncN_next hf
-  | exact fun hf => PTX.Flow.fires_tcRelinquish_next hf
-  | exact fun hf => PTX.Flow.fires_tcDealloc_next hf
-  | exact fun hf => PTX.Flow.fires_cpAsync_next hf
-  | exact fun hf => PTX.Flow.fires_cpAsyncCommit_next hf
-  | exact fun hf => PTX.Flow.fires_cpAsyncArrive_next hf
   | fail "advances: the instruction does not continue at the next instruction only")
 
 /-- An inductive type without parameters whose constructors take no arguments: a finite

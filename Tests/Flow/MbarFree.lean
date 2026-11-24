@@ -1,7 +1,9 @@
 -- SPDX-License-Identifier: Apache-2.0
 module
 
-public import Kernels.TmlFa4Fwd.Proof2.Epilogue.Steps
+public import Kernels.TmlFa4Fwd.Proof.Epilogue.Base
+public import Kernels.TmlFa4Fwd.Flow.Code
+public import Kernels.TmlFa4Fwd.Proof.Epilogue.Steps
 public import Lemmas.Flow.Ledger
 
 /-! # Ledger steps at sites that are not mbarrier operations (no shape needed)
@@ -13,7 +15,7 @@ poll, so the warp's arrival and poll ledgers take no step there without the site
 the negative control: it is a poll. -/
 
 namespace PTX.Tests.MbarFree
-open PTX PTX.Proof PTX.Flow PTX.Kernels.TmlFa4Fwd PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue
+open PTX PTX.Proof PTX.Flow PTX.Kernels.TmlFa4Fwd PTX.Kernels.TmlFa4Fwd.Proof.Epilogue
 
 variable {p : Params} {L : Launch} {m : Mem0} {g : Nat} {ent : Nat → Value}
 

@@ -1,8 +1,11 @@
 -- SPDX-License-Identifier: Apache-2.0
 module
 
+public import Kernels.TmlFa4Fwd.Proof.Common.Sites.Correction
+public import Kernels.TmlFa4Fwd.Proof.Common.Sites.Loader
+public import Kernels.TmlFa4Fwd.Proof.Common.Sites.Startup
 public import Lemmas.Flow.Step.SiteShape
-public import Kernels.TmlFa4Fwd.Proof2.Common.Roles
+public import Kernels.TmlFa4Fwd.Proof.Common.Roles
 
 /-! # A site the theorem's hypothesis fixes, and site membership by position
 
@@ -20,7 +23,7 @@ subterm of every shape goal. -/
 
 namespace PTX.Tests.SiteLit
 open PTX PTX.Proof PTX.Flow
-open PTX.Kernels.TmlFa4Fwd.Proof2
+open PTX.Kernels.TmlFa4Fwd.Proof
 
 set_option maxRecDepth 100000
 set_option maxHeartbeats 4000000

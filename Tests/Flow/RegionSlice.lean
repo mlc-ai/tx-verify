@@ -4,7 +4,7 @@ module
 public import Lemmas.Flow.RegionSlice
 public import Lemmas.Flow.SegJump
 public import Kernels.TmlFa4Fwd.Flow.Code
-public import Kernels.TmlFa4Fwd.Proof2.Epilogue.Base
+public import Kernels.TmlFa4Fwd.Proof.Epilogue.Base
 
 /-! # Frame regions on a code slice; an unconditional branch as a piece
 
@@ -25,6 +25,6 @@ example (L : Launch) (g : Nat) (F : List (Nat × Value)) :
       simp only [Assumptions.all, Assumptions.numeric, Assumptions.synchronization,
         List.cons_append, List.nil_append, List.mem_cons, List.not_mem_nil, or_false] at ha
       rcases ha with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl <;> rfl)
-    (Proof2.Epilogue.segFree (by decide))
+    (Proof.Epilogue.segFree (by decide))
 
 end PTX.Tests.RegionSlice

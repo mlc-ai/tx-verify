@@ -3,6 +3,6 @@
  "namespace": "PTX.Kernels.TmlFa4Fwd.Flow",
  "kernel": "PTX.Kernels.TmlFa4Fwd.kernel",
  "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
- "imports": ["Kernels.TmlFa4Fwd.Flow.Code", "Kernels.TmlFa4Fwd.Proof2.Epilogue.Base"],
+ "imports": ["Kernels.TmlFa4Fwd.Flow.Code", "Kernels.TmlFa4Fwd.Proof.Epilogue.Base"],
  "ranges": [[3111, 3370], [3429, 3582], [5110, 5272], [5683, 5684], [6527, 6559], [6680, 6731], [7622, 7739]],
- "segfree": "exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide)"}
+ "segfree": "exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide)"}

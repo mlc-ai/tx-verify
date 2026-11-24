@@ -3,7 +3,7 @@
 module
 
 public import Kernels.TmlFa4Fwd.Flow.Code
-public import Kernels.TmlFa4Fwd.Proof2.Epilogue.Base
+public import Kernels.TmlFa4Fwd.Proof.Epilogue.Base
 public import Lemmas.Flow.PcStep
 public import Lemmas.Flow.Hooks
 
@@ -18,7 +18,7 @@ theorem step_8462 {L : Launch} {g : Nat} :
           op := PTX.Op.int
             { op := PTX.IntOp.xor, ty := PTX.DType.int (PTX.IType.b) 32, sat := false,
               dsts := [some 6511], srcs := [PTX.Opnd.reg 6510, PTX.Opnd.reg 1631] } } :=
-  PcLocal.of_code code_8462 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8462 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8463 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8463
@@ -26,7 +26,7 @@ theorem step_8463 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.scalar, ty := PTX.DType.int (PTX.IType.b) 32,
               dsts := [some 6498], srcs := [PTX.Opnd.imm 1] } } :=
-  PcLocal.of_code code_8463 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8463 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8469 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8469
@@ -37,7 +37,7 @@ theorem step_8469 {L : Launch} {g : Nat} :
               rnd := none, mode := PTX.FMode.ieee, ftz := false, sat := false, relu := false,
               oob := false, nanMod := false, xorsign := false, absMod := false, dsts := [some 739],
               srcs := [PTX.Opnd.reg 6512, PTX.Opnd.f32imm 0] } } :=
-  PcLocal.of_code code_8469 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8469 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8470 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8470
@@ -46,7 +46,7 @@ theorem step_8470 {L : Launch} {g : Nat} :
             { op := PTX.IntOp.selp, ty := PTX.DType.float (PTX.FType.f32), sat := false,
               dsts := [some 6514],
               srcs := [PTX.Opnd.reg 6512, PTX.Opnd.f32imm 1065353216, PTX.Opnd.reg 739] } } :=
-  PcLocal.of_code code_8470 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8470 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8471 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8471
@@ -56,7 +56,7 @@ theorem step_8471 {L : Launch} {g : Nat} :
               cmpTy := none, rnd := none, mode := PTX.FMode.approx, ftz := true, sat := false,
               relu := false, oob := false, nanMod := false, xorsign := false, absMod := false,
               dsts := [some 6515], srcs := [PTX.Opnd.reg 6514] } } :=
-  PcLocal.of_code code_8471 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8471 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8472 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8472
@@ -64,27 +64,27 @@ theorem step_8472 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.scalar, ty := PTX.DType.int (PTX.IType.b) 32,
               dsts := [some 6496], srcs := [PTX.Opnd.imm 0] } } :=
-  PcLocal.of_code code_8472 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8472 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8474 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8474
         { guard := some (9888, false), op := PTX.Op.bra 8476 true } :=
-  PcLocal.of_code code_8474 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8474 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8475 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8475
         { guard := none, op := PTX.Op.bra 8473 true } :=
-  PcLocal.of_code code_8475 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8475 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8477 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8477
         { guard := some (9889, false), op := PTX.Op.bra 8479 true } :=
-  PcLocal.of_code code_8477 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8477 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8478 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8478
         { guard := none, op := PTX.Op.bra 8476 true } :=
-  PcLocal.of_code code_8478 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8478 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8479 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8479
@@ -92,7 +92,7 @@ theorem step_8479 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9259],
               srcs := [PTX.Opnd.reg 6515, PTX.Opnd.reg 6515] } } :=
-  PcLocal.of_code code_8479 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8479 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8481 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8481
@@ -100,7 +100,7 @@ theorem step_8481 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9260],
               srcs := [PTX.Opnd.reg 6522, PTX.Opnd.reg 6523] } } :=
-  PcLocal.of_code code_8481 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8481 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8482 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8482
@@ -108,7 +108,7 @@ theorem step_8482 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9261],
               srcs := [PTX.Opnd.reg 6520, PTX.Opnd.reg 6521] } } :=
-  PcLocal.of_code code_8482 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8482 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8483 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8483
@@ -116,7 +116,7 @@ theorem step_8483 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9262],
               srcs := [PTX.Opnd.reg 6518, PTX.Opnd.reg 6519] } } :=
-  PcLocal.of_code code_8483 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8483 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8484 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8484
@@ -124,7 +124,7 @@ theorem step_8484 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9263],
               srcs := [PTX.Opnd.reg 6516, PTX.Opnd.reg 6517] } } :=
-  PcLocal.of_code code_8484 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8484 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8486 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8486
@@ -135,7 +135,7 @@ theorem step_8486 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9264],
               srcs := [PTX.Opnd.reg 9263, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8486 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8486 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8487 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8487
@@ -146,7 +146,7 @@ theorem step_8487 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9265],
               srcs := [PTX.Opnd.reg 9262, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8487 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8487 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8488 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8488
@@ -157,7 +157,7 @@ theorem step_8488 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9266],
               srcs := [PTX.Opnd.reg 9261, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8488 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8488 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8489 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8489
@@ -168,7 +168,7 @@ theorem step_8489 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9267],
               srcs := [PTX.Opnd.reg 9260, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8489 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8489 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8490 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8490
@@ -176,7 +176,7 @@ theorem step_8490 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6524, some 6525], srcs := [PTX.Opnd.reg 9265] } } :=
-  PcLocal.of_code code_8490 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8490 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8491 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8491
@@ -184,7 +184,7 @@ theorem step_8491 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6526, some 6527], srcs := [PTX.Opnd.reg 9264] } } :=
-  PcLocal.of_code code_8491 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8491 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8493 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8493
@@ -192,7 +192,7 @@ theorem step_8493 {L : Launch} {g : Nat} :
           op := PTX.Op.int
             { op := PTX.IntOp.add, ty := PTX.DType.int (PTX.IType.s) 32, sat := false,
               dsts := [some 6528], srcs := [PTX.Opnd.reg 6511, PTX.Opnd.reg 6500] } } :=
-  PcLocal.of_code code_8493 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8493 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8494 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8494
@@ -200,7 +200,7 @@ theorem step_8494 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6529, some 6530], srcs := [PTX.Opnd.reg 9267] } } :=
-  PcLocal.of_code code_8494 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8494 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8495 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8495
@@ -208,7 +208,7 @@ theorem step_8495 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6531, some 6532], srcs := [PTX.Opnd.reg 9266] } } :=
-  PcLocal.of_code code_8495 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8495 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8497 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8497
@@ -216,7 +216,7 @@ theorem step_8497 {L : Launch} {g : Nat} :
           op := PTX.Op.int
             { op := PTX.IntOp.add, ty := PTX.DType.int (PTX.IType.s) 32, sat := false,
               dsts := [some 6533], srcs := [PTX.Opnd.reg 1629, PTX.Opnd.imm 8] } } :=
-  PcLocal.of_code code_8497 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8497 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8498 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8498
@@ -224,7 +224,7 @@ theorem step_8498 {L : Launch} {g : Nat} :
           op := PTX.Op.int
             { op := PTX.IntOp.add, ty := PTX.DType.int (PTX.IType.s) 32, sat := false,
               dsts := [some 6534], srcs := [PTX.Opnd.reg 6511, PTX.Opnd.reg 6502] } } :=
-  PcLocal.of_code code_8498 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8498 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8500 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8500
@@ -232,7 +232,7 @@ theorem step_8500 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9268],
               srcs := [PTX.Opnd.reg 6541, PTX.Opnd.reg 6542] } } :=
-  PcLocal.of_code code_8500 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8500 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8501 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8501
@@ -240,7 +240,7 @@ theorem step_8501 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9269],
               srcs := [PTX.Opnd.reg 6539, PTX.Opnd.reg 6540] } } :=
-  PcLocal.of_code code_8501 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8501 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8502 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8502
@@ -248,7 +248,7 @@ theorem step_8502 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9270],
               srcs := [PTX.Opnd.reg 6537, PTX.Opnd.reg 6538] } } :=
-  PcLocal.of_code code_8502 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8502 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8503 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8503
@@ -256,7 +256,7 @@ theorem step_8503 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9271],
               srcs := [PTX.Opnd.reg 6535, PTX.Opnd.reg 6536] } } :=
-  PcLocal.of_code code_8503 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8503 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8505 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8505
@@ -267,7 +267,7 @@ theorem step_8505 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9272],
               srcs := [PTX.Opnd.reg 9271, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8505 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8505 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8506 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8506
@@ -278,7 +278,7 @@ theorem step_8506 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9273],
               srcs := [PTX.Opnd.reg 9270, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8506 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8506 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8507 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8507
@@ -289,7 +289,7 @@ theorem step_8507 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9274],
               srcs := [PTX.Opnd.reg 9269, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8507 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8507 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8508 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8508
@@ -300,7 +300,7 @@ theorem step_8508 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9275],
               srcs := [PTX.Opnd.reg 9268, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8508 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8508 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8509 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8509
@@ -308,7 +308,7 @@ theorem step_8509 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6543, some 6544], srcs := [PTX.Opnd.reg 9273] } } :=
-  PcLocal.of_code code_8509 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8509 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8510 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8510
@@ -316,7 +316,7 @@ theorem step_8510 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6545, some 6546], srcs := [PTX.Opnd.reg 9272] } } :=
-  PcLocal.of_code code_8510 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8510 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8512 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8512
@@ -324,7 +324,7 @@ theorem step_8512 {L : Launch} {g : Nat} :
           op := PTX.Op.int
             { op := PTX.IntOp.add, ty := PTX.DType.int (PTX.IType.s) 32, sat := false,
               dsts := [some 6547], srcs := [PTX.Opnd.reg 6534, PTX.Opnd.reg 6500] } } :=
-  PcLocal.of_code code_8512 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8512 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8513 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8513
@@ -332,7 +332,7 @@ theorem step_8513 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6548, some 6549], srcs := [PTX.Opnd.reg 9275] } } :=
-  PcLocal.of_code code_8513 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8513 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8514 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8514
@@ -340,7 +340,7 @@ theorem step_8514 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6550, some 6551], srcs := [PTX.Opnd.reg 9274] } } :=
-  PcLocal.of_code code_8514 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8514 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8516 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8516
@@ -348,7 +348,7 @@ theorem step_8516 {L : Launch} {g : Nat} :
           op := PTX.Op.int
             { op := PTX.IntOp.add, ty := PTX.DType.int (PTX.IType.s) 32, sat := false,
               dsts := [some 6552], srcs := [PTX.Opnd.reg 1629, PTX.Opnd.imm 16] } } :=
-  PcLocal.of_code code_8516 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8516 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8517 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8517
@@ -356,7 +356,7 @@ theorem step_8517 {L : Launch} {g : Nat} :
           op := PTX.Op.int
             { op := PTX.IntOp.add, ty := PTX.DType.int (PTX.IType.s) 32, sat := false,
               dsts := [some 6553], srcs := [PTX.Opnd.reg 6511, PTX.Opnd.reg 6504] } } :=
-  PcLocal.of_code code_8517 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8517 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8519 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8519
@@ -364,7 +364,7 @@ theorem step_8519 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9276],
               srcs := [PTX.Opnd.reg 6560, PTX.Opnd.reg 6561] } } :=
-  PcLocal.of_code code_8519 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8519 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8520 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8520
@@ -372,7 +372,7 @@ theorem step_8520 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9277],
               srcs := [PTX.Opnd.reg 6558, PTX.Opnd.reg 6559] } } :=
-  PcLocal.of_code code_8520 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8520 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8521 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8521
@@ -380,7 +380,7 @@ theorem step_8521 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9278],
               srcs := [PTX.Opnd.reg 6556, PTX.Opnd.reg 6557] } } :=
-  PcLocal.of_code code_8521 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8521 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8522 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8522
@@ -388,7 +388,7 @@ theorem step_8522 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9279],
               srcs := [PTX.Opnd.reg 6554, PTX.Opnd.reg 6555] } } :=
-  PcLocal.of_code code_8522 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8522 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8524 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8524
@@ -399,7 +399,7 @@ theorem step_8524 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9280],
               srcs := [PTX.Opnd.reg 9279, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8524 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8524 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8525 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8525
@@ -410,7 +410,7 @@ theorem step_8525 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9281],
               srcs := [PTX.Opnd.reg 9278, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8525 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8525 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8526 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8526
@@ -421,7 +421,7 @@ theorem step_8526 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9282],
               srcs := [PTX.Opnd.reg 9277, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8526 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8526 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8527 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8527
@@ -432,7 +432,7 @@ theorem step_8527 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9283],
               srcs := [PTX.Opnd.reg 9276, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8527 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8527 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8528 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8528
@@ -440,7 +440,7 @@ theorem step_8528 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6562, some 6563], srcs := [PTX.Opnd.reg 9281] } } :=
-  PcLocal.of_code code_8528 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8528 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8529 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8529
@@ -448,7 +448,7 @@ theorem step_8529 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6564, some 6565], srcs := [PTX.Opnd.reg 9280] } } :=
-  PcLocal.of_code code_8529 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8529 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8531 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8531
@@ -456,7 +456,7 @@ theorem step_8531 {L : Launch} {g : Nat} :
           op := PTX.Op.int
             { op := PTX.IntOp.add, ty := PTX.DType.int (PTX.IType.s) 32, sat := false,
               dsts := [some 6566], srcs := [PTX.Opnd.reg 6553, PTX.Opnd.reg 6500] } } :=
-  PcLocal.of_code code_8531 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8531 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8532 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8532
@@ -464,7 +464,7 @@ theorem step_8532 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6567, some 6568], srcs := [PTX.Opnd.reg 9283] } } :=
-  PcLocal.of_code code_8532 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8532 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8533 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8533
@@ -472,7 +472,7 @@ theorem step_8533 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.unpack, ty := PTX.DType.int (PTX.IType.b) 64,
               dsts := [some 6569, some 6570], srcs := [PTX.Opnd.reg 9282] } } :=
-  PcLocal.of_code code_8533 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8533 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8535 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8535
@@ -480,7 +480,7 @@ theorem step_8535 {L : Launch} {g : Nat} :
           op := PTX.Op.int
             { op := PTX.IntOp.add, ty := PTX.DType.int (PTX.IType.s) 32, sat := false,
               dsts := [some 6571], srcs := [PTX.Opnd.reg 1629, PTX.Opnd.imm 24] } } :=
-  PcLocal.of_code code_8535 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8535 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8536 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8536
@@ -488,7 +488,7 @@ theorem step_8536 {L : Launch} {g : Nat} :
           op := PTX.Op.int
             { op := PTX.IntOp.add, ty := PTX.DType.int (PTX.IType.s) 32, sat := false,
               dsts := [some 6572], srcs := [PTX.Opnd.reg 6553, PTX.Opnd.reg 6502] } } :=
-  PcLocal.of_code code_8536 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8536 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8538 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8538
@@ -496,7 +496,7 @@ theorem step_8538 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9284],
               srcs := [PTX.Opnd.reg 6579, PTX.Opnd.reg 6580] } } :=
-  PcLocal.of_code code_8538 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8538 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8539 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8539
@@ -504,7 +504,7 @@ theorem step_8539 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9285],
               srcs := [PTX.Opnd.reg 6577, PTX.Opnd.reg 6578] } } :=
-  PcLocal.of_code code_8539 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8539 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8540 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8540
@@ -512,7 +512,7 @@ theorem step_8540 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9286],
               srcs := [PTX.Opnd.reg 6575, PTX.Opnd.reg 6576] } } :=
-  PcLocal.of_code code_8540 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8540 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8541 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8541
@@ -520,7 +520,7 @@ theorem step_8541 {L : Launch} {g : Nat} :
           op := PTX.Op.move
             { kind := PTX.MoveKind.pack, ty := PTX.DType.int (PTX.IType.b) 64, dsts := [some 9287],
               srcs := [PTX.Opnd.reg 6573, PTX.Opnd.reg 6574] } } :=
-  PcLocal.of_code code_8541 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8541 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8543 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8543
@@ -531,7 +531,7 @@ theorem step_8543 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9288],
               srcs := [PTX.Opnd.reg 9287, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8543 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8543 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8544 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8544
@@ -542,7 +542,7 @@ theorem step_8544 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9289],
               srcs := [PTX.Opnd.reg 9286, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8544 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8544 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8545 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8545
@@ -553,7 +553,7 @@ theorem step_8545 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9290],
               srcs := [PTX.Opnd.reg 9285, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8545 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8545 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 theorem step_8546 {L : Launch} {g : Nat} :
     PcLocal PTX.Kernels.TmlFa4Fwd.kernel PTX.Kernels.TmlFa4Fwd.Assumptions.all L g 8546
@@ -564,6 +564,6 @@ theorem step_8546 {L : Launch} {g : Nat} :
               sat := false, relu := false, oob := false, nanMod := false, xorsign := false,
               absMod := false, dsts := [some 9291],
               srcs := [PTX.Opnd.reg 9284, PTX.Opnd.reg 9259] } } :=
-  PcLocal.of_code code_8546 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue.segFree (by decide))
+  PcLocal.of_code code_8546 rfl (by exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide))
 
 end PTX.Kernels.TmlFa4Fwd.Flow

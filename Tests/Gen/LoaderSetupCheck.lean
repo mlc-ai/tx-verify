@@ -2,7 +2,7 @@
 module
 
 public import Tests.Gen.LoaderSetup
-public import Kernels.TmlFa4Fwd.Proof2.Loader.Machine
+public import Kernels.TmlFa4Fwd.Proof.Loader.Machine
 
 @[expose] public section
 
@@ -21,14 +21,14 @@ set_option maxRecDepth 100000
 open PTX PTX.Kernels.TmlFa4Fwd
 
 /-- The head division (`%r748`). -/
-theorem headDiv_setup (p : Params) (L : Launch) (g : Nat) (v : Proof2.Loader.V) (rd : BitVec 64) :
+theorem headDiv_setup (p : Params) (L : Launch) (g : Nat) (v : Proof.Loader.V) (rd : BitVec 64) :
     (headDiv v.co.head rd).lookup 1808 =
-      some (.bits 32 (Proof2.Loader.setup p L g v).r748) := rfl
+      some (.bits 32 (Proof.Loader.setup p L g v).r748) := rfl
 
 /-- The registers of the setup's rest. -/
-theorem setupRest_setup (p : Params) (L : Launch) (g : Nat) (v : Proof2.Loader.V)
+theorem setupRest_setup (p : Params) (L : Launch) (g : Nat) (v : Proof.Loader.V)
     (r21 r22 w259 : BitVec 64) (p106 : Bool) :
-    let su := Proof2.Loader.setup p L g v
+    let su := Proof.Loader.setup p L g v
     let T := setupRest v.co.head su.r748 v.ukw su.r741 (Flow.Arith32.sub32 v.sc.c0 v.sc.c1) r21
       r22 su.rd9 (BitVec.ofNat 64 p.pageTableBase) (BitVec.ofNat 64 p.pageTableStride)
       (BitVec.ofNat 64 p.kLayout.base) (BitVec.ofNat 64 p.kLayout.headStride)

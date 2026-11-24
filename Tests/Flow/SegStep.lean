@@ -2,7 +2,7 @@
 module
 
 public import Lemmas.Flow.Step.SegSym
-public import Kernels.TmlFa4Fwd.Proof.SoftmaxExponent
+public import Kernels.TmlFa4Fwd.Audit.SoftwareExponent
 public import Kernels.TmlFa4Fwd.Flow.Code
 public import Kernels.TmlFa4Fwd.Flow.Sites
 

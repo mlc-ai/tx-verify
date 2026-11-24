@@ -236,6 +236,14 @@ macro_rules
       try (split_ifs <;> first | (exfalso; omega) | skip)
       try with_reducible rfl))
 
+set_option hygiene false in
+/-- Clear the site's facts, the code lookup and the fired event. -/
+macro "site_clear" : tactic => `(tactic| (
+  try clear hF
+  try clear hat
+  try clear hf
+  try clear hc))
+
 /-- `shape_close`: a goal naming one event up to witnesses, conjunctions and alternatives, with
 the condition of an alternative introduced as a hypothesis (`shape_ldM`). A conjunction's right
 side is tried first, so that an event equation there fixes the witnesses
@@ -408,7 +416,10 @@ elab_rules : tactic
       -- registers (`MemAccess.regs`): reduce their count so that it meets the table's condition
       evalTactic (← `(tactic| all_goals try simp only [PTX.MemAccess.regs,
         List.filterMap_cons, List.filterMap_nil, id_eq, List.length_cons, List.length_nil]))
-      evalTactic (← `(tactic| all_goals (intros; simp only [Bool.bne_false, $us,*]; shape_close)))
+      -- the facts of the site are not in the shape, and `assumption` would unfold them at each of
+      -- its tries (seconds per site)
+      evalTactic (← `(tactic| all_goals (intros; site_clear)))
+      evalTactic (← `(tactic| all_goals (simp only [Bool.bne_false, $us,*]; shape_close)))
       let rest ← (gs.filter (!props.contains ·)).filterM fun g => do return !(← g.isAssigned)
       setGoals ((← getGoals) ++ rest)
     -- the class's lemmas in order, each with its side and shape goals (a store lemma does not

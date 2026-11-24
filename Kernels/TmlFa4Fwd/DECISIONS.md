@@ -6201,6 +6201,62 @@ element of each address load at sub-step 1.
     (`Gen.expoBA`) is one kind chain. The branch at 5815 picks the path by `%p632`; the P part's
     tables then name the packs as `bif (scmp .lt .u v.bt (r301 p L g v))` of the two paths'
     terms.
+- Step 3, done for the exponent stretch and the P part (A3). `BiasExpoVals.lean`: the template
+  matches `mB<pc>` and the software path's value functions `vB0`..`vB8`, `nextTA`/`nextTB`.
+  `Data.lean` (bias hunks only): `vExpoB` (the scaled-product run's end), `vTailB` (per path, a
+  `bif` on `%p632`'s test so that the table spine stays literal), `tailB` (the tail's end facts),
+  `unpackSpecB`/`halvesB` (the 24 unpacks before the second to fourth P stores), `pBData`; the bias
+  P states' table is `pBData`, and `biasNamed` names its keys. The unpack with a sink at pc 6380
+  (`mov.b64 {lo, _}`) is not an `out_gen` instruction: it is `exec_unpackLo` plus `Seg.rule1`
+  between the tail's two runs, and the tail is one run pair per path (`Gen.expoBTA*`,
+  `Gen.expoBTB*`), because the pair's kind is the maximum of its halves' kinds and only the low
+  half (`%r3607` on the hardware path, `%r3650` on the software path, both outputs of the runs
+  before) keeps `ni`; `split_join_lo` reads the low half back from its clean value. The software
+  path's runs carry the 25 control registers live at 6299, so `ctlTail` (6299 to 6307) starts from
+  their end facts without a frame across the template instances (`seg_frame` cannot frame a
+  stretch that contains `swExp2Sites`). Steps: `stepAt_narrB` (`StepsNarrB.lean`, the branch by
+  `Seg.pred_ex` on `%p632`, then `narrB_pathA`/`narrB_pathB`), `stepAt_pstB_0s`, `stepAt_pstB_1`,
+  `stepAt_parrB` (`StepsPB.lean`, `StepsPB2.lean`, from `StepsP1.lean`'s pattern), and the
+  control sites of the P part lifted from the control machine (`StepsBiasPCtl.lean`,
+  `StepsBiasP.lean`). `StepsBiasCtl.lean` needed one minimal edit: its
+  site list keeps only the polls (`ws .bias`, `wb true`, `fence true`, `stat false`, through
+  `StepsBiasCtlPoll.lean`), and `StepsBiasCtlStore.lean` is removed, because the P part's control
+  sites read the P part's data table (`pBData`) and `StepsBiasP.lean` now steps them by
+  `stepAt_lift`.
+- Handoff checks: the regenerated `ExpoB0` carries the negated scale, factor, maximum and row
+  sum. Its generator freshness check passed and its Lean check took 11.21 s. The hardware tail
+  formatting check took 36.00 s. The software tail's formatting-only edit was dropped after its
+  Lean check twice exceeded 60 s. The checkpoint build still needs to validate the underlying proof.
+- Merge with `origin/main` (c64f10c2a): the data table dispatches to both `pPData` and `pBData`,
+  and the step dispatcher uses both rounds' exponent and P proofs. Only `pwend .bias` remains in
+  `D.numeric`. The software-tail unpack now checks the pair equation on the arbitrary input
+  of the last generated run. Its isolated check with the long-line linter took 48.45 s. The
+  other edited modules took 4.93 s (`Machine`), 13.91 s (`Data`), 4.23 s (`Steps`), and
+  4.89 s (`Fragment`).
+- Generated the closing bias poll's arithmetic from the PTX: `rsumBa` rescales the previous
+  sum at pc 6561, and `rsumBb` starts after the zero move at pc 6562 and ends at 6647.
+  The addition tree has four pieces, with the final pair addition, unpack and scalar addition
+  in the last piece. `Gen/RsumB.lean` checked in 4.42 s in isolation and 3.9 s in the strict
+  build. Generator freshness passed.
+- Resumed on `349d93bc7`. The merge keeps the newly split plain proofs and the bias
+  exponent and P proofs. Saved work `6a9d7536b` moved the bias values ahead of the successor
+  and updates `mf`, `mr` and `rs` in `afterBias`, using `maxB` and `rsB`. This batch
+  retains those changes after isolated checks of the merged files and a strict
+  `Proof2.Top.Correct` checkpoint. One numeric state remains in the dispatcher,
+  `pwend .bias`. Its proof still needs the generated sum's kinds, the three successful
+  continuations, and the failed poll's back edge.
+- The closing poll is done: `StepsBiasEnd.lean` (`stepAt_pwendB`) from the sum's kinds
+  (`BiasSum*.lean`), its segment (`StepsBiasSum.lean`) and the three continuations
+  (`StepsBiasTail*.lean`). `SmWarp.numAll` (from `Pre`) closes the premise `numAll`. The back edge
+  first carries the registers that do not read the tile counter over tables in which that
+  counter's two values are opaque (`biasT_carried`): with the tables unfolded the kernel compared
+  the words' arithmetic and ran out of stack after 150 s; now 6 s.
+- A4 done: `Softmax.dataStoreSafe` (`DataStore.lean`): the P stores' halves have four bytes by the
+  kinds of the exponent stretches (`DataStoreBytes.lean`), the statistics are numbers or the `-∞`
+  pattern, and the addresses are in the lane chunk or 4-aligned (`DataStoreSite.lean`,
+  `Lemmas/Flow/UbFreeStore.lean`). `DataStoreSafe` has no premise of the state's invariant beyond
+  the machine's, so no row-sum fact is needed.
+
 ## Lane tmlfa4-safety (ex-Inkling agent): the frame-free SafePremises fields (2026-11-22)
 
 ### What each assigned field needs (read off Core and the Proof2 tree)
@@ -6822,7 +6878,106 @@ follow from the slot and band layout (the table in the file header), through the
   (`Sched.Lag.blk_tmaUnit`, now in the library), with three loader facts not yet in the tree: the
   TMA elections' won counts as placed counts (a lane wins `te t e` at most once), the copies to a
   Q barrier are the winner's `tc t c` (the predecessor lemma), and the drain's arrival excluded
-  while the MMA warp is before place 63. They are loader facts on lane 1c's `Loader/Spec.lean`
+  while the MMA warp is before place 63. They are loader facts on lane 1c's `Loader/Move.lean`
   (`Loader/Facts/`); the switch of `roleTime .loader` to `Ld.time` lands with them, together with
   the `kv_lag` change (`ld_short_time`: a loader lane short of packet `i` is before
   `Ld.bound p i`, which is below the K/V poll, written and checked on the branch).
+
+### Lane X2: the real loader times, and the Q polls by the byte balance
+
+- `Progress/Clock.lean` holds the phases and the order of their times; each role's times are in
+  `<Role>/Export/Time.lean`; `Progress/Time.lean` dispatches (the loader's placeholder is gone) and
+  `Progress/Order.lean` states the inequality of each wait.
+- The entry of every role is at `scanBase` (register requests: a lane without one is no later), the
+  first warp barrier just after. The scans count shuffles (and the pass's ballot) only, without the
+  pipeline's (the loader's 32 per packet, the MMA warp's broadcasts). The end sites are at
+  `doneBase` after the second scan (the loader's drain, whose last election follows the second
+  scan's collectives, too), or before the pipeline without a tile (`endT`).
+- `kv_lag`: a loader lane short of packet `i` is before `Ld.bound p i` (`Loader.ld_early`).
+- `q_lag`: two copies complete on a Q stage at most (`Loader.q_copies`), a completed phase takes
+  two (`TmaUnitObject.phase_le`), so the poll is blocked only in phase 0; the elected lane of
+  warp 14 (`q_winner`) past the first groups made the arrival and both copies (`Loader.q_done`,
+  from `group_hist`), before that it is before the pipeline. The drain's arrival needs no exclusion
+  (it has no copies). `LdWarp/Hist.lean` is `fact_at` for predicates of the earlier events.
+- `noWarpDivergence` is proved: the static facts (`Softmax/Export/Lands.lean`, one pass over the code
+  by `pollPass`), and per role that two lanes polling at one position poll one barrier or are
+  ordered (`<Role>/Export/Poll.lean`; the loader by its shuffles, which `LFits` already counts).
+- `loaderOther`, `mma`, `epilogue` are proved: their instructions in `Rest` that are no waits and no
+  warp collectives are the register request, the allocation with its address store, and the
+  `cp.async` operations (`<Role>/Export/Kind.lean`, `Top/Prog/Issue.lean`, the library's
+  `Lemmas/Kernel/Progress/Issue.lean`).
+- `Sched.WarpCollFacts.last` does not hold of this kernel: lanes past the batch skip the read before
+  the first collective of a pass, so a warp's last events before it differ (a register request or
+  a named-barrier arrival on some lanes, a read on the others). `Prog.WarpColl.Rest` asks
+  `Sched.WarpCollRel` instead: of two lanes at one collective, when one is released the other is or
+  the execution has an extension.
+- A delayed P store makes two `tcgen05` events at one site (the wait, then the store): the softmax
+  time reads its sub-step, so that a lane is later after each (`Blocked.Times.tcAfter`).
+- Open of `noAligned`: the Tensor Core and barrier classes; of `Blocked.times`: the Tensor Core and
+  barrier facts (the register requests are proved, `Top/Prog/RegTime.lean`); `WarpColl.facts`.
+  One engine serves the three: the times of the sites every lane of a CTA visits are a set `P` fixed
+  by the CTA; per role, no step of a lane jumps over an element of `P` (an edge check over `nexts`
+  in a slot, the round counts between slots) and an event at a site of the class moves past it. Then
+  the `k`-th event of a class is at the `k`-th element of the class's part of `P`
+  (`Nat.nth`), and no ledger class and no closed form of a count is needed.
+
+### Lane X2: the lags on the real time table (mmaSoft, softmax, correction)
+
+* **Short producers are early, per role** (`<Role>/Export/Lag.lean`, `Mma/Export/{At,CommitLag}`,
+  `Epilogue/Export/Out`): the waiter's barrier gives a producer with at most `v` arrivals or commits,
+  and the role's count closed forms with a site table give its time. The correction's table is one
+  for the P-full and credit arrivals (`corrO`, `corrE`, `corrB`): a lane with `A` arrivals is before
+  offset `corrB q` of slot `A + corrE q`. The MMA warp's commits are read on the lane that wins its
+  elections (`warp_winner`, `mma_at`), so one lemma gives S-full, O and later K/V and Q empty.
+* **Waits** go through `Sched.wait_site_steps` (`Lemmas/Kernel/Progress/WaitSite.lean`) and
+  `wait_rel`: the poll's barrier and parity come from the role's `*_mbar_use`, applied in the
+  execution with the failed poll appended, so they are not proved again at the end of a trace.
+* **Slots are within `bmax`**: `mma_rounds_bmax` (`Lib/RoundsBound.lean`).
+* **Softmax Bias-full and the loader's TMA waits** (the groups and the Q drain) are lane X1's:
+  `TmaBytes` is proved (`Protocol/Q/Bytes.lean`, `tmaBytes`) and every lane of a stage's Bias polls
+  observes its copies (`Protocol/Bias/Lanes.lean`, `bias_reach`). The K/V slot and drain polls are
+  proved here (`ld_kv_wait`, `kvE_lag`).
+* **The schedule engine, warp collectives** (`Lemmas/Kernel/Progress/WarpCollPair.lean`): the facts
+  are of two lanes of a warp (`WarpPair`), so a warp is closed alone. The static part is a function
+  of the state, not of the pc: the choice's two shuffles (`pre`, `tiles`) read lanes of the ballot,
+  so two lanes also need one ballot. `WarpColl.Rest` is the pairs of the warps other than 13; its
+  static parts `S` are existential, and a role supplies its own.
+* **The output warp** (`Epilogue/Export/{Coll,CollPair}`): the site is a function of the CTA and the
+  number of collectives (`Pos`, the pass by `Progress.Late`); a lane at a collective is released
+  with the other since its last event is its register request (`not_regWait`, for every role) or
+  does not block. A lane whose machine stopped has exited (`out_live`, as in `Epilogue/NoUb`).
+* **The MMA warp** (`Mma/Export/{CollCount,CollPos,CollState,CollSite,CollPair}`): the number of a
+  state is its shuffles, ballots and elections (`mma_cnt_eq`); `MCls` says where a state stands
+  (number, time, collective), one constructor per phase, and the facts of two lanes are about `MCls`
+  only (`MCls.order`: site and lag together, `MCls.lt_exit`). The pipeline's order is a table over
+  the places at round 0 and 14 collectives per round (`place_lt`).
+* **A stopped lane**: the MMA machine may stop at `ldAlloc`'s read without an exit, one tick before
+  the broadcast, so the lag excludes stopped lanes; a stopped pending lane is released
+  (`WarpPair.dead`) and steps to its undefined behaviour.
+* **For the loader pair**: its ledger counts the won elections only, so the elections need a closed
+  form by induction over the edges: 12 in the first block (groups 0 to 3), 6 per warm round, 3 for
+  group 6 (when it is taken), one in the drain; the rest has the shape of `MCls`.
+* **`Blocked.times`, `tcgen05` events**: the MMA warp's resource events are in the time table
+  (`Mma/Export/TcTime`: `mma_tcLag`, `tc_next`; `Mm.startT` has the allocation's store after the
+  request), the output and loader warps have no `tcgen05` event (`noTc_of_warp`). Open are the
+  softmax and correction warps' loads, stores and waits.
+* **`Blocked.times`, the startup barrier**: `bar_before` bounds a lane before barrier 0 by 174 (a
+  stopped lane counts one more than its last site), and the waiter is at 173, so the lag needs the
+  bound 173: a lane with no barrier event stopped at a site before the barrier's.
+* **The loader's elections**: lane X1's `Loader/Facts/{BiasNum,ElectNum,SuPick}` and `LdWarp/StepAt`
+  give the polls in closed form; with three elections per TMA poll the elections are `3 P` less the
+  ones to come in the group, where the drain's poll counts one. Group 6 is taken when `Last` holds
+  (more than ten blocks and a negative `r29`), not with every tile of two blocks.
+* **`WarpColl` is proved for every warp** (`Top/Prog/WarpColl.lean`; `Rest` has no field). A warp's
+  pair follows from one classification of its states (`Top/Prog/CollOfCls`: `CollCls`): the
+  collective a state is at, and a relation of the number of collectives, the time and that
+  collective, which orders the lanes. The loader's relation is `LCls`; the softmax and correction
+  warps' is `SCls` (`Lib/CollSched`) with their rounds as a parameter (`Mid`).
+* **The softmax pair** uses sites, places and the ledger: a round's warp barrier and election follow
+  its P-full arrival, so the role's collectives are twice the P-full arrivals less the ones to come
+  (`soft_coll_inv`), and warp 0 has the startup's sixteen elections before. The events that block a
+  lane right before a collective (the barrier after the register request, the last arrival on the
+  correction warps' barrier, the wait before the warp barrier) are ready for a lane when they are
+  for another of its warp (`Lemmas/Kernel/Progress/WarpReady`, `Softmax/Export/CollReady`).
+* **The correction pair**: the rescale ballots are full ballots of the ledger, two per round
+  (`CFits`); no blocking event of the role leads to a collective.

@@ -2,7 +2,7 @@
 module
 
 public import Tests.Gen.EpilogueUp
-public import Kernels.TmlFa4Fwd.Proof2.Epilogue.Machine
+public import Kernels.TmlFa4Fwd.Proof.Epilogue.Machine
 
 @[expose] public section
 
@@ -14,7 +14,7 @@ every register of the output warp's table (`partials`, `tilesOf`) the generated 
 hand-written one by `rfl`: the generated table mirrors the code in the same vocabulary. -/
 
 namespace PTX.Tests.Gen.EpilogueUp
-open PTX PTX.Kernels.TmlFa4Fwd.Proof2.Epilogue
+open PTX PTX.Kernels.TmlFa4Fwd.Proof.Epilogue
 
 theorem upFirst_partials (L : Launch) (g : Nat) (d : D) :
     ∀ r ∈ [2317, 2320, 2323, 2326, 7221],

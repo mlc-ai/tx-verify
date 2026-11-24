@@ -1,28 +1,28 @@
 {
   "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
-  "namespace": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen",
-  "output": "Kernels/TmlFa4Fwd/Proof2/Softmax/Gen/PkP.lean",
+  "namespace": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen",
+  "output": "Kernels/TmlFa4Fwd/Proof/Softmax/Gen/PkP.lean",
   "imports": [
     "Kernels.TmlFa4Fwd.Flow.Code",
-    "Kernels.TmlFa4Fwd.Proof2.Softmax.GenRules"
+    "Kernels.TmlFa4Fwd.Proof.Softmax.GenRules"
   ],
   "kernel": "PTX.Kernels.TmlFa4Fwd.Decoded.kernel",
   "code": "PTX.Kernels.TmlFa4Fwd.Flow",
   "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
   "runs": [
     {
-      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.segFree {pc} rfl",
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.segFree {pc} rfl",
       "rules": {
-        "mul": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_mul {pc} rfl",
-        "add": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_add {pc} rfl",
-        "sub": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_sub {pc} rfl",
-        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_fma2 {pc} rfl",
-        "add2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_add2 {pc} rfl",
-        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_ex2 {pc} rfl",
-        "pack": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_pack {pc}",
-        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_unpack {pc}",
-        "mov": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_mov {pc}",
-        "fn": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_cvt {pc} rfl rfl"
+        "mul": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mul {pc} rfl",
+        "add": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add {pc} rfl",
+        "sub": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_sub {pc} rfl",
+        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_fma2 {pc} rfl",
+        "add2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add2 {pc} rfl",
+        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_ex2 {pc} rfl",
+        "pack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_pack {pc}",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_unpack {pc}",
+        "mov": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mov {pc}",
+        "fn": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_cvt {pc} rfl rfl"
       },
       "name": "pkPA",
       "start": 7417,
@@ -48,18 +48,18 @@
       ]
     },
     {
-      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.segFree {pc} rfl",
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.segFree {pc} rfl",
       "rules": {
-        "mul": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_mul {pc} rfl",
-        "add": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_add {pc} rfl",
-        "sub": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_sub {pc} rfl",
-        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_fma2 {pc} rfl",
-        "add2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_add2 {pc} rfl",
-        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_ex2 {pc} rfl",
-        "pack": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_pack {pc}",
-        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_unpack {pc}",
-        "mov": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_mov {pc}",
-        "fn": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_cvt {pc} rfl rfl"
+        "mul": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mul {pc} rfl",
+        "add": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add {pc} rfl",
+        "sub": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_sub {pc} rfl",
+        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_fma2 {pc} rfl",
+        "add2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add2 {pc} rfl",
+        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_ex2 {pc} rfl",
+        "pack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_pack {pc}",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_unpack {pc}",
+        "mov": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mov {pc}",
+        "fn": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_cvt {pc} rfl rfl"
       },
       "name": "pkPB",
       "start": 7426,
@@ -85,18 +85,18 @@
       ]
     },
     {
-      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.segFree {pc} rfl",
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.segFree {pc} rfl",
       "rules": {
-        "mul": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_mul {pc} rfl",
-        "add": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_add {pc} rfl",
-        "sub": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_sub {pc} rfl",
-        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_fma2 {pc} rfl",
-        "add2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_add2 {pc} rfl",
-        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_ex2 {pc} rfl",
-        "pack": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_pack {pc}",
-        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_unpack {pc}",
-        "mov": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_mov {pc}",
-        "fn": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_cvt {pc} rfl rfl"
+        "mul": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mul {pc} rfl",
+        "add": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add {pc} rfl",
+        "sub": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_sub {pc} rfl",
+        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_fma2 {pc} rfl",
+        "add2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add2 {pc} rfl",
+        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_ex2 {pc} rfl",
+        "pack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_pack {pc}",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_unpack {pc}",
+        "mov": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mov {pc}",
+        "fn": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_cvt {pc} rfl rfl"
       },
       "name": "pkPC",
       "start": 7438,

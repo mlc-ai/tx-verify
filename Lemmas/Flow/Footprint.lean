@@ -438,8 +438,12 @@ meta partial def offEqProof (P : Expr) (T' T : Expr) (w e liveT : List Nat) : Me
     let key := mkNatLit ks
     let pk := P.beta #[key]
     let eqv ← mkEq a' a
+    -- a written, explicit or dead register needs no comparison: the values usually differ there,
+    -- and a failing comparison unfolds both (seconds per site)
+    let free := w.contains ks || e.contains ks || !liveT.contains ks
+    let same ← if free then withNewMCtxDepth (withReducible (isDefEq a' a)) else sameValue a' a
     let pv ←
-      if ← sameValue a' a then
+      if same then
         pure (mkApp3 (mkConst ``Or.inr) pk eqv (← mkEqRefl a'))
       else
         let (pw, pe, pt) := (← memE wE key, ← memE eE key, mkNot (← memE tE key))

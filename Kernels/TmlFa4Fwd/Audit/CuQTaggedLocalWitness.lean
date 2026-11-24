@@ -3,8 +3,8 @@ module
 
 public import Kernels.TmlFa4Fwd.Audit.CuQNumericWitness
 import all Kernels.TmlFa4Fwd.Audit.SpecWitness
-public import Kernels.TmlFa4Fwd.Proof.EpilogueWarpReady
-public import Kernels.TmlFa4Fwd.Proof.EpilogueWriteback
+public import Kernels.TmlFa4Fwd.Audit.OutputStep
+public import Kernels.TmlFa4Fwd.Proof.Lib.ScheduleCoords
 
 namespace PTX.Kernels.TmlFa4Fwd
 open TensorDescriptor

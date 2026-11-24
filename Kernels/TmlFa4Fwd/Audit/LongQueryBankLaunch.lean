@@ -2,11 +2,20 @@
 module
 
 public import Kernels.TmlFa4Fwd.Audit.SpecWitness
-public import Kernels.TmlFa4Fwd.Proof.MmaGeometry
+public import Lemmas.Flow.BitForms
 import all Init.Data.ToString.Extra
 import all Init.Data.Repr
 
 @[expose] public section
+
+namespace PTX.Kernels.TmlFa4Fwd.Mma
+
+/-- The number of KV blocks reached by the two query stages of the selected tile. -/
+def trips (p : Params) (batch tile : Nat) : Nat :=
+  min ((p.kLength batch + 127) / 128)
+    ((p.kLength batch - p.qLength batch + 256 * (tile + 1) + 127) / 128)
+
+end PTX.Kernels.TmlFa4Fwd.Mma
 
 namespace PTX.Kernels.TmlFa4Fwd.Audit
 open PTX PTX.Proof TensorDescriptor
