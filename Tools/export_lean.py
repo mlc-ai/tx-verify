@@ -128,9 +128,29 @@ def export(source: str, namespace: str) -> str:
         lines.append(f"  body := {value}")
         lines.append("")
     funcs = ", ".join(f.name for f in program.functions)
+    directives = []
+    for index, tokens in enumerate(program.directives):
+        if len(tokens) <= CHUNK:
+            directives.append(strings(tokens))
+            continue
+        # nvcc line information can include hundreds of thousands of .debug_str tokens.
+        # A single Lean list literal of that size exhausts the elaborator heartbeat limit.
+        separator = " "
+        while any(separator in token for token in tokens):
+            separator += "|"
+        name = f"directiveTokens{index}"
+        # Target validation reads the directive name without unpacking the debug payload.
+        packed = [separator.join(tokens[i : i + 2048]) for i in range(1, len(tokens), 2048)]
+        lines += [
+            f"def {name} : List String :=",
+            f"  {string(tokens[0])} :: ({strings(packed)} : List String).flatMap "
+            f"(fun s => s.splitOn {string(separator)})",
+            "",
+        ]
+        directives.append(name)
     lines.append("def module : Module where")
     lines.append(f"  sourceSha256 := {string(program.source_sha256)}")
-    lines.append("  directives := [" + ", ".join(strings(d) for d in program.directives) + "]")
+    lines.append("  directives := [" + ", ".join(directives) + "]")
     lines.append("  globals := [" + ", ".join(strings(g) for g in program.globals) + "]")
     lines.append(f"  functions := [{funcs}]")
     lines += ["", f"end {namespace}", ""]

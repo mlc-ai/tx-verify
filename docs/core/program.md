@@ -651,7 +651,7 @@ Lean definitions: every definition of [`Core/Source/Isa/Token.lean`](../../Core/
 <a id="prog-isa-entry"></a>
 #### instruction entries (`PROG-ISA-ENTRY`)
 
-*Rule* · [Lean comment: `Core/Source/Isa/Entry.lean` L11-L93](../../Core/Source/Isa/Entry.lean#L11-L93)
+*Rule* · [Lean comment: `Core/Source/Isa/Entry.lean` L11-L94](../../Core/Source/Isa/Entry.lean#L11-L94)
 
 Every instruction entry of the vendored table that is decoded, and every entry added for instructions the table lacks, is a constructor of `Entry`, with its mnemonic, family, effect class, PTX ISA section, modifier slots and operands. The file is generated from the vendored instruction table by `Tools/isa/gen_lean.py`; the assignment of entries to families is `Tools/isa/families.py`.
 
@@ -718,6 +718,7 @@ Lean definitions: every definition of [`Core/Source/Isa/Entry.lean`](../../Core/
 - §9.7.15.4: ".proxykind = { .alias, .async, .async.global, .async.shared::{cta, cluster} };"
 - §9.7.14.6: "ret{.uni};"
 - §9.7.14.7: "Syntax exit;"
+- §9.7.21.1: "Syntax brkpt;"
 - §9.7.21.4: "Syntax trap;"
 - §9.7.18.9.3: "tcgen05.shift.cta_group.down [taddr];"
 - §9.7.18.9.3: ".cta_group = { .cta_group::1, .cta_group::2 }"

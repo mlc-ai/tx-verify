@@ -1645,7 +1645,7 @@ Entries: 18 with Core semantics, 3 decode only, 0 rejected.
 
 The grammar recognizes these entries and the decoder gives them `Op.unmodeled`, which has no rule. The `multimem` operations access every memory location a multimem address points to across devices; the model executes one grid on one device and has no multimem addresses, so these operations stay without semantics.
 
-Entries: 0 with Core semantics, 23 decode only, 0 rejected.
+Entries: 0 with Core semantics, 24 decode only, 0 rejected.
 
 | Instruction | Modifiers | Operands | Kind | Status | Rule | Manual |
 |---|---|---|---|---|---|---|
@@ -1663,6 +1663,7 @@ Entries: 0 with Core semantics, 23 decode only, 0 rejected.
 | `multimem.st{.sem}{.scope}{.space}.type` | **Decode only:** sem: (omitted), `relaxed`, `release`, `weak`; scope: (omitted), `cluster`, `cta`, `gpu`, `sys`; space: (omitted), `global`; type: `bf16x2`, `f16x2`, `f32`, `f64` | `[addr], b` | event | Decode only: execution is rejected | none | §9.7.10.15 |
 | `multimem.st{.sem}{.scope}{.space}.vec.type` | **Decode only:** sem: (omitted), `relaxed`, `release`, `weak`; scope: (omitted), `cluster`, `cta`, `gpu`, `sys`; space: (omitted), `global`; vec: `v2`, `v4`, `v8`; type: `bf16`, `bf16x2`, `f16`, `f16x2`, `f32` | `[addr], {b...}` | event | Decode only: execution is rejected | none | §9.7.10.15 |
 | `multimem.st.async.sem.scope{.space}.type` | **Decode only:** sem: `release`; scope: `gpu`, `sys`; space: (omitted), `global`; type: `b16`, `b32`, `b64`, `b8`, `f32`, `f64`, `s16`, `s32`, `s64`, `s8`, `u16`, `u32`, `u64`, `u8` | `[addr], b` | event | Decode only: execution is rejected | none | §9.7.10.13 |
+| `brkpt` | none | none | local | Decode only: an `Assumption.localRule` may give it a meaning | none | §9.7.21.1 |
 | `fabric.action{.submitop}` | **Decode only:** action: `submit`; submitop: (omitted), `op_restrict::fetching` | none | event | Decode only: execution is rejected | none | §9.7.11.5.5 |
 | `fabric.action.api.dst.completion.sem.scope.type` | **Decode only:** action: `try_get`; api: `async`; dst: `shared::cta`; completion: `mbarrier::complete_tx::bytes.mbarrier::report::fabric`; sem: `relaxed`; scope: `sys`; type: `b128` | `[dst_mem], [src_le_id, src_data_off], size, [mbar]` | event | Decode only: execution is rejected | none | §9.7.11.5.1 |
 | `fabric.action.api.multimem.dst.completion.sem.scope.redop.type.sync` | **Decode only:** action: `try_pullred`; api: `async`; multimem: `multimem`; dst: `shared::cta`; completion: `mbarrier::complete_tx::bytes.mbarrier::report::fabric`; sem: `relaxed`; scope: `sys`; redop: `add`, `and`, `max`, `min`, `or`, `xor`; type: `b32`, `b64`, `bf16`, `f16`, `f32`, `s32`, `s64`, `u32`, `u64`; sync: `sync` | `[dst_mem], [src_le_id, src_data_off], size, [mbar], 0xFFFFFFFF` | event | Decode only: execution is rejected | none | §9.7.11.5.4 |

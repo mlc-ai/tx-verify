@@ -457,6 +457,7 @@ def entries():
         },
         _entry("ret", "ret", [["uni", ["uni"], True]], [], None, "ret{.uni};", "9.7.14.6"),
         _entry("exit", "exit", [], [], None, "Syntax exit;", "9.7.14.7"),
+        _entry("brkpt", "brkpt", [], [], None, "Syntax brkpt;", "9.7.21.1"),
         _entry("trap", "trap", [], [], None, "Syntax trap;", "9.7.21.4"),
         _entry(
             "tcgen05_shift",

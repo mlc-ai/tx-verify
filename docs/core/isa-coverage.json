@@ -3139,6 +3139,12 @@
 {"status":"core THREAD-RUN","count":1,"cubes":[[]]}
 ]
 },
+"brkpt": {
+"head": {"family":"unmodeled","mnemonic":"brkpt","effect":"local","section":"9.7.21.1","slots":[],"operands":"","combinations":1},
+"statuses": [
+{"status":"decode-only","count":1,"cubes":[[]]}
+]
+},
 "trap": {
 "head": {"family":"ctl","mnemonic":"trap","effect":"ctl","section":"9.7.21.4","slots":[],"operands":"","combinations":1},
 "statuses": [
