@@ -32,5 +32,21 @@ python3 Tools/export_lean.py /tmp/packed.ptx --namespace PTX.Generated.FlashKdaP
 cmp "$kda/Packed/Ptx.lean" /tmp/packed.lean
 ```
 
-[StateMap.lean](Packed/StateMap.lean) checks the final state tensor map for every sequence and head.
-Each of the 16 transfers covers eight keys in every value row of the 128-by-128 state.
+## Checked parts of the compiled entry
+
+[The memory specification](Packed/Spec.lean) gives the required value at every output and final
+state coordinate, including the outgoing state of an empty sequence. It also specifies the bytes
+each launch must preserve. The query, key and decay coefficients come from the preceding stage.
+
+[The update-gate proof](Packed/Activation.lean) evaluates both four-instruction gate sequences
+with exact multiplication, base-two exponential, addition and reciprocal. Their recorded binary32
+multiplier is exactly −12102203/8388608. At a logit of one this gives a strictly smaller result
+than the textbook sigmoid. The upstream test reference uses the same multiplier as the kernel.
+
+[The transfer sequences](Packed/Transfers.lean) identify all sixteen initial-state loads and
+sixteen final-state stores in the parsed entry. [The issue rules](Packed/StateIssue.lean)
+derive the actual copy events from operand registers, aligned parameter objects and valid state
+descriptors. [The address proof](Packed/StateMap.lean) maps each byte of the 128-by-128 state
+to one strip and connects completed copy effects to those bytes. [The shared-memory layout
+proof](Packed/StateSwizzle.lean) establishes that the three bit operations used to address
+a state element implement the same 32-byte swizzle as the tensor map.

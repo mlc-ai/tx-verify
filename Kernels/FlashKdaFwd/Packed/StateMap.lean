@@ -101,5 +101,45 @@ theorem write_byte (live : plane < planes) (i : Fin 16) (col : Fin 8) (row : Fin
   obtain ⟨_, w, hw, eqv⟩ := ok.writes _ _ hv
   exact ⟨v, eqv rfl ▸ hw, hv⟩
 
+def input (barrier : Loc) (i : Fin 16) : TensorCopy.Spec :=
+  { (s i).toTensorBox with mbar := barrier }
+
+theorem shared_slot (i : Fin 16) (col : Fin 8) (row : Fin 128) (byte : Fin 4) :
+    let start := smem.addr + 32768 + 4096*i.val
+    (s i).sharedLoc (cell col row byte) =
+      ⟨smem.space, smem.cta, start + TensorSwizzle.offset .b32 start
+        (32*row.val + 4*col.val + byte.val)⟩ := by
+  dsimp only
+  unfold TensorBox.sharedLoc TensorTile.sharedByte TensorTile.linearByte
+  simp only [strip, descriptor, slot, TensorDescriptor.Format.bytes,
+    TensorTile.rowBytes, TensorTile.count, TensorTile.step, TensorTile.swizzleWidth]
+  simp [Nat.mul_comm]
+
+set_option maxRecDepth 8192 in
+theorem read_byte (live : plane < planes) (i : Fin 16) (col : Fin 8) (row : Fin 128)
+    (byte : Fin 4) (barrier : Loc)
+    (e : TensorCopy.Effects (input base planes plane allocation smem barrier i))
+    (ok : TensorCopy.CopyOk _ e) (done_ : e.notified = true) :
+    let j := cell col row byte
+    TensorCopy.source (input base planes plane allocation smem barrier i) j =
+      .global (base + 65536*plane + 512*row.val + 4*(8*i.val+col.val) + byte.val) ∧
+      ∃ value, e.read j = some value ∧ e.write j = some (.copied value) := by
+  dsimp only
+  let j := cell col row byte
+  have ha := address base planes plane allocation smem live i col row byte
+  have hs : TensorCopy.source (input base planes plane allocation smem barrier i) j =
+      .global (base + 65536*plane + 512*row.val + 4*(8*i.val+col.val) + byte.val) := by
+    unfold TensorCopy.source
+    change (match (s i).globalAddress j with
+      | some a => TensorTransfer.Source.global a
+      | none => .fill .zero .f32 byte.val) = _
+    rw [show (s i).globalAddress j = _ from ha]
+  refine ⟨hs, ?_⟩
+  obtain ⟨v, hv⟩ := ok.complete done_ j
+  have source := ok.writes j v hv
+  rw [hs] at source
+  obtain ⟨w, read, rfl⟩ := source
+  exact ⟨w, read, hv⟩
+
 end
 end FlashKda.Packed.StateMap
