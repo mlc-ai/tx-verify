@@ -1,0 +1,180 @@
+{
+ "name": "tcgen05",
+ "title": "tcgen05",
+ "intro": "How the model treats the `tcgen05` instructions other than Tensor Memory allocation: the MMA kinds and descriptors, where operands and results lie in shared and Tensor Memory, the cells that loads, stores and copies access, `tcgen05.commit`, the tcgen05 fences, the order in which the Tensor Core performs its accesses and the values it produces. Concepts come first, then the rules.",
+ "concepts_intro": "The definitions a reader needs to follow the rules. Each text is the Lean doc comment, and each entry links to its Lean source.",
+ "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text. Interpretations (EXT) are readings of the PTX text that the model adopts beyond what the text states. The fields that reviewers check against the Lean bodies are collected under Details for reviewers. The rules `DEP-TC-FENCE` and `ERR-TC-COMMIT-GROUP` are in the mbarrier chapter, and the rule `ERR-ALIGNED-MISMATCH` for the warp-collective instructions is in the barriers chapter.",
+ "member_filter": {},
+ "concept_groups": [
+  {
+   "name": "Instructions and events",
+   "intro": "The qualifiers of the tcgen05 instructions, the events they produce, and the parts of an execution that record their asynchronous reads and completions.",
+   "items": [
+    "CtaGroup",
+    "MmaKind",
+    "TcMmaInstr",
+    "MmaCollector",
+    "TcCpShape",
+    "TcLdRed",
+    "TcShape",
+    "TcKind",
+    "Execution.MmaIssue",
+    "Execution.CpIssue",
+    "Execution.TLd",
+    "Execution.TSt",
+    "Execution.Commit",
+    "Execution.TcAsync",
+    "AsyncCopy.MmaOperands"
+   ]
+  },
+  {
+   "name": "Descriptors",
+   "intro": "The shared matrix descriptor that locates an operand in shared memory, and the instruction descriptor that fixes the kind and shape of an MMA.",
+   "items": [
+    "TcShared.Descriptor",
+    "TcMma.F8f6f4",
+    "TcMma.Kind",
+    "TcMma.Descriptor",
+    "TcMma.Valid"
+   ]
+  },
+  {
+   "name": "Operands and results",
+   "intro": "Where the bytes of the A and B operands are read and where each element of D is written.",
+   "items": [
+    "TcMma.OperandSpec",
+    "TcMma.Collectors",
+    "TcMma.Cell",
+    "TcMma.resultCell",
+    "TcMma.writeCell",
+    "Execution.MmaCell",
+    "Execution.MmaReadCell"
+   ]
+  },
+  {
+   "name": "Load, store and copy cells",
+   "intro": "The Tensor Memory cell of each register of a load or store, and the cells a copy writes.",
+   "items": [
+    "tcDataAddressOk",
+    "tcDataCell",
+    "TcCopy.Spec"
+   ]
+  },
+  {
+   "name": "Commit",
+   "intro": "The mbarriers that one `tcgen05.commit` signals.",
+   "items": [
+    "TcCommit.Spec",
+    "TcCommit.target"
+   ]
+  },
+  {
+   "name": "Ordering and completion",
+   "intro": "When one tcgen05 operation is ordered before another, and when an asynchronous operation has completed before an event.",
+   "items": [
+    "Execution.FenceBefore",
+    "TcMma.CommitObserved",
+    "ExecOrder",
+    "TcMma.TcBefore",
+    "TcMma.CompletedBefore",
+    "TcMma.Pipelined",
+    "TcMma.PipeAccess",
+    "TcMma.Before",
+    "TcMma.TmemWrite",
+    "TcMma.WriteBefore",
+    "TcMma.ReadBefore"
+   ]
+  },
+  {
+   "name": "Values",
+   "intro": "The value an MMA, a store or a copy leaves in a cell, and the value a load or a Tensor Memory A read returns.",
+   "items": [
+    "TcMma.eval",
+    "TcMma.Result",
+    "TcMma.Wrote",
+    "TcMma.TmemRead",
+    "TcMma.ReadSource",
+    "TcMma.ReadOk"
+   ]
+  },
+  {
+   "name": "Safety",
+   "intro": "The checks whose failure makes an execution or a kernel unsafe.",
+   "items": [
+    "TcMma.SourceUnsafe",
+    "TcMma.InstructionUnsafe",
+    "TcMma.WritesUnsafe",
+    "TcMma.ReadsUnsafe",
+    "Kernel.TcGroupUniform",
+    "TcMma.CollectorSafe"
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "name": "What a tcgen05 instruction does",
+   "intro": "The event each instruction produces, how its descriptors decode, and where its operands, results and register fragments lie.",
+   "items": [
+    "PROG-ISA-TC-MMA",
+    "PROG-ISA-TC-LD-RED",
+    "PROG-ISA-TC-CP",
+    "THREAD-TC-EVENT",
+    "THREAD-TC",
+    "THREAD-TC-LD-RED",
+    "THREAD-TC-COMMIT",
+    "THREAD-TC-COMMIT-TARGETS",
+    "THREAD-TC-SHARED-DESCRIPTOR",
+    "THREAD-TC-SHARED-ADDRESS",
+    "THREAD-TC-MMA-DESCRIPTOR",
+    "THREAD-TC-MMA-OPERANDS",
+    "THREAD-TC-MMA-RESULT-LAYOUT",
+    "EXT-TCFIG",
+    "THREAD-TC-DATA-ADDRESS",
+    "EXT-TMEM-LANE-FIELD",
+    "THREAD-TC-PACK16",
+    "THREAD-TC-CP-CELLS",
+    "EXT-TCCP",
+    "THREAD-TC-CP-DECOMPRESS",
+    "THREAD-TC-SHIFT-CELLS",
+    "EXT-TCSHIFT"
+   ]
+  },
+  {
+   "name": "Order and completion",
+   "intro": "When the asynchronous Tensor Memory accesses of tcgen05 operations are ordered, and when their completion is known.",
+   "items": [
+    "DEP-TC-COLLECTIVE",
+    "EXT-TC-EXEC-ORDER",
+    "DEP-TC-COMPLETION",
+    "EXT-TCACQUIRE",
+    "DEP-TC-PIPELINE",
+    "DEP-TC-READ-SOURCE",
+    "DEP-TMEM-STORE-VALUE",
+    "DEP-TMEM-COPY-VALUE",
+    "DEP-TMEM-SHIFT-VALUE",
+    "DEP-TC-COMPLETION-CLOSURE"
+   ]
+  },
+  {
+   "name": "Values",
+   "intro": "The values that MMAs compute and that loads and Tensor Memory A reads return.",
+   "items": [
+    "DEP-TC-MMA-VALUE",
+    "EXT-TCI8-WRAP",
+    "EXT-TCTF32",
+    "DEP-TC-LOAD-VALUE"
+   ]
+  },
+  {
+   "name": "What counts as an error",
+   "intro": "Executions and kernels that are rejected as unsafe because of a tcgen05 instruction.",
+   "items": [
+    "ERR-TMEM-READ-SOURCE",
+    "ERR-TC-MMA",
+    "ERR-TC-COLLECTOR-REUSE",
+    "ERR-TMEM-RACE",
+    "PROG-TC-CTA-GROUP"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,145 @@
+{
+  "name": "instructions",
+  "title": "Instructions: families, rules and tables",
+  "intro": "How a decoded instruction gets its meaning. The qualifier vocabulary and the operands come first, then the instruction families: each family has a representation, a decoding from a recognized instruction and a rule function that names the contract entry giving the instruction its semantics. The tables at the end list every entry of the instruction table with the modifier values that have semantics and those that only decode.",
+  "concepts_intro": "The definitions a reader needs to follow the rules. Each text is the Lean doc comment, and each entry links to its Lean source.",
+  "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text.",
+  "member_filter": {
+    "WarpKind": ["shfl", "vote", "match_", "redux", "activemask", "elect", "barWarp"]
+  },
+  "concept_groups": [
+    {
+      "name": "Types and qualifiers",
+      "intro": "The qualifier vocabulary that the instruction families share.",
+      "items": ["DType", "StateSpace", "Sem", "Cmp"]
+    },
+    {
+      "name": "Family representations",
+      "intro": "One representation for each family of instructions, and the function that names the rule of an instruction.",
+      "items": [
+        "RuleId",
+        "IntInstr",
+        "FloatInstr",
+        "MoveInstr",
+        "CvtInstr",
+        "MemAccess",
+        "AddrInstr",
+        "WarpKind",
+        "WarpInstr"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "name": "Types and operands",
+      "intro": "",
+      "items": ["PROG-ISA-TYPES", "PROG-OPERAND", "PROG-ISA-SREG"]
+    },
+    {
+      "name": "Instruction families",
+      "intro": "",
+      "items": [
+        "PROG-RULE-ID",
+        "PROG-INSTR-RULE",
+        "PROG-ISA-INT",
+        "PROG-ISA-FLOAT",
+        "PROG-ISA-MOVE",
+        "PROG-ISA-CVT",
+        "PROG-ISA-MISC",
+        "PROG-ISA-MEM",
+        "PROG-ISA-FENCE",
+        "PROG-ISA-WARP",
+        "PROG-ISA-MATRIX",
+        "PROG-ISA-SYNC-FORMS",
+        "PROG-ISA-COPY"
+      ]
+    }
+  ],
+  "tables": {
+    "intro": "There is one row for each entry of the instruction table (PROG-ISA-ENTRY). The instruction column gives the mnemonic and its modifier slots in syntax order, with optional slots in braces. The modifier column lists, for each slot, the values that occur in at least one combination with Core semantics, and separately the values that occur only in combinations that decode without semantics. A value with semantics has them only in the combinations the coverage file records. The coverage is computed by `Tests/Source/IsaCoverage.lean`, which decodes one instruction with sample operands for every legal modifier combination and applies the rule function of the family, and it is stored in [isa-coverage.json](isa-coverage.json) as cubes of combinations with equal status. A local instruction that decodes without semantics has no rule unless an assumption gives it one. An event instruction that decodes without semantics is rejected when a thread executes it. The register operands of the samples have the width of the operand's type; the rules of the contract entries decide the cases that depend on operand values.",
+    "sreg_intro": "One row for each special register of PROG-ISA-SREG, with the numbered registers of one prefix in one row. The status comes from `Tests/Source/IsaCoverage.lean`: a register is rejected when the decoder accepts no `mov` of its width from it, and otherwise it has the rule that `SReg.rule` names, which THREAD-SREG proves to be exactly the registers that `sregValue` gives a value (`sregValue_isSome`). The value column is `SReg.kind`. A register that decodes without semantics is `noRule` when an instruction reads it.",
+    "excluded_intro": "These instructions are recognized by name and rejected before decoding.",
+    "groups": [
+      {
+        "name": "Integer and bit instructions",
+        "families": ["int"],
+        "intro": "Decoded to `IntInstr` (PROG-ISA-INT). `IntInstr.rule` names THREAD-INT, or THREAD-MOVE for `selp` and `slct`. The extended-precision instructions of §9.7.2 are grammar entries of their own, since the instruction table has none of them."
+      },
+      {
+        "name": "Register moves",
+        "families": ["move"],
+        "intro": "Decoded to `MoveInstr` (PROG-ISA-MOVE). `MoveInstr.rule` names THREAD-MOVE."
+      },
+      {
+        "name": "Conversions",
+        "families": ["cvt"],
+        "intro": "Decoded to `CvtInstr` (PROG-ISA-CVT). `CvtInstr.rule` names THREAD-CVT for the conversions the model gives exactly (`CvtInstr.exact`)."
+      },
+      {
+        "name": "Memory access and addresses",
+        "families": ["mem"],
+        "intro": "Decoded to `MemAccess` or `AddrInstr` (PROG-ISA-MEM). `MemAccess.rule` and `AddrInstr.rule` name THREAD-ACCESS, THREAD-MOVE, THREAD-CVTA, THREAD-SHARED-POINTER or THREAD-PREFETCH."
+      },
+      {
+        "name": "Warp collectives",
+        "families": ["warp"],
+        "intro": "Decoded to `WarpInstr` (PROG-ISA-WARP). `WarpInstr.rule` names THREAD-SHFL, THREAD-VOTE, THREAD-REDUX, THREAD-MATCH, THREAD-ACTIVEMASK, THREAD-ELECT or THREAD-WARP-BAR."
+      },
+      {
+        "name": "Control flow",
+        "families": ["ctl"],
+        "intro": "Decoded to their own constructors of `Op`. `Op.rule` (PROG-INSTR-RULE) names THREAD-BRANCH for `bra` and for `brx.idx` without `.uni`, THREAD-RUN for `ret`, `exit` and `trap`, and no rule for `brx.idx.uni`."
+      },
+      {
+        "name": "Floating-point arithmetic",
+        "families": ["float"],
+        "intro": "The listed forms decode to their own constructors of `Op` (PROG-ISA-SYNC-FORMS). The Core has no rule for them; a kernel assumption gives them one (ASM-IDEAL)."
+      },
+      {
+        "name": "Barriers",
+        "families": ["barrier"],
+        "intro": "The forms listed in PROG-ISA-SYNC-FORMS decode to their own constructors of `Op`; `Op.rule` (PROG-INSTR-RULE) names the rule of each."
+      },
+      {
+        "name": "Memory fences",
+        "families": ["fence"],
+        "intro": "`fence.mbarrier_init` decodes to `Op.fenceMbarInit` (PROG-ISA-SYNC-FORMS, THREAD-TMA); every other `fence` and `membar` form decodes to `Op.fence` (PROG-ISA-FENCE) with THREAD-FENCE."
+      },
+      {
+        "name": "Mbarrier objects",
+        "families": ["mbarrier"],
+        "intro": "The forms listed in PROG-ISA-SYNC-FORMS decode to their own constructors of `Op`; `Op.rule` (PROG-INSTR-RULE) names the rule of each."
+      },
+      {
+        "name": "Asynchronous copies",
+        "families": ["async"],
+        "intro": "The forms listed in PROG-ISA-SYNC-FORMS decode to their own constructors of `Op`; `Op.rule` (PROG-INSTR-RULE) names the rule of each."
+      },
+      {
+        "name": "Tcgen05",
+        "families": ["tc"],
+        "intro": "The forms listed in PROG-ISA-SYNC-FORMS decode to their own constructors of `Op`; `Op.rule` (PROG-INSTR-RULE) names the rule of each."
+      },
+      {
+        "name": "Cluster launch control",
+        "families": ["clc"],
+        "intro": "The forms listed in PROG-ISA-SYNC-FORMS decode to their own constructors of `Op`; `Op.rule` (PROG-INSTR-RULE) names the rule of each."
+      },
+      {
+        "name": "Other instructions",
+        "families": ["misc"],
+        "intro": "`setmaxnreg` decodes to its own constructor of `Op` (PROG-ISA-SYNC-FORMS), whose rule is THREAD-SETMAXNREG. `createpolicy`, `nanosleep`, `pmevent` and `griddepcontrol` decode to `MiscInstr` (PROG-ISA-MISC), and `MiscInstr.rule` names THREAD-CACHE-POLICY for `createpolicy` and THREAD-NO-EFFECT for the others."
+      },
+      {
+        "name": "Warp-level matrix instructions",
+        "families": ["matrix"],
+        "intro": "Decoded to `MatrixInstr` (PROG-ISA-MATRIX); `spcompress` and `spdecompress` have no representation and decode to `Op.unmodeled`. `MatrixInstr.rule` names THREAD-MATRIX for `ldmatrix`, `stmatrix` and `movmatrix` and THREAD-MMA-SYNC for `mma` and `mma.sp`. The floating MMA forms have no Core arithmetic; a kernel assumption gives it (ASM-IDEAL)."
+      },
+      {
+        "name": "Without a representation",
+        "families": ["multimem", "texture", "unmodeled"],
+        "intro": "The grammar recognizes these entries and the decoder gives them `Op.unmodeled`, which has no rule. The `multimem` operations access every memory location a multimem address points to across devices; the model executes one grid on one device and has no multimem addresses, so these operations stay without semantics."
+      }
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+{
+ "name": "correctness",
+ "title": "Correctness",
+ "intro": "What it means for a kernel to be correct, how the other chapters fit into that definition, and how far the conclusion carries to real hardware. The first group of rules holds the three interpretations that apply to every kernel: the toolchain implements the ISA, the launch data describes the real launch and meets six obligations, and the Lean source is the compiled program. They state how far the conclusion `Correct` carries to real hardware. The top-level definition is [Correct](#correct) (concept [`Correct`](#c-correct)), in the second group of rules. It has four parts for every launch the kernel admits: no possible execution is unsafe (safety), every execution that cannot grow is complete (progress), the possible executions have a common bound on their size (termination), and the memory after every complete execution satisfies the postcondition (result). The groups after it define each part: which executions are possible, what counts as an error, what progress, fairness and termination mean, and what the memory after the kernel is. The rules of the other chapters supply the fields of `Consistent` and the disjuncts of `Unsafe`. Concepts come first, then the rules.",
+ "concepts_intro": "The definitions a reader needs to follow the rules, from the parts of an execution up to `Correct`. Each text is the Lean doc comment, and each entry links to its Lean source.",
+ "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text. Interpretations (EXT) are readings of the PTX text that the model adopts beyond what the text states. The fields that reviewers check against the Lean bodies are collected under Details for reviewers.",
+ "member_filter": {
+  "Execution": [
+   "tr",
+   "rf",
+   "initial",
+   "async",
+   "objects"
+  ]
+ },
+ "concept_groups": [
+  {
+   "name": "Kernels, launches and executions",
+   "intro": "The program, its launch and one candidate execution. The kernel's own assumptions are described in [Assumptions a kernel may declare](assumptions.md).",
+   "items": [
+    "Kernel",
+    "Launch",
+    "Mem0",
+    "Execution",
+    "Execution.le",
+    "Execution.size"
+   ]
+  },
+  {
+   "name": "Possible and unsafe executions",
+   "intro": "The executions the model allows and the executions it rejects as undefined.",
+   "items": [
+    "Produces",
+    "Consistent",
+    "Unsafe",
+    "HasUb"
+   ]
+  },
+  {
+   "name": "Progress and termination",
+   "intro": "Executions that cannot grow, complete executions and fair runs.",
+   "items": [
+    "Maximal",
+    "AsyncDrained",
+    "Complete",
+    "FairRun"
+   ]
+  },
+  {
+   "name": "Memory after the kernel",
+   "intro": "The coherence order of the writes and the final value of each byte.",
+   "items": [
+    "FinalMem",
+    "CoStep",
+    "CoBefore",
+    "CoOrder",
+    "CoMaximal",
+    "IsFinal"
+   ]
+  },
+  {
+   "name": "Correctness",
+   "intro": "The launches a kernel admits and the definition of a correct kernel.",
+   "items": [
+    "Launch.Valid",
+    "Correct"
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "name": "How far the conclusion carries to hardware",
+   "intro": "Three interpretations that every kernel's theorem relies on. A theorem says nothing about a run on hardware that breaks one of them.",
+   "items": [
+    "EXT-ISA",
+    "EXT-LAUNCH",
+    "EXT-PREFERRED-CLUSTER",
+    "EXT-IMPORT"
+   ]
+  },
+  {
+   "name": "The definition of a correct kernel",
+   "intro": "The top-level definition. Every kernel theorem states `Correct` for its kernel, its own assumptions (ASM-INTERFACE), launch, launch memory and postcondition; the launch premise restricts it to the launches the kernel's declarations admit.",
+   "items": [
+    "CORRECT",
+    "CORRECT-LAUNCH"
+   ]
+  },
+  {
+   "name": "Which executions are possible",
+   "intro": "The conjunction of the thread rules and the execution constraints of every chapter.",
+   "items": [
+    "CORRECT-CONSISTENT",
+    "DEP-ASYNC-STAGE-ORDER",
+    "EXT-STAGE-ORDER",
+    "DEP-ORDER",
+    "DEP-CANONICAL-SPIN"
+   ]
+  },
+  {
+   "name": "What counts as an error",
+   "intro": "The disjunction of the safety checks of every chapter, and the faults that instructions raise themselves.",
+   "items": [
+    "ERR-POLL-SHAPE",
+    "ERR-UNSAFE",
+    "ERR-UNDEFINED-INSTRUCTION"
+   ]
+  },
+  {
+   "name": "Progress, fairness and termination",
+   "intro": "Executions that cannot grow must be complete; the fairness assumption carries this to real runs.",
+   "items": [
+    "CORRECT-GROW",
+    "CORRECT-MAXIMAL",
+    "CORRECT-COMPLETE",
+    "CORRECT-FAIR",
+    "EXT-FAIR"
+   ]
+  },
+  {
+   "name": "The memory after the kernel",
+   "intro": "The final value of each byte, given by a coherence order of the execution's writes.",
+   "items": [
+    "CORRECT-FINAL"
+   ]
+  }
+ ]
+}

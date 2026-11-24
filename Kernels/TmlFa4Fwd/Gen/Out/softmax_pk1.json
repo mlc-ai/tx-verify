@@ -1,0 +1,125 @@
+{
+  "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
+  "namespace": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen",
+  "output": "Kernels/TmlFa4Fwd/Proof/Softmax/Gen/Pk1.lean",
+  "imports": [
+    "Kernels.TmlFa4Fwd.Flow.Code",
+    "Kernels.TmlFa4Fwd.Proof.Softmax.GenRules"
+  ],
+  "kernel": "PTX.Kernels.TmlFa4Fwd.Decoded.kernel",
+  "code": "PTX.Kernels.TmlFa4Fwd.Flow",
+  "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
+  "runs": [
+    {
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.segFree {pc} rfl",
+      "rules": {
+        "mul": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mul {pc} rfl",
+        "add": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add {pc} rfl",
+        "sub": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_sub {pc} rfl",
+        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_fma2 {pc} rfl",
+        "add2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add2 {pc} rfl",
+        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_ex2 {pc} rfl",
+        "pack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_pack {pc}",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_unpack {pc}",
+        "mov": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mov {pc}",
+        "fn": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_cvt {pc} rfl rfl"
+      },
+      "name": "pkA",
+      "start": 4827,
+      "end": 4835,
+      "cut": 32,
+      "outputs": [
+        "%r2835",
+        "%r2836",
+        "%r2837",
+        "%r2838",
+        "%r2839",
+        "%r2840",
+        "%r2841",
+        "%r2842",
+        "%r2843",
+        "%r2844",
+        "%r2845",
+        "%r2846",
+        "%r2847",
+        "%r2848",
+        "%r2849",
+        "%r2850"
+      ]
+    },
+    {
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.segFree {pc} rfl",
+      "rules": {
+        "mul": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mul {pc} rfl",
+        "add": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add {pc} rfl",
+        "sub": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_sub {pc} rfl",
+        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_fma2 {pc} rfl",
+        "add2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add2 {pc} rfl",
+        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_ex2 {pc} rfl",
+        "pack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_pack {pc}",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_unpack {pc}",
+        "mov": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mov {pc}",
+        "fn": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_cvt {pc} rfl rfl"
+      },
+      "name": "pkB",
+      "start": 4836,
+      "end": 4844,
+      "cut": 32,
+      "outputs": [
+        "%r2851",
+        "%r2852",
+        "%r2853",
+        "%r2854",
+        "%r2855",
+        "%r2856",
+        "%r2857",
+        "%r2858",
+        "%r2859",
+        "%r2860",
+        "%r2861",
+        "%r2862",
+        "%r2863",
+        "%r2864",
+        "%r2865",
+        "%r2866"
+      ]
+    },
+    {
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.segFree {pc} rfl",
+      "rules": {
+        "mul": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mul {pc} rfl",
+        "add": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add {pc} rfl",
+        "sub": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_sub {pc} rfl",
+        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_fma2 {pc} rfl",
+        "add2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add2 {pc} rfl",
+        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_ex2 {pc} rfl",
+        "pack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_pack {pc}",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_unpack {pc}",
+        "mov": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mov {pc}",
+        "fn": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_cvt {pc} rfl rfl"
+      },
+      "name": "pkC",
+      "start": 4848,
+      "end": 4856,
+      "cut": 32,
+      "outputs": [
+        "%r2868",
+        "%r2869",
+        "%r2870",
+        "%r2871",
+        "%r2872",
+        "%r2873",
+        "%r2874",
+        "%r2875",
+        "%r2876",
+        "%r2877",
+        "%r2878",
+        "%r2879",
+        "%r2880",
+        "%r2881",
+        "%r2882",
+        "%r2883"
+      ]
+    }
+  ]
+}

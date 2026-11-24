@@ -1,0 +1,70 @@
+{
+  "kernel": "FlashAttention-4 forward (CuTeDSL), Tri Dao et al.",
+  "source": {
+    "repository": "https://github.com/Dao-AILab/flash-attention",
+    "commit": "00756db9d921da0846453283ddfbeb7457abd09b",
+    "file": "flash_attn/cute/flash_fwd_sm100.py",
+    "class": "FlashAttentionForwardSm100",
+    "license": "BSD-3-Clause"
+  },
+  "toolchain": {
+    "nvidia-cutlass-dsl": "4.6.1",
+    "quack-kernels": "0.5.3",
+    "torch": "2.11.0+cu130",
+    "python": "3.14",
+    "ptx_compiler": "NVVM 23.0.0, CUDA 13.3 (CL-37800683)"
+  },
+  "config": {
+    "batch": 1,
+    "seqlen": 8192,
+    "num_heads": 32,
+    "num_kv_heads": 32,
+    "head_dim": 128,
+    "causal": false,
+    "dtype": "float16",
+    "arch": "sm_100a"
+  },
+  "scope": {
+    "note": "config above is only the instance gen_ptx.py uses to produce the input tensors; the proof scope is this field",
+    "fixed_by_ptx": {
+      "head_dim": 128,
+      "dtype": "float16",
+      "causal": false,
+      "return_lse": false,
+      "seqlen_q_greater_than": 256,
+      "block": 512,
+      "cluster": [
+        2,
+        1,
+        1
+      ]
+    },
+    "parameters": {
+      "batch": "any",
+      "num_heads": "any, with num_kv_heads equal to num_heads",
+      "seqlen_q": "any multiple of 512",
+      "seqlen_k": "any multiple of 128 (may differ from seqlen_q)",
+      "grid": "any even number of CTAs"
+    },
+    "same_ptx_across_scope": "argued from source and PTX; not yet confirmed by regenerating with other shapes",
+    "out_of_scope": [
+      "arbitrary sequence lengths (masking, TMA out-of-bounds fill, -inf paths)",
+      "seqlen_q <= 256",
+      "GQA/MQA",
+      "return_lse",
+      "causal"
+    ]
+  },
+  "ptx": {
+    "file": "flash_fwd_sm100.ptx",
+    "sha256": "7db209672fa849011493f600925369d700932bb50f9f674cc9cc52d97b628e8b",
+    "ptx_version": "8.8",
+    "entry": "kernel_cutlass_kernel_flash_attncuteflash_fwd_sm100FlashAttentionForwardSm100_object_at__tensor0000o11101213_tensor0000o11101213_tensor0000o10111213_tensor0000o11101213_None_None_None_Non_0",
+    "instructions": 4897
+  },
+  "status": {
+    "proof": "proved (Theorem.lean)",
+    "decode": "complete (all 4897 instructions; see Coverage.lean)",
+    "hardware_validation": "compile only"
+  }
+}

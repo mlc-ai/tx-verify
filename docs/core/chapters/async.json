@@ -1,0 +1,209 @@
+{
+ "name": "async",
+ "title": "Asynchronous copies and tensor maps",
+ "intro": "How the model treats the asynchronous engine: bulk copies and tensor copies (TMA), tensor maps and their geometry, multicast, bulk groups and their waits, tensor stores and reductions, and the safety checks that apply to them. Concepts come first, then the rules.",
+ "concepts_intro": "The definitions a reader needs to follow the rules. Each text is the Lean doc comment, and each entry links to its Lean source.",
+ "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text. Interpretations (EXT) are readings of the PTX text that the model adopts beyond what the text states. The fields that reviewers check against the Lean bodies are collected under Details for reviewers.",
+ "member_filter": {
+  "Kind": [
+   "copy",
+   "tensorIssue",
+   "tensorPrefetch",
+   "tensorStore",
+   "bulkCommit",
+   "bulkWait",
+   "bulkPrefetch",
+   "asyncCommit",
+   "asyncWait",
+   "asyncArrive"
+  ],
+  "Execution": [
+   "tensor",
+   "tensorStores",
+   "async"
+  ]
+ },
+ "concept_groups": [
+  {
+   "name": "Linear bulk copies",
+   "intro": "The recorded effects of a linear bulk copy and how they grow.",
+   "items": [
+    "AsyncCopy.Notification",
+    "AsyncCopy.CopyOk",
+    "TmaOk"
+   ]
+  },
+  {
+   "name": "Bulk groups",
+   "intro": "Per-thread grouping of bulk operations and the waits on groups.",
+   "items": [
+    "BulkGroup.WaitMode",
+    "BulkGroup.State",
+    "BulkGroup.Action",
+    "BulkGroup.Done",
+    "BulkGroup.WaitReady",
+    "BulkWaitsFor",
+    "GroupWaitStages"
+   ]
+  },
+  {
+   "name": "Tensor maps",
+   "intro": "The descriptor of a tiled tensor.",
+   "items": [
+    "TensorDescriptor.Format",
+    "TensorDescriptor.Fill",
+    "TensorDescriptor.Descriptor",
+    "TensorDescriptor.Valid",
+    "TensorDescriptor.BoxAligned"
+   ]
+  },
+  {
+   "name": "Tensor geometry",
+   "intro": "Global addresses and the elements a bounding box selects.",
+   "items": [
+    "TensorAddress.Geometry",
+    "TensorAddress.InBounds",
+    "TensorTile.Box"
+   ]
+  },
+  {
+   "name": "Shared layout",
+   "intro": "Where a selected element lies in shared memory.",
+   "items": [
+    "TensorSwizzle.Mode",
+    "TensorTile.sharedByte"
+   ]
+  },
+  {
+   "name": "The bytes of a transfer",
+   "intro": "The bytes that one tensor transfer moves.",
+   "items": [
+    "TensorTransfer.Slot",
+    "TensorTransfer.Source",
+    "TensorTransfer.bytes",
+    "TensorHasOob",
+    "TensorBox",
+    "requireBoxAligned"
+   ]
+  },
+  {
+   "name": "Tensor loads",
+   "intro": "The specification and recorded effects of a tensor load.",
+   "items": [
+    "TensorCopy.Spec",
+    "TensorCopy.Effects",
+    "TensorCopy.CopyOk",
+    "TensorCopy.Completion",
+    "TensorCopy.Observation",
+    "TensorOk"
+   ]
+  },
+  {
+   "name": "Tensor stores and reductions",
+   "intro": "The specification and recorded effects of a tensor store or reduction.",
+   "items": [
+    "TensorStore.Spec",
+    "TensorStore.Valid",
+    "TensorStore.Effects",
+    "TensorStore.CopyOk",
+    "TensorStore.Observation",
+    "TensorStoreOk",
+    "TensorStore.reduceValue",
+    "TensorStore.ReduceOk"
+   ]
+  },
+  {
+   "name": "Instruction events",
+   "intro": "The events that tensor and bulk-group instructions produce.",
+   "items": [
+    "tensorTmpl",
+    "tensorStoreTmpl"
+   ]
+  },
+  {
+   "name": "Safety",
+   "intro": "The conditions that make a tensor operation unsafe.",
+   "items": [
+    "TensorBackingMissing",
+    "TensorAllocationUnsafe",
+    "TensorUnsafe",
+    "TensorStoreUnsafe"
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "name": "What the instructions do",
+   "intro": "The events of tensor loads, prefetches, stores, reductions and bulk-group instructions.",
+   "items": [
+    "THREAD-TENSOR-ISSUE",
+    "THREAD-TENSOR-PREFETCH",
+    "EXT-PREFETCH-PENDING",
+    "THREAD-TENSOR-STORE",
+    "THREAD-CP-ASYNC",
+    "THREAD-ASYNC-STORE",
+    "EXT-ST-ASYNC-CTA"
+   ]
+  },
+  {
+   "name": "Tensor maps and geometry",
+   "intro": "The tensor map, the elements a bounding box selects and their addresses and shared layout.",
+   "items": [
+    "THREAD-TENSOR-DESCRIPTOR",
+    "EXT-TMA-BOX-ALIGN",
+    "THREAD-TENSOR-GLOBAL-ADDRESS",
+    "THREAD-TENSOR-TILE",
+    "THREAD-TENSOR-TILE-SHARED",
+    "EXT-TMA-GEOMETRY",
+    "THREAD-TENSOR-SWIZZLE",
+    "THREAD-TENSOR-TRANSFER-MAP",
+    "EXT-TMA-GATHER4",
+    "EXT-TMA-SCATTER4"
+   ]
+  },
+  {
+   "name": "Which executions are allowed",
+   "intro": "Effects of copies, tensor loads, stores and reductions, and the waits on bulk groups.",
+   "items": [
+    "DEP-ASYNC-STAGES",
+    "MEM-FOOTPRINT",
+    "DEP-ASYNC-ORIGIN",
+    "DEP-LINEAR-COPY-EFFECTS",
+    "DEP-TENSOR-LOAD-ORIGIN",
+    "PROG-CTA-GROUP",
+    "DEP-TENSOR-LOAD-EFFECTS",
+    "DEP-TENSOR-LOAD-BYTES",
+    "DEP-TENSOR-STORE-EFFECTS",
+    "EXT-TMA-STORE-OOB",
+    "EXT-TMA-REDUCE",
+    "DEP-TENSOR-STORE-BYTES",
+    "DEP-REDUCTION-VALUES",
+    "EXT-TMA-REDUCE-OP",
+    "EXT-TMA-REDUCE-ATOMIC",
+    "OBJ-BULK-GROUP",
+    "OBJ-BULK-GROUP-TRACE",
+    "DEP-BULK-WAIT"
+   ]
+  },
+  {
+   "name": "What counts as an error",
+   "intro": "Tensor operations that are rejected as unsafe.",
+   "items": [
+    "ERR-CP-ASYNC-OVERLAP",
+    "ERR-BULK-MASK-RANGE",
+    "ERR-TENSOR-FILL-VALUE",
+    "ERR-REDUCTION-NO-RULE",
+    "ERR-TENSOR-LARGE-OOB"
+   ]
+  },
+  {
+   "name": "Representation of growth and progress",
+   "intro": "Entries that fix how effects grow and are counted.",
+   "items": [
+    "CORRECT-ASYNC-GROW",
+    "CORRECT-TENSOR-SIZE",
+    "CORRECT-TENSOR-STORE-SIZE"
+   ]
+  }
+ ]
+}

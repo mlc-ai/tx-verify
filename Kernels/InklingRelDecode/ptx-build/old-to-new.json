@@ -1,0 +1,2116 @@
+{
+ "note": "old = unpatched kernel PTX (tag inkling-old-ptx-baseline), new = frozen fixed PTX; same pcs. registers: old name -> {new name: number of pcs}; changed_pcs: pcs whose instruction text differs, shape_change marks a different opcode/guard/operand shape (not only a renamed register).",
+ "registers": {
+  "%p172": {
+   "%p171": 2
+  },
+  "%p173": {
+   "%p172": 2
+  },
+  "%p174": {
+   "%p173": 1
+  },
+  "%p175": {
+   "%p174": 2
+  },
+  "%p176": {
+   "%p175": 68
+  },
+  "%p177": {
+   "%p176": 2
+  },
+  "%p178": {
+   "%p177": 5
+  },
+  "%p179": {
+   "%p178": 3
+  },
+  "%p180": {
+   "%p179": 10
+  },
+  "%p181": {
+   "%p180": 10
+  },
+  "%r954": {
+   "%r1072": 1
+  },
+  "%r955": {
+   "%r1077": 1
+  },
+  "%r956": {
+   "%r954": 3
+  },
+  "%r957": {
+   "%r955": 3
+  },
+  "%r958": {
+   "%r956": 3
+  },
+  "%r959": {
+   "%r957": 3
+  },
+  "%r960": {
+   "%r958": 2
+  },
+  "%r961": {
+   "%r959": 3
+  },
+  "%r962": {
+   "%r960": 3
+  },
+  "%r963": {
+   "%r961": 3
+  },
+  "%r964": {
+   "%r962": 3
+  },
+  "%r965": {
+   "%r963": 2
+  },
+  "%r966": {
+   "%r964": 3
+  },
+  "%r967": {
+   "%r965": 3
+  },
+  "%r968": {
+   "%r966": 2
+  },
+  "%r969": {
+   "%r967": 3
+  },
+  "%r970": {
+   "%r968": 3
+  },
+  "%r971": {
+   "%r969": 2
+  },
+  "%r972": {
+   "%r970": 3
+  },
+  "%r973": {
+   "%r971": 3
+  },
+  "%r974": {
+   "%r972": 3
+  },
+  "%r975": {
+   "%r973": 3
+  },
+  "%r976": {
+   "%r974": 2
+  },
+  "%r977": {
+   "%r975": 3
+  },
+  "%r978": {
+   "%r976": 3
+  },
+  "%r979": {
+   "%r977": 3
+  },
+  "%r980": {
+   "%r978": 3
+  },
+  "%r981": {
+   "%r979": 2
+  },
+  "%r982": {
+   "%r980": 3
+  },
+  "%r983": {
+   "%r981": 3
+  },
+  "%r984": {
+   "%r982": 3
+  },
+  "%r985": {
+   "%r983": 3
+  },
+  "%r986": {
+   "%r984": 2
+  },
+  "%r987": {
+   "%r985": 3
+  },
+  "%r988": {
+   "%r986": 3
+  },
+  "%r989": {
+   "%r987": 2
+  },
+  "%r990": {
+   "%r988": 3
+  },
+  "%r991": {
+   "%r989": 3
+  },
+  "%r992": {
+   "%r990": 2
+  },
+  "%r993": {
+   "%r991": 3
+  },
+  "%r994": {
+   "%r992": 3
+  },
+  "%r995": {
+   "%r993": 3
+  },
+  "%r996": {
+   "%r994": 3
+  },
+  "%r997": {
+   "%r995": 2
+  },
+  "%r998": {
+   "%r996": 3
+  },
+  "%r999": {
+   "%r997": 3
+  },
+  "%r1000": {
+   "%r998": 2
+  },
+  "%r1001": {
+   "%r999": 3
+  },
+  "%r1002": {
+   "%r1000": 3
+  },
+  "%r1003": {
+   "%r1001": 2
+  },
+  "%r1004": {
+   "%r1002": 3
+  },
+  "%r1005": {
+   "%r1003": 3
+  },
+  "%r1006": {
+   "%r1004": 3
+  },
+  "%r1007": {
+   "%r1005": 3
+  },
+  "%r1008": {
+   "%r1006": 2
+  },
+  "%r1009": {
+   "%r1007": 3
+  },
+  "%r1010": {
+   "%r1008": 3
+  },
+  "%r1011": {
+   "%r1009": 2
+  },
+  "%r1012": {
+   "%r1010": 3
+  },
+  "%r1013": {
+   "%r1011": 3
+  },
+  "%r1014": {
+   "%r1012": 2
+  },
+  "%r1015": {
+   "%r1013": 3
+  },
+  "%r1016": {
+   "%r1014": 3
+  },
+  "%r1017": {
+   "%r1015": 3
+  },
+  "%r1018": {
+   "%r1016": 3
+  },
+  "%r1019": {
+   "%r1017": 2
+  },
+  "%r1020": {
+   "%r1018": 3
+  },
+  "%r1021": {
+   "%r1019": 3
+  },
+  "%r1022": {
+   "%r1020": 3
+  },
+  "%r1023": {
+   "%r1021": 3
+  },
+  "%r1024": {
+   "%r1022": 2
+  },
+  "%r1025": {
+   "%r1023": 3
+  },
+  "%r1026": {
+   "%r1024": 3
+  },
+  "%r1027": {
+   "%r1025": 3
+  },
+  "%r1028": {
+   "%r1026": 3
+  },
+  "%r1029": {
+   "%r1027": 2
+  },
+  "%r1030": {
+   "%r1028": 3
+  },
+  "%r1031": {
+   "%r1029": 3
+  },
+  "%r1032": {
+   "%r1030": 2
+  },
+  "%r1033": {
+   "%r1031": 3
+  },
+  "%r1034": {
+   "%r1032": 3
+  },
+  "%r1035": {
+   "%r1033": 2
+  },
+  "%r1036": {
+   "%r1034": 3
+  },
+  "%r1037": {
+   "%r1035": 3
+  },
+  "%r1038": {
+   "%r1036": 3
+  },
+  "%r1039": {
+   "%r1037": 3
+  },
+  "%r1040": {
+   "%r1038": 2
+  },
+  "%r1041": {
+   "%r1039": 2
+  },
+  "%r1042": {
+   "%r1040": 2
+  },
+  "%r1043": {
+   "%r1041": 2
+  },
+  "%r1044": {
+   "%r1042": 2
+  },
+  "%r1045": {
+   "%r1043": 2
+  },
+  "%r1046": {
+   "%r1044": 2
+  },
+  "%r1047": {
+   "%r1045": 2
+  },
+  "%r1048": {
+   "%r1046": 2
+  },
+  "%r1049": {
+   "%r1047": 2
+  },
+  "%r1050": {
+   "%r1048": 2
+  },
+  "%r1051": {
+   "%r1049": 2
+  },
+  "%r1052": {
+   "%r1050": 2
+  },
+  "%r1053": {
+   "%r1051": 2
+  },
+  "%r1054": {
+   "%r1052": 2
+  },
+  "%r1055": {
+   "%r1053": 2
+  },
+  "%r1056": {
+   "%r1054": 2
+  },
+  "%r1057": {
+   "%r1055": 2
+  },
+  "%r1058": {
+   "%r1056": 2
+  },
+  "%r1059": {
+   "%r1057": 2
+  },
+  "%r1060": {
+   "%r1058": 2
+  },
+  "%r1061": {
+   "%r1059": 3
+  },
+  "%r1062": {
+   "%r1060": 2
+  },
+  "%r1063": {
+   "%r1061": 4
+  },
+  "%r1064": {
+   "%r1062": 3
+  },
+  "%r1065": {
+   "%r1063": 2
+  },
+  "%r1066": {
+   "%r1064": 2
+  },
+  "%r1067": {
+   "%r1065": 65
+  },
+  "%r1068": {
+   "%r1066": 2
+  },
+  "%r1069": {
+   "%r1067": 2
+  },
+  "%r1070": {
+   "%r1068": 3
+  },
+  "%r1071": {
+   "%r1069": 2
+  },
+  "%r1072": {
+   "%r1070": 2
+  },
+  "%r1076": {
+   "%r46": 1
+  },
+  "%r1077": {
+   "%r1074": 1
+  },
+  "%r1078": {
+   "%r1075": 2
+  },
+  "%r1079": {
+   "%r1076": 1
+  }
+ },
+ "changed_pcs": [
+  {
+   "pc": 188,
+   "old": "setp.eq.b32 %p178, %r27, 0",
+   "new": "setp.eq.b32 %p177, %r27, 0",
+   "shape_change": false
+  },
+  {
+   "pc": 193,
+   "old": "@%p178 mbarrier.arrive.expect_tx.shared::cta.b64 _, [%r152], 65536",
+   "new": "@%p177 mbarrier.arrive.expect_tx.shared::cta.b64 _, [%r152], 65536",
+   "shape_change": false
+  },
+  {
+   "pc": 237,
+   "old": "@%p178 mbarrier.arrive.expect_tx.shared::cta.b64 _, [%r154], 65536",
+   "new": "@%p177 mbarrier.arrive.expect_tx.shared::cta.b64 _, [%r154], 65536",
+   "shape_change": false
+  },
+  {
+   "pc": 279,
+   "old": "@%p178 mbarrier.arrive.expect_tx.shared::cta.b64 _, [%r156], 65536",
+   "new": "@%p177 mbarrier.arrive.expect_tx.shared::cta.b64 _, [%r156], 65536",
+   "shape_change": false
+  },
+  {
+   "pc": 586,
+   "old": "and.pred %p176, %p86, %p87",
+   "new": "and.pred %p175, %p86, %p87",
+   "shape_change": false
+  },
+  {
+   "pc": 612,
+   "old": "and.pred %p89, %p176, %p88",
+   "new": "and.pred %p89, %p175, %p88",
+   "shape_change": false
+  },
+  {
+   "pc": 809,
+   "old": "add.s32 %r954, %r331, %r347",
+   "new": "add.s32 %r1072, %r331, %r347",
+   "shape_change": false
+  },
+  {
+   "pc": 949,
+   "old": "selp.f32 %r1453, %r1453, %r1063, %p168",
+   "new": "selp.f32 %r1453, %r1453, %r1061, %p168",
+   "shape_change": false
+  },
+  {
+   "pc": 950,
+   "old": "fma.rn.f32 %r1454, %r1454, %r46, %r1072",
+   "new": "fma.rn.f32 %r1454, %r1454, %r46, %r1070",
+   "shape_change": false
+  },
+  {
+   "pc": 1008,
+   "old": "mov.pred %p173, -1",
+   "new": "mov.pred %p172, -1",
+   "shape_change": false
+  },
+  {
+   "pc": 1009,
+   "old": "@%p173 tcgen05.st.sync.aligned.16x32bx2.x32.b32 [%r1215+0], 32, {%r1216,%r1217,%r1218,%r1219,%r1220,%r1221,%r1222,%r1223,%r1224,%r1225,%r1226,%r1227,%r1228,%r1229,%r1230,%r1231,%r1232,%r1233,%r1234,%r1235,%r1236,%r1237,%r1238,%r1239,%r1240,%r1241,%r1242,%r1243,%r1244,%r1245,%r1246,%r1247}",
+   "new": "@%p172 tcgen05.st.sync.aligned.16x32bx2.x32.b32 [%r1215+0], 32, {%r1216,%r1217,%r1218,%r1219,%r1220,%r1221,%r1222,%r1223,%r1224,%r1225,%r1226,%r1227,%r1228,%r1229,%r1230,%r1231,%r1232,%r1233,%r1234,%r1235,%r1236,%r1237,%r1238,%r1239,%r1240,%r1241,%r1242,%r1243,%r1244,%r1245,%r1246,%r1247}",
+   "shape_change": false
+  },
+  {
+   "pc": 1013,
+   "old": "@%p178 mbarrier.arrive.shared::cta.b64 _, [%r1248]",
+   "new": "@%p177 mbarrier.arrive.shared::cta.b64 _, [%r1248]",
+   "shape_change": false
+  },
+  {
+   "pc": 1050,
+   "old": "@%p91 bra $L__BB0_35",
+   "new": "@%p91 bra $L__BB0_36",
+   "shape_change": true
+  },
+  {
+   "pc": 1056,
+   "old": "and.pred %p92, %p176, %p95",
+   "new": "and.pred %p92, %p175, %p95",
+   "shape_change": false
+  },
+  {
+   "pc": 1300,
+   "old": "mov.pred %p180, %p1",
+   "new": "mov.pred %p179, %p1",
+   "shape_change": false
+  },
+  {
+   "pc": 1301,
+   "old": "mov.pred %p181, %p2",
+   "new": "mov.pred %p180, %p2",
+   "shape_change": false
+  },
+  {
+   "pc": 1762,
+   "old": "and.pred %p180, %p163, %p166",
+   "new": "and.pred %p179, %p163, %p166",
+   "shape_change": false
+  },
+  {
+   "pc": 1763,
+   "old": "and.pred %p181, %p162, %p166",
+   "new": "and.pred %p180, %p162, %p166",
+   "shape_change": false
+  },
+  {
+   "pc": 1764,
+   "old": "mov.b64 {%r956,%r957}, %rd499",
+   "new": "mov.b64 {%r954,%r955}, %rd499",
+   "shape_change": false
+  },
+  {
+   "pc": 1765,
+   "old": "mov.b64 {%r958,%r959}, %rd500",
+   "new": "mov.b64 {%r956,%r957}, %rd500",
+   "shape_change": false
+  },
+  {
+   "pc": 1766,
+   "old": "max.f32 %r960, %r958, %r959",
+   "new": "max.f32 %r958, %r956, %r957",
+   "shape_change": false
+  },
+  {
+   "pc": 1767,
+   "old": "mov.b64 {%r961,%r962}, %rd501",
+   "new": "mov.b64 {%r959,%r960}, %rd501",
+   "shape_change": false
+  },
+  {
+   "pc": 1768,
+   "old": "mov.b64 {%r963,%r964}, %rd502",
+   "new": "mov.b64 {%r961,%r962}, %rd502",
+   "shape_change": false
+  },
+  {
+   "pc": 1769,
+   "old": "max.f32 %r965, %r963, %r964",
+   "new": "max.f32 %r963, %r961, %r962",
+   "shape_change": false
+  },
+  {
+   "pc": 1770,
+   "old": "mov.b64 {%r966,%r967}, %rd503",
+   "new": "mov.b64 {%r964,%r965}, %rd503",
+   "shape_change": false
+  },
+  {
+   "pc": 1771,
+   "old": "max.f32 %r968, %r966, %r967",
+   "new": "max.f32 %r966, %r964, %r965",
+   "shape_change": false
+  },
+  {
+   "pc": 1772,
+   "old": "mov.b64 {%r969,%r970}, %rd504",
+   "new": "mov.b64 {%r967,%r968}, %rd504",
+   "shape_change": false
+  },
+  {
+   "pc": 1773,
+   "old": "max.f32 %r971, %r969, %r970",
+   "new": "max.f32 %r969, %r967, %r968",
+   "shape_change": false
+  },
+  {
+   "pc": 1774,
+   "old": "mov.b64 {%r972,%r973}, %rd505",
+   "new": "mov.b64 {%r970,%r971}, %rd505",
+   "shape_change": false
+  },
+  {
+   "pc": 1775,
+   "old": "mov.b64 {%r974,%r975}, %rd506",
+   "new": "mov.b64 {%r972,%r973}, %rd506",
+   "shape_change": false
+  },
+  {
+   "pc": 1776,
+   "old": "max.f32 %r976, %r974, %r975",
+   "new": "max.f32 %r974, %r972, %r973",
+   "shape_change": false
+  },
+  {
+   "pc": 1777,
+   "old": "mov.b64 {%r977,%r978}, %rd507",
+   "new": "mov.b64 {%r975,%r976}, %rd507",
+   "shape_change": false
+  },
+  {
+   "pc": 1778,
+   "old": "mov.b64 {%r979,%r980}, %rd508",
+   "new": "mov.b64 {%r977,%r978}, %rd508",
+   "shape_change": false
+  },
+  {
+   "pc": 1779,
+   "old": "max.f32 %r981, %r979, %r980",
+   "new": "max.f32 %r979, %r977, %r978",
+   "shape_change": false
+  },
+  {
+   "pc": 1780,
+   "old": "mov.b64 {%r982,%r983}, %rd509",
+   "new": "mov.b64 {%r980,%r981}, %rd509",
+   "shape_change": false
+  },
+  {
+   "pc": 1781,
+   "old": "mov.b64 {%r984,%r985}, %rd510",
+   "new": "mov.b64 {%r982,%r983}, %rd510",
+   "shape_change": false
+  },
+  {
+   "pc": 1782,
+   "old": "max.f32 %r986, %r984, %r985",
+   "new": "max.f32 %r984, %r982, %r983",
+   "shape_change": false
+  },
+  {
+   "pc": 1783,
+   "old": "mov.b64 {%r987,%r988}, %rd511",
+   "new": "mov.b64 {%r985,%r986}, %rd511",
+   "shape_change": false
+  },
+  {
+   "pc": 1784,
+   "old": "max.f32 %r989, %r987, %r988",
+   "new": "max.f32 %r987, %r985, %r986",
+   "shape_change": false
+  },
+  {
+   "pc": 1785,
+   "old": "mov.b64 {%r990,%r991}, %rd512",
+   "new": "mov.b64 {%r988,%r989}, %rd512",
+   "shape_change": false
+  },
+  {
+   "pc": 1786,
+   "old": "max.f32 %r992, %r990, %r991",
+   "new": "max.f32 %r990, %r988, %r989",
+   "shape_change": false
+  },
+  {
+   "pc": 1787,
+   "old": "mov.b64 {%r993,%r994}, %rd513",
+   "new": "mov.b64 {%r991,%r992}, %rd513",
+   "shape_change": false
+  },
+  {
+   "pc": 1788,
+   "old": "mov.b64 {%r995,%r996}, %rd514",
+   "new": "mov.b64 {%r993,%r994}, %rd514",
+   "shape_change": false
+  },
+  {
+   "pc": 1789,
+   "old": "max.f32 %r997, %r995, %r996",
+   "new": "max.f32 %r995, %r993, %r994",
+   "shape_change": false
+  },
+  {
+   "pc": 1790,
+   "old": "mov.b64 {%r998,%r999}, %rd515",
+   "new": "mov.b64 {%r996,%r997}, %rd515",
+   "shape_change": false
+  },
+  {
+   "pc": 1791,
+   "old": "max.f32 %r1000, %r998, %r999",
+   "new": "max.f32 %r998, %r996, %r997",
+   "shape_change": false
+  },
+  {
+   "pc": 1792,
+   "old": "mov.b64 {%r1001,%r1002}, %rd516",
+   "new": "mov.b64 {%r999,%r1000}, %rd516",
+   "shape_change": false
+  },
+  {
+   "pc": 1793,
+   "old": "max.f32 %r1003, %r1001, %r1002",
+   "new": "max.f32 %r1001, %r999, %r1000",
+   "shape_change": false
+  },
+  {
+   "pc": 1794,
+   "old": "mov.b64 {%r1004,%r1005}, %rd517",
+   "new": "mov.b64 {%r1002,%r1003}, %rd517",
+   "shape_change": false
+  },
+  {
+   "pc": 1795,
+   "old": "mov.b64 {%r1006,%r1007}, %rd518",
+   "new": "mov.b64 {%r1004,%r1005}, %rd518",
+   "shape_change": false
+  },
+  {
+   "pc": 1796,
+   "old": "max.f32 %r1008, %r1006, %r1007",
+   "new": "max.f32 %r1006, %r1004, %r1005",
+   "shape_change": false
+  },
+  {
+   "pc": 1797,
+   "old": "mov.b64 {%r1009,%r1010}, %rd519",
+   "new": "mov.b64 {%r1007,%r1008}, %rd519",
+   "shape_change": false
+  },
+  {
+   "pc": 1798,
+   "old": "max.f32 %r1011, %r1009, %r1010",
+   "new": "max.f32 %r1009, %r1007, %r1008",
+   "shape_change": false
+  },
+  {
+   "pc": 1799,
+   "old": "mov.b64 {%r1012,%r1013}, %rd520",
+   "new": "mov.b64 {%r1010,%r1011}, %rd520",
+   "shape_change": false
+  },
+  {
+   "pc": 1800,
+   "old": "max.f32 %r1014, %r1012, %r1013",
+   "new": "max.f32 %r1012, %r1010, %r1011",
+   "shape_change": false
+  },
+  {
+   "pc": 1801,
+   "old": "mov.b64 {%r1015,%r1016}, %rd521",
+   "new": "mov.b64 {%r1013,%r1014}, %rd521",
+   "shape_change": false
+  },
+  {
+   "pc": 1802,
+   "old": "mov.b64 {%r1017,%r1018}, %rd522",
+   "new": "mov.b64 {%r1015,%r1016}, %rd522",
+   "shape_change": false
+  },
+  {
+   "pc": 1803,
+   "old": "max.f32 %r1019, %r1017, %r1018",
+   "new": "max.f32 %r1017, %r1015, %r1016",
+   "shape_change": false
+  },
+  {
+   "pc": 1804,
+   "old": "mov.b64 {%r1020,%r1021}, %rd523",
+   "new": "mov.b64 {%r1018,%r1019}, %rd523",
+   "shape_change": false
+  },
+  {
+   "pc": 1805,
+   "old": "mov.b64 {%r1022,%r1023}, %rd524",
+   "new": "mov.b64 {%r1020,%r1021}, %rd524",
+   "shape_change": false
+  },
+  {
+   "pc": 1806,
+   "old": "max.f32 %r1024, %r1022, %r1023",
+   "new": "max.f32 %r1022, %r1020, %r1021",
+   "shape_change": false
+  },
+  {
+   "pc": 1807,
+   "old": "mov.b64 {%r1025,%r1026}, %rd525",
+   "new": "mov.b64 {%r1023,%r1024}, %rd525",
+   "shape_change": false
+  },
+  {
+   "pc": 1808,
+   "old": "mov.b64 {%r1027,%r1028}, %rd526",
+   "new": "mov.b64 {%r1025,%r1026}, %rd526",
+   "shape_change": false
+  },
+  {
+   "pc": 1809,
+   "old": "max.f32 %r1029, %r1027, %r1028",
+   "new": "max.f32 %r1027, %r1025, %r1026",
+   "shape_change": false
+  },
+  {
+   "pc": 1810,
+   "old": "mov.b64 {%r1030,%r1031}, %rd527",
+   "new": "mov.b64 {%r1028,%r1029}, %rd527",
+   "shape_change": false
+  },
+  {
+   "pc": 1811,
+   "old": "max.f32 %r1032, %r1030, %r1031",
+   "new": "max.f32 %r1030, %r1028, %r1029",
+   "shape_change": false
+  },
+  {
+   "pc": 1812,
+   "old": "mov.b64 {%r1033,%r1034}, %rd528",
+   "new": "mov.b64 {%r1031,%r1032}, %rd528",
+   "shape_change": false
+  },
+  {
+   "pc": 1813,
+   "old": "max.f32 %r1035, %r1033, %r1034",
+   "new": "max.f32 %r1033, %r1031, %r1032",
+   "shape_change": false
+  },
+  {
+   "pc": 1814,
+   "old": "mov.b64 {%r1036,%r1037}, %rd529",
+   "new": "mov.b64 {%r1034,%r1035}, %rd529",
+   "shape_change": false
+  },
+  {
+   "pc": 1815,
+   "old": "mov.b64 {%r1038,%r1039}, %rd530",
+   "new": "mov.b64 {%r1036,%r1037}, %rd530",
+   "shape_change": false
+  },
+  {
+   "pc": 1816,
+   "old": "max.f32 %r1040, %r1038, %r1039",
+   "new": "max.f32 %r1038, %r1036, %r1037",
+   "shape_change": false
+  },
+  {
+   "pc": 1817,
+   "old": "max.f32 %r1041, %r956, %r957, %r960",
+   "new": "max.f32 %r1039, %r954, %r955, %r958",
+   "shape_change": false
+  },
+  {
+   "pc": 1818,
+   "old": "max.f32 %r1042, %r961, %r962, %r965",
+   "new": "max.f32 %r1040, %r959, %r960, %r963",
+   "shape_change": false
+  },
+  {
+   "pc": 1819,
+   "old": "max.f32 %r1043, %r972, %r973, %r976",
+   "new": "max.f32 %r1041, %r970, %r971, %r974",
+   "shape_change": false
+  },
+  {
+   "pc": 1820,
+   "old": "max.f32 %r1044, %r977, %r978, %r981",
+   "new": "max.f32 %r1042, %r975, %r976, %r979",
+   "shape_change": false
+  },
+  {
+   "pc": 1821,
+   "old": "max.f32 %r1045, %r982, %r983, %r986",
+   "new": "max.f32 %r1043, %r980, %r981, %r984",
+   "shape_change": false
+  },
+  {
+   "pc": 1822,
+   "old": "max.f32 %r1046, %r993, %r994, %r997",
+   "new": "max.f32 %r1044, %r991, %r992, %r995",
+   "shape_change": false
+  },
+  {
+   "pc": 1823,
+   "old": "max.f32 %r1047, %r1004, %r1005, %r1008",
+   "new": "max.f32 %r1045, %r1002, %r1003, %r1006",
+   "shape_change": false
+  },
+  {
+   "pc": 1824,
+   "old": "max.f32 %r1048, %r1015, %r1016, %r1019",
+   "new": "max.f32 %r1046, %r1013, %r1014, %r1017",
+   "shape_change": false
+  },
+  {
+   "pc": 1825,
+   "old": "max.f32 %r1049, %r1020, %r1021, %r1024",
+   "new": "max.f32 %r1047, %r1018, %r1019, %r1022",
+   "shape_change": false
+  },
+  {
+   "pc": 1826,
+   "old": "max.f32 %r1050, %r1025, %r1026, %r1029",
+   "new": "max.f32 %r1048, %r1023, %r1024, %r1027",
+   "shape_change": false
+  },
+  {
+   "pc": 1827,
+   "old": "max.f32 %r1051, %r1036, %r1037, %r1040",
+   "new": "max.f32 %r1049, %r1034, %r1035, %r1038",
+   "shape_change": false
+  },
+  {
+   "pc": 1828,
+   "old": "max.f32 %r1052, %r968, %r971, %r1043",
+   "new": "max.f32 %r1050, %r966, %r969, %r1041",
+   "shape_change": false
+  },
+  {
+   "pc": 1829,
+   "old": "max.f32 %r1053, %r989, %r992, %r1046",
+   "new": "max.f32 %r1051, %r987, %r990, %r1044",
+   "shape_change": false
+  },
+  {
+   "pc": 1830,
+   "old": "max.f32 %r1054, %r1000, %r1003, %r1047",
+   "new": "max.f32 %r1052, %r998, %r1001, %r1045",
+   "shape_change": false
+  },
+  {
+   "pc": 1831,
+   "old": "max.f32 %r1055, %r1011, %r1014, %r1048",
+   "new": "max.f32 %r1053, %r1009, %r1012, %r1046",
+   "shape_change": false
+  },
+  {
+   "pc": 1832,
+   "old": "max.f32 %r1056, %r1032, %r1035, %r1051",
+   "new": "max.f32 %r1054, %r1030, %r1033, %r1049",
+   "shape_change": false
+  },
+  {
+   "pc": 1833,
+   "old": "max.f32 %r1057, %r1041, %r1042, %r1052",
+   "new": "max.f32 %r1055, %r1039, %r1040, %r1050",
+   "shape_change": false
+  },
+  {
+   "pc": 1834,
+   "old": "max.f32 %r1058, %r1044, %r1045, %r1053",
+   "new": "max.f32 %r1056, %r1042, %r1043, %r1051",
+   "shape_change": false
+  },
+  {
+   "pc": 1835,
+   "old": "max.f32 %r1059, %r1049, %r1050, %r1056",
+   "new": "max.f32 %r1057, %r1047, %r1048, %r1054",
+   "shape_change": false
+  },
+  {
+   "pc": 1836,
+   "old": "max.f32 %r1060, %r1054, %r1055, %r1059",
+   "new": "max.f32 %r1058, %r1052, %r1053, %r1057",
+   "shape_change": false
+  },
+  {
+   "pc": 1837,
+   "old": "max.f32 %r1061, %r1057, %r1058, %r1060",
+   "new": "max.f32 %r1059, %r1055, %r1056, %r1058",
+   "shape_change": false
+  },
+  {
+   "pc": 1838,
+   "old": "shfl.sync.bfly.b32 %r1062, %r1061, 16, 31, -1",
+   "new": "shfl.sync.bfly.b32 %r1060, %r1059, 16, 31, -1",
+   "shape_change": false
+  },
+  {
+   "pc": 1839,
+   "old": "max.f32 %r1063, %r1453, %r1061, %r1062",
+   "new": "max.f32 %r1061, %r1453, %r1059, %r1060",
+   "shape_change": false
+  },
+  {
+   "pc": 1840,
+   "old": "setp.eq.f32 %p167, %r1063, 0fFF800000",
+   "new": "setp.eq.f32 %p167, %r1061, 0fFF800000",
+   "shape_change": false
+  },
+  {
+   "pc": 1841,
+   "old": "selp.f32 %r1064, 0f00000000, %r1063, %p167",
+   "new": "selp.f32 %r1062, 0f00000000, %r1061, %p167",
+   "shape_change": false
+  },
+  {
+   "pc": 1842,
+   "old": "sub.f32 %r1065, %r1453, %r1064",
+   "new": "sub.f32 %r1063, %r1453, %r1062",
+   "shape_change": false
+  },
+  {
+   "pc": 1843,
+   "old": "mul.f32 %r809, %r37, %r1065",
+   "new": "mul.f32 %r809, %r37, %r1063",
+   "shape_change": false
+  },
+  {
+   "pc": 1847,
+   "old": "selp.f32 %r1066, %r1453, %r1064, %p168",
+   "new": "selp.f32 %r1064, %r1453, %r1062, %p168",
+   "shape_change": false
+  },
+  {
+   "pc": 1848,
+   "old": "mul.f32 %r1067, %r1066, %r38",
+   "new": "mul.f32 %r1065, %r1064, %r38",
+   "shape_change": false
+  },
+  {
+   "pc": 1849,
+   "old": "fma.rn.f32 %r827, %r956, %r37, %r1067",
+   "new": "fma.rn.f32 %r827, %r954, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1850,
+   "old": "fma.rn.f32 %r829, %r957, %r37, %r1067",
+   "new": "fma.rn.f32 %r829, %r955, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1851,
+   "old": "fma.rn.f32 %r831, %r958, %r37, %r1067",
+   "new": "fma.rn.f32 %r831, %r956, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1852,
+   "old": "fma.rn.f32 %r833, %r959, %r37, %r1067",
+   "new": "fma.rn.f32 %r833, %r957, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1853,
+   "old": "fma.rn.f32 %r835, %r961, %r37, %r1067",
+   "new": "fma.rn.f32 %r835, %r959, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1854,
+   "old": "fma.rn.f32 %r837, %r962, %r37, %r1067",
+   "new": "fma.rn.f32 %r837, %r960, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1855,
+   "old": "fma.rn.f32 %r839, %r963, %r37, %r1067",
+   "new": "fma.rn.f32 %r839, %r961, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1856,
+   "old": "fma.rn.f32 %r841, %r964, %r37, %r1067",
+   "new": "fma.rn.f32 %r841, %r962, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1857,
+   "old": "fma.rn.f32 %r843, %r966, %r37, %r1067",
+   "new": "fma.rn.f32 %r843, %r964, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1858,
+   "old": "fma.rn.f32 %r845, %r967, %r37, %r1067",
+   "new": "fma.rn.f32 %r845, %r965, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1859,
+   "old": "fma.rn.f32 %r847, %r969, %r37, %r1067",
+   "new": "fma.rn.f32 %r847, %r967, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1860,
+   "old": "fma.rn.f32 %r849, %r970, %r37, %r1067",
+   "new": "fma.rn.f32 %r849, %r968, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1861,
+   "old": "fma.rn.f32 %r851, %r972, %r37, %r1067",
+   "new": "fma.rn.f32 %r851, %r970, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1862,
+   "old": "fma.rn.f32 %r853, %r973, %r37, %r1067",
+   "new": "fma.rn.f32 %r853, %r971, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1863,
+   "old": "fma.rn.f32 %r855, %r974, %r37, %r1067",
+   "new": "fma.rn.f32 %r855, %r972, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1864,
+   "old": "fma.rn.f32 %r857, %r975, %r37, %r1067",
+   "new": "fma.rn.f32 %r857, %r973, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1865,
+   "old": "fma.rn.f32 %r859, %r977, %r37, %r1067",
+   "new": "fma.rn.f32 %r859, %r975, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1866,
+   "old": "fma.rn.f32 %r861, %r978, %r37, %r1067",
+   "new": "fma.rn.f32 %r861, %r976, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1867,
+   "old": "fma.rn.f32 %r863, %r979, %r37, %r1067",
+   "new": "fma.rn.f32 %r863, %r977, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1868,
+   "old": "fma.rn.f32 %r865, %r980, %r37, %r1067",
+   "new": "fma.rn.f32 %r865, %r978, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1869,
+   "old": "fma.rn.f32 %r867, %r982, %r37, %r1067",
+   "new": "fma.rn.f32 %r867, %r980, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1870,
+   "old": "fma.rn.f32 %r869, %r983, %r37, %r1067",
+   "new": "fma.rn.f32 %r869, %r981, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1871,
+   "old": "fma.rn.f32 %r871, %r984, %r37, %r1067",
+   "new": "fma.rn.f32 %r871, %r982, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1872,
+   "old": "fma.rn.f32 %r873, %r985, %r37, %r1067",
+   "new": "fma.rn.f32 %r873, %r983, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1873,
+   "old": "fma.rn.f32 %r875, %r987, %r37, %r1067",
+   "new": "fma.rn.f32 %r875, %r985, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1874,
+   "old": "fma.rn.f32 %r877, %r988, %r37, %r1067",
+   "new": "fma.rn.f32 %r877, %r986, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1875,
+   "old": "fma.rn.f32 %r879, %r990, %r37, %r1067",
+   "new": "fma.rn.f32 %r879, %r988, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1876,
+   "old": "fma.rn.f32 %r881, %r991, %r37, %r1067",
+   "new": "fma.rn.f32 %r881, %r989, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1877,
+   "old": "fma.rn.f32 %r883, %r993, %r37, %r1067",
+   "new": "fma.rn.f32 %r883, %r991, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1878,
+   "old": "fma.rn.f32 %r885, %r994, %r37, %r1067",
+   "new": "fma.rn.f32 %r885, %r992, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1879,
+   "old": "fma.rn.f32 %r887, %r995, %r37, %r1067",
+   "new": "fma.rn.f32 %r887, %r993, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1880,
+   "old": "fma.rn.f32 %r889, %r996, %r37, %r1067",
+   "new": "fma.rn.f32 %r889, %r994, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1881,
+   "old": "fma.rn.f32 %r891, %r998, %r37, %r1067",
+   "new": "fma.rn.f32 %r891, %r996, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1882,
+   "old": "fma.rn.f32 %r893, %r999, %r37, %r1067",
+   "new": "fma.rn.f32 %r893, %r997, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1883,
+   "old": "fma.rn.f32 %r895, %r1001, %r37, %r1067",
+   "new": "fma.rn.f32 %r895, %r999, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1884,
+   "old": "fma.rn.f32 %r897, %r1002, %r37, %r1067",
+   "new": "fma.rn.f32 %r897, %r1000, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1885,
+   "old": "fma.rn.f32 %r899, %r1004, %r37, %r1067",
+   "new": "fma.rn.f32 %r899, %r1002, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1886,
+   "old": "fma.rn.f32 %r901, %r1005, %r37, %r1067",
+   "new": "fma.rn.f32 %r901, %r1003, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1887,
+   "old": "fma.rn.f32 %r903, %r1006, %r37, %r1067",
+   "new": "fma.rn.f32 %r903, %r1004, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1888,
+   "old": "fma.rn.f32 %r905, %r1007, %r37, %r1067",
+   "new": "fma.rn.f32 %r905, %r1005, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1889,
+   "old": "fma.rn.f32 %r907, %r1009, %r37, %r1067",
+   "new": "fma.rn.f32 %r907, %r1007, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1890,
+   "old": "fma.rn.f32 %r909, %r1010, %r37, %r1067",
+   "new": "fma.rn.f32 %r909, %r1008, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1891,
+   "old": "fma.rn.f32 %r911, %r1012, %r37, %r1067",
+   "new": "fma.rn.f32 %r911, %r1010, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1892,
+   "old": "fma.rn.f32 %r913, %r1013, %r37, %r1067",
+   "new": "fma.rn.f32 %r913, %r1011, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1893,
+   "old": "fma.rn.f32 %r915, %r1015, %r37, %r1067",
+   "new": "fma.rn.f32 %r915, %r1013, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1894,
+   "old": "fma.rn.f32 %r917, %r1016, %r37, %r1067",
+   "new": "fma.rn.f32 %r917, %r1014, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1895,
+   "old": "fma.rn.f32 %r919, %r1017, %r37, %r1067",
+   "new": "fma.rn.f32 %r919, %r1015, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1896,
+   "old": "fma.rn.f32 %r921, %r1018, %r37, %r1067",
+   "new": "fma.rn.f32 %r921, %r1016, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1897,
+   "old": "fma.rn.f32 %r923, %r1020, %r37, %r1067",
+   "new": "fma.rn.f32 %r923, %r1018, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1898,
+   "old": "fma.rn.f32 %r925, %r1021, %r37, %r1067",
+   "new": "fma.rn.f32 %r925, %r1019, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1899,
+   "old": "fma.rn.f32 %r927, %r1022, %r37, %r1067",
+   "new": "fma.rn.f32 %r927, %r1020, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1900,
+   "old": "fma.rn.f32 %r929, %r1023, %r37, %r1067",
+   "new": "fma.rn.f32 %r929, %r1021, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1901,
+   "old": "fma.rn.f32 %r931, %r1025, %r37, %r1067",
+   "new": "fma.rn.f32 %r931, %r1023, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1902,
+   "old": "fma.rn.f32 %r933, %r1026, %r37, %r1067",
+   "new": "fma.rn.f32 %r933, %r1024, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1903,
+   "old": "fma.rn.f32 %r935, %r1027, %r37, %r1067",
+   "new": "fma.rn.f32 %r935, %r1025, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1904,
+   "old": "fma.rn.f32 %r937, %r1028, %r37, %r1067",
+   "new": "fma.rn.f32 %r937, %r1026, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1905,
+   "old": "fma.rn.f32 %r939, %r1030, %r37, %r1067",
+   "new": "fma.rn.f32 %r939, %r1028, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1906,
+   "old": "fma.rn.f32 %r941, %r1031, %r37, %r1067",
+   "new": "fma.rn.f32 %r941, %r1029, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1907,
+   "old": "fma.rn.f32 %r943, %r1033, %r37, %r1067",
+   "new": "fma.rn.f32 %r943, %r1031, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1908,
+   "old": "fma.rn.f32 %r945, %r1034, %r37, %r1067",
+   "new": "fma.rn.f32 %r945, %r1032, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1909,
+   "old": "fma.rn.f32 %r947, %r1036, %r37, %r1067",
+   "new": "fma.rn.f32 %r947, %r1034, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1910,
+   "old": "fma.rn.f32 %r949, %r1037, %r37, %r1067",
+   "new": "fma.rn.f32 %r949, %r1035, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1911,
+   "old": "fma.rn.f32 %r951, %r1038, %r37, %r1067",
+   "new": "fma.rn.f32 %r951, %r1036, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 1912,
+   "old": "fma.rn.f32 %r953, %r1039, %r37, %r1067",
+   "new": "fma.rn.f32 %r953, %r1037, %r37, %r1065",
+   "shape_change": false
+  },
+  {
+   "pc": 2153,
+   "old": "selp.f32 %r47, %r810, %r850, %p180",
+   "new": "selp.f32 %r47, %r810, %r850, %p179",
+   "shape_change": false
+  },
+  {
+   "pc": 2154,
+   "old": "selp.f32 %r48, %r811, %r852, %p180",
+   "new": "selp.f32 %r48, %r811, %r852, %p179",
+   "shape_change": false
+  },
+  {
+   "pc": 2155,
+   "old": "selp.f32 %r49, %r812, %r854, %p180",
+   "new": "selp.f32 %r49, %r812, %r854, %p179",
+   "shape_change": false
+  },
+  {
+   "pc": 2156,
+   "old": "selp.f32 %r50, %r813, %r856, %p180",
+   "new": "selp.f32 %r50, %r813, %r856, %p179",
+   "shape_change": false
+  },
+  {
+   "pc": 2157,
+   "old": "selp.f32 %r51, %r814, %r882, %p180",
+   "new": "selp.f32 %r51, %r814, %r882, %p179",
+   "shape_change": false
+  },
+  {
+   "pc": 2158,
+   "old": "selp.f32 %r52, %r815, %r884, %p180",
+   "new": "selp.f32 %r52, %r815, %r884, %p179",
+   "shape_change": false
+  },
+  {
+   "pc": 2159,
+   "old": "selp.f32 %r53, %r816, %r886, %p180",
+   "new": "selp.f32 %r53, %r816, %r886, %p179",
+   "shape_change": false
+  },
+  {
+   "pc": 2160,
+   "old": "selp.f32 %r54, %r817, %r888, %p180",
+   "new": "selp.f32 %r54, %r817, %r888, %p179",
+   "shape_change": false
+  },
+  {
+   "pc": 2161,
+   "old": "selp.f32 %r55, %r818, %r914, %p181",
+   "new": "selp.f32 %r55, %r818, %r914, %p180",
+   "shape_change": false
+  },
+  {
+   "pc": 2162,
+   "old": "selp.f32 %r56, %r819, %r916, %p181",
+   "new": "selp.f32 %r56, %r819, %r916, %p180",
+   "shape_change": false
+  },
+  {
+   "pc": 2163,
+   "old": "selp.f32 %r57, %r820, %r918, %p181",
+   "new": "selp.f32 %r57, %r820, %r918, %p180",
+   "shape_change": false
+  },
+  {
+   "pc": 2164,
+   "old": "selp.f32 %r58, %r821, %r920, %p181",
+   "new": "selp.f32 %r58, %r821, %r920, %p180",
+   "shape_change": false
+  },
+  {
+   "pc": 2165,
+   "old": "selp.f32 %r59, %r822, %r946, %p181",
+   "new": "selp.f32 %r59, %r822, %r946, %p180",
+   "shape_change": false
+  },
+  {
+   "pc": 2166,
+   "old": "selp.f32 %r60, %r823, %r948, %p181",
+   "new": "selp.f32 %r60, %r823, %r948, %p180",
+   "shape_change": false
+  },
+  {
+   "pc": 2167,
+   "old": "selp.f32 %r61, %r824, %r950, %p181",
+   "new": "selp.f32 %r61, %r824, %r950, %p180",
+   "shape_change": false
+  },
+  {
+   "pc": 2168,
+   "old": "selp.f32 %r62, %r825, %r952, %p181",
+   "new": "selp.f32 %r62, %r825, %r952, %p180",
+   "shape_change": false
+  },
+  {
+   "pc": 2232,
+   "old": "mov.b64 {%r1068,%r1069}, %rd397",
+   "new": "mov.b64 {%r1066,%r1067}, %rd397",
+   "shape_change": false
+  },
+  {
+   "pc": 2233,
+   "old": "add.f32 %r1070, %r1068, %r1069",
+   "new": "add.f32 %r1068, %r1066, %r1067",
+   "shape_change": false
+  },
+  {
+   "pc": 2234,
+   "old": "shfl.sync.bfly.b32 %r1071, %r1070, 16, 31, -1",
+   "new": "shfl.sync.bfly.b32 %r1069, %r1068, 16, 31, -1",
+   "shape_change": false
+  },
+  {
+   "pc": 2235,
+   "old": "add.f32 %r1072, %r1070, %r1071",
+   "new": "add.f32 %r1070, %r1068, %r1069",
+   "shape_change": false
+  },
+  {
+   "pc": 2237,
+   "old": "bar.sync 0, 128",
+   "new": "@%p169 bra $L__BB0_35",
+   "shape_change": true
+  },
+  {
+   "pc": 2238,
+   "old": "shfl.sync.bfly.b32 %r1073, %r46, 8, 31, -1",
+   "new": "xor.b32 %r1071, %r43, 1",
+   "shape_change": true
+  },
+  {
+   "pc": 2239,
+   "old": "min.f32 %r1074, %r46, %r1073",
+   "new": "mbarrier.try_wait.parity.shared::cta.b64 complete, [%r162], %r1071",
+   "shape_change": true
+  },
+  {
+   "pc": 2240,
+   "old": "shfl.sync.bfly.b32 %r1075, %r1074, 4, 31, -1",
+   "new": "@!#/2614#complete bra.uni waitLoop",
+   "shape_change": true
+  },
+  {
+   "pc": 2241,
+   "old": "min.f32 %r1076, %r1074, %r1075",
+   "new": "bar.sync 0, 128",
+   "shape_change": true
+  },
+  {
+   "pc": 2242,
+   "old": "shfl.sync.bfly.b32 %r1077, %r1076, 2, 31, -1",
+   "new": "shfl.sync.bfly.b32 %r1074, %r46, 8, 31, -1",
+   "shape_change": true
+  },
+  {
+   "pc": 2243,
+   "old": "min.f32 %r1078, %r1076, %r1077",
+   "new": "min.f32 %r1075, %r46, %r1074",
+   "shape_change": false
+  },
+  {
+   "pc": 2244,
+   "old": "shfl.sync.bfly.b32 %r1079, %r1078, 1, 31, -1",
+   "new": "shfl.sync.bfly.b32 %r1076, %r1075, 4, 31, -1",
+   "shape_change": true
+  },
+  {
+   "pc": 2245,
+   "old": "min.f32 %r955, %r1078, %r1079",
+   "new": "min.f32 %r1077, %r1075, %r1076",
+   "shape_change": false
+  },
+  {
+   "pc": 2246,
+   "old": "st.shared::cta.b32 [%r954+0], %r955",
+   "new": "shfl.sync.bfly.b32 %r1078, %r1077, 2, 31, -1",
+   "shape_change": true
+  },
+  {
+   "pc": 2247,
+   "old": "bar.sync 0, 128",
+   "new": "min.f32 %r1079, %r1077, %r1078",
+   "shape_change": true
+  },
+  {
+   "pc": 2248,
+   "old": "ld.shared.b32 %r1080, [%r39+212992]",
+   "new": "shfl.sync.bfly.b32 %r1080, %r1079, 1, 31, -1",
+   "shape_change": true
+  },
+  {
+   "pc": 2249,
+   "old": "shfl.sync.bfly.b32 %r1081, %r1080, 2, 31, -1",
+   "new": "min.f32 %r1073, %r1079, %r1080",
+   "shape_change": true
+  },
+  {
+   "pc": 2250,
+   "old": "min.f32 %r1082, %r1080, %r1081",
+   "new": "st.shared::cta.b32 [%r1072+0], %r1073",
+   "shape_change": true
+  },
+  {
+   "pc": 2251,
+   "old": "shfl.sync.bfly.b32 %r1083, %r1082, 1, 31, -1",
+   "new": "bar.sync 0, 128",
+   "shape_change": true
+  },
+  {
+   "pc": 2252,
+   "old": "min.f32 %r1084, %r1082, %r1083",
+   "new": "ld.shared.b32 %r1081, [%r39+212992]",
+   "shape_change": true
+  },
+  {
+   "pc": 2253,
+   "old": "setp.geu.f32 %p170, %r1084, 0f3F800000",
+   "new": "shfl.sync.bfly.b32 %r1082, %r1081, 2, 31, -1",
+   "shape_change": true
+  },
+  {
+   "pc": 2254,
+   "old": "or.pred %p171, %p169, %p170",
+   "new": "min.f32 %r1083, %r1081, %r1082",
+   "shape_change": true
+  },
+  {
+   "pc": 2255,
+   "old": "@%p171 bra $L__BB0_34",
+   "new": "shfl.sync.bfly.b32 %r1084, %r1083, 1, 31, -1",
+   "shape_change": true
+  },
+  {
+   "pc": 2256,
+   "old": "xor.b32 %r1085, %r43, 1",
+   "new": "min.f32 %r1085, %r1083, %r1084",
+   "shape_change": true
+  },
+  {
+   "pc": 2257,
+   "old": "mbarrier.try_wait.parity.shared::cta.b64 complete, [%r162], %r1085",
+   "new": "setp.geu.f32 %p170, %r1085, 0f3F800000",
+   "shape_change": true
+  },
+  {
+   "pc": 2258,
+   "old": "@!#/2660#complete bra.uni waitLoop",
+   "new": "@%p170 bra $L__BB0_35",
+   "shape_change": true
+  },
+  {
+   "pc": 2327,
+   "old": "mov.pred %p172, -1",
+   "new": "mov.pred %p171, -1",
+   "shape_change": false
+  },
+  {
+   "pc": 2328,
+   "old": "@%p172 tcgen05.st.sync.aligned.16x32bx2.x64.b32 [%r1150+0], 64, {%r1151,%r1152,%r1153,%r1154,%r1155,%r1156,%r1157,%r1158,%r1159,%r1160,%r1161,%r1162,%r1163,%r1164,%r1165,%r1166,%r1167,%r1168,%r1169,%r1170,%r1171,%r1172,%r1173,%r1174,%r1175,%r1176,%r1177,%r1178,%r1179,%r1180,%r1181,%r1182,%r1183,%r1184,%r1185,%r1186,%r1187,%r1188,%r1189,%r1190,%r1191,%r1192,%r1193,%r1194,%r1195,%r1196,%r1197,%r1198,%r1199,%r1200,%r1201,%r1202,%r1203,%r1204,%r1205,%r1206,%r1207,%r1208,%r1209,%r1210,%r1211,%r1212,%r1213,%r1214}",
+   "new": "@%p171 tcgen05.st.sync.aligned.16x32bx2.x64.b32 [%r1150+0], 64, {%r1151,%r1152,%r1153,%r1154,%r1155,%r1156,%r1157,%r1158,%r1159,%r1160,%r1161,%r1162,%r1163,%r1164,%r1165,%r1166,%r1167,%r1168,%r1169,%r1170,%r1171,%r1172,%r1173,%r1174,%r1175,%r1176,%r1177,%r1178,%r1179,%r1180,%r1181,%r1182,%r1183,%r1184,%r1185,%r1186,%r1187,%r1188,%r1189,%r1190,%r1191,%r1192,%r1193,%r1194,%r1195,%r1196,%r1197,%r1198,%r1199,%r1200,%r1201,%r1202,%r1203,%r1204,%r1205,%r1206,%r1207,%r1208,%r1209,%r1210,%r1211,%r1212,%r1213,%r1214}",
+   "shape_change": false
+  },
+  {
+   "pc": 2330,
+   "old": "bra.uni $L__BB0_34",
+   "new": "bra.uni $L__BB0_35",
+   "shape_change": true
+  },
+  {
+   "pc": 2375,
+   "old": "@!#/2800#complete bra.uni waitLoop",
+   "new": "@!#/2801#complete bra.uni waitLoop",
+   "shape_change": true
+  },
+  {
+   "pc": 2463,
+   "old": "@!#/2924#complete bra.uni waitLoop",
+   "new": "@!#/2925#complete bra.uni waitLoop",
+   "shape_change": true
+  },
+  {
+   "pc": 2511,
+   "old": "@!#/2984#complete bra.uni waitLoop",
+   "new": "@!#/2985#complete bra.uni waitLoop",
+   "shape_change": true
+  },
+  {
+   "pc": 2560,
+   "old": "setp.lt.s32 %p174, %r25, 1",
+   "new": "setp.lt.s32 %p173, %r25, 1",
+   "shape_change": false
+  },
+  {
+   "pc": 2566,
+   "old": "setp.equ.f32 %p179, %r1454, 0f00000000",
+   "new": "setp.equ.f32 %p178, %r1454, 0f00000000",
+   "shape_change": false
+  },
+  {
+   "pc": 2598,
+   "old": "@%p174 bra $L__BB0_37",
+   "new": "@%p173 bra $L__BB0_38",
+   "shape_change": true
+  },
+  {
+   "pc": 2600,
+   "old": "@!#/3097#complete bra.uni waitLoop",
+   "new": "@!#/3098#complete bra.uni waitLoop",
+   "shape_change": true
+  },
+  {
+   "pc": 2601,
+   "old": "selp.f32 %r1301, 0f3F800000, %r1454, %p179",
+   "new": "selp.f32 %r1301, 0f3F800000, %r1454, %p178",
+   "shape_change": false
+  },
+  {
+   "pc": 2679,
+   "old": "setp.eq.b32 %p177, %r1438, 0",
+   "new": "setp.eq.b32 %p176, %r1438, 0",
+   "shape_change": false
+  },
+  {
+   "pc": 2680,
+   "old": "selp.b32 %r1370, -8388608, %r63, %p179",
+   "new": "selp.b32 %r1370, -8388608, %r63, %p178",
+   "shape_change": false
+  },
+  {
+   "pc": 2681,
+   "old": "and.pred %p175, %p177, %p176",
+   "new": "and.pred %p174, %p176, %p175",
+   "shape_change": false
+  },
+  {
+   "pc": 2682,
+   "old": "@%p175 st.global.b32 [%rd431+0], {%r1370}",
+   "new": "@%p174 st.global.b32 [%rd431+0], {%r1370}",
+   "shape_change": false
+  },
+  {
+   "pc": 2751,
+   "old": "@%p176 st.global.b32 [%rd432+0], {%r1371}",
+   "new": "@%p175 st.global.b32 [%rd432+0], {%r1371}",
+   "shape_change": false
+  },
+  {
+   "pc": 2752,
+   "old": "@%p176 st.global.b32 [%rd433+0], {%r1372}",
+   "new": "@%p175 st.global.b32 [%rd433+0], {%r1372}",
+   "shape_change": false
+  },
+  {
+   "pc": 2754,
+   "old": "@%p176 st.global.b32 [%rd434+0], {%r1373}",
+   "new": "@%p175 st.global.b32 [%rd434+0], {%r1373}",
+   "shape_change": false
+  },
+  {
+   "pc": 2755,
+   "old": "@%p176 st.global.b32 [%rd435+0], {%r1374}",
+   "new": "@%p175 st.global.b32 [%rd435+0], {%r1374}",
+   "shape_change": false
+  },
+  {
+   "pc": 2757,
+   "old": "@%p176 st.global.b32 [%rd436+0], {%r1375}",
+   "new": "@%p175 st.global.b32 [%rd436+0], {%r1375}",
+   "shape_change": false
+  },
+  {
+   "pc": 2758,
+   "old": "@%p176 st.global.b32 [%rd437+0], {%r1376}",
+   "new": "@%p175 st.global.b32 [%rd437+0], {%r1376}",
+   "shape_change": false
+  },
+  {
+   "pc": 2760,
+   "old": "@%p176 st.global.b32 [%rd438+0], {%r1377}",
+   "new": "@%p175 st.global.b32 [%rd438+0], {%r1377}",
+   "shape_change": false
+  },
+  {
+   "pc": 2761,
+   "old": "@%p176 st.global.b32 [%rd439+0], {%r1378}",
+   "new": "@%p175 st.global.b32 [%rd439+0], {%r1378}",
+   "shape_change": false
+  },
+  {
+   "pc": 2763,
+   "old": "@%p176 st.global.b32 [%rd440+0], {%r1379}",
+   "new": "@%p175 st.global.b32 [%rd440+0], {%r1379}",
+   "shape_change": false
+  },
+  {
+   "pc": 2764,
+   "old": "@%p176 st.global.b32 [%rd441+0], {%r1380}",
+   "new": "@%p175 st.global.b32 [%rd441+0], {%r1380}",
+   "shape_change": false
+  },
+  {
+   "pc": 2766,
+   "old": "@%p176 st.global.b32 [%rd442+0], {%r1381}",
+   "new": "@%p175 st.global.b32 [%rd442+0], {%r1381}",
+   "shape_change": false
+  },
+  {
+   "pc": 2767,
+   "old": "@%p176 st.global.b32 [%rd443+0], {%r1382}",
+   "new": "@%p175 st.global.b32 [%rd443+0], {%r1382}",
+   "shape_change": false
+  },
+  {
+   "pc": 2769,
+   "old": "@%p176 st.global.b32 [%rd444+0], {%r1383}",
+   "new": "@%p175 st.global.b32 [%rd444+0], {%r1383}",
+   "shape_change": false
+  },
+  {
+   "pc": 2770,
+   "old": "@%p176 st.global.b32 [%rd445+0], {%r1384}",
+   "new": "@%p175 st.global.b32 [%rd445+0], {%r1384}",
+   "shape_change": false
+  },
+  {
+   "pc": 2772,
+   "old": "@%p176 st.global.b32 [%rd446+0], {%r1385}",
+   "new": "@%p175 st.global.b32 [%rd446+0], {%r1385}",
+   "shape_change": false
+  },
+  {
+   "pc": 2773,
+   "old": "@%p176 st.global.b32 [%rd447+0], {%r1386}",
+   "new": "@%p175 st.global.b32 [%rd447+0], {%r1386}",
+   "shape_change": false
+  },
+  {
+   "pc": 2775,
+   "old": "@%p176 st.global.b32 [%rd448+0], {%r1387}",
+   "new": "@%p175 st.global.b32 [%rd448+0], {%r1387}",
+   "shape_change": false
+  },
+  {
+   "pc": 2776,
+   "old": "@%p176 st.global.b32 [%rd449+0], {%r1388}",
+   "new": "@%p175 st.global.b32 [%rd449+0], {%r1388}",
+   "shape_change": false
+  },
+  {
+   "pc": 2778,
+   "old": "@%p176 st.global.b32 [%rd450+0], {%r1389}",
+   "new": "@%p175 st.global.b32 [%rd450+0], {%r1389}",
+   "shape_change": false
+  },
+  {
+   "pc": 2779,
+   "old": "@%p176 st.global.b32 [%rd451+0], {%r1390}",
+   "new": "@%p175 st.global.b32 [%rd451+0], {%r1390}",
+   "shape_change": false
+  },
+  {
+   "pc": 2781,
+   "old": "@%p176 st.global.b32 [%rd452+0], {%r1391}",
+   "new": "@%p175 st.global.b32 [%rd452+0], {%r1391}",
+   "shape_change": false
+  },
+  {
+   "pc": 2782,
+   "old": "@%p176 st.global.b32 [%rd453+0], {%r1392}",
+   "new": "@%p175 st.global.b32 [%rd453+0], {%r1392}",
+   "shape_change": false
+  },
+  {
+   "pc": 2784,
+   "old": "@%p176 st.global.b32 [%rd454+0], {%r1393}",
+   "new": "@%p175 st.global.b32 [%rd454+0], {%r1393}",
+   "shape_change": false
+  },
+  {
+   "pc": 2785,
+   "old": "@%p176 st.global.b32 [%rd455+0], {%r1394}",
+   "new": "@%p175 st.global.b32 [%rd455+0], {%r1394}",
+   "shape_change": false
+  },
+  {
+   "pc": 2787,
+   "old": "@%p176 st.global.b32 [%rd456+0], {%r1395}",
+   "new": "@%p175 st.global.b32 [%rd456+0], {%r1395}",
+   "shape_change": false
+  },
+  {
+   "pc": 2788,
+   "old": "@%p176 st.global.b32 [%rd457+0], {%r1396}",
+   "new": "@%p175 st.global.b32 [%rd457+0], {%r1396}",
+   "shape_change": false
+  },
+  {
+   "pc": 2790,
+   "old": "@%p176 st.global.b32 [%rd458+0], {%r1397}",
+   "new": "@%p175 st.global.b32 [%rd458+0], {%r1397}",
+   "shape_change": false
+  },
+  {
+   "pc": 2791,
+   "old": "@%p176 st.global.b32 [%rd459+0], {%r1398}",
+   "new": "@%p175 st.global.b32 [%rd459+0], {%r1398}",
+   "shape_change": false
+  },
+  {
+   "pc": 2793,
+   "old": "@%p176 st.global.b32 [%rd460+0], {%r1399}",
+   "new": "@%p175 st.global.b32 [%rd460+0], {%r1399}",
+   "shape_change": false
+  },
+  {
+   "pc": 2794,
+   "old": "@%p176 st.global.b32 [%rd461+0], {%r1400}",
+   "new": "@%p175 st.global.b32 [%rd461+0], {%r1400}",
+   "shape_change": false
+  },
+  {
+   "pc": 2796,
+   "old": "@%p176 st.global.b32 [%rd462+0], {%r1401}",
+   "new": "@%p175 st.global.b32 [%rd462+0], {%r1401}",
+   "shape_change": false
+  },
+  {
+   "pc": 2797,
+   "old": "@%p176 st.global.b32 [%rd463+0], {%r1402}",
+   "new": "@%p175 st.global.b32 [%rd463+0], {%r1402}",
+   "shape_change": false
+  },
+  {
+   "pc": 2799,
+   "old": "@%p176 st.global.b32 [%rd464+0], {%r1403}",
+   "new": "@%p175 st.global.b32 [%rd464+0], {%r1403}",
+   "shape_change": false
+  },
+  {
+   "pc": 2800,
+   "old": "@%p176 st.global.b32 [%rd465+0], {%r1404}",
+   "new": "@%p175 st.global.b32 [%rd465+0], {%r1404}",
+   "shape_change": false
+  },
+  {
+   "pc": 2802,
+   "old": "@%p176 st.global.b32 [%rd466+0], {%r1405}",
+   "new": "@%p175 st.global.b32 [%rd466+0], {%r1405}",
+   "shape_change": false
+  },
+  {
+   "pc": 2803,
+   "old": "@%p176 st.global.b32 [%rd467+0], {%r1406}",
+   "new": "@%p175 st.global.b32 [%rd467+0], {%r1406}",
+   "shape_change": false
+  },
+  {
+   "pc": 2805,
+   "old": "@%p176 st.global.b32 [%rd468+0], {%r1407}",
+   "new": "@%p175 st.global.b32 [%rd468+0], {%r1407}",
+   "shape_change": false
+  },
+  {
+   "pc": 2806,
+   "old": "@%p176 st.global.b32 [%rd469+0], {%r1408}",
+   "new": "@%p175 st.global.b32 [%rd469+0], {%r1408}",
+   "shape_change": false
+  },
+  {
+   "pc": 2808,
+   "old": "@%p176 st.global.b32 [%rd470+0], {%r1409}",
+   "new": "@%p175 st.global.b32 [%rd470+0], {%r1409}",
+   "shape_change": false
+  },
+  {
+   "pc": 2809,
+   "old": "@%p176 st.global.b32 [%rd471+0], {%r1410}",
+   "new": "@%p175 st.global.b32 [%rd471+0], {%r1410}",
+   "shape_change": false
+  },
+  {
+   "pc": 2811,
+   "old": "@%p176 st.global.b32 [%rd472+0], {%r1411}",
+   "new": "@%p175 st.global.b32 [%rd472+0], {%r1411}",
+   "shape_change": false
+  },
+  {
+   "pc": 2812,
+   "old": "@%p176 st.global.b32 [%rd473+0], {%r1412}",
+   "new": "@%p175 st.global.b32 [%rd473+0], {%r1412}",
+   "shape_change": false
+  },
+  {
+   "pc": 2814,
+   "old": "@%p176 st.global.b32 [%rd474+0], {%r1413}",
+   "new": "@%p175 st.global.b32 [%rd474+0], {%r1413}",
+   "shape_change": false
+  },
+  {
+   "pc": 2815,
+   "old": "@%p176 st.global.b32 [%rd475+0], {%r1414}",
+   "new": "@%p175 st.global.b32 [%rd475+0], {%r1414}",
+   "shape_change": false
+  },
+  {
+   "pc": 2817,
+   "old": "@%p176 st.global.b32 [%rd476+0], {%r1415}",
+   "new": "@%p175 st.global.b32 [%rd476+0], {%r1415}",
+   "shape_change": false
+  },
+  {
+   "pc": 2818,
+   "old": "@%p176 st.global.b32 [%rd477+0], {%r1416}",
+   "new": "@%p175 st.global.b32 [%rd477+0], {%r1416}",
+   "shape_change": false
+  },
+  {
+   "pc": 2820,
+   "old": "@%p176 st.global.b32 [%rd478+0], {%r1417}",
+   "new": "@%p175 st.global.b32 [%rd478+0], {%r1417}",
+   "shape_change": false
+  },
+  {
+   "pc": 2821,
+   "old": "@%p176 st.global.b32 [%rd479+0], {%r1418}",
+   "new": "@%p175 st.global.b32 [%rd479+0], {%r1418}",
+   "shape_change": false
+  },
+  {
+   "pc": 2823,
+   "old": "@%p176 st.global.b32 [%rd480+0], {%r1419}",
+   "new": "@%p175 st.global.b32 [%rd480+0], {%r1419}",
+   "shape_change": false
+  },
+  {
+   "pc": 2824,
+   "old": "@%p176 st.global.b32 [%rd481+0], {%r1420}",
+   "new": "@%p175 st.global.b32 [%rd481+0], {%r1420}",
+   "shape_change": false
+  },
+  {
+   "pc": 2826,
+   "old": "@%p176 st.global.b32 [%rd482+0], {%r1421}",
+   "new": "@%p175 st.global.b32 [%rd482+0], {%r1421}",
+   "shape_change": false
+  },
+  {
+   "pc": 2827,
+   "old": "@%p176 st.global.b32 [%rd483+0], {%r1422}",
+   "new": "@%p175 st.global.b32 [%rd483+0], {%r1422}",
+   "shape_change": false
+  },
+  {
+   "pc": 2829,
+   "old": "@%p176 st.global.b32 [%rd484+0], {%r1423}",
+   "new": "@%p175 st.global.b32 [%rd484+0], {%r1423}",
+   "shape_change": false
+  },
+  {
+   "pc": 2830,
+   "old": "@%p176 st.global.b32 [%rd485+0], {%r1424}",
+   "new": "@%p175 st.global.b32 [%rd485+0], {%r1424}",
+   "shape_change": false
+  },
+  {
+   "pc": 2832,
+   "old": "@%p176 st.global.b32 [%rd486+0], {%r1425}",
+   "new": "@%p175 st.global.b32 [%rd486+0], {%r1425}",
+   "shape_change": false
+  },
+  {
+   "pc": 2833,
+   "old": "@%p176 st.global.b32 [%rd487+0], {%r1426}",
+   "new": "@%p175 st.global.b32 [%rd487+0], {%r1426}",
+   "shape_change": false
+  },
+  {
+   "pc": 2835,
+   "old": "@%p176 st.global.b32 [%rd488+0], {%r1427}",
+   "new": "@%p175 st.global.b32 [%rd488+0], {%r1427}",
+   "shape_change": false
+  },
+  {
+   "pc": 2836,
+   "old": "@%p176 st.global.b32 [%rd489+0], {%r1428}",
+   "new": "@%p175 st.global.b32 [%rd489+0], {%r1428}",
+   "shape_change": false
+  },
+  {
+   "pc": 2838,
+   "old": "@%p176 st.global.b32 [%rd490+0], {%r1429}",
+   "new": "@%p175 st.global.b32 [%rd490+0], {%r1429}",
+   "shape_change": false
+  },
+  {
+   "pc": 2839,
+   "old": "@%p176 st.global.b32 [%rd491+0], {%r1430}",
+   "new": "@%p175 st.global.b32 [%rd491+0], {%r1430}",
+   "shape_change": false
+  },
+  {
+   "pc": 2841,
+   "old": "@%p176 st.global.b32 [%rd492+0], {%r1431}",
+   "new": "@%p175 st.global.b32 [%rd492+0], {%r1431}",
+   "shape_change": false
+  },
+  {
+   "pc": 2842,
+   "old": "@%p176 st.global.b32 [%rd493+0], {%r1432}",
+   "new": "@%p175 st.global.b32 [%rd493+0], {%r1432}",
+   "shape_change": false
+  },
+  {
+   "pc": 2844,
+   "old": "@%p176 st.global.b32 [%rd494+0], {%r1433}",
+   "new": "@%p175 st.global.b32 [%rd494+0], {%r1433}",
+   "shape_change": false
+  },
+  {
+   "pc": 2845,
+   "old": "@%p176 st.global.b32 [%rd495+0], {%r1434}",
+   "new": "@%p175 st.global.b32 [%rd495+0], {%r1434}",
+   "shape_change": false
+  }
+ ]
+}

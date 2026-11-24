@@ -1,0 +1,112 @@
+{
+ "name": "program",
+ "title": "The program, its values and the launch",
+ "intro": "How the model represents a kernel before it runs: the parsed PTX source, its decoding into typed instructions, the values and bytes that registers and memory hold, and the launch that fixes the grid. Concepts come first, then the rules.",
+ "concepts_intro": "The definitions a reader needs to follow the rules. Each text is the Lean doc comment, and each entry links to its Lean source.",
+ "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text. Interpretations (EXT) are readings of the PTX text that the model adopts beyond what the text states. The fields that reviewers check against the Lean bodies are collected under Details for reviewers.",
+ "member_filter": {},
+ "concept_groups": [
+  {
+   "name": "Source and decoding",
+   "intro": "The parsed PTX source and the decoder that turns it into a kernel.",
+   "items": [
+    "Syntax.Module",
+    "Syntax.Function",
+    "Syntax.Statement",
+    "Syntax.Operand",
+    "module"
+   ]
+  },
+  {
+   "name": "Kernel and instructions",
+   "intro": "The typed program that the model executes.",
+   "items": [
+    "Kernel",
+    "Instr",
+    "Op",
+    "Opnd",
+    "FloatFmt",
+    "Space",
+    "SReg",
+    "Op.isLocal",
+    "Op.aligned",
+    "Op.uniform",
+    "UniformScope"
+   ]
+  },
+  {
+   "name": "Values and bytes",
+   "intro": "What a register holds, what a memory byte holds, and how undefined behaviour is reported.",
+   "items": [
+    "Value",
+    "FVal",
+    "Layout",
+    "PtrTarget",
+    "Value.bytes",
+    "Value.byteAt",
+    "Value.toBytes",
+    "Byte",
+    "ClcResponse",
+    "Fault",
+    "Exec"
+   ]
+  },
+  {
+   "name": "Locations, launch and initial memory",
+   "intro": "Where bytes live, how threads are launched, and what memory holds at launch.",
+   "items": [
+    "Loc",
+    "Acc",
+    "Acc.Overlap",
+    "Launch",
+    "Launch.threads",
+    "Mem0"
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "name": "The program text",
+   "intro": "How the parsed source becomes a kernel.",
+   "items": [
+    "PROG-SYNTAX",
+    "PROG-ISA-TOKEN",
+    "PROG-ISA-ENTRY",
+    "PROG-ISA-CONSTRAINT",
+    "PROG-ISA-GRAMMAR",
+    "PROG-DECODE",
+    "EXT-SHARED",
+    "EXT-LOCAL-CONST-LAYOUT"
+   ]
+  },
+  {
+   "name": "Instructions",
+   "intro": "The instruction forms that exist, and which of them perform events.",
+   "items": [
+    "PROG-INSTR-FORMS",
+    "PROG-INSTR-EVENTS"
+   ]
+  },
+  {
+   "name": "Values and bytes",
+   "intro": "The data that registers and memory hold.",
+   "items": [
+    "THREAD-VALUE",
+    "THREAD-FLOAT-FORMAT",
+    "MEM-BYTE",
+    "EXT-ENDIAN",
+    "OBJ-CLC-RESPONSE",
+    "ERR-FAULT-REASON"
+   ]
+  },
+  {
+   "name": "Locations and the launch",
+   "intro": "Memory locations, the launch configuration and the memory at launch.",
+   "items": [
+    "MEM-LOCATION",
+    "PROG-LAUNCH",
+    "PROG-LAUNCH-MEMORY"
+   ]
+  }
+ ]
+}

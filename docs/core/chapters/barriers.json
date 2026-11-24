@@ -1,0 +1,158 @@
+{
+ "name": "barriers",
+ "title": "Barriers and warp collectives",
+ "intro": "How the model treats CTA barriers (`bar`, `barrier`), cluster barriers (`barrier.cluster`), cluster membership, and the warp collectives `bar.warp.sync`, `elect.sync`, `shfl.sync`, `vote.sync`, `redux.sync`, `match.sync` and `activemask`, together with the rule that threads of a warp agree on the guard of a uniform instruction. Concepts come first, then the rules.",
+ "concepts_intro": "The definitions a reader needs to follow the rules. Each text is the Lean doc comment, and each entry links to its Lean source.",
+ "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text. Interpretations (EXT) are readings of the PTX text that the model adopts beyond what the text states. The fields that reviewers check against the Lean bodies are collected under Details for reviewers.",
+ "concept_groups": [
+  {
+   "name": "CTA barriers",
+   "intro": "The sixteen barrier resources of a CTA, their generations, and how recorded arrivals refer to source events.",
+   "items": [
+    "CtaBarrier.Slot",
+    "CtaBarrier.State",
+    "CtaBarrier.Error",
+    "CtaBarrier.arrive",
+    "CtaBarrier.exitThread",
+    "CtaBarrier.Record",
+    "CtaBarrier.run",
+    "CtaBarrier.GenerationOf",
+    "CtaBarrier.Released",
+    "CtaBarArrivalK",
+    "CtaBarK",
+    "CtaBarDone",
+    "CtaBarSync"
+   ]
+  },
+  {
+   "name": "Clusters",
+   "intro": "Cluster membership, ranks and peer addresses.",
+   "items": [
+    "Launch.oneDimLaunch",
+    "Launch.clusterOfCta",
+    "Launch.rankOfCta",
+    "Launch.peerCta",
+    "Launch.mapShared",
+    "SameCluster"
+   ]
+  },
+  {
+   "name": "Cluster barriers",
+   "intro": "The barrier of one cluster, its phases and the recorded arrivals and waits.",
+   "items": [
+    "ClusterBarrier.State",
+    "ClusterBarrier.Action",
+    "ClusterBarrier.Outcome",
+    "ClusterBarrier.perform",
+    "ClusterBarrier.Record",
+    "ClusterBarrier.run",
+    "ClusterBarrier.ArrivalOf",
+    "ClusterBarrier.WaitOf",
+    "ClusterBarrier.Synchronizes",
+    "ClusterSync"
+   ]
+  },
+  {
+   "name": "Warp collectives",
+   "intro": "Instances of `bar.warp.sync`, `elect.sync`, `shfl.sync`, `vote.sync`, `redux.sync` and `match.sync`.",
+   "items": [
+    "electMember",
+    "Execution.Elect",
+    "Execution.WarpBar",
+    "WarpBarSync",
+    "shflSource",
+    "Execution.ShflK",
+    "voteClass",
+    "maskInWarp",
+    "Execution.MaskK",
+    "MaskInstance",
+    "MaskWait",
+    "voteResult",
+    "reduxResult",
+    "matchMask"
+   ]
+  },
+  {
+   "name": "Warp-uniform control flow",
+   "intro": "The records of a thread's steps and the order that decides which executions may coincide.",
+   "items": [
+    "Visit",
+    "Walk",
+    "DepBefore",
+    "SameUniformGroup",
+    "WarpDivergent"
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "name": "What a barrier or collective instruction does",
+   "intro": "The event a thread produces for each instruction, and how a barrier object changes.",
+   "items": [
+    "THREAD-BAR",
+    "EXT-BAR-ZERO-COUNT",
+    "OBJ-CTA-BARRIER-STATE",
+    "OBJ-CLUSTER-BARRIER-STATE",
+    "EXT-CLUSTER-WAIT-PHASE",
+    "THREAD-WARP-BAR",
+    "THREAD-ELECT",
+    "THREAD-SHFL",
+    "THREAD-VOTE",
+    "THREAD-REDUX",
+    "THREAD-MATCH",
+    "THREAD-ACTIVEMASK",
+    "THREAD-MATRIX",
+    "THREAD-MMA-SYNC"
+   ]
+  },
+  {
+   "name": "Cluster membership",
+   "intro": "Which CTAs form a cluster and what a rank denotes.",
+   "items": [
+    "PROG-CLUSTER",
+    "EXT-CLUSTER-RANK"
+   ]
+  },
+  {
+   "name": "Which executions are allowed",
+   "intro": "The recorded histories of barriers, the synchronization and blocking they give, and the agreement of the lanes of a collective.",
+   "items": [
+    "OBJ-CTA-BARRIER-HISTORY",
+    "OBJ-CTA-BARRIER-SYNC",
+    "OBJ-CLUSTER-BARRIER-HISTORY",
+    "OBJ-CLUSTER-BARRIER-SYNC",
+    "DEP-WARP-BARRIER",
+    "DEP-WARP-ELECT",
+    "EXT-ELECT-SITE",
+    "DEP-WARP-SHUFFLE",
+    "EXT-SHFL-UP-INDEX",
+    "DEP-WARP-INSTANCE",
+    "EXT-WARP-INSTANCE",
+    "DEP-WARP-VOTE",
+    "DEP-WARP-REDUX",
+    "DEP-WARP-MATCH",
+    "DEP-WARP-ACTIVEMASK",
+    "THREAD-MATRIX-LAYOUT",
+    "EXT-MATRIX-FIGURES",
+    "EXT-MMA-SPARSE-FIGURES",
+    "EXT-MMA-FRAGMENTS",
+    "DEP-WARP-MATRIX",
+    "DEP-WARP-MMA"
+   ]
+  },
+  {
+   "name": "What counts as an error",
+   "intro": "Executions rejected as unsafe because the lanes of a warp may disagree on a barrier, an aligned instruction or a uniform guard, or because a participant exits before an aligned instruction.",
+   "items": [
+    "ERR-ALIGNED-MISMATCH",
+    "ERR-BARRIER-MISMATCH",
+    "EXT-BAR-PARTICIPANTS",
+    "ERR-CTA-BARRIER",
+    "ERR-CLUSTER-BARRIER",
+    "ERR-NONUNIFORM-GUARD",
+    "EXT-DEPENDENCY-ORDER",
+    "ERR-WARP-MATRIX"
+   ]
+  }
+ ]
+}

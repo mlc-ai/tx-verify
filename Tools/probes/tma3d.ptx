@@ -1,0 +1,66 @@
+// SPDX-License-Identifier: Apache-2.0
+
+// Hardware probe for 3D tiled TMA loads (THREAD-TENSOR-TILE-SHARED, THREAD-TENSOR-TRANSFER-MAP).
+.version 8.7
+.target sm_100a
+.address_size 64
+
+// One 3D tiled TMA load into a 8 KiB shared buffer (1024-aligned) at byte offset OFF; the buffer
+// is pre-filled with 0xEE and copied out whole. Params: tensor map (by value), 3 coordinates,
+// offset, expected bytes, output (8192 B). Driver: run_tmand.cu.
+.visible .entry tma3d(
+	.param .align 64 .b8 tmap[128], .param .u32 pc0, .param .u32 pc1, .param .u32 pc2, .param .u32 poff,
+	.param .u32 pbytes, .param .u64 pout)
+{
+	.reg .pred 	%p<4>;
+	.reg .b32 	%r<50>;
+	.reg .b64 	%rd<10>;
+	.shared .align 1024 .b8 buf[8192];
+	.shared .align 8 .b8 bar[8];
+
+	mov.u32 	%r1, %tid.x;
+	mov.u32 	%r2, buf;
+	mov.u32 	%r3, bar;
+	// Fill with 0xEE: 128 threads x 64 bytes.
+	mov.u32 	%r4, 0xEEEEEEEE;
+	shl.b32 	%r5, %r1, 6;
+	add.u32 	%r6, %r2, %r5;
+	st.shared.v4.b32 	[%r6], {%r4, %r4, %r4, %r4};
+	st.shared.v4.b32 	[%r6+16], {%r4, %r4, %r4, %r4};
+	st.shared.v4.b32 	[%r6+32], {%r4, %r4, %r4, %r4};
+	st.shared.v4.b32 	[%r6+48], {%r4, %r4, %r4, %r4};
+	setp.ne.u32 	%p1, %r1, 0;
+	@%p1 bra 	$L_SYNC;
+	mbarrier.init.shared::cta.b64 	[%r3], 1;
+	fence.mbarrier_init.release.cluster;
+$L_SYNC:
+	fence.proxy.async.shared::cta;
+	bar.sync 	0;
+	@%p1 bra 	$L_WAIT;
+	ld.param.u32 	%r40, [pc0];
+	ld.param.u32 	%r41, [pc1];
+	ld.param.u32 	%r42, [pc2];
+	ld.param.u32 	%r9, [poff];
+	ld.param.u32 	%r10, [pbytes];
+	add.u32 	%r11, %r2, %r9;
+	mov.u64 	%rd1, tmap;
+	cvta.param.u64 	%rd2, %rd1;
+	mbarrier.arrive.expect_tx.shared::cta.b64 	_, [%r3], %r10;
+	cp.async.bulk.tensor.3d.shared::cluster.global.mbarrier::complete_tx::bytes 	[%r11], [%rd2, {%r40, %r41, %r42}], [%r3];
+$L_WAIT:
+	mbarrier.try_wait.parity.shared::cta.b64 	%p2, [%r3], 0;
+	@!%p2 bra 	$L_WAIT;
+	ld.param.u64 	%rd3, [pout];
+	cvta.to.global.u64 	%rd4, %rd3;
+	cvt.u64.u32 	%rd5, %r5;
+	add.s64 	%rd6, %rd4, %rd5;
+	ld.shared.v4.b32 	{%r12, %r13, %r14, %r15}, [%r6];
+	st.global.v4.b32 	[%rd6], {%r12, %r13, %r14, %r15};
+	ld.shared.v4.b32 	{%r12, %r13, %r14, %r15}, [%r6+16];
+	st.global.v4.b32 	[%rd6+16], {%r12, %r13, %r14, %r15};
+	ld.shared.v4.b32 	{%r12, %r13, %r14, %r15}, [%r6+32];
+	st.global.v4.b32 	[%rd6+32], {%r12, %r13, %r14, %r15};
+	ld.shared.v4.b32 	{%r12, %r13, %r14, %r15}, [%r6+48];
+	st.global.v4.b32 	[%rd6+48], {%r12, %r13, %r14, %r15};
+	ret;
+}

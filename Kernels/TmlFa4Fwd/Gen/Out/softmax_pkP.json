@@ -1,0 +1,125 @@
+{
+  "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
+  "namespace": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen",
+  "output": "Kernels/TmlFa4Fwd/Proof/Softmax/Gen/PkP.lean",
+  "imports": [
+    "Kernels.TmlFa4Fwd.Flow.Code",
+    "Kernels.TmlFa4Fwd.Proof.Softmax.GenRules"
+  ],
+  "kernel": "PTX.Kernels.TmlFa4Fwd.Decoded.kernel",
+  "code": "PTX.Kernels.TmlFa4Fwd.Flow",
+  "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
+  "runs": [
+    {
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.segFree {pc} rfl",
+      "rules": {
+        "mul": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mul {pc} rfl",
+        "add": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add {pc} rfl",
+        "sub": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_sub {pc} rfl",
+        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_fma2 {pc} rfl",
+        "add2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add2 {pc} rfl",
+        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_ex2 {pc} rfl",
+        "pack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_pack {pc}",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_unpack {pc}",
+        "mov": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mov {pc}",
+        "fn": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_cvt {pc} rfl rfl"
+      },
+      "name": "pkPA",
+      "start": 7417,
+      "end": 7425,
+      "cut": 32,
+      "outputs": [
+        "%r4689",
+        "%r4690",
+        "%r4691",
+        "%r4692",
+        "%r4693",
+        "%r4694",
+        "%r4695",
+        "%r4696",
+        "%r4697",
+        "%r4698",
+        "%r4699",
+        "%r4700",
+        "%r4701",
+        "%r4702",
+        "%r4703",
+        "%r4704"
+      ]
+    },
+    {
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.segFree {pc} rfl",
+      "rules": {
+        "mul": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mul {pc} rfl",
+        "add": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add {pc} rfl",
+        "sub": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_sub {pc} rfl",
+        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_fma2 {pc} rfl",
+        "add2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add2 {pc} rfl",
+        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_ex2 {pc} rfl",
+        "pack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_pack {pc}",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_unpack {pc}",
+        "mov": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mov {pc}",
+        "fn": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_cvt {pc} rfl rfl"
+      },
+      "name": "pkPB",
+      "start": 7426,
+      "end": 7434,
+      "cut": 32,
+      "outputs": [
+        "%r4705",
+        "%r4706",
+        "%r4707",
+        "%r4708",
+        "%r4709",
+        "%r4710",
+        "%r4711",
+        "%r4712",
+        "%r4713",
+        "%r4714",
+        "%r4715",
+        "%r4716",
+        "%r4717",
+        "%r4718",
+        "%r4719",
+        "%r4720"
+      ]
+    },
+    {
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.segFree {pc} rfl",
+      "rules": {
+        "mul": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mul {pc} rfl",
+        "add": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add {pc} rfl",
+        "sub": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_sub {pc} rfl",
+        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_fma2 {pc} rfl",
+        "add2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_add2 {pc} rfl",
+        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_ex2 {pc} rfl",
+        "pack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_pack {pc}",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_unpack {pc}",
+        "mov": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_mov {pc}",
+        "fn": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_cvt {pc} rfl rfl"
+      },
+      "name": "pkPC",
+      "start": 7438,
+      "end": 7446,
+      "cut": 32,
+      "outputs": [
+        "%r4722",
+        "%r4723",
+        "%r4724",
+        "%r4725",
+        "%r4726",
+        "%r4727",
+        "%r4728",
+        "%r4729",
+        "%r4730",
+        "%r4731",
+        "%r4732",
+        "%r4733",
+        "%r4734",
+        "%r4735",
+        "%r4736",
+        "%r4737"
+      ]
+    }
+  ]
+}

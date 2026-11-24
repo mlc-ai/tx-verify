@@ -1,0 +1,136 @@
+{
+ "name": "tmem",
+ "title": "Tensor Memory",
+ "intro": "How the model treats Tensor Memory: how each CTA's allocator allocates and deallocates columns, how relinquishing the permit and cta_group::2 pairs of CTAs work, when an access is covered by an allocation, and what counts as an error. Concepts come first, then the rules.",
+ "concepts_intro": "The definitions a reader needs to follow the rules. Each text is the Lean doc comment, and each entry links to its Lean source.",
+ "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text. Interpretations (EXT) are readings of the PTX text that the model adopts beyond what the text states. The fields that reviewers check against the Lean bodies are collected under Details for reviewers.",
+ "member_filter": {
+  "Execution": [
+   "tmemHistory",
+   "tmemPairing",
+   "tmemPairBlocks"
+  ]
+ },
+ "concept_groups": [
+  {
+   "name": "The allocator and its operations",
+   "intro": "The state of one CTA's Tensor Memory allocator and the effect of each allocation-management operation on it.",
+   "items": [
+    "Tmem.Region",
+    "Tmem.State",
+    "Tmem.Request",
+    "Tmem.Action",
+    "Tmem.Error",
+    "Tmem.Outcome",
+    "Tmem.validColumns",
+    "Tmem.available",
+    "Tmem.perform"
+   ]
+  },
+  {
+   "name": "CTA groups and pairs",
+   "intro": "The CTAs that take part in one operation: a single CTA for cta_group::1, an even/odd CTA pair for cta_group::2.",
+   "items": [
+    "CtaGroup",
+    "CtaInCluster",
+    "Launch.ctaGroupRanks",
+    "Launch.ctaGroup",
+    "SameCtaGroup"
+   ]
+  },
+  {
+   "name": "Requests, records and histories",
+   "intro": "The warp instances of an allocation-management instruction, the records each CTA's allocator keeps, and the parts of an execution that hold them.",
+   "items": [
+    "Tmem.Pair.WarpRequest",
+    "Tmem.Pair.Requests",
+    "Tmem.Pair.compatible",
+    "Tmem.Pair.WarpRequest.Valid",
+    "Tmem.Pair.Requests.Valid",
+    "Tmem.Pair.PairValid",
+    "Execution",
+    "Tmem.Pair.runRequests",
+    "Tmem.Pair.HistoriesOk",
+    "Tmem.Pair.Precedes",
+    "Tmem.Pair.WarpRequest.Before"
+   ]
+  },
+  {
+   "name": "Performing, completing and returning",
+   "intro": "When a request is performed, when an operation is complete, and what an instruction waits for before it returns.",
+   "items": [
+    "Tmem.Pair.Participates",
+    "Tmem.Pair.Performed",
+    "Tmem.Pair.Completed",
+    "Tmem.Pair.Covered",
+    "Tmem.Pair.Drained",
+    "Tmem.Pair.MustWait",
+    "Tmem.Pair.CompletionReady"
+   ]
+  },
+  {
+   "name": "Coverage and lifetimes",
+   "intro": "Which allocation covers an access to a Tensor Memory cell, which deallocations end that allocation, and when a later allocation starts a fresh lifetime.",
+   "items": [
+    "Tmem.Pair.Covers",
+    "Tmem.Pair.PairAllocBefore",
+    "Tmem.Pair.FreshAfter",
+    "Tmem.Pair.OwnRelease",
+    "Tmem.Pair.ReleaseOf"
+   ]
+  },
+  {
+   "name": "Safety",
+   "intro": "The executions that are rejected as unsafe because of Tensor Memory.",
+   "items": [
+    "Tmem.Pair.ResourceUnsafe",
+    "Tmem.Pair.PendingReleaseAlloc",
+    "Tmem.Pair.Access",
+    "Tmem.Pair.AccessUnsafe",
+    "Tmem.Pair.Released",
+    "Tmem.Pair.ReleaseUnsafe"
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "name": "What an allocation-management instruction does",
+   "intro": "The allocator of one CTA, the warps that issue each operation, the column an allocation returns and what an instruction waits for.",
+   "items": [
+    "OBJ-TMEM-ALLOCATOR",
+    "EXT-TCALLOC-STORER",
+    "OBJ-TMEM-PAIR",
+    "OBJ-TMEM-REQUEST",
+    "OBJ-TMEM-REQUESTS",
+    "OBJ-TMEM-HISTORY",
+    "OBJ-TMEM-ALLOC-RESULT",
+    "MEM-TMEM-RESULT-HANDOFF",
+    "EXT-TMEM-ALLOC-RESULT-ORDER",
+    "DEP-TMEM-ALLOC-WAIT"
+   ]
+  },
+  {
+   "name": "Which executions are allowed",
+   "intro": "The order of each allocator's history, completion of operations, and the coverage of accesses by allocations.",
+   "items": [
+    "OBJ-TMEM-ORDER",
+    "EXT-TMEM-ALLOC-ORDER",
+    "OBJ-TMEM-ORIGIN",
+    "OBJ-TMEM-COMPLETE-OPERATIONS",
+    "OBJ-TMEM-COMPLETION-PREFIX",
+    "OBJ-TMEM-PUBLICATION",
+    "EXT-PAIR-ALLOC-ORDER",
+    "OBJ-TMEM-LIFETIME"
+   ]
+  },
+  {
+   "name": "What counts as an error",
+   "intro": "Executions that are rejected as unsafe because of Tensor Memory allocation, access or release.",
+   "items": [
+    "ERR-TMEM-RESOURCE",
+    "ERR-TMEM-ACCESS-LIFETIME",
+    "ERR-TMEM-NOT-RELEASED"
+   ]
+  }
+ ]
+}

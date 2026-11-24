@@ -1,0 +1,84 @@
+// SPDX-License-Identifier: Apache-2.0
+
+// Hardware probe for .multicast::cluster tensor loads (THREAD-TENSOR-ISSUE tensorMulticast).
+.version 8.7
+.target sm_100a
+.address_size 64
+
+// One 2D tiled TMA load with .multicast::cluster, issued by cluster rank 0 of a 4-CTA cluster
+// into the 8 KiB buffer (1024-aligned) of every CTA in ctaMask at byte offset OFF. Every CTA
+// pre-fills its buffer with 0xEE; a CTA in the mask arms its own mbarrier with the box bytes and
+// waits. Each CTA copies its buffer out. Params: tensor map, x, y, offset, bytes, mask, output.
+.visible .entry tmamc(
+	.param .align 64 .b8 tmap[128], .param .u32 px, .param .u32 py, .param .u32 poff,
+	.param .u32 pbytes, .param .u32 pmask, .param .u64 pout)
+.explicitcluster
+.reqnctapercluster 4, 1, 1
+{
+	.reg .pred 	%p<6>;
+	.reg .b32 	%r<30>;
+	.reg .b64 	%rd<12>;
+	.reg .b16 	%rs<2>;
+	.shared .align 1024 .b8 buf[8192];
+	.shared .align 8 .b8 bar[8];
+
+	mov.u32 	%r1, %tid.x;
+	mov.u32 	%r2, buf;
+	mov.u32 	%r3, bar;
+	mov.u32 	%r20, %cluster_ctarank;
+	ld.param.u32 	%r21, [pmask];
+	shr.u32 	%r22, %r21, %r20;
+	and.b32 	%r22, %r22, 1;
+	setp.ne.u32 	%p4, %r22, 0;
+	mov.u32 	%r4, 0xEEEEEEEE;
+	shl.b32 	%r5, %r1, 6;
+	add.u32 	%r6, %r2, %r5;
+	st.shared.v4.b32 	[%r6], {%r4, %r4, %r4, %r4};
+	st.shared.v4.b32 	[%r6+16], {%r4, %r4, %r4, %r4};
+	st.shared.v4.b32 	[%r6+32], {%r4, %r4, %r4, %r4};
+	st.shared.v4.b32 	[%r6+48], {%r4, %r4, %r4, %r4};
+	setp.ne.u32 	%p1, %r1, 0;
+	@%p1 bra 	$L_SYNC;
+	mbarrier.init.shared::cta.b64 	[%r3], 1;
+	fence.mbarrier_init.release.cluster;
+	ld.param.u32 	%r10, [pbytes];
+	@%p4 mbarrier.arrive.expect_tx.shared::cta.b64 	_, [%r3], %r10;
+$L_SYNC:
+	fence.proxy.async.shared::cta;
+	barrier.cluster.arrive.release.aligned;
+	barrier.cluster.wait.acquire.aligned;
+	setp.ne.u32 	%p2, %r20, 0;
+	or.pred 	%p2, %p2, %p1;
+	@%p2 bra 	$L_WAIT;
+	ld.param.u32 	%r7, [px];
+	ld.param.u32 	%r8, [py];
+	ld.param.u32 	%r9, [poff];
+	add.u32 	%r11, %r2, %r9;
+	mov.u64 	%rd1, tmap;
+	cvta.param.u64 	%rd2, %rd1;
+	cvt.u16.u32 	%rs1, %r21;
+	cp.async.bulk.tensor.2d.shared::cluster.global.mbarrier::complete_tx::bytes.multicast::cluster 	[%r11], [%rd2, {%r7, %r8}], [%r3], %rs1;
+$L_WAIT:
+	@!%p4 bra 	$L_OUT;
+$L_POLL:
+	mbarrier.try_wait.parity.shared::cta.b64 	%p3, [%r3], 0;
+	@!%p3 bra 	$L_POLL;
+$L_OUT:
+	ld.param.u64 	%rd3, [pout];
+	cvta.to.global.u64 	%rd4, %rd3;
+	mul.wide.u32 	%rd7, %r20, 8192;
+	add.s64 	%rd4, %rd4, %rd7;
+	cvt.u64.u32 	%rd5, %r5;
+	add.s64 	%rd6, %rd4, %rd5;
+	ld.shared.v4.b32 	{%r12, %r13, %r14, %r15}, [%r6];
+	st.global.v4.b32 	[%rd6], {%r12, %r13, %r14, %r15};
+	ld.shared.v4.b32 	{%r12, %r13, %r14, %r15}, [%r6+16];
+	st.global.v4.b32 	[%rd6+16], {%r12, %r13, %r14, %r15};
+	ld.shared.v4.b32 	{%r12, %r13, %r14, %r15}, [%r6+32];
+	st.global.v4.b32 	[%rd6+32], {%r12, %r13, %r14, %r15};
+	ld.shared.v4.b32 	{%r12, %r13, %r14, %r15}, [%r6+48];
+	st.global.v4.b32 	[%rd6+48], {%r12, %r13, %r14, %r15};
+	barrier.cluster.arrive.release.aligned;
+	barrier.cluster.wait.acquire.aligned;
+	ret;
+}

@@ -1,0 +1,56 @@
+# Fast checks only; nothing here compiles Lean. The full verification is in README.md ("Checks").
+repos:
+  - repo: local
+    hooks:
+      - id: lean-text
+        name: Lean text (whitespace, final newline, line width, sorry/admit/native_decide/axiom)
+        # The width rule is Mathlib's `longLine` linter (lakefile.lean); a file with the line
+        # `set_option linter.style.longLine false` is exempt from both.
+        entry: python3 Tools/check_lean_text.py --max-width 100
+        language: system
+        files: \.lean$
+      - id: local-paths
+        name: no machine-local absolute paths in tracked files
+        entry: python3 Tools/check_local_paths.py
+        language: system
+        pass_filenames: true
+      - id: contract-index
+        name: Core/README.md contract index is current
+        entry: python3 Tools/contract_index.py --check
+        language: system
+        files: ^(Core/|Assumption/|Tools/contract_index\.py$)
+        pass_filenames: false
+      - id: coredoc
+        name: docs/core reader document is current and covers every Core contract block once
+        entry: python3 Tools/coredoc.py --check
+        language: system
+        files: ^(Core/|Assumption/|docs/core/|Tools/coredoc\.py$)
+        pass_filenames: false
+      - id: reading-disclosure
+        name: EXT notes and Theorem.lean reading lists agree (the Lean half needs --lean)
+        entry: python3 Tools/reading_uses.py
+        language: system
+        files: ^(Core/|Assumption/|Kernels/[^/]+/Theorem\.lean$|Tools/reading_uses\.py$)
+        pass_filenames: false
+      - id: ptx-quotes
+        name: PTX spec quotes in the model and kernel assumptions are verbatim (skipped without TXVERIFY_PTX_SPEC)
+        entry: python3 Tools/check_quotes.py
+        language: system
+        files: ^(Core/|Assumption/|Kernels/[^/]+/Assumptions(\.lean$|/)|Tools/check_quotes\.py$)
+        pass_filenames: false
+      - id: pytest-fast
+        name: pytest (proof lint, PTX parser, contract tools)
+        entry: env -u PYTHONPATH python3 -m pytest -q -p no:cacheprovider tests/test_proof_lint.py tests/test_parse.py tests/test_check_tools.py tests/test_reading_uses.py tests/test_coredoc.py tests/test_contract_fields.py tests/test_contract_format.py
+        language: system
+        files: ^(Assumption/.*\.lean|Kernels/.*\.(lean|py)|Lemmas/.*\.lean|Tools/.*\.py|tests/.*\.py)$
+        pass_filenames: false
+      - id: ruff-check
+        name: ruff check
+        entry: ruff check
+        language: system
+        files: ^(Tools|tests|Kernels)/.*\.py$
+      - id: ruff-format
+        name: ruff format --check
+        entry: ruff format --check
+        language: system
+        files: ^(Tools|tests|Kernels)/.*\.py$

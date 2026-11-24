@@ -1,0 +1,54 @@
+{
+  "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
+  "namespace": "PTX.Tests.Gen.Expo",
+  "output": "Tests/Gen/Out/Expo.lean",
+  "imports": [
+    "Kernels.TmlFa4Fwd.Flow.Code",
+    "Tests.Gen.Out.ExpoRules"
+  ],
+  "kernel": "PTX.Kernels.TmlFa4Fwd.Decoded.kernel",
+  "code": "PTX.Kernels.TmlFa4Fwd.Flow",
+  "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
+  "runs": [
+    {
+      "name": "expo",
+      "start": 4399,
+      "end": 4826,
+      "cut": 32,
+      "outputs": [
+        "%r2163",
+        "%r2833",
+        "%r2834",
+        "%r2831",
+        "%r2832",
+        "%r2829",
+        "%r2830",
+        "%r2827",
+        "%r2828",
+        "%r2825",
+        "%r2826",
+        "%r2823",
+        "%r2824",
+        "%r2821",
+        "%r2822",
+        "%r2819",
+        "%r2820"
+      ],
+      "segfree": "PTX.Tests.Gen.ExpoRules.segFree {pc} rfl",
+      "rules": {
+        "mul": "PTX.Tests.Gen.ExpoRules.rule_mul {pc} rfl",
+        "fma2": "PTX.Tests.Gen.ExpoRules.rule_fma2 {pc} rfl",
+        "ex2": "PTX.Tests.Gen.ExpoRules.rule_ex2 {pc} rfl",
+        "pack": "PTX.Tests.Gen.ExpoRules.rule_pack {pc}",
+        "unpack": "PTX.Tests.Gen.ExpoRules.rule_unpack {pc}",
+        "fn": "PTX.Tests.Gen.ExpoRules.rule_cvt {pc} rfl rfl"
+      },
+      "fn": {
+        "cvt.rn.bf16x2.f32": {
+          "op": "PTX.Tests.Gen.ExpoRules.cvtOp",
+          "f": "PTX.Tests.Gen.ExpoRules.packE"
+        }
+      }
+    }
+  ]
+}

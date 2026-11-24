@@ -1,0 +1,18 @@
+{
+ "decoded": "Kernels/TmlFa4Fwd/Data/Decoded.lean",
+ "output": "Kernels/TmlFa4Fwd/Gen/StepEpilogue.lean",
+ "namespace": "PTX.Kernels.TmlFa4Fwd.Flow",
+ "kernel": "PTX.Kernels.TmlFa4Fwd.kernel",
+ "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
+ "imports": [
+  "Kernels.TmlFa4Fwd.Flow.Code",
+  "Kernels.TmlFa4Fwd.Proof.Epilogue.Base"
+ ],
+ "ranges": [
+  [
+   2769,
+   3111
+  ]
+ ],
+ "segfree": "exact PTX.Kernels.TmlFa4Fwd.Proof.Epilogue.segFree (by decide)"
+}

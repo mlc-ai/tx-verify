@@ -1,0 +1,29 @@
+{
+  "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
+  "namespace": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen",
+  "output": "Kernels/TmlFa4Fwd/Proof/Softmax/Gen/MaxB.lean",
+  "imports": [
+    "Kernels.TmlFa4Fwd.Flow.Code",
+    "Kernels.TmlFa4Fwd.Proof.Softmax.GenRulesB"
+  ],
+  "kernel": "PTX.Kernels.TmlFa4Fwd.Decoded.kernel",
+  "code": "PTX.Kernels.TmlFa4Fwd.Flow",
+  "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
+  "runs": [
+    {
+      "name": "maxB",
+      "start": 5536,
+      "end": 5666,
+      "cut": 32,
+      "outputs": [
+        "%r3500"
+      ],
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.segFree {pc} rfl",
+      "rules": {
+        "max2": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_max2 {pc} rfl",
+        "max3": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_max3 {pc} rfl",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Gen.rule_unpack {pc}"
+      }
+    }
+  ]
+}

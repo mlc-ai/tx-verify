@@ -1,0 +1,126 @@
+{
+  "config": {
+    "cuda": {
+      "arch": "sm_100a",
+      "compiler": "nvcc",
+      "target_format": "ptx"
+    }
+  },
+  "shape": [
+    8192,
+    8192,
+    8192
+  ],
+  "dtype": "fp16",
+  "kernel_config": {
+    "cta_n": 256,
+    "cta_k": 64,
+    "l2_group_size": 8,
+    "overlap_epilogue": false,
+    "pipe_depth": 4,
+    "wb_pipe_depth": 8
+  },
+  "tirx-kernels/tirx_kernels/gemm/fp16_bf16_gemm.py": "49d666304a26c21321ec99fa5f28f3194b8e2aa9319db8f0846c84113523cf88",
+  "tirx-kernels/tirx_kernels/tirx_lite/scheduler.py": "081f1be0144b001ab09565dfbf0fefcce8c30f989d7dd225e9c401bad475873a",
+  "ptx_sha256": "9b8db81d7c91ee81a062c515627f70d8e62b3970630d8dd6363dd5b726f9dfbd",
+  "nvcc": "13.2.51",
+  "ptx_version": "9.2",
+  "target": "sm_100a",
+  "proof_status": "complete",
+  "tensor_maps": {
+    "a": {
+      "dtype": "float16",
+      "rank": 2,
+      "global_shape": [
+        8192,
+        8192
+      ],
+      "global_strides": [
+        16384
+      ],
+      "box": [
+        64,
+        128
+      ],
+      "element_strides": [
+        1,
+        1
+      ],
+      "interleave": 0,
+      "swizzle": 3,
+      "l2_promotion": 2,
+      "oob_fill": 0
+    },
+    "b": {
+      "dtype": "float16",
+      "rank": 2,
+      "global_shape": [
+        8192,
+        8192
+      ],
+      "global_strides": [
+        16384
+      ],
+      "box": [
+        64,
+        128
+      ],
+      "element_strides": [
+        1,
+        1
+      ],
+      "interleave": 0,
+      "swizzle": 3,
+      "l2_promotion": 2,
+      "oob_fill": 0
+    },
+    "d": {
+      "dtype": "float16",
+      "rank": 2,
+      "global_shape": [
+        8192,
+        8192
+      ],
+      "global_strides": [
+        16384
+      ],
+      "box": [
+        32,
+        128
+      ],
+      "element_strides": [
+        1,
+        1
+      ],
+      "interleave": 0,
+      "swizzle": 2,
+      "l2_promotion": 2,
+      "oob_fill": 0
+    }
+  },
+  "tvm/python/tvm_tirx/backend/cuda/lang/alloc_pool.py": "e4beefc6e7b2365478e66ae98f88240b433a6ff719ee76bba764ee0369492aba",
+  "tirx-kernels/tirx_kernels/tirx_lite/smem.py": "61090d5036fface5b7c4bad5a77a7c6ee147d4eae7ede2bfe9f8494e91124427",
+  "shared_alignment": 1024,
+  "instruction_count": 1097,
+  "tail_drain": {
+    "empty_barriers": 4,
+    "scope": "each CTA elected loader",
+    "before": "final cluster barrier"
+  },
+  "source": {
+    "entry": "tirx_kernels.gemm.fp16_bf16_gemm.get_kernel(\"fp16\", 8192, 8192, 8192, backend_config={\"cuda\": {\"arch\": \"sm_100a\", \"compiler\": \"nvcc\", \"target_format\": \"ptx\"}}), compiled by tirx_kernels.runner.compile_kernel (Scripts/gen_ptx.py)",
+    "repositories": {
+      "tirx-kernels": {
+        "repository": "https://github.com/mlc-ai/tirx-kernels.git",
+        "commit": "13f586f59d4de26b0260057b2592b3eed655983a",
+        "checkout": "tirx-kernels"
+      },
+      "tvm": {
+        "repository": "https://github.com/apache/tvm-tirx.git",
+        "commit": "6a1e2e4ed52e0e4cd92929a169f4d3f5fa02e4f5",
+        "checkout": "tvm"
+      }
+    }
+  },
+  "verified": "The four upstream source sha256 values recorded above (the keys ending in .py) equal the sha256 of those files at the two commits in source.repositories. The PTX was not regenerated and compared at these commits; ptx_sha256 is the hash of the recorded PTX file only."
+}
