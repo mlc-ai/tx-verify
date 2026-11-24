@@ -126,6 +126,11 @@ instructions and registers written by other instructions or returned by machine 
 
 The [pipeline proof](Packed/Producer/Pipeline.lean) shows that once this thread enters the
 producer path at instruction 1411 with its leader flag set, no continuation can exit normally.
-It also checks the two dispatch branches immediately after the block barrier for a one-token
-sequence, given the thread number, length and election values in their registers. Deriving these
-values at the barrier from a valid launch and initialized sequence offsets remains open.
+For the first sequence in a block, the [sequence-offset proof](Packed/Producer/SequenceOffsets.lean)
+starts immediately after the two global offset reads. Given start offset zero, end offset one,
+and the block, thread and leader values in the registers at that point, Lean checks every possible
+continuation. The later election uses the same mask, chooses the same thread, and this thread
+cannot exit normally. A consistent execution prefix from launch reaching those offset values
+would therefore refute full kernel correctness for that launch, whatever output property is
+requested. Constructing such a prefix, including the preceding block barriers and global reads,
+remains open.
