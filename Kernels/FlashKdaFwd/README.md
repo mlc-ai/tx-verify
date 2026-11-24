@@ -126,11 +126,21 @@ instructions and registers written by other instructions or returned by machine 
 
 The [pipeline proof](Packed/Producer/Pipeline.lean) shows that once this thread enters the
 producer path at instruction 1411 with its leader flag set, no continuation can exit normally.
-For the first sequence in a block, the [sequence-offset proof](Packed/Producer/SequenceOffsets.lean)
-starts immediately after the two global offset reads. Given start offset zero, end offset one,
-and the block, thread and leader values in the registers at that point, Lean checks every possible
-continuation. The later election uses the same mask, chooses the same thread, and this thread
-cannot exit normally. A consistent execution prefix from launch reaching those offset values
-would therefore refute full kernel correctness for that launch, whatever output property is
-requested. Constructing such a prefix, including the preceding block barriers and global reads,
-remains open.
+The [launch proof](Packed/Producer/LaunchOffsets.lean) follows thread 129 from the decoded entry
+through the startup barriers and both eight-byte global reads on any path to normal exit. Take a
+first sequence of length one and an aligned offset table at modeled address 65536. The host input
+contract supplies its two offsets, zero and one. If both loads see those initial bytes, the
+integer instructions compute length one, the later election selects thread 129 again, and a
+normal exit is impossible. The proof derives the registers at both loads from launch.
+
+There is a further consequence when the output and final-state buffers start above the offset
+table. If the whole kernel met the specified correctness contract, some complete execution
+would have to elect thread 129 and contain **two distinct writes to the same input byte**.
+One write would supply a byte different from its launch value to an offset read. Another
+would have to supply the original byte because every permitted final memory must preserve it.
+The [memory proof](Packed/Producer/OffsetFrame.lean) derives both writers from the existing
+contract. The bytes here are the abstract values in TxVerify's memory model. For a launch
+whose tensor maps all start above the offset table, the [transfer proof](Packed/Producer/OffsetTransfers.lean)
+rules out every tensor load and tensor store as a writer of either input offset. Establishing
+whether any other write can supply a changed input byte remains open. The argument does not
+establish that a particular GPU takes the breakpoint.
