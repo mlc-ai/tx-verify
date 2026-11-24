@@ -107,11 +107,25 @@ leader. All participants agree, every participant has arrived, and the elected t
 records its producer flag before reaching instruction 48. NVIDIA specifies a deterministic
 choice for each member mask and leaves the particular lane unspecified.
 
-CUTLASS checks the elected producer's lane number later, when acquiring a pipeline stage.
-The compiler retains this check with source-line information disabled. If thread 129,
-whose lane number is one, reaches the check as leader, it executes a breakpoint. Establishing
-whether a valid execution reaches that breakpoint requires following the intervening
-synchronization and control flow. [Local proof](Packed/Election.lean) ·
+CUTLASS checks the elected producer's lane number when acquiring a pipeline stage.
+The compiler retains this check with source-line information disabled. In the input-copy warp,
+thread 128 has lane number zero and thread 129 has lane number one. If thread 129 is the
+leader when it reaches the check, the compiled instruction executes a breakpoint. Disassembling
+the machine-code section identified in the manifest also shows the guarded breakpoint at byte
+offset `0x5bf0` in the first full-tile path.
+[Instruction proof](Packed/Election.lean) ·
 [FlashKDA producer selection](https://github.com/MoonshotAI/FlashKDA/blob/b8a96a6db49e785ba0ee103e9d87d2588ffcc4f2/csrc/smxx/utils.cuh#L98-L109) ·
 [CUTLASS producer check](https://github.com/NVIDIA/cutlass/blob/5c149f52a436782210263fb2f19b354443a61c6a/include/cutlass/pipeline/sm90_pipeline.hpp#L515-L526) ·
 [PTX election semantics](https://docs.nvidia.com/cuda/parallel-thread-execution/#parallel-synchronization-and-communication-instructions-elect-sync).
+
+The [control-flow proof](Packed/Producer/Trace.lean) checks the remainder of the decoded entry.
+In every consistent execution that chooses thread 129 at the first election, that thread can
+issue no event from instructions 1456 through 1862 or 1882 through 2071. These ranges contain
+the tile copies of the input and workspace. The proof covers jumps, waiting loops, predicated
+instructions and registers written by other instructions or returned by machine events.
+
+The [pipeline proof](Packed/Producer/Pipeline.lean) shows that once this thread enters the
+producer path at instruction 1411 with its leader flag set, no continuation can exit normally.
+It also checks the two dispatch branches immediately after the block barrier for a one-token
+sequence, given the thread number, length and election values in their registers. Deriving these
+values at the barrier from a valid launch and initialized sequence offsets remains open.
