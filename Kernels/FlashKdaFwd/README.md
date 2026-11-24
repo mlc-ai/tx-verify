@@ -34,6 +34,12 @@ cmp "$kda/Packed/Ptx.lean" /tmp/packed.lean
 
 ## Checked parts of the compiled entry
 
+[The decoding proof](Packed/Program.lean) establishes that the TxVerify decoder returns one
+program with all 3,835 instructions from the exported PTX syntax. Each checked instruction
+sequence is also a slice of that same program. [The entry proof](Packed/Entry.lean) starts
+at instruction zero, binds the host parameters and traces the input-copy warp to its first
+election at instruction 32.
+
 [The memory specification](Packed/Spec.lean) gives the required value at every output and final
 state coordinate, including the outgoing state of an empty sequence. It also specifies the bytes
 each launch must preserve. The query, key and decay coefficients come from the preceding stage.
@@ -94,14 +100,18 @@ follows the four 32-bit words in shared memory through the four register unpacks
 of all eight stores. The computation producing those words and their availability to the
 store warp still need a proof.
 
-When FlashKDA sets up the input copy, it elects one leader from a 32-thread warp. The pipeline
-checks that an elected producer has lane number zero. The fixed PTX retains this check with
-source-line information disabled. Lean verifies the election instruction, the lane-number
-test and the branch to a breakpoint. For example, thread 129 has lane number one. If it
-arrives at the test as the elected producer, the test fails. A complete execution reaching
-the breakpoint has yet to be established. NVIDIA specifies a deterministic choice for each
-member mask and leaves the chosen lane unspecified.
-[Local proof](Packed/Election.lean) ·
+The first block's input-copy warp consists of threads 128 through 159. At instruction 32,
+all 32 threads elect a leader. The [execution proof](Packed/Prefix.lean) starts from the
+decoded entry and establishes a consistent execution through that election for each possible
+leader. All participants agree, every participant has arrived, and the elected thread
+records its producer flag before reaching instruction 48. NVIDIA specifies a deterministic
+choice for each member mask and leaves the particular lane unspecified.
+
+CUTLASS checks the elected producer's lane number later, when acquiring a pipeline stage.
+The compiler retains this check with source-line information disabled. If thread 129,
+whose lane number is one, reaches the check as leader, it executes a breakpoint. Establishing
+whether a valid execution reaches that breakpoint requires following the intervening
+synchronization and control flow. [Local proof](Packed/Election.lean) ·
 [FlashKDA producer selection](https://github.com/MoonshotAI/FlashKDA/blob/b8a96a6db49e785ba0ee103e9d87d2588ffcc4f2/csrc/smxx/utils.cuh#L98-L109) ·
 [CUTLASS producer check](https://github.com/NVIDIA/cutlass/blob/5c149f52a436782210263fb2f19b354443a61c6a/include/cutlass/pipeline/sm90_pipeline.hpp#L515-L526) ·
 [PTX election semantics](https://docs.nvidia.com/cuda/parallel-thread-execution/#parallel-synchronization-and-communication-instructions-elect-sync).

@@ -18,7 +18,7 @@ private theorem map_length {α β : Type} (f : α → Except String β) {xs : Li
     subst ys
     simp [ih b]
 
-private theorem decoded_length {env : Decode.Env} {pc} {xs} {ys}
+theorem decoded_length {env : Decode.Env} {pc} {xs} {ys}
     (h : Decode.code env pc xs = .ok ys) : ys.length = xs.length := by
   simpa using map_length _ h
 
