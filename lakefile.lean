@@ -20,4 +20,5 @@ lean_lib PTX where
     .submodules `Kernels.TcGemm, .submodules `Kernels.Fp16Gemm8192,
     .submodules `Kernels.FlashAttn4Fwd, .submodules `Kernels.AddOne,
     .submodules `Kernels.FlashMlaSparseDecodeH64, .submodules `Kernels.InklingRelDecode,
-    .submodules `Kernels.TmlFa4Fwd, .submodules `Kernels.FlashKdaFwd]
+    .submodules `Kernels.TmlFa4Fwd, .submodules `Kernels.FlashKdaFwd,
+    .submodules `Kernels.FlashKdaBwd]

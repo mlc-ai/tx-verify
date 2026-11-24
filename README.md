@@ -63,6 +63,11 @@ final state at any sequence length. It also checks selected compiled instruction
 GPU counterexamples on constructed inputs. Safety, progress, termination, and the final memory
 of the complete compiled forward launch remain open.
 
+The [FLA KDA backward verification](Kernels/FlashKdaBwd/README.md) derives the gradients of the
+real forward recurrence, checks identities used by FLA's chunk backward, and compares eight
+GPU input gradients to a double-precision reference. A one-token case exposes a zero update-logit
+gradient whose real derivative exceeds two.
+
 ## Layout
 
 | Path | Content |
