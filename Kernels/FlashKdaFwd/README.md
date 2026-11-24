@@ -68,3 +68,23 @@ right shift. The proof gives the generic shared window an explicit 256-byte-alig
 evaluates the shift, mask and XOR on its 64-bit address. The resulting pointer keeps the same
 owner and has exactly the tensor-map byte offset. This local address interpretation is an
 additional machine assumption.
+
+[The projection proof](Packed/Projection.lean) checks all 112 instructions in the first
+projection block. It tracks which of 32 shared loads supplies each of the 64 matrix products
+and which prior result supplies its accumulator. [The matrix load proof](Packed/MatrixLoad.lean)
+derives the 16-byte read of each thread from its address register and follows the bytes through
+the warp exchange into the matrix operand layout. [The address calculation](Packed/ProjectionAddress.lean)
+relates thread, feature and token indices to the shared bytes of the coefficient and state arrays.
+The ordering of writes and reads across warps still has to be established.
+
+[The bfloat16 proof](Packed/Bfloat.lean) checks both gate load and shift sequences. Moving a
+16-bit stored pattern into the high half of a 32-bit register preserves its decoded value, also
+for subnormal inputs. The separate real-arithmetic assumption for narrowing a computed FP32 value
+to bfloat16 preserves its value in the ideal model.
+
+[The output map](Packed/OutputMap.lean) relates a completed bulk copy of a 16-token tile to
+the global address of each output byte. Distinct live sequence, head, token, feature and byte
+coordinates have distinct addresses. [The partial-tile stores](Packed/Tail.lean) write eight
+consecutive bfloat16 values, two bytes each, at the corresponding addresses. These theorems
+describe where a supplied value is written. The computation producing the value and the
+synchronization that makes it available to the store warp are still proof obligations.

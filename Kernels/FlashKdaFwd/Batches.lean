@@ -16,6 +16,28 @@ def firstToken (length : ℕ → ℕ) (i : ℕ) := ∑ j ∈ range i, length j
     firstTile length (i+1) = firstTile length i + tiles (length i) := by
   simp [firstTile, sum_range_succ]
 
+@[simp] theorem firstToken_succ (length : ℕ → ℕ) (i : ℕ) :
+    firstToken length (i+1) = firstToken length i + length i := by
+  simp [firstToken, sum_range_succ]
+
+theorem monotone_token (length : ℕ → ℕ) : Monotone (firstToken length) :=
+  monotone_nat_of_le_succ fun i => by rw [firstToken_succ]; omega
+
+theorem token_lt_end (length : ℕ → ℕ) {seq count t : ℕ} (hs : seq < count) (ht : t < length seq) :
+    firstToken length seq + t < firstToken length count := by
+  have h := monotone_token length (show seq+1 ≤ count from hs)
+  rw [firstToken_succ] at h
+  omega
+
+theorem token_unique (length : ℕ → ℕ) {i j ti tj : ℕ} (hi : ti < length i) (hj : tj < length j)
+    (same : firstToken length i + ti = firstToken length j + tj) : i = j ∧ ti = tj := by
+  rcases lt_trichotomy i j with h | h | h
+  · have := token_lt_end length h hi
+    omega
+  · exact ⟨h, by simpa [h] using same⟩
+  · have := token_lt_end length h hj
+    omega
+
 theorem monotone_tile (length : ℕ → ℕ) : Monotone (firstTile length) :=
   monotone_nat_of_le_succ fun i => by rw [firstTile_succ]; omega
 
