@@ -55,3 +55,16 @@ a state element implement the same 32-byte swizzle as the tensor map.
 threads to one 16-by-8 matrix multiply. For arbitrary real inputs in those registers, each
 thread receives its four entries of the product plus the accumulator, including all sixteen
 terms in each dot product. Instruction 2,199 (numbering from zero) uses this operation.
+
+[The workspace contract](Packed/Workspace.lean) specifies the six arrays supplied by the
+preparation kernel, their byte addresses, and the values, logits, sequence offsets and initial
+states read by the recurrence. Lean proves that multiplying these matrices gives the sequential
+output on every live row and the outgoing state. The unused rows in a partial tile may contain
+arbitrary finite values and update strengths.
+
+[The shared-pointer proof](Packed/Pointer.lean) checks instructions 470 through 472. TxVerify's
+default rule keeps a shared pointer symbolic and reports an unsupported operation on the first
+right shift. The proof gives the generic shared window an explicit 256-byte-aligned base and
+evaluates the shift, mask and XOR on its 64-bit address. The resulting pointer keeps the same
+owner and has exactly the tensor-map byte offset. This local address interpretation is an
+additional machine assumption.
