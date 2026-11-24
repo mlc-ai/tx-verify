@@ -1,0 +1,99 @@
+// SPDX-License-Identifier: Apache-2.0
+
+// Naive int8 GEMM on one CTA of 128 threads: D (128x8, s32) = A (128x32, s8) * B (32x8, s8).
+// A and B are stored in global memory in the K-major, no-swizzle canonical layout of
+// tcgen05 (8-row x 16-byte core matrices): A[i][k] at 16*(i%8) + 256*(i/8) + (k%16) +
+// 128*(k/16); B[k][j] at 16*j + (k%16) + 128*(k/16). D is row-major, 32 bytes per row.
+//
+// Warp 0 allocates 32 Tensor Memory columns. Thread 0 loads A and B with two bulk copies
+// (TMA) completing on bar0, issues one tcgen05.mma.kind::i8 and commits it to bar1. Every
+// thread waits on bar1, loads its row of D from Tensor Memory and stores it. Warp 0 then
+// frees the Tensor Memory.
+
+.version 8.7
+.target sm_100a
+.address_size 64
+
+.visible .entry tc_gemm(
+	.param .u64 tc_gemm_param_0,
+	.param .u64 tc_gemm_param_1,
+	.param .u64 tc_gemm_param_2
+)
+{
+	.reg .pred 	%p<6>;
+	.reg .b32 	%r<30>;
+	.reg .b64 	%rd<12>;
+	.shared .align 128 .b8 sA[4096];
+	.shared .align 128 .b8 sB[256];
+	.shared .align 8 .b8 bar0[8];
+	.shared .align 8 .b8 bar1[8];
+	.shared .align 4 .b8 tslot[4];
+
+	mov.u32 	%r1, %tid.x;
+	shr.u32 	%r2, %r1, 5;
+	mov.u32 	%r3, bar0;
+	mov.u32 	%r4, bar1;
+	mov.u32 	%r5, tslot;
+	setp.ne.u32 	%p1, %r2, 0;
+	setp.ne.u32 	%p2, %r1, 0;
+	@%p1 bra 	$L__ALLOCATED;
+	tcgen05.alloc.cta_group::1.sync.aligned.shared::cta.b32 	[%r5], 32;
+$L__ALLOCATED:
+	@%p2 bra 	$L__ISSUED;
+	ld.param.u64 	%rd1, [tc_gemm_param_0];
+	ld.param.u64 	%rd2, [tc_gemm_param_1];
+	cvta.to.global.u64 	%rd3, %rd1;
+	cvta.to.global.u64 	%rd4, %rd2;
+	mov.u32 	%r6, sA;
+	mov.u32 	%r7, sB;
+	mbarrier.init.shared::cta.b64 	[%r3], 1;
+	mbarrier.init.shared::cta.b64 	[%r4], 1;
+	fence.proxy.async.shared::cta;
+	mbarrier.arrive.expect_tx.shared::cta.b64 	_, [%r3], 4352;
+	cp.async.bulk.shared::cta.global.mbarrier::complete_tx::bytes 	[%r6], [%rd3], 4096, [%r3];
+	cp.async.bulk.shared::cta.global.mbarrier::complete_tx::bytes 	[%r7], [%rd4], 256, [%r3];
+$L__ISSUED:
+	bar.sync 	0;
+	ld.shared.u32 	%r8, [%r5];
+	and.b32 	%r8, %r8, 65535;
+	@%p2 bra 	$L__COMMITTED;
+$L__WAIT0:
+	mbarrier.try_wait.parity.shared::cta.b64 	%p3, [%r3], 0;
+	@!%p3 bra 	$L__WAIT0;
+	shr.u32 	%r9, %r6, 4;
+	add.u32 	%r10, %r9, 524288;
+	mul.wide.u32 	%rd5, %r10, 1;
+	add.u64 	%rd6, %rd5, 70437463654400;
+	shr.u32 	%r11, %r7, 4;
+	add.u32 	%r12, %r11, 524288;
+	mul.wide.u32 	%rd7, %r12, 1;
+	add.u64 	%rd8, %rd7, 70437463654400;
+	mov.u32 	%r13, 134349984;
+	mov.u32 	%r24, 0;
+	setp.ne.u32 	%p4, %r1, 0;
+	tcgen05.mma.cta_group::1.kind::i8 	[%r8], %rd6, %rd8, %r13, {%r24, %r24, %r24, %r24}, %p4;
+	tcgen05.commit.cta_group::1.mbarrier::arrive::one.shared::cluster.b64 	[%r4];
+$L__COMMITTED:
+$L__WAIT1:
+	mbarrier.try_wait.parity.shared::cta.b64 	%p5, [%r4], 0;
+	@!%p5 bra 	$L__WAIT1;
+	tcgen05.fence::after_thread_sync;
+	shl.b32 	%r14, %r2, 21;
+	add.s32 	%r15, %r8, %r14;
+	tcgen05.ld.sync.aligned.32x32b.x8.b32 	{%r16, %r17, %r18, %r19, %r20, %r21, %r22, %r23}, [%r15];
+	tcgen05.wait::ld.sync.aligned;
+	ld.param.u64 	%rd9, [tc_gemm_param_2];
+	cvta.to.global.u64 	%rd10, %rd9;
+	mul.wide.u32 	%rd11, %r1, 32;
+	add.s64 	%rd11, %rd10, %rd11;
+	st.global.v4.b32 	[%rd11], {%r16, %r17, %r18, %r19};
+	st.global.v4.b32 	[%rd11+16], {%r20, %r21, %r22, %r23};
+	tcgen05.fence::before_thread_sync;
+	bar.sync 	0;
+	tcgen05.fence::after_thread_sync;
+	@%p1 bra 	$L__DONE;
+	tcgen05.dealloc.cta_group::1.sync.aligned.b32 	%r8, 32;
+$L__DONE:
+	ret;
+
+}

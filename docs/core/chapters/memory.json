@@ -1,0 +1,44 @@
+{
+  "name": "memory",
+  "title": "Memory model",
+  "intro": "How the model orders memory accesses and decides which values a read may return: byte locations and footprints, scopes, program order, base causality order, the byte-specific model causality order that also covers asynchronous accesses, the reads-from and coherence axioms, and the memory errors (data races, including the exemption for writes of identical values, mixed-size conflicts, unallocated bytes and the shared-memory lifetime). The coherence order of writes and the memory after the kernel are part of the correctness chapter (CORRECT-FINAL). Concepts come first, then the rules.",
+  "concepts_intro": "The definitions a reader needs to follow the rules. Each text is the Lean doc comment, and each entry links to its Lean source.",
+  "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text. Interpretations (EXT) are readings of the PTX text that the model adopts beyond what the text states. The fields that reviewers check against the Lean bodies are collected under Details for reviewers.",
+  "readme_sections": [
+    {"title": "The memory layer against PTX §8.9", "marker": "PTX MEMORY MAP"}
+  ],
+  "concept_groups": [
+    {"name": "Locations, footprints and scopes",
+     "intro": "A byte of memory, the bytes one memory operation accesses, the memory at launch, and the scope of a strong operation.",
+     "items": ["Loc", "Acc", "Acc.Overlap", "Mem0", "MbarScope", "MbarScopeIncludes"]},
+    {"name": "Memory operations",
+     "intro": "The accesses of thread instructions and of the stages of asynchronous operations.",
+     "items": ["AsyncCopy.Ref", "Execution.Intent", "Execution.MemReads", "Execution.MemWrites"]},
+    {"name": "Order",
+     "intro": "Program order, base causality order between thread instructions, and the byte-specific model causality order that relates thread and asynchronous accesses.",
+     "items": ["po", "synchronizesWith", "FenceSync", "baseCausality", "ProxyBefore", "AsyncFinished", "CompletionBefore", "AsyncChain",
+               "PairAsync", "modelCausality", "ByteCausality"]},
+    {"name": "Reads",
+     "intro": "Which write a read byte comes from and which sources the axioms exclude.",
+     "items": ["RfWf", "NoFuture", "Hidden"]},
+    {"name": "Races",
+     "intro": "Conflicting accesses, moral strength and the race checks.",
+     "items": ["Conflict", "StrongScoped", "MorallyStrong", "SameValueWrites", "Race", "Mixed", "Unalloc"]},
+    {"name": "Shared-memory lifetime",
+     "intro": "The uses of a CTA's shared memory and the order that places them inside the CTA's lifetime.",
+     "items": ["SharedUse", "LifetimeOrder", "CompletedBefore", "SharedLifetimeUnsafe"]}
+  ],
+  "groups": [
+    {"name": "How accesses are ordered",
+     "intro": "Program order, the synchronization that enters base causality order, and the byte-specific order that composes thread and asynchronous accesses.",
+     "items": ["MEM-PROGRAM-ORDER", "MEM-SCOPE", "MEM-RELEASE-ACQUIRE", "MEM-FENCE-SC", "MEM-BASE-CAUSALITY", "MEM-MODEL-CAUSALITY",
+               "MEM-BYTE-CAUSALITY", "EXT-PAIR-ASYNC", "EXT-READ-WAIT-ORDER",
+               "EXT-TC-COMMIT-OPERAND-ORDER", "EXT-TC-SOURCE-REUSE"]},
+    {"name": "Which values a read may return",
+     "intro": "The reads-from relation and the causality and coherence axioms that constrain it.",
+     "items": ["MEM-READS-FROM", "MEM-READ-AXIOMS"]},
+    {"name": "What counts as a memory error",
+     "intro": "Executions that are rejected as unsafe because of how they access memory.",
+     "items": ["ERR-DATA-RACE", "MEM-ATOMICITY", "ERR-MIXED-SIZE", "ERR-UNALLOCATED-ACCESS", "ERR-SHARED-LIFETIME"]}
+  ]
+}

@@ -1,0 +1,91 @@
+{
+ "name": "assumptions",
+ "title": "Assumptions a kernel may declare",
+ "intro": "What a kernel may assume beyond the core rules, and what each kind of assumption makes the model trust. The core leaves some instructions without a rule and rejects some programs that real code relies on; a kernel can still be proved when it declares an assumption, and every assumption it declares appears in its theorem. Each assumption is built from one of the constructors in this chapter and is scoped to the instruction forms or the sites (`pc`) the kernel names. The first group of rules is the interface every assumption has, and each later rule is one constructor. Concepts come first, then the rules.",
+ "concepts_intro": "The definitions a reader needs to follow the rules: the interface of an assumption and the semantics the constructors give to the instructions they select. Each text is the Lean doc comment, and each entry links to its Lean source.",
+ "rules_intro": "Each rule is a contract block of the Lean source and describes one constructor. Its statement says what an assumption built from it makes the model trust, at which instructions or sites, and where it applies, which change to the program would make it unnecessary. The source cites the PTX ISA 9.5 text and the outside evidence it rests on, and the direction says how it relates to that text. The fields that reviewers check against the Lean bodies are collected under Details for reviewers.",
+ "concept_groups": [
+  {
+   "name": "The interface of an assumption",
+   "intro": "The fields through which an assumption refines the core.",
+   "items": [
+    "Assumption"
+   ]
+  },
+  {
+   "name": "Exact real arithmetic",
+   "intro": "The forms an ideal-real assumption covers and the exact operations it gives them.",
+   "items": [
+    "Assumption.IdealScope",
+    "Assumption.FloatForm",
+    "Assumption.execIdealFloat",
+    "Assumption.execIdealMma",
+    "Assumption.idealRmw"
+   ]
+  },
+  {
+   "name": "Approximate instructions read as exact",
+   "intro": "The approximate forms and the exact functions they are read as.",
+   "items": [
+    "Assumption.ApproxForm",
+    "Assumption.execApproxExact"
+   ]
+  },
+  {
+   "name": "Code templates read as exact functions",
+   "intro": "A reviewed straight-line template, its shapes and the step that replaces an instance of it.",
+   "items": [
+    "Assumption.SegShape",
+    "Assumption.SegTemplate",
+    "Assumption.execSegment"
+   ]
+  },
+  {
+   "name": "Readings at named sites",
+   "intro": "The step, the static check and the execution condition of the site-scoped hardware readings.",
+   "items": [
+    "Assumption.execPairEven",
+    "Assumption.ldConsumedAt",
+    "Assumption.commitPerformedAt"
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "name": "The interface of an assumption",
+   "intro": "The fields of an assumption and the hooks through which a constructor selects instructions or sites.",
+   "items": [
+    "ASM-INTERFACE"
+   ]
+  },
+  {
+   "name": "Arithmetic read as exact",
+   "intro": "Floating instructions, approximate instructions and whole code templates read as exact real functions. The distance between these exact results and the hardware's is left open.",
+   "items": [
+    "ASM-IDEAL",
+    "ASM-APPROX",
+    "ASM-SEGMENT",
+    "OPEN-NUM"
+   ]
+  },
+  {
+   "name": "Memory and synchronization",
+   "intro": "Loads outside the memory model, synchronization across the CTAs of a cluster, and the completion and order of `tcgen05` operations.",
+   "items": [
+    "ASM-NC",
+    "ASM-MBAR-SCOPE",
+    "ASM-TCLD-DATAFLOW",
+    "ASM-COMMIT-ORDER",
+    "ASM-SETMAXNREG-SYNC"
+   ]
+  },
+  {
+   "name": "Addresses and control flow",
+   "intro": "An address computed from the hardware encoding, and the agreement of the lanes of a warp on a poll.",
+   "items": [
+    "ASM-PEER-BIT",
+    "ASM-POLL-AGREE"
+   ]
+  }
+ ]
+}

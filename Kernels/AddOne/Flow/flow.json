@@ -1,0 +1,75 @@
+{
+ "kernel": "add_one",
+ "instructions": 9,
+ "sites": [
+  {
+   "name": "load_0",
+   "pc": 5,
+   "opcode": "ld.global.u32",
+   "operands": [
+    "%r2",
+    "[%rd2]"
+   ],
+   "guard": null,
+   "live": [
+    "%rd2"
+   ],
+   "next": [
+    {
+     "to": "store_0",
+     "loop": null,
+     "conditions": [],
+     "length": 1,
+     "defs": {
+      "%r3": "add.s32(%r2,1)"
+     }
+    }
+   ]
+  },
+  {
+   "name": "store_0",
+   "pc": 7,
+   "opcode": "st.global.u32",
+   "operands": [
+    "[%rd2]",
+    "%r3"
+   ],
+   "guard": null,
+   "live": [
+    "%r3",
+    "%rd2"
+   ],
+   "next": [
+    {
+     "to": "exit_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "exit_0",
+   "pc": 8,
+   "opcode": "ret",
+   "operands": [],
+   "guard": null,
+   "live": [],
+   "next": []
+  }
+ ],
+ "entry": [
+  {
+   "to": "load_0",
+   "conditions": [],
+   "length": 5,
+   "defs": {
+    "%rd1": "ld.param.u64([add_one_param_0])",
+    "%rd2": "add.s64(cvta.to.global.u64(ld.param.u64([add_one_param_0])),mul.wide.u32(mov.u32(%tid.x),4))",
+    "%r1": "mov.u32(%tid.x)",
+    "%rd3": "mul.wide.u32(mov.u32(%tid.x),4)"
+   }
+  }
+ ]
+}

@@ -1,0 +1,218 @@
+{
+ "kernel": "block_sum",
+ "instructions": 31,
+ "sites": [
+  {
+   "name": "load_0",
+   "pc": 9,
+   "opcode": "ld.global.b32",
+   "operands": [
+    "%r5",
+    "[%rd5]"
+   ],
+   "guard": null,
+   "live": [
+    "%r1",
+    "%r2",
+    "%rd1",
+    "%rd5"
+   ],
+   "next": [
+    {
+     "to": "store_0",
+     "loop": null,
+     "conditions": [],
+     "length": 3,
+     "defs": {
+      "%r6": "shl.b32(%r2,2)",
+      "%r7": "mov.b32(_ZZ9block_sumE1s)",
+      "%r8": "add.s32(mov.b32(_ZZ9block_sumE1s),shl.b32(%r2,2))"
+     }
+    }
+   ]
+  },
+  {
+   "name": "store_0",
+   "pc": 13,
+   "opcode": "st.shared.b32",
+   "operands": [
+    "[%r8]",
+    "%r5"
+   ],
+   "guard": null,
+   "live": [
+    "%r1",
+    "%r2",
+    "%r5",
+    "%r8",
+    "%rd1"
+   ],
+   "next": [
+    {
+     "to": "bar_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "bar_0",
+   "pc": 14,
+   "opcode": "bar.sync",
+   "operands": [
+    "0"
+   ],
+   "guard": null,
+   "live": [
+    "%r1",
+    "%r2",
+    "%rd1"
+   ],
+   "next": [
+    {
+     "to": "load_1",
+     "loop": null,
+     "conditions": [
+      [
+       "%p1",
+       false,
+       16
+      ]
+     ],
+     "length": 5,
+     "defs": {
+      "%p1": "setp.ne.b32(%r2,0)",
+      "%r12": "mov.b32(0f00000000)",
+      "%r11": "mov.b32(0)",
+      "%r10": "mov.b32(_ZZ9block_sumE1s)"
+     }
+    },
+    {
+     "to": "exit_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p1",
+       true,
+       16
+      ]
+     ],
+     "length": 2,
+     "defs": {
+      "%p1": "setp.ne.b32(%r2,0)"
+     }
+    }
+   ]
+  },
+  {
+   "name": "load_1",
+   "pc": 20,
+   "opcode": "ld.shared.b32",
+   "operands": [
+    "%r9",
+    "[%r10]"
+   ],
+   "guard": null,
+   "live": [
+    "%r1",
+    "%r10",
+    "%r11",
+    "%r12",
+    "%rd1"
+   ],
+   "next": [
+    {
+     "to": "store_1",
+     "loop": null,
+     "conditions": [
+      [
+       "%p2",
+       false,
+       25
+      ]
+     ],
+     "length": 8,
+     "defs": {
+      "%r12": "add.f32(%r12,%r9)",
+      "%r11": "add.s32(%r11,1)",
+      "%r10": "add.s32(%r10,4)",
+      "%p2": "setp.ne.b32(add.s32(%r11,1),256)",
+      "%rd6": "cvta.to.global.u64(%rd1)",
+      "%rd7": "mul.wide.u32(%r1,4)",
+      "%rd8": "add.s64(cvta.to.global.u64(%rd1),mul.wide.u32(%r1,4))"
+     }
+    },
+    {
+     "to": "load_1",
+     "loop": null,
+     "conditions": [
+      [
+       "%p2",
+       true,
+       25
+      ]
+     ],
+     "length": 5,
+     "defs": {
+      "%r12": "add.f32(%r12,%r9)",
+      "%r11": "add.s32(%r11,1)",
+      "%r10": "add.s32(%r10,4)",
+      "%p2": "setp.ne.b32(add.s32(%r11,1),256)"
+     }
+    }
+   ]
+  },
+  {
+   "name": "store_1",
+   "pc": 29,
+   "opcode": "st.global.b32",
+   "operands": [
+    "[%rd8]",
+    "%r12"
+   ],
+   "guard": null,
+   "live": [
+    "%r12",
+    "%rd8"
+   ],
+   "next": [
+    {
+     "to": "exit_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "exit_0",
+   "pc": 30,
+   "opcode": "ret",
+   "operands": [],
+   "guard": null,
+   "live": [],
+   "next": []
+  }
+ ],
+ "entry": [
+  {
+   "to": "load_0",
+   "conditions": [],
+   "length": 9,
+   "defs": {
+    "%rd2": "ld.param.b64([block_sum_param_0])",
+    "%rd1": "ld.param.b64([block_sum_param_1])",
+    "%rd3": "cvta.to.global.u64(ld.param.b64([block_sum_param_0]))",
+    "%r2": "mov.u32(%tid.x)",
+    "%r1": "mov.u32(%ctaid.x)",
+    "%r3": "shl.b32(mov.u32(%ctaid.x),8)",
+    "%r4": "add.s32(shl.b32(mov.u32(%ctaid.x),8),mov.u32(%tid.x))",
+    "%rd4": "mul.wide.u32(add.s32(shl.b32(mov.u32(%ctaid.x),8),mov.u32(%tid.x)),4)",
+    "%rd5": "add.s64(cvta.to.global.u64(ld.param.b64([block_sum_param_0])),mul.wide.u32(add.s32(shl.b32(mov.u32(%ctaid.x),8),mov.u32(%tid.x)),4))"
+   }
+  }
+ ]
+}

@@ -1,0 +1,837 @@
+{
+ "kernel": "tc_gemm",
+ "instructions": 60,
+ "sites": [
+  {
+   "name": "tmemAlloc_0",
+   "pc": 8,
+   "opcode": "tcgen05.alloc.cta_group::1.sync.aligned.shared::cta.b32",
+   "operands": [
+    "[%r5]",
+    "32"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%p2",
+    "%r1",
+    "%r2",
+    "%r3",
+    "%r4",
+    "%r5",
+    "%r6",
+    "%r7"
+   ],
+   "next": [
+    {
+     "to": "mbarInit_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p2",
+       false,
+       9
+      ]
+     ],
+     "length": 7,
+     "defs": {
+      "%rd1": "ld.param.u64([tc_gemm_param_0])",
+      "%rd2": "ld.param.u64([tc_gemm_param_1])",
+      "%rd3": "cvta.to.global.u64(ld.param.u64([tc_gemm_param_0]))",
+      "%rd4": "cvta.to.global.u64(ld.param.u64([tc_gemm_param_1]))",
+      "%r6": "mov.u32(sA)",
+      "%r7": "mov.u32(sB)"
+     }
+    },
+    {
+     "to": "bar_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p2",
+       true,
+       9
+      ]
+     ],
+     "length": 1,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "mbarInit_0",
+   "pc": 16,
+   "opcode": "mbarrier.init.shared::cta.b64",
+   "operands": [
+    "[%r3]",
+    "1"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%p2",
+    "%r1",
+    "%r2",
+    "%r3",
+    "%r4",
+    "%r5",
+    "%r6",
+    "%r7",
+    "%rd3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "mbarInit_1",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "mbarInit_1",
+   "pc": 17,
+   "opcode": "mbarrier.init.shared::cta.b64",
+   "operands": [
+    "[%r4]",
+    "1"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%p2",
+    "%r1",
+    "%r2",
+    "%r3",
+    "%r4",
+    "%r5",
+    "%r6",
+    "%r7",
+    "%rd3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "fenceProxy_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "fenceProxy_0",
+   "pc": 18,
+   "opcode": "fence.proxy.async.shared::cta",
+   "operands": [],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%p2",
+    "%r1",
+    "%r2",
+    "%r3",
+    "%r4",
+    "%r5",
+    "%r6",
+    "%r7",
+    "%rd3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "mbarArrive_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "mbarArrive_0",
+   "pc": 19,
+   "opcode": "mbarrier.arrive.expect_tx.shared::cta.b64",
+   "operands": [
+    "_",
+    "[%r3]",
+    "4352"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%p2",
+    "%r1",
+    "%r2",
+    "%r3",
+    "%r4",
+    "%r5",
+    "%r6",
+    "%r7",
+    "%rd3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "bulkCopy_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "bulkCopy_0",
+   "pc": 20,
+   "opcode": "cp.async.bulk.shared::cta.global.mbarrier::complete_tx::bytes",
+   "operands": [
+    "[%r6]",
+    "[%rd3]",
+    "4096",
+    "[%r3]"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%p2",
+    "%r1",
+    "%r2",
+    "%r3",
+    "%r4",
+    "%r5",
+    "%r6",
+    "%r7",
+    "%rd3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "bulkCopy_1",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "bulkCopy_1",
+   "pc": 21,
+   "opcode": "cp.async.bulk.shared::cta.global.mbarrier::complete_tx::bytes",
+   "operands": [
+    "[%r7]",
+    "[%rd4]",
+    "256",
+    "[%r3]"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%p2",
+    "%r1",
+    "%r2",
+    "%r3",
+    "%r4",
+    "%r5",
+    "%r6",
+    "%r7",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "bar_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "bar_0",
+   "pc": 22,
+   "opcode": "bar.sync",
+   "operands": [
+    "0"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%p2",
+    "%r1",
+    "%r2",
+    "%r3",
+    "%r4",
+    "%r5",
+    "%r6",
+    "%r7"
+   ],
+   "next": [
+    {
+     "to": "load_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "load_0",
+   "pc": 23,
+   "opcode": "ld.shared.u32",
+   "operands": [
+    "%r8",
+    "[%r5]"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%p2",
+    "%r1",
+    "%r2",
+    "%r3",
+    "%r4",
+    "%r5",
+    "%r6",
+    "%r7"
+   ],
+   "next": [
+    {
+     "to": "mbarWait_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p2",
+       false,
+       25
+      ]
+     ],
+     "length": 2,
+     "defs": {
+      "%r8": "and.b32(%r8,65535)"
+     }
+    },
+    {
+     "to": "mbarWait_1",
+     "loop": null,
+     "conditions": [
+      [
+       "%p2",
+       true,
+       25
+      ]
+     ],
+     "length": 2,
+     "defs": {
+      "%r8": "and.b32(%r8,65535)"
+     }
+    }
+   ]
+  },
+  {
+   "name": "mbarWait_0",
+   "pc": 26,
+   "opcode": "mbarrier.try_wait.parity.shared::cta.b64",
+   "operands": [
+    "%p3",
+    "[%r3]",
+    "0"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r1",
+    "%r2",
+    "%r3",
+    "%r4",
+    "%r6",
+    "%r7",
+    "%r8"
+   ],
+   "next": [
+    {
+     "to": "mma_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p3",
+       true,
+       27
+      ]
+     ],
+     "length": 12,
+     "defs": {
+      "%r9": "shr.u32(%r6,4)",
+      "%r10": "add.u32(shr.u32(%r6,4),524288)",
+      "%rd5": "mul.wide.u32(add.u32(shr.u32(%r6,4),524288),1)",
+      "%rd6": "add.u64(mul.wide.u32(add.u32(shr.u32(%r6,4),524288),1),70437463654400)",
+      "%r11": "shr.u32(%r7,4)",
+      "%r12": "add.u32(shr.u32(%r7,4),524288)",
+      "%rd7": "mul.wide.u32(add.u32(shr.u32(%r7,4),524288),1)",
+      "%rd8": "add.u64(mul.wide.u32(add.u32(shr.u32(%r7,4),524288),1),70437463654400)",
+      "%r13": "mov.u32(134349984)",
+      "%r24": "mov.u32(0)",
+      "%p4": "setp.ne.u32(%r1,0)"
+     }
+    },
+    {
+     "to": "mbarWait_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p3",
+       false,
+       27
+      ]
+     ],
+     "length": 1,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "mma_0",
+   "pc": 39,
+   "opcode": "tcgen05.mma.cta_group::1.kind::i8",
+   "operands": [
+    "[%r8]",
+    "%rd6",
+    "%rd8",
+    "%r13",
+    "{%r24,%r24,%r24,%r24}",
+    "%p4"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%p4",
+    "%r1",
+    "%r2",
+    "%r4",
+    "%r8",
+    "%r13",
+    "%r24",
+    "%rd6",
+    "%rd8"
+   ],
+   "next": [
+    {
+     "to": "tcCommit_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "tcCommit_0",
+   "pc": 40,
+   "opcode": "tcgen05.commit.cta_group::1.mbarrier::arrive::one.shared::cluster.b64",
+   "operands": [
+    "[%r4]"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r1",
+    "%r2",
+    "%r4",
+    "%r8"
+   ],
+   "next": [
+    {
+     "to": "mbarWait_1",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "mbarWait_1",
+   "pc": 41,
+   "opcode": "mbarrier.try_wait.parity.shared::cta.b64",
+   "operands": [
+    "%p5",
+    "[%r4]",
+    "0"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r1",
+    "%r2",
+    "%r4",
+    "%r8"
+   ],
+   "next": [
+    {
+     "to": "tcFence_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p5",
+       true,
+       42
+      ]
+     ],
+     "length": 1,
+     "defs": {}
+    },
+    {
+     "to": "mbarWait_1",
+     "loop": null,
+     "conditions": [
+      [
+       "%p5",
+       false,
+       42
+      ]
+     ],
+     "length": 1,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "tcFence_0",
+   "pc": 43,
+   "opcode": "tcgen05.fence::after_thread_sync",
+   "operands": [],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r1",
+    "%r2",
+    "%r8"
+   ],
+   "next": [
+    {
+     "to": "tmemLoad_0",
+     "loop": null,
+     "conditions": [],
+     "length": 2,
+     "defs": {
+      "%r14": "shl.b32(%r2,21)",
+      "%r15": "add.s32(%r8,shl.b32(%r2,21))"
+     }
+    }
+   ]
+  },
+  {
+   "name": "tmemLoad_0",
+   "pc": 46,
+   "opcode": "tcgen05.ld.sync.aligned.32x32b.x8.b32",
+   "operands": [
+    "{%r16,%r17,%r18,%r19,%r20,%r21,%r22,%r23}",
+    "[%r15]"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r1",
+    "%r8",
+    "%r15"
+   ],
+   "next": [
+    {
+     "to": "tmemWait_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "tmemWait_0",
+   "pc": 47,
+   "opcode": "tcgen05.wait::ld.sync.aligned",
+   "operands": [],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r1",
+    "%r8",
+    "%r16",
+    "%r17",
+    "%r18",
+    "%r19",
+    "%r20",
+    "%r21",
+    "%r22",
+    "%r23"
+   ],
+   "next": [
+    {
+     "to": "store_0",
+     "loop": null,
+     "conditions": [],
+     "length": 4,
+     "defs": {
+      "%rd9": "ld.param.u64([tc_gemm_param_2])",
+      "%rd10": "cvta.to.global.u64(ld.param.u64([tc_gemm_param_2]))",
+      "%rd11": "add.s64(cvta.to.global.u64(ld.param.u64([tc_gemm_param_2])),mul.wide.u32(%r1,32))"
+     }
+    }
+   ]
+  },
+  {
+   "name": "store_0",
+   "pc": 52,
+   "opcode": "st.global.v4.b32",
+   "operands": [
+    "[%rd11]",
+    "{%r16,%r17,%r18,%r19}"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r8",
+    "%r16",
+    "%r17",
+    "%r18",
+    "%r19",
+    "%r20",
+    "%r21",
+    "%r22",
+    "%r23",
+    "%rd11"
+   ],
+   "next": [
+    {
+     "to": "store_1",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "store_1",
+   "pc": 53,
+   "opcode": "st.global.v4.b32",
+   "operands": [
+    "[%rd11+16]",
+    "{%r20,%r21,%r22,%r23}"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r8",
+    "%r20",
+    "%r21",
+    "%r22",
+    "%r23",
+    "%rd11"
+   ],
+   "next": [
+    {
+     "to": "tcFence_1",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "tcFence_1",
+   "pc": 54,
+   "opcode": "tcgen05.fence::before_thread_sync",
+   "operands": [],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r8"
+   ],
+   "next": [
+    {
+     "to": "bar_1",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "bar_1",
+   "pc": 55,
+   "opcode": "bar.sync",
+   "operands": [
+    "0"
+   ],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r8"
+   ],
+   "next": [
+    {
+     "to": "tcFence_2",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "tcFence_2",
+   "pc": 56,
+   "opcode": "tcgen05.fence::after_thread_sync",
+   "operands": [],
+   "guard": null,
+   "live": [
+    "%p1",
+    "%r8"
+   ],
+   "next": [
+    {
+     "to": "tmemDealloc_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p1",
+       false,
+       57
+      ]
+     ],
+     "length": 1,
+     "defs": {}
+    },
+    {
+     "to": "exit_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p1",
+       true,
+       57
+      ]
+     ],
+     "length": 1,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "tmemDealloc_0",
+   "pc": 58,
+   "opcode": "tcgen05.dealloc.cta_group::1.sync.aligned.b32",
+   "operands": [
+    "%r8",
+    "32"
+   ],
+   "guard": null,
+   "live": [
+    "%r8"
+   ],
+   "next": [
+    {
+     "to": "exit_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "exit_0",
+   "pc": 59,
+   "opcode": "ret",
+   "operands": [],
+   "guard": null,
+   "live": [],
+   "next": []
+  }
+ ],
+ "entry": [
+  {
+   "to": "tmemAlloc_0",
+   "conditions": [
+    [
+     "%p1",
+     false,
+     7
+    ]
+   ],
+   "length": 8,
+   "defs": {
+    "%r1": "mov.u32(%tid.x)",
+    "%r2": "shr.u32(mov.u32(%tid.x),5)",
+    "%r3": "mov.u32(bar0)",
+    "%r4": "mov.u32(bar1)",
+    "%r5": "mov.u32(tslot)",
+    "%p1": "setp.ne.u32(shr.u32(mov.u32(%tid.x),5),0)",
+    "%p2": "setp.ne.u32(mov.u32(%tid.x),0)"
+   }
+  },
+  {
+   "to": "mbarInit_0",
+   "conditions": [
+    [
+     "%p1",
+     true,
+     7
+    ],
+    [
+     "%p2",
+     false,
+     9
+    ]
+   ],
+   "length": 15,
+   "defs": {
+    "%r1": "mov.u32(%tid.x)",
+    "%r2": "shr.u32(mov.u32(%tid.x),5)",
+    "%r3": "mov.u32(bar0)",
+    "%r4": "mov.u32(bar1)",
+    "%r5": "mov.u32(tslot)",
+    "%p1": "setp.ne.u32(shr.u32(mov.u32(%tid.x),5),0)",
+    "%p2": "setp.ne.u32(mov.u32(%tid.x),0)",
+    "%rd1": "ld.param.u64([tc_gemm_param_0])",
+    "%rd2": "ld.param.u64([tc_gemm_param_1])",
+    "%rd3": "cvta.to.global.u64(ld.param.u64([tc_gemm_param_0]))",
+    "%rd4": "cvta.to.global.u64(ld.param.u64([tc_gemm_param_1]))",
+    "%r6": "mov.u32(sA)",
+    "%r7": "mov.u32(sB)"
+   }
+  },
+  {
+   "to": "bar_0",
+   "conditions": [
+    [
+     "%p1",
+     true,
+     7
+    ],
+    [
+     "%p2",
+     true,
+     9
+    ]
+   ],
+   "length": 9,
+   "defs": {
+    "%r1": "mov.u32(%tid.x)",
+    "%r2": "shr.u32(mov.u32(%tid.x),5)",
+    "%r3": "mov.u32(bar0)",
+    "%r4": "mov.u32(bar1)",
+    "%r5": "mov.u32(tslot)",
+    "%p1": "setp.ne.u32(shr.u32(mov.u32(%tid.x),5),0)",
+    "%p2": "setp.ne.u32(mov.u32(%tid.x),0)"
+   }
+  }
+ ]
+}

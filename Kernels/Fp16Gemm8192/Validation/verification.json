@@ -1,0 +1,120 @@
+{
+  "proof_complete": true,
+  "proof_status": "complete",
+  "ptx_sha256": "9b8db81d7c91ee81a062c515627f70d8e62b3970630d8dd6363dd5b726f9dfbd",
+  "instruction_count": 1097,
+  "public_gemm_theorems": {
+    "correct": "checked",
+    "completed_execution": "checked",
+    "realizable_result": "checked"
+  },
+  "entrypoint": "../Theorem.lean",
+  "correct_fields": {
+    "safe": "proved",
+    "progress": "proved",
+    "terminates": "proved",
+    "result": "proved"
+  },
+  "assumptions": [
+    "Assumptions.idealArith",
+    "Assumptions.clusterMbar"
+  ],
+  "caller_preconditions": "Spec.Pre: launch, input, storage and resource only; no protocol/task/phase/FIFO premises",
+  "axiom_audit": {
+    "status": "passed",
+    "allowed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "test": "Tests/Kernel/Fp16GemmProduction.lean; Tests/Kernel/Statements.lean",
+    "spec_data_whitelist": [
+      "Spec",
+      "Data.Decoded",
+      "Data.TensorMaps"
+    ],
+    "proof_imports_in_spec": false
+  },
+  "lean": {
+    "command": [
+      "lake",
+      "--wfail",
+      "build"
+    ],
+    "layout_recheck": "passed",
+    "warnings": 0,
+    "source_manifest_sha256": "a670fa2d38216d8a49451fbabb90e39c97b2b1bae12d4fae2b30e89b46225f2b",
+    "source_manifest_matches": true,
+    "lakefile_sha256": "0adb129e6ef22ce35d1112c592fd52a9589391e94379712896219bbea1bdeb38",
+    "lean_args": [
+      "-j1",
+      "-s512000"
+    ],
+    "cold_build_before_directory_reorganization": {
+      "status": "passed",
+      "source_manifest_sha256": "4b13daacbdf86099108645f8c00fa1185ba0f8dbd207d6dff04fdf9f3172c706",
+      "wall_s": 1047.7838647000026,
+      "project_artifacts_cleaned": true,
+      "dependency_artifacts_preserved": true,
+      "peak_process_tree_rss_bytes": 222986268672
+    }
+  },
+  "tests": {
+    "python": {
+      "command": "TXVERIFY_BUILD=1 python -m pytest -q tests",
+      "passed": 40,
+      "skipped": 0
+    },
+    "gpu": {
+      "status": "passed",
+      "existing_configs": 26,
+      "partial_ring_configs": 6,
+      "seeds": [
+        0,
+        7,
+        23,
+        101
+      ],
+      "output_poison": "NaN",
+      "repeated_async_and_two_streams": true
+    },
+    "upstream": {
+      "tvm_affected": {
+        "passed": 26
+      },
+      "tirx_lite": {
+        "passed": 101
+      },
+      "gemm_storage": {
+        "passed": 6,
+        "scope": "root allocation and input tail drain regression"
+      }
+    }
+  },
+  "performance": {
+    "median_regression_percent": 6.323,
+    "threshold_waived_by_user": true,
+    "priority": "kernel correctness"
+  },
+  "model_regression": {
+    "status": "included in full wfail build",
+    "tests": [
+      "Tests/Async/AsyncReuse.lean",
+      "Tests/Tmem/TmemPairCompletion.lean"
+    ],
+    "completion_laws": [
+      "same-CTA named barrier",
+      "MMA identical-footprint completion prefix",
+      "full-owner synchronous TMEM pair completion prefix"
+    ],
+    "notification_fifo_assumption": false
+  },
+  "remaining": [],
+  "resources": {
+    "registers": 168,
+    "stack_bytes": 72,
+    "spill_store_bytes": 84,
+    "spill_load_bytes": 84
+  },
+  "manifest": "../Data/manifest.json"
+}

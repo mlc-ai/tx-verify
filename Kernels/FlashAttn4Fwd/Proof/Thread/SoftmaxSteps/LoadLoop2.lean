@@ -1,0 +1,75 @@
+-- SPDX-License-Identifier: Apache-2.0
+module
+
+public import Kernels.FlashAttn4Fwd.Proof.Thread.SoftmaxSteps.LoadBase
+
+@[expose] public section
+
+/-! # The score loads of a loop tile
+
+Load `c` (columns `32 c …`, address register `tmem 32 c`) with its implicit wait
+(`ld_step`). (After the last load the row maximum follows, `SoftmaxSteps/Alpha*`.) -/
+
+namespace PTX.Kernels.FlashAttn4Fwd.Proof.Softmax
+open PTX PTX.Proof PTX.Flow
+
+noncomputable section
+set_option maxRecDepth 100000
+set_option maxHeartbeats 8000000
+
+/-- The loads `2`, `3` of a loop tile. -/
+theorem step_ldLoop23 {P : Params} {L : Launch} {mem0 : Mem0} {g : Nat}
+    {d : D} {t u : TState} {e : Event} {ins : Instr} (hpre : Pre P L mem0) (c : Fin 4)
+    (hc2 : 2 ≤ c.val) (hs : d.site = .ld true c) (hi : Inv L g d)
+    (h : At t d.site.pc (facts L g d)) (hc : kernel.code[d.site.pc]? = some ins)
+    (hf : Fires d.site.pc (eventTmpl asms L g t ins.op) e (some u)) : Step L g d e u := by
+  obtain ⟨site, i, tt, s, m, l⟩ := d
+  simp only at hs h hc hf hi ⊢
+  subst hs
+  have hw8 := hi.warp
+  have hk : kOf L g < 4 := Nat.mod_lt _ (by decide)
+  have hA : At t _ (factsAt L g _ ⟨.ld true c, i, tt, s, m, l⟩) :=
+    ⟨h.1, h.2.1, h.2.2.1, h.2.2.2.1, by simpa [facts, factsAt, Site.extra] using h.2.2.2.2⟩
+  have hframe : ∀ xs,
+      Holds t.regs (factsAt L g (Site.ld true c).pc ⟨.ld true c, i, tt, s, m, l⟩) →
+      Holds t.regs
+        (factsAt L g (Site.ld true c).pc (atWait ⟨.ld true c, i, tt, s, m, l⟩ true c xs)) := by
+    intro xs _
+    obtain ⟨t', hr', ht'⟩ : ∃ t', run kernel asms L g 0 t = some t' ∧
+        At t' (Site.ld true c).pc
+          (factsAt L g (Site.ld true c).pc
+            (atWait ⟨.ld true c, i, tt, s, m, l⟩ true c xs)) := by
+      rcases fin4_cases c with rfl | rfl | rfl | rfl <;> simp at hc2 <;>
+        sm_seg hA hpre
+    cases hr'
+    exact ht'.2.2.2.2
+  rcases fin4_cases c with rfl | rfl | rfl | rfl <;> simp at hc2
+  · obtain rfl := Option.some.inj (hc.symm.trans Flow.code_tmemLoad_6)
+    have hv : valueOf L g ⟨.ld true 2, i, tt, s, m, l⟩ 2060 = b32 (tmem L g 64) := by
+      simp only [valueOf, ctrlValues, PTX.Flow.lookupLit, Option.getD_some]
+    refine ld_step rfl hi h
+      (tcLdWait_ld true 2)
+      (hv ▸ holds_mem hA.2.2.2.2 (List.mem_map.mpr ⟨2060, by table_decide, rfl⟩))
+      (by simp only [tmem, stOf, kOf] at hk ⊢; omega) rfl (by decide)
+      (show ∀ r ∈ Flow.live Flow.tmemLoad_6, r ∉ ldRegs true 2 by decide +kernel)
+      hframe (fun xs _ p hp => ?_) hf
+    have hp' : p < 32 := by simpa [ldRegs] using hp
+    interval_cases p <;>
+      simp only [valueOf, ctrlValues, floatValues, PTX.Flow.lookupLit, Option.getD_some, ldRegs,
+        loadW] <;> rfl
+  · obtain rfl := Option.some.inj (hc.symm.trans Flow.code_tmemLoad_7)
+    have hv : valueOf L g ⟨.ld true 3, i, tt, s, m, l⟩ 2058 = b32 (tmem L g 96) := by
+      simp only [valueOf, ctrlValues, PTX.Flow.lookupLit, Option.getD_some]
+    refine ld_step rfl hi h
+      (tcLdWait_ld true 3)
+      (hv ▸ holds_mem hA.2.2.2.2 (List.mem_map.mpr ⟨2058, by table_decide, rfl⟩))
+      (by simp only [tmem, stOf, kOf] at hk ⊢; omega) rfl (by decide)
+      (show ∀ r ∈ Flow.live Flow.tmemLoad_7, r ∉ ldRegs true 3 by decide +kernel)
+      hframe (fun xs _ p hp => ?_) hf
+    have hp' : p < 32 := by simpa [ldRegs] using hp
+    interval_cases p <;>
+      simp only [valueOf, ctrlValues, floatValues, PTX.Flow.lookupLit, Option.getD_some, ldRegs,
+        loadW] <;> rfl
+
+end
+end PTX.Kernels.FlashAttn4Fwd.Proof.Softmax

@@ -1,0 +1,243 @@
+{
+ "kernel": "tma_copy",
+ "instructions": 18,
+ "sites": [
+  {
+   "name": "mbarInit_0",
+   "pc": 9,
+   "opcode": "mbarrier.init.shared::cta.b64",
+   "operands": [
+    "[%r2]",
+    "1"
+   ],
+   "guard": null,
+   "live": [
+    "%r2",
+    "%r3",
+    "%rd3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "fenceProxy_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "fenceProxy_0",
+   "pc": 10,
+   "opcode": "fence.proxy.async.shared::cta",
+   "operands": [],
+   "guard": null,
+   "live": [
+    "%r2",
+    "%r3",
+    "%rd3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "mbarArrive_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "mbarArrive_0",
+   "pc": 11,
+   "opcode": "mbarrier.arrive.expect_tx.shared::cta.b64",
+   "operands": [
+    "_",
+    "[%r2]",
+    "16"
+   ],
+   "guard": null,
+   "live": [
+    "%r2",
+    "%r3",
+    "%rd3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "bulkCopy_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "bulkCopy_0",
+   "pc": 12,
+   "opcode": "cp.async.bulk.shared::cta.global.mbarrier::complete_tx::bytes",
+   "operands": [
+    "[%r3]",
+    "[%rd3]",
+    "16",
+    "[%r2]"
+   ],
+   "guard": null,
+   "live": [
+    "%r2",
+    "%r3",
+    "%rd3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "mbarWait_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "mbarWait_0",
+   "pc": 13,
+   "opcode": "mbarrier.try_wait.parity.shared::cta.b64",
+   "operands": [
+    "%p2",
+    "[%r2]",
+    "0"
+   ],
+   "guard": null,
+   "live": [
+    "%r2",
+    "%r3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "load_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p2",
+       true,
+       14
+      ]
+     ],
+     "length": 1,
+     "defs": {}
+    },
+    {
+     "to": "mbarWait_0",
+     "loop": null,
+     "conditions": [
+      [
+       "%p2",
+       false,
+       14
+      ]
+     ],
+     "length": 1,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "load_0",
+   "pc": 15,
+   "opcode": "ld.shared.u32",
+   "operands": [
+    "%r4",
+    "[%r3]"
+   ],
+   "guard": null,
+   "live": [
+    "%r3",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "store_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "store_0",
+   "pc": 16,
+   "opcode": "st.global.u32",
+   "operands": [
+    "[%rd4]",
+    "%r4"
+   ],
+   "guard": null,
+   "live": [
+    "%r4",
+    "%rd4"
+   ],
+   "next": [
+    {
+     "to": "exit_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "exit_0",
+   "pc": 17,
+   "opcode": "ret",
+   "operands": [],
+   "guard": null,
+   "live": [],
+   "next": []
+  }
+ ],
+ "entry": [
+  {
+   "to": "mbarInit_0",
+   "conditions": [
+    [
+     "%p1",
+     false,
+     2
+    ]
+   ],
+   "length": 9,
+   "defs": {
+    "%r1": "mov.u32(%tid.x)",
+    "%p1": "setp.ne.s32(mov.u32(%tid.x),0)",
+    "%rd1": "ld.param.u64([tma_copy_param_0])",
+    "%rd2": "ld.param.u64([tma_copy_param_1])",
+    "%rd3": "cvta.to.global.u64(ld.param.u64([tma_copy_param_0]))",
+    "%rd4": "cvta.to.global.u64(ld.param.u64([tma_copy_param_1]))",
+    "%r2": "mov.u32(bar)",
+    "%r3": "mov.u32(buf)"
+   }
+  },
+  {
+   "to": "exit_0",
+   "conditions": [
+    [
+     "%p1",
+     true,
+     2
+    ]
+   ],
+   "length": 3,
+   "defs": {
+    "%r1": "mov.u32(%tid.x)",
+    "%p1": "setp.ne.s32(mov.u32(%tid.x),0)"
+   }
+  }
+ ]
+}

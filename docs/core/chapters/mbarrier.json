@@ -1,0 +1,48 @@
+{
+  "name": "mbarrier",
+  "title": "mbarrier",
+  "intro": "How the model treats `mbarrier` objects: what each instruction does to an object, which executions are allowed, and what counts as an error. Concepts come first, then the rules.",
+  "concepts_intro": "The definitions a reader needs to follow the rules. Each text is the Lean doc comment, and each entry links to its Lean source.",
+  "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text. Interpretations (EXT) are readings of the PTX text that the model adopts beyond what the text states. The fields that reviewers check against the Lean bodies are collected under Details for reviewers.",
+  "member_filter": {
+    "Kind": ["mbInit", "mbInval", "arrive", "wait", "fenceMbarInit", "bulk"],
+    "Execution": ["tr", "async", "objects"]
+  },
+  "concept_groups": [
+    {"name": "The object and its operations",
+     "intro": "The contents of one mbarrier object and the effect of each operation on it.",
+     "items": ["MBarrier.State", "MBarrier.Action", "MBarrier.Reply", "MBarrier.Error",
+               "MBarrier.limit", "MBarrier.perform"]},
+    {"name": "Events and executions",
+     "intro": "The events that mbarrier instructions produce and the parts of an execution that record them.",
+     "items": ["Kind", "Event", "Execution", "MbarScope"]},
+    {"name": "Object histories",
+     "intro": "The recorded operations of one mbarrier address, their phases and lifetimes.",
+     "items": ["MBarrier.Record", "MBarrier.CheckedLog", "MBarrier.SameLifetime",
+               "MBarrier.UpdateBeforeWait", "MBarrier.InitBefore", "MBarrier.Before"]},
+    {"name": "Observation",
+     "intro": "Which updates a successful wait observes.",
+     "items": ["AsyncCopy.WaitObserves", "AsyncCopy.AsyncObserved", "MbarObserved"]},
+    {"name": "Synchronization and ordering",
+     "intro": "The synchronization that mbarrier operations create and the order constraints on each object.",
+     "items": ["ScopesMeet", "MSync", "CopyReleaseSync", "MbarExec", "AsyncFinished",
+               "ObjectOrder", "ObjectCoherent", "AsyncObjectOrdered"]},
+    {"name": "Initialization and safety",
+     "intro": "When an initialization is published to a use, and which executions are unsafe.",
+     "items": ["InitPublished", "ObjectPublished", "TmaUnsafe"]}
+  ],
+  "groups": [
+    {"name": "What an mbarrier instruction does",
+     "intro": "The event a thread produces for each mbarrier instruction, and how an object changes under each operation.",
+     "items": ["THREAD-TMA", "OBJ-MBAR-STATE"]},
+    {"name": "Which executions are allowed",
+     "intro": "The recorded history of an object and the ordering and synchronization constraints that an execution must satisfy.",
+     "items": ["OBJ-MBAR-PHASES", "OBJ-MBAR-HISTORY", "OBJ-MBAR-ORIGIN", "OBJ-MBAR-OBSERVE",
+               "MEM-MBAR-SYNCHRONIZES", "OBJ-MBAR-INIT-PUBLICATION", "EXT-INIT-FENCE-ARRIVE", "MEM-OBJECT-ORDER-CAUSALITY",
+               "EXT-OBJECT-ORDER", "EXT-ASYNC-OBJECT", "EXT-ENABLES-OBJECT", "MEM-OBSERVED-COMPLETION",
+               "DEP-TC-FENCE"]},
+    {"name": "What counts as an error",
+     "intro": "Executions that are rejected as unsafe because of an mbarrier object.",
+     "items": ["ERR-MBAR-UNINITIALIZED", "ERR-OBJECT-LIFETIME", "ERR-TC-COMMIT-GROUP"]}
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "kernel": "FlashMLA SM100 sparse decode, head64, no split-KV (v41_h64_no_split)",
+  "source": {
+    "repository": "https://github.com/deepseek-ai/FlashMLA",
+    "commit": "395cb3afbb331fef7b1b21e9340861b9436b42d8",
+    "file": "csrc/cuda_kernels/sm100/decode/sparse/head64/instantiations/v41_h64_no_split.cu",
+    "kernel_file": "csrc/cuda_kernels/sm100/decode/sparse/head64/kernel.cuh",
+    "params_file": "csrc/params.h",
+    "license": "MIT",
+    "config": {
+      "model_type": "V41",
+      "extra_model_type": "V41",
+      "enable_split_kv": false
+    }
+  },
+  "toolchain": {
+    "nvcc": "13.2.51",
+    "ptx_version": "9.2",
+    "target": "sm_100a",
+    "flags": [
+      "-ptx",
+      "-gencode arch=compute_100a,code=sm_100a",
+      "-DTORCH_TARGET_VERSION=0x020a000000000000",
+      "-DUSE_CUDA",
+      "-O3",
+      "-std=c++20",
+      "-Wno-deprecated-declarations",
+      "-U__CUDA_NO_HALF_OPERATORS__",
+      "-U__CUDA_NO_HALF_CONVERSIONS__",
+      "-U__CUDA_NO_HALF2_OPERATORS__",
+      "-U__CUDA_NO_BFLOAT16_CONVERSIONS__",
+      "--expt-relaxed-constexpr",
+      "--expt-extended-lambda",
+      "--use_fast_math",
+      "--diag-suppress=445",
+      "-DNDEBUG",
+      "-DFLASH_MLA_IS_BUILD_ON_CUDA"
+    ]
+  },
+  "ptx": {
+    "file": "v41_h64_no_split_plain.ptx",
+    "sha256": "7bc254103f5f5593dce7b94729b715738b7fe2de3550cd18fe1ff82dd841a28d",
+    "instructions": 3612,
+    "lines": 6678
+  },
+  "scope": {
+    "note": "the proof's parameters are symbolic; this field states what the PTX fixes",
+    "fixed_by_ptx": {
+      "h_q": 64,
+      "h_kv": 1,
+      "d_qk": 512,
+      "d_v": 512,
+      "kv_format": "e4m3 values with one ue8m0 scale per 32 dimensions (528 bytes per token)",
+      "block": [384, 1, 1],
+      "cluster": [1, 1, 1],
+      "split_kv": false,
+      "topk_block": 64
+    },
+    "parameters": {
+      "batch": "any positive",
+      "s_q": "any positive",
+      "topk": "any positive multiple of 64",
+      "extra_topk": "0 (cache disabled) or a positive multiple of 64",
+      "no_split_condition": "topk + extra_topk <= 640",
+      "page_block_size": "any positive multiple of 64",
+      "indices": "int32 [b, s_q, topk], entries -1 or a token position in the paged cache",
+      "sink": "optional float [64]",
+      "topk_length": "optional int32 [b]"
+    },
+    "out_of_scope": [
+      "split-KV (enable_split_kv)",
+      "head128 sparse decode",
+      "FP4 extra cache (V41_FP4)",
+      "non-contiguous Q, O and LSE views",
+      "infinite attention sinks"
+    ]
+  },
+  "launch": {
+    "grid": "(s_q, b, 1)",
+    "block": "(384, 1, 1)",
+    "cluster": "(1, 1, 1)",
+    "max_ntid": 384,
+    "min_ctas_per_sm": 1,
+    "max_cluster_rank": 1,
+    "shared_bytes": 223232,
+    "shared_addressed_bytes": 222952
+  },
+  "params": {
+    "param_0": {
+      "type": "SparseAttnDecodeParams",
+      "bytes": 304,
+      "alignment": 8
+    },
+    "param_1": {
+      "type": "TmaParams",
+      "bytes": 1024,
+      "alignment": 128,
+      "tensor_maps": 8,
+      "descriptor_offsets": {
+        "Q": 128,
+        "O": 512,
+        "KV": 768,
+        "extra_KV": 896
+      }
+    }
+  },
+  "status": {
+    "proof": "in progress",
+    "decode": "complete (all 3612 instructions)"
+  }
+}

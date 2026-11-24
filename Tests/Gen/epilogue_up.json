@@ -1,0 +1,34 @@
+{
+  "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
+  "namespace": "PTX.Tests.Gen.EpilogueUp",
+  "output": "Tests/Gen/EpilogueUp.lean",
+  "imports": [
+    "Lemmas.Flow.Arith32"
+  ],
+  "tables": [
+    {
+      "name": "upFirst",
+      "params": "(lane tl u1 u2 u4 u8 u16 : BitVec 64)",
+      "start": 2796,
+      "end": 2816,
+      "known": {
+        "%r141": "lane",
+        "%r6160": "tl",
+        "%r1255": "u1",
+        "%r1258": "u2",
+        "%r1261": "u4",
+        "%r1264": "u8",
+        "%r1267": "u16"
+      }
+    },
+    {
+      "name": "tilesFirst",
+      "params": "(w dn : BitVec 64)",
+      "start": 2785,
+      "end": 2795,
+      "known": {
+        "%r142": "(sub32 dn w)"
+      }
+    }
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "kernel": "Inkling 2 Small Gluon relative-attention decode/verify, full layer, split partials",
+  "source": {
+    "repository": "https://github.com/vllm-project/vllm",
+    "pull_request": 67325,
+    "commit": "d664cd1e96052857aea2aa844eeba571c24758b4",
+    "file": "vllm/models/inkling2/ops/attention.py",
+    "entry": "_rel_verify_kernel",
+    "sha256": "4e8bd9165986b051e0286b5caccbc809dfaa16a34c3e2e5ce9b9a7a0aabd448a",
+    "license": "Apache-2.0",
+    "patch": {
+      "file": "ptx-build/attention-sync.patch",
+      "applied_to_sha256": "4e8bd9165986b051e0286b5caccbc809dfaa16a34c3e2e5ce9b9a7a0aabd448a",
+      "effect": "(1) the softmax warps wait on o_done in every iteration i > 0 (PTX ISA 9.5 §9.7.15.16.5.1); (2) the epilogue waits on o_final before the num_iters branch, so the o_final commit of the MMA warp is observed also when num_iters = 0 (ERR-SHARED-LIFETIME)"
+    },
+    "note": "vLLM d664cd1e96052857aea2aa844eeba571c24758b4 with the two synchronization fixes of ptx-build/attention-sync.patch; sha256 above is the unpatched file."
+  },
+  "model": {
+    "repository": "https://huggingface.co/thinkingmachines/Inkling-2-Small",
+    "revision": "8361e7a31ae7e9966a49a91d3994fde618936c2b",
+    "file": "config.json",
+    "total_heads": 48,
+    "total_kv_heads": 8,
+    "tensor_parallel_size": 4,
+    "heads_per_rank": 12,
+    "kv_heads_per_rank": 2,
+    "gqa_ratio": 6,
+    "head_dim": 128,
+    "dtype": "bfloat16"
+  },
+  "recipe": {
+    "pull_request": "https://github.com/vllm-project/vllm/pull/67319",
+    "commit": "2b0791f01799c42e9caab6f6028e1ceb74f79f90",
+    "file": "recipes/models/thinkingmachines/Inkling-2-Small.yaml",
+    "strategy": "single_node_tp.tp4"
+  },
+  "toolchain": {
+    "python": "3.11.13",
+    "triton": "3.8.0",
+    "numpy": "2.4.6",
+    "ptxas": "CUDA 13.2 V13.2.51, cuda_13.2.r13.2/compiler.37434383_0",
+    "llvm": "LLVM NVPTX Back-End bundled with Triton 3.8.0",
+    "ptxas_path": "/usr/local/cuda/bin/ptxas",
+    "ptxas_selection": "TRITON_PTXAS_BLACKWELL_PATH explicitly set by gen_ptx.py"
+  },
+  "config": {
+    "H": 12,
+    "HKV": 2,
+    "D": 128,
+    "REL": 1024,
+    "REL_PAD": 1280,
+    "PAGE": 64,
+    "IS_LOCAL": false,
+    "BLOCK_M": 64,
+    "BLOCK_N": 128,
+    "FA_BLOCK": 128,
+    "STAGES": 3,
+    "FUSE_GATE": false,
+    "DRAFT": false,
+    "WINDOW": 0
+  },
+  "compilation": {
+    "target": {
+      "backend": "cuda",
+      "arch": 100,
+      "warp_size": 32
+    },
+    "options": {
+      "num_warps": 4,
+      "num_ctas": 1,
+      "launch_pdl": true
+    },
+    "runtime_specialization": {},
+    "note": "Offline GluonASTSource leaves all non-constexpr parameters unspecialized. Unchanged source slices are loaded from /tmp; host dependency imports alone are replaced."
+  },
+  "scope": {
+    "symbolic": [
+      "batch",
+      "num_tokens",
+      "q_start",
+      "q_len",
+      "seqlen_k",
+      "num_splits",
+      "cache blocks",
+      "runtime strides",
+      "softmax_scale"
+    ],
+    "conditions": [
+      "num_splits > 1 (FUSE_GATE=False)",
+      "0 <= q_len <= 10; rows 60..63 are padding",
+      "full-attention layer; local/window and draft specializations are separate PTX programs"
+    ],
+    "stored_result": "OPart is normalized per-split weighted value vector; LsePart is log2 of per-split softmax normalizer. Online m,l,O accumulator is internal; combine is outside scope.",
+    "pdl": "Both griddepcontrol.wait and griddepcontrol.launch_dependents retained."
+  },
+  "launch": {
+    "grid": [
+      "num_splits",
+      2,
+      "batch"
+    ],
+    "block": [
+      256,
+      1,
+      1
+    ],
+    "cluster": [
+      1,
+      1,
+      1
+    ],
+    "num_warps_requested": 4,
+    "num_warps_compiled": 8,
+    "warp_specialization": "4 default softmax warps plus load/MMA partitions rounded to 8 total warps",
+    "shared_bytes": 213340,
+    "tmem_columns": 512,
+    "launch_pdl": true
+  },
+  "tensor_maps": [
+    {
+      "argument": "kv_desc",
+      "rank": 2,
+      "dtype": "bfloat16",
+      "element_bytes": 2,
+      "global_dimensions": [
+        "num_blocks * 64",
+        512
+      ],
+      "element_strides": [
+        512,
+        1
+      ],
+      "byte_strides": [
+        1024,
+        2
+      ],
+      "source_block_shape": [
+        64,
+        128
+      ],
+      "ptx_coordinate_order": "column, row",
+      "box_dimensions_ptx_order": [
+        64,
+        64
+      ],
+      "element_strides_tma": [
+        1,
+        1
+      ],
+      "interleave": "none",
+      "swizzle_bytes": 128,
+      "oob_fill": "zero",
+      "round_f32_to_tf32": false,
+      "base_alignment_bytes": 16,
+      "descriptor_parameter_alignment_bytes": 64,
+      "descriptor_parameter_bytes": 128,
+      "page_rows": 64,
+      "head_rows": 0,
+      "head_cols": 256,
+      "v_column_offset": 128,
+      "compiler_tensordesc_meta": {
+        "swizzle": 3,
+        "elem_size": 2,
+        "elem_type": 10,
+        "block_size": [
+          64,
+          64
+        ],
+        "fp4_padded": false,
+        "is_im2col": false
+      },
+      "note": "Recipe default LBNHC shape/stride; dimensions and scalar offsets remain launch parameters. Each logical [64,128] block is split into two TMA box [64,64] copies.",
+      "tensor_map_global_dimensions_ptx_order": [
+        512,
+        "num_blocks * 64"
+      ],
+      "tensor_map_global_byte_strides": [
+        1024
+      ],
+      "logical_block_tma_copies": 2,
+      "l2_promotion_bytes": 128,
+      "cuda_oob_fill_enum": "CU_TENSOR_MAP_FLOAT_OOB_FILL_NONE",
+      "cuda_element_type": "CU_TENSOR_MAP_DATA_TYPE_BFLOAT16"
+    }
+  ],
+  "ptx": {
+    "file": "rel_verify_sm100a.ptx",
+    "sha256": "85f2300c5126b67afaae007417017e15ed02aec959f6e799396a2d05508ac895",
+    "ptx_version": "9.2",
+    "target": "sm_100a",
+    "entry": "_rel_verify_kernel",
+    "instructions": 2856,
+    "instruction_count_method": "Tools.parse_ptx.parse and Tools.flow_gen.flatten (nested scopes flattened, instruction statements only)",
+    "unchanged": false,
+    "previous": {
+      "sha256": "fa719b76891877aaacc32c4cd33b5ad2a28b8b7521c0083a7ac67b27e017bfdf",
+      "note": "PTX of the unpatched kernel, rebuilt byte for byte by ptx-build with source line limit 1100"
+    },
+    "build": {
+      "tool": "ptx-build/gen_ptx.py through ptx-build/ns_run.sh",
+      "triton": "3.8.0",
+      "ptxas": "CUDA 13.2.51",
+      "source_last_line": 1101,
+      "note": "a build is valid only through ns_run.sh (the debug sections name /tmp/inkling-decode-source); tests/test_ptx_debug_paths.py checks it. The pipeline reproduces the first-fix PTX 7be78764... byte for byte."
+    },
+    "previous2": {
+      "sha256": "7be78764e85d275603e9d59dfbc8725a40906ce2feb00cd511fc8e1407faf5dd",
+      "note": "PTX with only the o_done fix (frozen until this commit)"
+    }
+  },
+  "status": {
+    "proof": "proved (Theorem.lean)",
+    "decode": "complete (all 2856 instructions; div.full.f32 has no Core rule and is read by an assumption; see Coverage.lean)",
+    "hardware_validation": "compile only; no launch"
+  }
+}

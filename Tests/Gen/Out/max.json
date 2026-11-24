@@ -1,0 +1,29 @@
+{
+  "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
+  "namespace": "PTX.Tests.Gen.Max",
+  "output": "Tests/Gen/Out/Max.lean",
+  "imports": [
+    "Kernels.TmlFa4Fwd.Flow.Code",
+    "Tests.Gen.Out.ExpoRules"
+  ],
+  "kernel": "PTX.Kernels.TmlFa4Fwd.Decoded.kernel",
+  "code": "PTX.Kernels.TmlFa4Fwd.Flow",
+  "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
+  "runs": [
+    {
+      "name": "bmax",
+      "start": 5536,
+      "end": 5666,
+      "cut": 32,
+      "outputs": [
+        "%r3500"
+      ],
+      "segfree": "PTX.Tests.Gen.ExpoRules.segFree {pc} rfl",
+      "rules": {
+        "max2": "PTX.Tests.Gen.ExpoRules.rule_max2 {pc} rfl",
+        "max3": "PTX.Tests.Gen.ExpoRules.rule_max3 {pc} rfl",
+        "unpack": "PTX.Tests.Gen.ExpoRules.rule_unpack {pc}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
+  "namespace": "PTX.Tests.Gen.LoaderSetup",
+  "output": "Tests/Gen/LoaderSetup.lean",
+  "imports": [
+    "Lemmas.Flow.Arith32Wide"
+  ],
+  "tables": [
+    {
+      "name": "headDiv",
+      "params": "(head rd2246 : BitVec 64)",
+      "start": 415,
+      "end": 419,
+      "known": {
+        "%r6109": "head",
+        "%rd2246": "rd2246"
+      }
+    },
+    {
+      "name": "setupRest",
+      "params": "(head r748 ukw r741 r25 r21 r22 rd9 ptb pts kb ks vb vs w259 : BitVec 64) (p106 : Bool)",
+      "start": 423,
+      "end": 485,
+      "known": {
+        "%r6109": "head",
+        "%r748": "r748",
+        "%r26": "ukw",
+        "%r741": "r741",
+        "%r25": "r25",
+        "%r21": "r21",
+        "%r22": "r22",
+        "%rd9": "rd9",
+        "%rd216": "ptb",
+        "%rd217": "pts",
+        "%rd204": "kb",
+        "%rd206": "ks",
+        "%rd208": "vb",
+        "%rd210": "vs",
+        "%rs259": "w259",
+        "%p106": "p106"
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
+  "namespace": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen",
+  "output": "Kernels/TmlFa4Fwd/Proof2/Softmax/Gen/Rsum1.lean",
+  "imports": [
+    "Kernels.TmlFa4Fwd.Flow.Code",
+    "Kernels.TmlFa4Fwd.Proof2.Softmax.GenRules"
+  ],
+  "kernel": "PTX.Kernels.TmlFa4Fwd.Decoded.kernel",
+  "code": "PTX.Kernels.TmlFa4Fwd.Flow",
+  "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
+  "runs": [
+    {
+      "segfree": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.segFree {pc} rfl",
+      "rules": {
+        "mul": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_mul {pc} rfl",
+        "add": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_add {pc} rfl",
+        "sub": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_sub {pc} rfl",
+        "fma2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_fma2 {pc} rfl",
+        "add2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_add2 {pc} rfl",
+        "ex2": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_ex2 {pc} rfl",
+        "pack": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_pack {pc}",
+        "unpack": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_unpack {pc}",
+        "mov": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_mov {pc}",
+        "fn": "PTX.Kernels.TmlFa4Fwd.Proof2.Softmax.Gen.rule_cvt {pc} rfl rfl"
+      },
+      "name": "rsum1",
+      "start": 4877,
+      "end": 5006,
+      "cut": 32,
+      "outputs": [
+        "%r6197"
+      ]
+    }
+  ]
+}

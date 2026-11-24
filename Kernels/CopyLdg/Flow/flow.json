@@ -1,0 +1,111 @@
+{
+ "kernel": "copy_ldg",
+ "instructions": 16,
+ "sites": [
+  {
+   "name": "load_0",
+   "pc": 12,
+   "opcode": "ld.global.nc.f32",
+   "operands": [
+    "%r6",
+    "[%rd3]"
+   ],
+   "guard": null,
+   "live": [
+    "%rd3",
+    "%rd4",
+    "%rd5"
+   ],
+   "next": [
+    {
+     "to": "store_0",
+     "loop": null,
+     "conditions": [],
+     "length": 1,
+     "defs": {
+      "%rd6": "add.s64(%rd4,%rd5)"
+     }
+    }
+   ]
+  },
+  {
+   "name": "store_0",
+   "pc": 14,
+   "opcode": "st.global.b32",
+   "operands": [
+    "[%rd6]",
+    "%r6"
+   ],
+   "guard": null,
+   "live": [
+    "%r6",
+    "%rd6"
+   ],
+   "next": [
+    {
+     "to": "exit_0",
+     "loop": null,
+     "conditions": [],
+     "length": 0,
+     "defs": {}
+    }
+   ]
+  },
+  {
+   "name": "exit_0",
+   "pc": 15,
+   "opcode": "ret",
+   "operands": [],
+   "guard": null,
+   "live": [],
+   "next": []
+  }
+ ],
+ "entry": [
+  {
+   "to": "load_0",
+   "conditions": [
+    [
+     "%p1",
+     false,
+     8
+    ]
+   ],
+   "length": 12,
+   "defs": {
+    "%rd1": "ld.param.b64([copy_ldg_param_0])",
+    "%rd2": "ld.param.b64([copy_ldg_param_1])",
+    "%r2": "ld.param.b32([copy_ldg_param_2])",
+    "%r3": "mov.u32(%ctaid.x)",
+    "%r4": "mov.u32(%ntid.x)",
+    "%r5": "mov.u32(%tid.x)",
+    "%r1": "mad.lo.s32(mov.u32(%ctaid.x),mov.u32(%ntid.x),mov.u32(%tid.x))",
+    "%p1": "setp.ge.u32(mad.lo.s32(mov.u32(%ctaid.x),mov.u32(%ntid.x),mov.u32(%tid.x)),ld.param.b32([copy_ldg_param_2]))",
+    "%rd4": "cvta.to.global.u64(ld.param.b64([copy_ldg_param_1]))",
+    "%rd5": "mul.wide.u32(mad.lo.s32(mov.u32(%ctaid.x),mov.u32(%ntid.x),mov.u32(%tid.x)),4)",
+    "%rd3": "add.s64(ld.param.b64([copy_ldg_param_0]),mul.wide.u32(mad.lo.s32(mov.u32(%ctaid.x),mov.u32(%ntid.x),mov.u32(%tid.x)),4))"
+   }
+  },
+  {
+   "to": "exit_0",
+   "conditions": [
+    [
+     "%p1",
+     true,
+     8
+    ]
+   ],
+   "length": 9,
+   "defs": {
+    "%rd1": "ld.param.b64([copy_ldg_param_0])",
+    "%rd2": "ld.param.b64([copy_ldg_param_1])",
+    "%r2": "ld.param.b32([copy_ldg_param_2])",
+    "%r3": "mov.u32(%ctaid.x)",
+    "%r4": "mov.u32(%ntid.x)",
+    "%r5": "mov.u32(%tid.x)",
+    "%r1": "mad.lo.s32(mov.u32(%ctaid.x),mov.u32(%ntid.x),mov.u32(%tid.x))",
+    "%p1": "setp.ge.u32(mad.lo.s32(mov.u32(%ctaid.x),mov.u32(%ntid.x),mov.u32(%tid.x)),ld.param.b32([copy_ldg_param_2]))"
+   }
+  }
+ ]
+}

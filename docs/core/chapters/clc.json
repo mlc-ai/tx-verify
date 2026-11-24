@@ -1,0 +1,59 @@
+{
+ "name": "clc",
+ "title": "Cluster launch control",
+ "intro": "How the model treats `clusterlaunchcontrol`: the arbitration that launches or cancels clusters, the responses to cancellation requests, and their delivery to the CTAs of a cluster. Concepts come first, then the rules.",
+ "concepts_intro": "The definitions a reader needs to follow the rules. Each text is the Lean doc comment, and each entry links to its Lean source.",
+ "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text. Interpretations (EXT) are readings of the PTX text that the model adopts beyond what the text states. The fields that reviewers check against the Lean bodies are collected under Details for reviewers.",
+ "concept_groups": [
+  {
+   "name": "Arbitration",
+   "intro": "Who owns each cluster task and how requests are resolved.",
+   "items": [
+    "Clc.Owner",
+    "Clc.State",
+    "Clc.Step",
+    "Clc.ValidTask",
+    "Clc.ArbitrationOk",
+    "Clc.Result"
+   ]
+  },
+  {
+   "name": "Requests and effects",
+   "intro": "The operands of a request and what it does in each target CTA.",
+   "items": [
+    "Clc.Spec",
+    "Clc.Target",
+    "Clc.Effects",
+    "Clc.ResponseWrite",
+    "Clc.Completion",
+    "ClcCanceled"
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "name": "What a cluster launch control instruction does",
+   "intro": "The events that issue a request and decode its response.",
+   "items": [
+    "THREAD-CLC-QUERY"
+   ]
+  },
+  {
+   "name": "Which executions are allowed",
+   "intro": "The arbitration history, the responses derived from it and the per-CTA effects.",
+   "items": [
+    "OBJ-CLC-OWNERSHIP",
+    "OBJ-CLC-ARBITRATION",
+    "DEP-CLC-EFFECTS",
+    "OBJ-CLC-ORIGIN"
+   ]
+  },
+  {
+   "name": "What counts as an error",
+   "intro": "Cluster launch control uses that are rejected as unsafe.",
+   "items": [
+    "ERR-CLC-REQUEST-AFTER-FAILURE"
+   ]
+  }
+ ]
+}

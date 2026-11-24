@@ -1,0 +1,206 @@
+{
+ "name": "threads",
+ "title": "Threads: state, local steps and events",
+ "intro": "How one thread runs: its local state, the registers and local instructions, the events it emits for every other instruction, and the events and executions that collect them. Concepts come first, then the rules.",
+ "concepts_intro": "The definitions a reader needs to follow the rules. Each text is the Lean doc comment, and each entry links to its Lean source.",
+ "rules_intro": "Each rule is a contract block of the Lean source. Its statement says what the rule means for programs. The source quotes the PTX ISA 9.5 text the rule rests on, and the direction says how the rule relates to that text. Interpretations (EXT) are readings of the PTX text that the model adopts beyond what the text states. The fields that reviewers check against the Lean bodies are collected under Details for reviewers.",
+ "member_filter": {
+  "Kind": [
+   "rd",
+   "nc",
+   "wr",
+   "bar",
+   "shfl",
+   "vote",
+   "elect",
+   "warpBar",
+   "setMaxReg",
+   "exit",
+   "ub"
+  ],
+  "Tmpl": [
+   "read",
+   "readNC",
+   "write",
+   "bar",
+   "shfl",
+   "vote",
+   "elect",
+   "warpBar",
+   "setMaxReg",
+   "exit",
+   "ub"
+  ],
+  "Execution": [
+   "tr",
+   "rf"
+  ]
+ },
+ "concept_groups": [
+  {
+   "name": "Thread state and events",
+   "intro": "The state of one thread and the events it produces.",
+   "items": [
+    "EvId",
+    "TState",
+    "Kind",
+    "Event",
+    "Tmpl",
+    "Execution",
+    "Execution.get",
+    "SameCta",
+    "SameWarp",
+    "SameWarpgroup",
+    "laneOf"
+   ]
+  },
+  {
+   "name": "Running a thread",
+   "intro": "How a thread's instructions become local steps and events.",
+   "items": [
+    "out",
+    "Tau",
+    "EStep",
+    "Run",
+    "Produces",
+    "execLocal",
+    "execLocalRule",
+    "execLocalA",
+    "guardHolds"
+   ]
+  },
+  {
+   "name": "Registers and numeric values",
+   "intro": "Reading and writing registers and interpreting their contents.",
+   "items": [
+    "readReg",
+    "setReg",
+    "next",
+    "sregValue",
+    "readBits",
+    "readValue",
+    "Value.bitPattern",
+    "readFloat",
+    "classify",
+    "FVal.toValue",
+    "execFloat",
+    "FloatInstr.lane",
+    "Layout.round",
+    "execInt",
+    "execMove",
+    "execCvt"
+   ]
+  },
+  {
+   "name": "Addresses, loads and stores",
+   "intro": "Effective addresses and the events of loads and stores.",
+   "items": [
+    "effAddr",
+    "rebuild",
+    "loadTmpl",
+    "storeTmpl",
+    "execCvta",
+    "readSharedAddress",
+    "execSharedAddress",
+    "tensorMapAddress"
+   ]
+  },
+  {
+   "name": "Register adjustment",
+   "intro": "The `setmaxnreg` request, its matching and its legality.",
+   "items": [
+    "SetMaxNReg.tmpl",
+    "SetMaxNReg.Request",
+    "SetMaxNReg.SameRequest",
+    "SetMaxNReg.Unsafe"
+   ]
+  }
+ ],
+ "groups": [
+  {
+   "name": "Thread state and events",
+   "intro": "What a thread's state, its events and an execution contain.",
+   "items": [
+    "THREAD-STATE",
+    "THREAD-INSTANCE-ID",
+    "THREAD-EVENT",
+    "THREAD-TEMPLATE",
+    "MEM-EXECUTION",
+    "MEM-EXECUTION-QUERIES",
+    "PROG-CTA-WARP",
+    "EXT-WARP"
+   ]
+  },
+  {
+   "name": "How a thread runs",
+   "intro": "How a thread executes its instructions and emits events.",
+   "items": [
+    "THREAD-RUN",
+    "THREAD-LOCAL",
+    "THREAD-BRANCH"
+   ]
+  },
+  {
+   "name": "Registers and numeric values",
+   "intro": "Bit patterns, registers, integer and floating operands, and data movement.",
+   "items": [
+    "THREAD-BITS",
+    "EXT-FLOAT-BITS",
+    "THREAD-REG",
+    "THREAD-SREG",
+    "THREAD-INT",
+    "THREAD-NUM",
+    "THREAD-FLOAT",
+    "THREAD-FLOAT-IEEE",
+    "EXT-IEEE754",
+    "THREAD-FLOAT-APPROX",
+    "THREAD-FLOAT-ROUND",
+    "THREAD-MOVE",
+    "THREAD-CVT",
+    "EXT-UE8M0",
+    "EXT-NARROW-FLOAT"
+   ]
+  },
+  {
+   "name": "Addresses and pointers",
+   "intro": "The generic address windows and `cvta`, pointers to kernel parameters, tensor maps and shared memory, and pointer offsets.",
+   "items": [
+    "THREAD-CVTA",
+    "EXT-CVTA",
+    "THREAD-TENSOR-MAP-ADDRESS",
+    "THREAD-TENSORMAP-PREFETCH",
+    "THREAD-POINTER-OFFSET",
+    "THREAD-SHARED-POINTER"
+   ]
+  },
+  {
+   "name": "Loads and stores",
+   "intro": "The address, footprint and value of loads and stores.",
+   "items": [
+    "THREAD-ADDR",
+    "EXT-ADDR-WRAP",
+    "THREAD-ACCESS",
+    "EXT-VECTOR-ELEM",
+    "THREAD-BYTES",
+    "THREAD-ATOMIC",
+    "THREAD-ATOMIC-OP",
+    "THREAD-PREFETCH",
+    "THREAD-CACHE-POLICY",
+    "THREAD-NO-EFFECT",
+    "EXT-GRIDDEP-SINGLE",
+    "THREAD-FENCE"
+   ]
+  },
+  {
+   "name": "Register adjustment",
+   "intro": "The `setmaxnreg` request, how the lanes of a warp match, and when it is unsafe.",
+   "items": [
+    "THREAD-SETMAXNREG",
+    "EXT-SETMAXNREG-VIRTUAL",
+    "EXT-SETMAXNREG-EFFECTIVE",
+    "DEP-SETMAXNREG-RENDEZVOUS",
+    "ERR-SETMAXNREG"
+   ]
+  }
+ ]
+}
