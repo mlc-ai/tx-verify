@@ -1,0 +1,74 @@
+{
+  "device": "NVIDIA GB300",
+  "cases": [
+    {
+      "first_update_logit": 1.52587890625e-05,
+      "small_key": 3.725290298461914e-09,
+      "kernel_output": 1.0078125,
+      "reference_output": 1.015625,
+      "reference_fma_operands": [
+        [
+          "0x00000000",
+          "0x3f800000",
+          "0x3fc00000"
+        ],
+        [
+          "0x3fc00000",
+          "0x3f2caaaa",
+          "0xa3020000"
+        ],
+        [
+          "0x3f818000",
+          "0x3f800000",
+          "0x00000000"
+        ]
+      ]
+    },
+    {
+      "first_update_logit": 0,
+      "small_key": 3.725290298461914e-09,
+      "kernel_output": 1.0078125,
+      "reference_output": 1.015625,
+      "reference_fma_operands": [
+        [
+          "0x00000000",
+          "0x3f800000",
+          "0x3fc00000"
+        ],
+        [
+          "0x3fc00000",
+          "0x3f2caaaa",
+          "0xa3020000"
+        ],
+        [
+          "0x3f818000",
+          "0x3f800000",
+          "0x00000000"
+        ]
+      ]
+    },
+    {
+      "first_update_logit": 1.52587890625e-05,
+      "small_key": 0,
+      "kernel_output": 1.015625,
+      "reference_output": 1.015625,
+      "reference_fma_operands": [
+        [
+          "0x00000000",
+          "0x3f800000",
+          "0x3fc00000"
+        ],
+        [
+          "0x3fc00000",
+          "0x3f2caaaa",
+          "0x00000000"
+        ],
+        [
+          "0x3f818000",
+          "0x3f800000",
+          "0x00000000"
+        ]
+      ]
+    }
+  ]
+}

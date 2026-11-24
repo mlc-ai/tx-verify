@@ -1,0 +1,80 @@
+{
+  "device": "NVIDIA GB300",
+  "fla_commit": "3a9ce1c83a13994d824dbb3421e2989d330bb38b",
+  "cases": [
+    {
+      "token_count": 33,
+      "cumulative_lengths": null,
+      "output_words_as_binary32": {
+        "production": [
+          "0x3e8a0000",
+          "0x3f810000"
+        ],
+        "torch_reference": [
+          "0x3e8a0000",
+          "0x3f820000"
+        ],
+        "fla_reference": [
+          "0xbe9de400",
+          "0x3f818038"
+        ]
+      },
+      "exact_mismatch_indices": [
+        [
+          0,
+          32,
+          0,
+          0
+        ]
+      ],
+      "comparison_threshold": 0.005,
+      "abs_max": 0.577911376953125,
+      "rms_ratio": 1.7998746353670623,
+      "assertion": "output diff: 0.577911 ratio: 1.799875",
+      "reference_comparison": {
+        "abs_max": 0.577911376953125,
+        "rms_ratio": 1.7998746353670623,
+        "assertion": "torch reference diff: 0.577911 ratio: 1.799875"
+      }
+    },
+    {
+      "token_count": 34,
+      "cumulative_lengths": [
+        0,
+        33,
+        34
+      ],
+      "output_words_as_binary32": {
+        "production": [
+          "0x3e8a0000",
+          "0x3f810000"
+        ],
+        "torch_reference": [
+          "0x3e8a0000",
+          "0x3f820000"
+        ],
+        "fla_reference": [
+          "0xbe9de400",
+          "0x3f818038"
+        ]
+      },
+      "exact_mismatch_indices": [
+        [
+          0,
+          32,
+          0,
+          0
+        ]
+      ],
+      "comparison_threshold": 0.006,
+      "abs_max": 0.577911376953125,
+      "rms_ratio": 1.7998745870214314,
+      "assertion": "output diff: 0.577911 ratio: 1.799875",
+      "reference_comparison": {
+        "abs_max": 0.577911376953125,
+        "rms_ratio": 1.7998745870214314,
+        "assertion": "torch reference diff: 0.577911 ratio: 1.799875"
+      }
+    }
+  ]
+}

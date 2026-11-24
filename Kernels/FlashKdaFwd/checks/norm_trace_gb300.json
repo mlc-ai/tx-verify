@@ -1,0 +1,23 @@
+{
+  "squared_norms": [
+    "0x40401000",
+    "0x3f604000"
+  ],
+  "root_arguments": [
+    "0x40401004",
+    "0x3f604011"
+  ],
+  "inverse_norms": [
+    "0x3f13c710",
+    "0x3f88c2e9"
+  ],
+  "dot_accumulators": [
+    "0x3a099800",
+    "0x0"
+  ],
+  "packed_dots": [
+    "0x3a0a"
+  ],
+  "device": "NVIDIA GB300",
+  "output_word": "0x398a"
+}

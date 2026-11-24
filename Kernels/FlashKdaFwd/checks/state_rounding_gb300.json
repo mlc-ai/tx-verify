@@ -1,0 +1,194 @@
+{
+  "device": "NVIDIA GB300",
+  "cases": [
+    {
+      "name": "normal operands",
+      "lengths": [
+        1
+      ],
+      "gate_lower_bound": "-0x1.2696200000000p-1",
+      "first_kernel_state": [
+        "0x3f900001"
+      ],
+      "first_reference_state": [
+        "0x3f900002"
+      ],
+      "differing_state_elements": 1,
+      "differing_output_elements": 0,
+      "last_kernel_output": "0x0000",
+      "last_reference_output": "0x0000",
+      "reference_fma_operands": [
+        [
+          "0x3fc00002",
+          "0x3f400000",
+          "0xa3100000"
+        ]
+      ]
+    },
+    {
+      "name": "packed independent sequences",
+      "lengths": [
+        1,
+        0,
+        1
+      ],
+      "gate_lower_bound": "-0x1.2696200000000p-1",
+      "first_kernel_state": [
+        "0x3f900001",
+        "0x3fc00002",
+        "0x3f900001"
+      ],
+      "first_reference_state": [
+        "0x3f900002",
+        "0x3fc00002",
+        "0x3f900002"
+      ],
+      "differing_state_elements": 2,
+      "differing_output_elements": 0,
+      "last_kernel_output": "0x0000",
+      "last_reference_output": "0x0000",
+      "reference_fma_operands": [
+        [
+          "0x3fc00002",
+          "0x3f400000",
+          "0xa3100000"
+        ],
+        [
+          "0x3fc00002",
+          "0x3f400000",
+          "0xa3100000"
+        ]
+      ]
+    },
+    {
+      "name": "zero correction control",
+      "lengths": [
+        1
+      ],
+      "gate_lower_bound": "-0x1.2696200000000p-1",
+      "first_kernel_state": [
+        "0x3f900002"
+      ],
+      "first_reference_state": [
+        "0x3f900002"
+      ],
+      "differing_state_elements": 0,
+      "differing_output_elements": 0,
+      "last_kernel_output": "0x0000",
+      "last_reference_output": "0x0000",
+      "reference_fma_operands": [
+        [
+          "0x3fc00002",
+          "0x3f400000",
+          "0x00000000"
+        ]
+      ]
+    },
+    {
+      "name": "normal input, subnormal result",
+      "lengths": [
+        1
+      ],
+      "gate_lower_bound": "-0x1.62e42fefa39efp+0",
+      "first_kernel_state": [
+        "0x00000000"
+      ],
+      "first_reference_state": [
+        "0x00400000"
+      ],
+      "differing_state_elements": 1,
+      "differing_output_elements": 0,
+      "last_kernel_output": "0x0000",
+      "last_reference_output": "0x0000",
+      "reference_fma_operands": [
+        [
+          "0x00800000",
+          "0x3f000000",
+          "0x00000000"
+        ]
+      ]
+    },
+    {
+      "name": "normal result control",
+      "lengths": [
+        1
+      ],
+      "gate_lower_bound": "-0x1.62e42fefa39efp+0",
+      "first_kernel_state": [
+        "0x00800000"
+      ],
+      "first_reference_state": [
+        "0x00800000"
+      ],
+      "differing_state_elements": 0,
+      "differing_output_elements": 0,
+      "last_kernel_output": "0x0000",
+      "last_reference_output": "0x0000",
+      "reference_fma_operands": [
+        [
+          "0x01000000",
+          "0x3f000000",
+          "0x00000000"
+        ]
+      ]
+    },
+    {
+      "name": "output after tile boundary",
+      "lengths": [
+        17
+      ],
+      "gate_lower_bound": "-0x1.2696200000000p-1",
+      "first_kernel_state": [
+        "0x3f817fff"
+      ],
+      "first_reference_state": [
+        "0x3f818000"
+      ],
+      "differing_state_elements": 1,
+      "differing_output_elements": 1,
+      "last_kernel_output": "0x3f81",
+      "last_reference_output": "0x3f82",
+      "reference_fma_operands": [
+        [
+          "0x3facaaaa",
+          "0x3f400000",
+          "0xa3020000"
+        ],
+        [
+          "0x3f818000",
+          "0x3f800000",
+          "0x00000000"
+        ]
+      ]
+    },
+    {
+      "name": "tile boundary control",
+      "lengths": [
+        17
+      ],
+      "gate_lower_bound": "-0x1.2696200000000p-1",
+      "first_kernel_state": [
+        "0x3f818000"
+      ],
+      "first_reference_state": [
+        "0x3f818000"
+      ],
+      "differing_state_elements": 0,
+      "differing_output_elements": 0,
+      "last_kernel_output": "0x3f82",
+      "last_reference_output": "0x3f82",
+      "reference_fma_operands": [
+        [
+          "0x3facaaaa",
+          "0x3f400000",
+          "0x00000000"
+        ],
+        [
+          "0x3f818000",
+          "0x3f800000",
+          "0x00000000"
+        ]
+      ]
+    }
+  ]
+}

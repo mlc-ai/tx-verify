@@ -1,2 +1,4 @@
 Kernels/*/DECISIONS.md merge=union
 Lemmas/DECISIONS.md merge=union
+Kernels/FlashKdaFwd/flash_kda_sm100a.ptx linguist-generated=true
+Kernels/FlashKdaFwd/Ptx.lean linguist-generated=true

@@ -1,0 +1,152 @@
+{
+  "device": "NVIDIA GB300",
+  "first_sequence_lengths": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32
+  ],
+  "second_sequence_lengths": {
+    "fixed": "same as first",
+    "packed": 1
+  },
+  "changed_key_channel": 7,
+  "workspace": {
+    "fixed": {
+      "decayed_key_nan_counts_by_row": [
+        0,
+        128,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "next_row_channel_seven_word": "0x7fff"
+    },
+    "packed": {
+      "decayed_key_nan_counts_by_row": [
+        0,
+        128,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "next_row_channel_seven_word": "0x7fff"
+    }
+  },
+  "cases": {
+    "fixed": {
+      "zero": {
+        "default_first_output_word": "0x3f00",
+        "following_key_word": "0x0",
+        "first_output_word": "0x3f00",
+        "nan_output_count": 0,
+        "nan_state_count": 0
+      },
+      "largest_finite": {
+        "default_first_output_word": "0x3f00",
+        "following_key_word": "0x7f7f",
+        "first_output_word": "0x3f00",
+        "nan_output_count": 0,
+        "nan_state_count": 0
+      },
+      "quiet_nan": {
+        "default_first_output_word": "0x7fff",
+        "following_key_word": "0x7fc1",
+        "first_output_word": "0x7fff",
+        "nan_output_count": 128,
+        "nan_state_count": 16384
+      }
+    },
+    "packed": {
+      "zero": {
+        "default_first_output_word": "0x3f00",
+        "following_key_word": "0x0",
+        "first_output_word": "0x3f00",
+        "nan_output_count": 0,
+        "nan_state_count": 0
+      },
+      "largest_finite": {
+        "default_first_output_word": "0x3f00",
+        "following_key_word": "0x7f7f",
+        "first_output_word": "0x3f00",
+        "nan_output_count": 0,
+        "nan_state_count": 0
+      },
+      "quiet_nan": {
+        "default_first_output_word": "0x7fff",
+        "following_key_word": "0x7fc1",
+        "first_output_word": "0x7fff",
+        "nan_output_count": 128,
+        "nan_state_count": 16384
+      }
+    }
+  },
+  "shared": {
+    "fixed": {
+      "key_bytes_checked_at_each_stage": 4096,
+      "next_key_word_before": "0x7fc1",
+      "next_key_word_after": "0x0000",
+      "valid_row_inverse_length": "0x3f7ffff7",
+      "next_row_inverse_length": "0x7fffffff",
+      "first_output_word": "0x7fff"
+    },
+    "packed": {
+      "key_bytes_checked_at_each_stage": 4096,
+      "next_key_word_before": "0x7fc1",
+      "next_key_word_after": "0x0000",
+      "valid_row_inverse_length": "0x3f7ffff7",
+      "next_row_inverse_length": "0x7fffffff",
+      "first_output_word": "0x7fff"
+    }
+  }
+}

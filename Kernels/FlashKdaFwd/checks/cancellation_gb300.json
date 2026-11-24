@@ -1,0 +1,17 @@
+{
+  "device": "NVIDIA GB300",
+  "cases": [
+    {
+      "increment": 0.001953125,
+      "kernel": 0.0,
+      "upstream_reference": 0.0,
+      "real_output_in_float64": 0.001381067586738122
+    },
+    {
+      "increment": 0.0078125,
+      "kernel": 0.005523681640625,
+      "upstream_reference": 0.005523681640625,
+      "real_output_in_float64": 0.005524270346952488
+    }
+  ]
+}
