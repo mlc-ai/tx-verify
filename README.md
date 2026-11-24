@@ -55,19 +55,7 @@ Kernels built from an upstream project record its repository, commit and toolcha
 manifest; no upstream source is vendored. The small kernels are compiled from the `.cu` file next
 to their PTX or are hand-written and checked by `ptxas`.
 
-## FlashKDA forward algorithm and floating-point checks
-
-The [FlashKDA forward proof](Kernels/FlashKdaFwd/README.md) establishes that the 16-token
-block algorithm over real numbers agrees with the token recurrence for every output and the
-final state at any sequence length. It also checks selected compiled instructions and records
-GPU counterexamples on constructed inputs. Safety, progress, termination, and the final memory
-of the complete compiled forward launch remain open.
-
-The [FLA KDA backward verification](Kernels/FlashKdaBwd/README.md) derives the gradients of the
-real forward recurrence and proves they also differentiate FLA's chunk factorization for any
-partition of the sequence. It checks FLA's chunk backward identities and compares eight
-GPU input gradients to a double-precision reference. A one-token case exposes a zero update-logit
-gradient whose real derivative exceeds two.
+See the [FlashKDA packed forward recurrence](Kernels/FlashKdaFwd/README.md) for the selected FP32 state specialization and its current verification status.
 
 ## Layout
 
