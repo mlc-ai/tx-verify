@@ -9,7 +9,12 @@ namespace FlashKda.Packed.ProducerControl
 set_option maxHeartbeats 0
 set_option maxRecDepth 60000
 
-theorem window_48 : window 48 80 = some true := by kernel_rfl
+theorem window_0 : window 0 13 = some true := by
+  unfold window
+  rw [Prologue.sites]
+  rfl
+
+theorem window_13 : window 13 115 = some true := by kernel_rfl
 
 theorem window_128 : window 128 128 = some true := by kernel_rfl
 

@@ -11,10 +11,28 @@ identifies the compiler, source, specialization and file fingerprints. Assemblin
 entry with the upstream assembler flags gives the same 72,064 machine-code bytes in its text
 section as assembling the complete compiler module.
 
-[Sequence.lean](Sequence.lean) proves the real block algorithm agrees with the independent
-token recurrence at every output and the outgoing state for every length. The end-to-end
-theorem for the compiled entry, from launch and initialized memory to the global writes,
-is in progress.
+The real-valued block algorithm agrees with the token recurrence at every output and at the
+outgoing state, for every sequence length. [Algorithm proof](Sequence.lean).
+
+**The compiled entry fails total correctness in TxVerify's execution model.** Consider one
+sequence of one token, one head and one block of 192 threads. The input-copy warp elects a
+leader. Its second thread is a permitted choice. Lean constructs a consistent execution from
+launch through this election and proves that it has no consistent extension in which all
+threads finish. The argument applies even if the output is allowed to have any value. It
+uses a 16-byte offset table starting at modeled address 65536, with every host tensor map's
+data buffer starting above it. The concrete witness has zero token values, zero FP32 initial
+state and a prepared workspace derived from those inputs. Lean verifies its initialized memory,
+all eleven tensor maps, host parameters and valid block launch before applying the theorem.
+[Whole-entry proof](Packed/ElectionResult.lean) ·
+[Concrete witness](Packed/Counterexample.lean).
+
+The election instruction specifies a repeatable choice for the same participating threads.
+It leaves the identity of the winner unspecified. CUTLASS checks for lane zero and the pinned
+build retains the breakpoint instruction. TxVerify treats an executed breakpoint as having
+no continuation under this kernel's rules. These facts delimit the result to the execution
+model. The numerical result on a particular GPU that elects lane zero remains a separate
+question. [NVIDIA election semantics](https://docs.nvidia.com/cuda/parallel-thread-execution/#parallel-synchronization-and-communication-instructions-elect-sync) ·
+[NVIDIA breakpoint semantics](https://docs.nvidia.com/cuda/parallel-thread-execution/#miscellaneous-instructions-brkpt).
 
 ## Reproduction
 
@@ -133,14 +151,14 @@ contract supplies its two offsets, zero and one. If both loads see those initial
 integer instructions compute length one, the later election selects thread 129 again, and a
 normal exit is impossible. The proof derives the registers at both loads from launch.
 
-There is a further consequence when the output and final-state buffers start above the offset
-table. If the whole kernel met the specified correctness contract, some complete execution
-would have to elect thread 129 and contain **two distinct writes to the same input byte**.
-One write would supply a byte different from its launch value to an offset read. Another
-would have to supply the original byte because every permitted final memory must preserve it.
-The [memory proof](Packed/Producer/OffsetFrame.lean) derives both writers from the existing
-contract. The bytes here are the abstract values in TxVerify's memory model. For a launch
-whose tensor maps all start above the offset table, the [transfer proof](Packed/Producer/OffsetTransfers.lean)
-rules out every tensor load and tensor store as a writer of either input offset. Establishing
-whether any other write can supply a changed input byte remains open. The argument does not
-establish that a particular GPU takes the breakpoint.
+To complete an execution after this election, thread 129 would have to read a changed byte
+at instruction 115 or 116. The proof checks every instruction of the entry for possible
+writers. Tensor transfers cannot write the offset table when their buffers lie above it.
+The remaining candidates are ordinary stores after instruction 379. At that instruction
+all six warps of the block take part in their third full-block synchronization on barrier
+zero. The offset reads precede it, and every candidate store follows it. The memory rule
+forbids a read from taking its value from a causally later store. This rules out every
+candidate and proves that the reachable election cannot lead to a complete execution.
+[Classification of writes](Packed/Producer/OffsetWriters.lean) ·
+[Cross-thread ordering](Packed/Producer/BarrierOrdering.lean) ·
+[Whole-entry proof](Packed/ElectionResult.lean).

@@ -19,11 +19,11 @@ theorem reachable {base : Nat → Nat → Nat} {L : Launch} {g : Nat} {t u : TSt
     apply ih
     by_cases guard : special s.pc
     · exact tau_special base tid init guard h
-    · exact tau_ordinary base init guard (fun _ p => certified init.position.1 p) h
+    · exact tau_ordinary base init guard (fun _ p => (certified p).1) h
   | @event s _ _ _ _ h _ ih =>
     by_cases guard : special s.pc
     · exact (no_guard_event base guard h).elim
-    · exact ih (event_ordinary base init guard (fun _ p => certified init.position.1 p) h)
+    · exact ih (event_ordinary base init guard (fun _ p => (certified p).1) h)
 
 theorem elected_suffix (base : Nat → Nat → Nat) (L : Launch) (v : BitVec 64)
     (host : L.params (Prologue.param 15) = some v) (block : L.block = 192)

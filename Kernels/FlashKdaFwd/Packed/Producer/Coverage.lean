@@ -10,7 +10,7 @@ namespace FlashKda.Packed.ProducerControl
 open PTX
 
 private def spans : List (Nat × Nat) :=
-  [(48,80), (128,128), (256,64), (320,1), (321,63), (384,128), (512,128), (640,128),
+  [(0,13), (13,115), (128,128), (256,64), (320,1), (321,63), (384,128), (512,128), (640,128),
    (768,128), (896,128), (1024,128), (1152,128), (1280,128), (1408,3), (1411,1),
    (1412,23), (1435,1), (1436,100), (1536,128), (1664,128), (1792,90), (1882,1),
    (1883,37), (1920,128), (2048,68), (2116,1), (2117,59), (2176,128), (2304,128),
@@ -20,7 +20,7 @@ private def spans : List (Nat × Nat) :=
 
 private theorem verified : spans.all (fun s => window s.1 s.2 == some true) = true := by
   simp only [spans,List.all_cons,List.all_nil,
-    window_48, window_128, window_256, window_320, window_321,
+    window_0, window_13, window_128, window_256, window_320, window_321,
     window_384, window_512, window_640, window_768, window_896,
     window_1024, window_1152, window_1280, window_1408, window_1411,
     window_1412, window_1435, window_1436, window_1536, window_1664,
@@ -31,8 +31,8 @@ private theorem verified : spans.all (fun s => window s.1 s.2 == some true) = tr
     window_3456, window_3584, window_3712, window_3777, window_3778]
   rfl
 
-theorem certified {pc : Nat} {i : Instr} (low : 48 ≤ pc) (atPc : kernel.code[pc]? = some i) :
-    accepts pc i = true := by
+theorem certified {pc : Nat} {i : Instr} (atPc : kernel.code[pc]? = some i) :
+    accepts pc i = true ∧ memorySite pc i.op = true := by
   have high : pc < 3835 := by
     have h := (List.getElem?_eq_some_iff.mp atPc).1
     rwa [code_length] at h
