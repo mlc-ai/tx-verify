@@ -5,17 +5,23 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "Tools"))
-from parse_ptx import parse  # noqa: E402
 
 SYMBOL_SHA256 = "90c7b6ce9ed03f9abd6bf8c5cf58fff0f3898cc966ace698d074e047863f0e17"
 
 
 def select(source: str) -> str:
-    if re.search(r"^\s*\.(?:loc\s|file\s|section\s+\.debug)", source, re.M):
+    from parse_ptx import parse
+
+    code = re.sub(
+        r'"(?:\\.|[^"\\])*"|/\*[\s\S]*?\*/|//[^\n]*',
+        lambda m: m[0] if m[0].startswith('"') else " " + "\n" * m[0].count("\n"),
+        source,
+    )
+    if re.search(r"^\s*\.(?:loc\s|file\s|section\s+\.debug)", code, re.M):
         raise ValueError("Rebuild without -lineinfo or device debug information")
-    sections = re.split(r"(?=^\.visible \.entry )", source, flags=re.M)
+    sections = re.split(r"(?=^\.visible \.entry )", code, flags=re.M)
     header = [
-        line
+        line.rstrip()
         for line in sections[0].splitlines()
         if line.startswith((".version ", ".target ", ".address_size ", ".extern .shared "))
     ]
@@ -26,8 +32,7 @@ def select(source: str) -> str:
             selected.append((name, section))
     if len(selected) != 1:
         raise ValueError(f"Expected one packed FP32 state entry, found {len(selected)}")
-    name, code = selected[0]
-    clean = re.sub(r"/\*[\s\S]*?\*/|//[^\n]*", " ", code)
+    name, clean = selected[0]
     text = "\n".join(header + [line.rstrip() for line in clean.splitlines() if line.strip()]) + "\n"
     original = parse(source)
     result = parse(text)

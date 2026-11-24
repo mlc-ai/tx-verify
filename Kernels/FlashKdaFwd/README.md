@@ -54,7 +54,10 @@ a state element implement the same 32-byte swizzle as the tensor map.
 [The warp matrix proof](Packed/Matrix.lean) follows the operand bytes contributed by all 32
 threads to one 16-by-8 matrix multiply. For arbitrary real inputs in those registers, each
 thread receives its four entries of the product plus the accumulator, including all sixteen
-terms in each dot product. Instruction 2,199 (numbering from zero) uses this operation.
+terms in each dot product. At instruction 2,199 (numbering from zero), the compiler supplies
+the same all-zero 32-bit register for all four accumulators. The
+[register proof](Packed/MatrixRegs.lean) derives the bytes sent by each lane, the real dot
+products returned by a matrix event, and their placement in the four destination registers.
 
 [The workspace contract](Packed/Workspace.lean) specifies the six arrays supplied by the
 preparation kernel, their byte addresses, and the values, logits, sequence offsets and initial
@@ -86,5 +89,19 @@ to bfloat16 preserves its value in the ideal model.
 the global address of each output byte. Distinct live sequence, head, token, feature and byte
 coordinates have distinct addresses. [The partial-tile stores](Packed/Tail.lean) write eight
 consecutive bfloat16 values, two bytes each, at the corresponding addresses. These theorems
-describe where a supplied value is written. The computation producing the value and the
-synchronization that makes it available to the store warp are still proof obligations.
+give the global destination of each store. The [shared load and unpack proof](Packed/PartialOutput.lean)
+follows the four 32-bit words in shared memory through the four register unpacks to the bytes
+of all eight stores. The computation producing those words and their availability to the
+store warp still need a proof.
+
+When FlashKDA sets up the input copy, it elects one leader from a 32-thread warp. The pipeline
+checks that an elected producer has lane number zero. The fixed PTX retains this check with
+source-line information disabled. Lean verifies the election instruction, the lane-number
+test and the branch to a breakpoint. For example, thread 129 has lane number one. If it
+arrives at the test as the elected producer, the test fails. A complete execution reaching
+the breakpoint has yet to be established. NVIDIA specifies a deterministic choice for each
+member mask and leaves the chosen lane unspecified.
+[Local proof](Packed/Election.lean) ·
+[FlashKDA producer selection](https://github.com/MoonshotAI/FlashKDA/blob/b8a96a6db49e785ba0ee103e9d87d2588ffcc4f2/csrc/smxx/utils.cuh#L98-L109) ·
+[CUTLASS producer check](https://github.com/NVIDIA/cutlass/blob/5c149f52a436782210263fb2f19b354443a61c6a/include/cutlass/pipeline/sm90_pipeline.hpp#L515-L526) ·
+[PTX election semantics](https://docs.nvidia.com/cuda/parallel-thread-execution/#parallel-synchronization-and-communication-instructions-elect-sync).
