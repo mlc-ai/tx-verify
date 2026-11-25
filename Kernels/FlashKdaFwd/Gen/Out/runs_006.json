@@ -1,0 +1,3151 @@
+{
+  "ptx": "Kernels/FlashKdaFwd/packed_fp32_sm100a.ptx",
+  "namespace": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Run",
+  "output": "Kernels/FlashKdaFwd/Proof/Thread/Run/Part006.lean",
+  "imports": [
+    "Kernels.FlashKdaFwd.Spec",
+    "Kernels.FlashKdaFwd.Flow.Code",
+    "Kernels.FlashKdaFwd.Proof.Thread.PtrRules"
+  ],
+  "kernel": "PTX.Kernels.FlashKdaFwd.kernel",
+  "code": "PTX.Kernels.FlashKdaFwd.Flow",
+  "assumptions": "PTX.Kernels.FlashKdaFwd.Assumptions.all",
+  "runs": [
+    {
+      "name": "r766",
+      "start": 766,
+      "end": 770,
+      "cut": 16,
+      "outputs": [
+        "%rd120"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r771",
+      "start": 771,
+      "end": 775,
+      "cut": 16,
+      "outputs": [
+        "%rd124"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r776",
+      "start": 776,
+      "end": 780,
+      "cut": 16,
+      "outputs": [
+        "%rd128"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r781",
+      "start": 781,
+      "end": 785,
+      "cut": 16,
+      "outputs": [
+        "%rd132"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r786",
+      "start": 786,
+      "end": 790,
+      "cut": 16,
+      "outputs": [
+        "%rd136"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r791",
+      "start": 791,
+      "end": 795,
+      "cut": 16,
+      "outputs": [
+        "%rd140"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r796",
+      "start": 796,
+      "end": 800,
+      "cut": 16,
+      "outputs": [
+        "%rd144"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r801",
+      "start": 801,
+      "end": 805,
+      "cut": 16,
+      "outputs": [
+        "%rd148"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r806",
+      "start": 806,
+      "end": 810,
+      "cut": 16,
+      "outputs": [
+        "%rd152"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r811",
+      "start": 811,
+      "end": 815,
+      "cut": 16,
+      "outputs": [
+        "%rd156"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r816",
+      "start": 816,
+      "end": 820,
+      "cut": 16,
+      "outputs": [
+        "%rd160"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r821",
+      "start": 821,
+      "end": 825,
+      "cut": 16,
+      "outputs": [
+        "%rd164"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r826",
+      "start": 826,
+      "end": 830,
+      "cut": 16,
+      "outputs": [
+        "%rd168"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r831",
+      "start": 831,
+      "end": 835,
+      "cut": 16,
+      "outputs": [
+        "%rd172"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r836",
+      "start": 836,
+      "end": 840,
+      "cut": 16,
+      "outputs": [
+        "%rd176"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r841",
+      "start": 841,
+      "end": 845,
+      "cut": 16,
+      "outputs": [
+        "%rd180"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r846",
+      "start": 846,
+      "end": 850,
+      "cut": 16,
+      "outputs": [
+        "%rd184"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r851",
+      "start": 851,
+      "end": 855,
+      "cut": 16,
+      "outputs": [
+        "%rd188"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r856",
+      "start": 856,
+      "end": 860,
+      "cut": 16,
+      "outputs": [
+        "%rd192"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r861",
+      "start": 861,
+      "end": 865,
+      "cut": 16,
+      "outputs": [
+        "%rd196"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r866",
+      "start": 866,
+      "end": 870,
+      "cut": 16,
+      "outputs": [
+        "%rd200"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r871",
+      "start": 871,
+      "end": 875,
+      "cut": 16,
+      "outputs": [
+        "%rd204"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r876",
+      "start": 876,
+      "end": 880,
+      "cut": 16,
+      "outputs": [
+        "%rd208"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r881",
+      "start": 881,
+      "end": 885,
+      "cut": 16,
+      "outputs": [
+        "%rd212"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r886",
+      "start": 886,
+      "end": 890,
+      "cut": 16,
+      "outputs": [
+        "%rd216"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r891",
+      "start": 891,
+      "end": 895,
+      "cut": 16,
+      "outputs": [
+        "%rd220"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r896",
+      "start": 896,
+      "end": 900,
+      "cut": 16,
+      "outputs": [
+        "%rd224"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r901",
+      "start": 901,
+      "end": 905,
+      "cut": 16,
+      "outputs": [
+        "%rd228"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r906",
+      "start": 906,
+      "end": 910,
+      "cut": 16,
+      "outputs": [
+        "%rd232"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r911",
+      "start": 911,
+      "end": 915,
+      "cut": 16,
+      "outputs": [
+        "%rd236"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r916",
+      "start": 916,
+      "end": 920,
+      "cut": 16,
+      "outputs": [
+        "%rd240"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    },
+    {
+      "name": "r921",
+      "start": 921,
+      "end": 925,
+      "cut": 16,
+      "outputs": [
+        "%rd244"
+      ],
+      "segfree": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.segFree {pc}",
+      "rules": {
+        "mul": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mul {pc}",
+        "sub": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_sub {pc}",
+        "add": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add {pc}",
+        "ex2": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_ex2 {pc}",
+        "mov": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mov {pc}",
+        "unpack32": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.unpack32_piece"
+      },
+      "fn": {
+        "cvt.rn.bf16.f32": {
+          "kind": "narrow",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.narrowE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_narrow {pc}"
+        },
+        "fma.rn.ftz.f32": {
+          "kind": "fma",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.fmaE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_fma {pc}"
+        },
+        "rcp.approx.ftz.f32": {
+          "kind": "rcp",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rcpFE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_rcp {pc}"
+        },
+        "cvt.u32.u16": {
+          "kind": "zext16",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.zext16E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_zext16 {pc}"
+        },
+        "mov.b32#pack": {
+          "kind": "pack32",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.pack32E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_pack32 {pc}"
+        },
+        "mul.ftz.f32#imm": {
+          "kind": "mulK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.mulKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_mulK {pc}"
+        },
+        "add.ftz.f32#imm": {
+          "kind": "addK",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.addKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_addK {pc}"
+        },
+        "shl.b32#imm": {
+          "kind": "shl",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.shlKE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_shl {pc}"
+        },
+        "add.s64#imm": {
+          "kind": "add64K",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64KE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64K {pc}"
+        },
+        "add.s64": {
+          "kind": "add64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.add64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_add64 {pc}"
+        },
+        "shr.u64#imm": {
+          "kind": "swShr",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrOpK",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swShrEK",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swShrK {pc}"
+        },
+        "and.b64#imm": {
+          "kind": "and64",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64Op",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.and64E",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_and64 {pc}"
+        },
+        "xor.b64": {
+          "kind": "swXor",
+          "op": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorOp",
+          "f": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.swXorE",
+          "rule": "PTX.Kernels.FlashKdaFwd.Proof.Thread.Rules.rule_swXor {pc}"
+        }
+      }
+    }
+  ]
+}

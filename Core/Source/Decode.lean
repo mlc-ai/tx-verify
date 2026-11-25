@@ -200,6 +200,27 @@ Effect: The decoder works in two layers: `Isa.Grammar.parse` recognizes it as on
   truncated to the width of the use (§4.5.1: "each integer constant is converted to the appropriate
   size based on the data or instruction type at its use").
 
+### EXT-BRKPT — a reached breakpoint aborts the kernel
+
+Statement: The model reads `brkpt` as `trap`: a thread that executes it performs an event of
+  undefined behaviour, so no execution that reaches a breakpoint is accepted.
+
+Why it is not spec text: The ISA says only that `brkpt` suspends execution. It does not say what a
+  suspended thread does when no debugger is attached, whether it resumes, or what the other threads
+  of the launch observe meanwhile. Compilers emit it behind a guarded branch for a failed debug
+  assertion (CUTLASS `CUTLASS_ASSERT` under `nvcc` without `-DNDEBUG`), where reaching it means the
+  program's own invariant is broken.
+
+Evidence: PTX ISA §9.7.21.1 (brkpt): "Suspends execution" and §9.7.21.4 (trap): "Abort execution and
+  generate an interrupt to the host CPU."
+
+Direction: stricter
+
+Effect: A kernel that contains `brkpt` can be proved only by showing that no consistent execution
+  reaches one (`Correct.safe`). The decoded program holds `Op.trap` at the position of every
+  `brkpt`; the instruction reads no register, so it does not affect DEP-CANONICAL-SPIN. Disclosed by
+  every kernel whose statement names `Op.trap`: FlashMlaSparseDecodeH64.
+
 ### EXT-SHARED — shared memory layout
 
 Statement: The model places each `.shared` variable at the decoder's offset from the shared base, in
@@ -259,7 +280,8 @@ namespace PTX.Decode
 open PTX.Syntax
 
 /-- A control-flow instruction: `bra{.uni}` to a label, `brx.idx{.uni}` through a
-`.branchtargets` table declared before it, `ret`, `exit`, `trap`. `ret.uni` is not decoded. -/
+`.branchtargets` table declared before it, `ret`, `exit`, `trap`, and `brkpt`, which decodes to
+`trap` (EXT-BRKPT). `ret.uni` is not decoded. -/
 def ctlOp (env : Env) (r : Isa.Raw) : M Op := do
   let uni := flag r .uni
   match r.entry with
@@ -277,6 +299,7 @@ def ctlOp (env : Env) (r : Isa.Raw) : M Op := do
   | .ret => if uni then throw "ret.uni is not decoded" else pure .ret
   | .exit => pure .exit
   | .trap => pure .trap
+  | .brkpt => pure .trap
   | _ => throw "not a control-flow instruction"
 
 /-- Decode one instruction: the grammar recognizes it as an instruction entry (`Grammar.parse`),

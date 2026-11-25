@@ -754,6 +754,7 @@ def Entry.cubes : Entry → List (List Nat)
   | .fence_proxy_sem => [[4, 6, 1, 185, 30], [4, 4, 14, 185, 30]]
   | .ret => [[3]]
   | .exit => [[]]
+  | .brkpt => [[]]
   | .trap => [[]]
   | .tcgen05_shift => [[1099511627776, 6, 2]]
 

@@ -51,6 +51,7 @@ All kernels target `sm_100a`.
 | `FlashMlaSparseDecodeH64` | 3,612 | FlashMLA sparse decode, 64 heads, paged FP8 KV cache with top-k indices ([README](Kernels/FlashMlaSparseDecodeH64/README.md)) | 11 |
 | `InklingRelDecode` | 2,856 | Inkling 2 Small relative-attention decode (Gluon), symbolic batch and splits ([README](Kernels/InklingRelDecode/README.md)) | 11 |
 | `TmlFa4Fwd` | 9,206 | tml-fa4 SM100 forward (CuTeDSL), paged KV with relative bias ([README](Kernels/TmlFa4Fwd/README.md)) | 10 |
+| `FlashKdaFwd` | 3,836 | FlashKDA forward recurrence (CUTLASS), packed variable-length batch, FP32 state: warp-level `ldmatrix`/`mma.sync`/`stmatrix`, two TMA pipelines ([README](Kernels/FlashKdaFwd/README.md)) | 6 |
 
 Kernels built from an upstream project record its repository, commit and toolchain in a
 manifest; no upstream source is vendored. The small kernels are compiled from the `.cu` file next

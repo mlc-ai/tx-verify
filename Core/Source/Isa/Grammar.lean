@@ -77,6 +77,7 @@ def candidates : Token → List Entry
   | .bmsk => [.bmsk]
   | .bra => [.bra]
   | .brev => [.brev]
+  | .brkpt => [.brkpt]
   | .brx => [.brx_idx]
   | .clmad => [.clmad]
   | .clusterlaunchcontrol => [.clusterlaunchcontrol_try_cancel,

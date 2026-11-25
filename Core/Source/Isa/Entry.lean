@@ -70,6 +70,7 @@ Source:
 - §9.7.15.4: ".proxykind = { .alias, .async, .async.global, .async.shared::{cta, cluster} };"
 - §9.7.14.6: "ret{.uni};"
 - §9.7.14.7: "Syntax exit;"
+- §9.7.21.1: "Syntax brkpt;"
 - §9.7.21.4: "Syntax trap;"
 - §9.7.18.9.3: "tcgen05.shift.cta_group.down [taddr];"
 - §9.7.18.9.3: ".cta_group = { .cta_group::1, .cta_group::2 }"
@@ -730,6 +731,7 @@ inductive Entry where
   | fence_proxy_sem
   | ret
   | exit
+  | brkpt
   | trap
   | tcgen05_shift
   deriving DecidableEq, Repr, Inhabited
@@ -1252,6 +1254,7 @@ def Entry.mnemonic : Entry → String
   | .fence_proxy_sem => "fence"
   | .ret => "ret"
   | .exit => "exit"
+  | .brkpt => "brkpt"
   | .trap => "trap"
   | .tcgen05_shift => "tcgen05"
 
@@ -1803,6 +1806,7 @@ def Entry.name : Entry → String
   | .fence_proxy_sem => "fence_proxy_sem"
   | .ret => "ret"
   | .exit => "exit"
+  | .brkpt => "brkpt"
   | .trap => "trap"
   | .tcgen05_shift => "tcgen05_shift"
 
@@ -2324,6 +2328,7 @@ def Entry.family : Entry → Family
   | .fence_proxy_sem => .fence
   | .ret => .ctl
   | .exit => .ctl
+  | .brkpt => .ctl
   | .trap => .ctl
   | .tcgen05_shift => .tc
 
@@ -2845,6 +2850,7 @@ def Entry.effect : Entry → Effect
   | .fence_proxy_sem => .event
   | .ret => .ctl
   | .exit => .ctl
+  | .brkpt => .ctl
   | .trap => .ctl
   | .tcgen05_shift => .event
 
@@ -3366,6 +3372,7 @@ def Entry.section : Entry → String
   | .fence_proxy_sem => "9.7.15.4"
   | .ret => "9.7.14.6"
   | .exit => "9.7.14.7"
+  | .brkpt => "9.7.21.1"
   | .trap => "9.7.21.4"
   | .tcgen05_shift => "9.7.18.9.3"
 
@@ -3887,6 +3894,7 @@ def Entry.prefix : Entry → List Token
   | .fence_proxy_sem => []
   | .ret => []
   | .exit => []
+  | .brkpt => []
   | .trap => []
   | .tcgen05_shift => []
 
@@ -5163,6 +5171,7 @@ def Entry.slotSpecs : Entry → List SlotSpec
       ⟨.scope, false, 30⟩]
   | .ret =>     [⟨.uni, true, 2⟩]
   | .exit =>     []
+  | .brkpt =>     []
   | .trap =>     []
   | .tcgen05_shift =>
     [⟨.action, false, 1099511627776⟩, ⟨.cta_group, false, 6⟩, ⟨.shift_dir, false, 2⟩]
@@ -9662,6 +9671,7 @@ def Entry.operands : Entry → List OpGroup
   | .fence_proxy_sem => []
   | .ret => []
   | .exit => []
+  | .brkpt => []
   | .trap => []
   | .tcgen05_shift =>
     [
@@ -9703,6 +9713,8 @@ def Entry.orders : Entry → List (List Nat × List Nat)
       6, 7, 8, 10, 9])]
   | .cp_async_bulk_tensor_g2s_cta => [([0, 1, 2, 3, 4, 5, 6, 7, 9, 8], [0, 1, 2, 3, 4, 5, 6, 7, 9,
       8])]
+  | .ldmatrix => [([0, 1, 3, 4, 2, 5, 6], [0, 1, 4, 2, 3, 5, 6])]
+  | .stmatrix => [([0, 1, 3, 4, 2, 5, 6], [0, 1, 4, 2, 3, 5, 6])]
   | _ => []
 
 /-- The slots of an entry with their optional flags. -/

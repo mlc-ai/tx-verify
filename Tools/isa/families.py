@@ -69,7 +69,8 @@ MNEMONIC_FAMILY = {
         "shfl.sync vote.sync match redux.sync activemask elect.sync".split(),
         "warp",
     ),
-    **dict.fromkeys("bra brx.idx ret exit trap".split(), "ctl"),
+    # `brkpt` is decoded as `trap` (EXT-BRKPT): a proof must exclude a reached breakpoint.
+    **dict.fromkeys("bra brx.idx ret exit trap brkpt".split(), "ctl"),
     **dict.fromkeys(
         "add sub mul mad fma testp copysign rcp sqrt rsqrt sin cos lg2 ex2 tanh".split(), "float"
     ),
@@ -466,6 +467,11 @@ def _orders(e):
     """Alternative slot orders: lists of slot indices in written order."""
     names = [s[0] for s in e["slots"]]
     out = []
+    # CUTLASS writes .num and optional .trans before .m8n8 in both matrix moves.
+    # Keep the same operand checks and pass slot values back in canonical order.
+    if e["name"] in {"ldmatrix", "stmatrix"}:
+        order = ("sync", "aligned", "num", "trans", "shape", "space", "type")
+        out.append([names.index(slot) for slot in order])
     for a, b in SWAPS:
         if a in names and b in names:
             perm = list(range(len(names)))

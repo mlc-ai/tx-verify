@@ -1,0 +1,11 @@
+--- a/csrc/smxx/fwd_kernel2.cuh
++++ b/csrc/smxx/fwd_kernel2.cuh
+@@ -351,6 +351,8 @@
+                     [] __device__ (auto x) { return float(x); });
+             }
+     }
++    // generic-proxy reads of the state buffer -> ordered before the TMA loads that reuse it
++    cutlass::arch::fence_view_async_shared();
+     __syncthreads();  // all initial-state reads finish before pipeline reuse
+ 
+     // --- LOAD warp: issue TMA loads for v, beta, and workspace intermediates
