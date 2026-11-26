@@ -7,7 +7,7 @@ public import Kernels.TmlFa4Fwd.Proof.Common.Roles
 public import Kernels.TmlFa4Fwd.Proof.Epilogue.Machine
 public import Kernels.TmlFa4Fwd.Proof.Epilogue.Export.NoLdSt
 public import Kernels.TmlFa4Fwd.Proof.Epilogue.Shape
-public import Kernels.TmlFa4Fwd.Proof.Lib.TmemAccess
+public import Lemmas.Tmem.AccessClass
 public import Kernels.TmlFa4Fwd.Proof.Loader.Machine
 public import Kernels.TmlFa4Fwd.Proof.Loader.Shape
 public import Kernels.TmlFa4Fwd.Proof.Mma.Machine
@@ -36,7 +36,7 @@ import Lemmas.Kernel.FrameU
 
 @[expose] public section
 
-/-! # Every Tensor Memory access is of the thread's CTA, below column 512 (`Tmem1.AccessInfo`)
+/-! # Every Tensor Memory access is of the thread's CTA, below column 512 (`Tmem.Access.AccessInfo`)
 
 * An MMA's cells (`mma_access`): every MMA is of group one with the issuer's CTA group
   (`Mma.actualMmaOwnership`), which is the issuer's CTA alone (`Mma.singleCtaGroup`), so every
@@ -77,7 +77,7 @@ theorem aCell_col {s : TcMma.OperandSpec} {index : Nat} {c : TcMma.Cell} {b : Na
 /-- **An MMA's Tensor Memory cells** are in the issuer's CTA, below column 512. -/
 theorem mma_access (hp : Pre p L m) (hX : Consistent L kernel Assumptions.all m X) {e : EvId}
     {cell : TcMma.Cell} (h : X.MmaAccess e cell) :
-    e.1 < L.threads ∧ cell.cta = e.1 / L.block ∧ cell.column < 512 ∧ Tmem1.IsMma X e := by
+    e.1 < L.threads ∧ cell.cta = e.1 / L.block ∧ cell.column < 512 ∧ Tmem.Access.IsMma X e := by
   have key : ∀ {d s acc mask}, X.MmaIssue e d s acc mask →
       e.1 < L.threads ∧ s.lowCta = e.1 / L.block ∧ s.highCta = e.1 / L.block := by
     intro d s acc mask hi
@@ -222,7 +222,7 @@ theorem no_shift (hX : Consistent L kernel Assumptions.all m X) {i : EvId} {s : 
 below column 512, and no copy or shift is issued.** -/
 theorem tmem_info (hp : Pre p L m) (hX : Consistent L kernel Assumptions.all m X)
     (hFw : Follow p L X) :
-    Tmem1.AccessInfo L X := by
+    Tmem.Access.AccessInfo L X := by
   refine ⟨fun {e cell} h => ?_, noCp_of_consistent kernel_noTcCp hX,
     fun i s => no_shift hX⟩
   obtain ⟨g, k⟩ := e

@@ -16,7 +16,7 @@ theorem fold_states {p L m} (hp : Pre p L m) (g n : Nat) (hn : 0 < n)
       (v (u+1)).mf = finE (maximum p L g (v u) (r u)) ∧
       (v (u+1)).mr = (maximum p L g (v u) (r u)).toReal ∧
       (v (u+1)).rs = sumAfter p L g (v u) (r u)) :
-    Values.Fold n (fun u i => weight p (score p L g (v u) (r u) i))
+    PTX.Numeric.OnlineFold.Fold n (fun u i => weight p (score p L g (v u) (r u) i))
       (fun u => P p L g (v u) (r u)) (fun u => scale p (maximum p L g (v u) (r u)))
       (fun u => factor p (v u) (r u)) (sumAfter p L g (v (n-1)) (r (n-1))) := by
   let M u := maximum p L g (v u) (r u)
@@ -87,7 +87,7 @@ theorem online {p L m} (hp : Pre p L m) (g n : Nat) (hn : 0 < n)
     (bias : Nat → Bool) (input : Nat → V) :
     let v := roundState p L g bias input
     let r := roundAt bias
-    Values.Fold n (fun u i => weight p (score p L g (v u) (r u) i))
+    PTX.Numeric.OnlineFold.Fold n (fun u i => weight p (score p L g (v u) (r u) i))
       (fun u => P p L g (v u) (r u)) (fun u => scale p (maximum p L g (v u) (r u)))
       (fun u => factor p (v u) (r u)) (sumAfter p L g (v (n-1)) (r (n-1))) := by
   apply fold_states hp g n hn _ _ rfl

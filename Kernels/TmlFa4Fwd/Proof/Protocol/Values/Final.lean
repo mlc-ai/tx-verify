@@ -19,6 +19,7 @@ sum is the row's attention (`final_attention`). The row sum and maximum give the
 (`row_lse`). -/
 
 namespace PTX.Kernels.TmlFa4Fwd.Proof.Values
+open PTX.Numeric.OnlineFold
 open PTX PTX.Proof PTX.Flow TcMma Tm
 
 noncomputable section

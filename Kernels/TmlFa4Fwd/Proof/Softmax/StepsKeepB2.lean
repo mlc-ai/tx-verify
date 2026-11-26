@@ -3,7 +3,7 @@ module
 
 public import Kernels.TmlFa4Fwd.Proof.Softmax.StepsKeepB
 import Kernels.TmlFa4Fwd.Flow.Code
-import Kernels.TmlFa4Fwd.Proof.Lib.MulEReal
+import Lemmas.Flow.MulERealBot
 import Kernels.TmlFa4Fwd.Proof.Softmax.Base
 import Kernels.TmlFa4Fwd.Proof.Softmax.Scales
 import Std.Tactic.BVDecide.Normalize.Prop

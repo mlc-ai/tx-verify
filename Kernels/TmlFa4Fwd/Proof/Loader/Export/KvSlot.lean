@@ -3,7 +3,7 @@ module
 
 public import Kernels.TmlFa4Fwd.Proof.Loader.Ref
 public import Kernels.TmlFa4Fwd.Proof.Loader.Shape
-public import Kernels.TmlFa4Fwd.Proof.Lib.LineWord
+public import Lemmas.Flow.Arith32LineWord
 import Kernels.TmlFa4Fwd.Proof.Loader.Export.Parity
 
 @[expose] public section

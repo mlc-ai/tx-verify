@@ -1,0 +1,215 @@
+{
+  "kernel": "TmlFa4Fwd",
+  "root": "Kernels/TmlFa4Fwd/Proof",
+  "namespace": "PTX.Kernels.TmlFa4Fwd.Proof",
+  "old_roots": [],
+  "roles": {
+    "Epilogue": [
+      "Startup"
+    ],
+    "Mma": [
+      "Epilogue",
+      "Startup"
+    ],
+    "Loader": [
+      "LdWarp",
+      "Epilogue",
+      "Startup"
+    ],
+    "LdWarp": [
+      "Loader",
+      "Epilogue",
+      "Startup"
+    ],
+    "Softmax": [
+      "SmWarp",
+      "Epilogue",
+      "Startup"
+    ],
+    "SmWarp": [
+      "Softmax",
+      "Epilogue",
+      "Startup"
+    ],
+    "Correction": [
+      "CorrWarp",
+      "Epilogue",
+      "Startup"
+    ],
+    "CorrWarp": [
+      "Correction",
+      "Epilogue",
+      "Startup"
+    ],
+    "Startup": [
+      "Epilogue",
+      "Mma",
+      "Loader",
+      "LdWarp",
+      "Softmax",
+      "SmWarp",
+      "Correction",
+      "CorrWarp"
+    ]
+  },
+  "common": "Common",
+  "lower": [
+    "Lib"
+  ],
+  "upper": [
+    "Protocol",
+    "Top",
+    "Progress",
+    "Bound"
+  ],
+  "generated": [
+    "Gen"
+  ],
+  "state_names": [
+    "stateAt",
+    "\\.D\\b",
+    "\\bSite\\b",
+    "\\bRef(?!Present\\b)[A-Z]\\w*",
+    "\\bJR\\b"
+  ],
+  "role_invariants": [
+    "\\b(?:JR_eq|RefAll|Ref(?!Present\\b)[A-Z]\\w*|refE|(?:Mma|LdWarp|SmWarp|CorrWarp|Epilogue)\\.Ref)\\b"
+  ],
+  "role_match": [
+    "\\b(?:cases|rcases) (?:i|σ1) with\\b"
+  ],
+  "patterns": [
+    [
+      "hData hN hD hS call lines",
+      [
+        ""
+      ],
+      "hData hN hD hS",
+      false
+    ],
+    [
+      "cases i with",
+      [
+        "Top",
+        "Progress",
+        "Bound"
+      ],
+      "cases i with",
+      false
+    ],
+    [
+      "lane invariant unfolded",
+      [
+        ""
+      ],
+      "unfold JR|\\bJR_eq\\b",
+      false
+    ],
+    [
+      "all_goals simp_all",
+      [
+        ""
+      ],
+      "^\\s*all_goals simp_all\\s*$",
+      false
+    ],
+    [
+      "code lookups per list element",
+      [
+        ""
+      ],
+      "\\.all \\(fun pc => .*code\\[pc\\]\\?",
+      false
+    ],
+    [
+      "role table re-entered",
+      [
+        ""
+      ],
+      "ev_of_ne_ub \\(T := table",
+      false
+    ]
+  ],
+  "top": {
+    "correct": "Top/Correct.lean",
+    "theorem": "correct2",
+    "open": null,
+    "variables": [
+      "{p : Params}",
+      "{l : Launch}",
+      "{m : Mem0}"
+    ],
+    "hypothesis": "(hp : Pre p l m)",
+    "conclusion": "Correct kernel Assumptions.all l m (Post p m)"
+  },
+  "closed": true,
+  "check_limit": 15.0,
+  "ceilings": {
+    "upper imports of role internals": 170,
+    "imports between roles": 0,
+    "upper import all": 1,
+    "upper names of role invariants": 288,
+    "upper case splits on the role": 75,
+    "imports of old roots": 0,
+    "state names in public statements": 1274,
+    "role matches outside Common": 136,
+    "role internals rebuilding upper modules": 18481,
+    "positional projections": 152,
+    "maxHeartbeats raises": 896,
+    "files over 500 lines": 24,
+    "copied proof lines zone A": 832,
+    "copied proof lines zone B": 5002,
+    "hData hN hD hS call lines": 0,
+    "cases i with": 11,
+    "lane invariant unfolded": 46,
+    "all_goals simp_all": 8,
+    "code lookups per list element": 1,
+    "role table re-entered": 0,
+    "handwritten lines": 174512,
+    "handwritten lines Bound": 370,
+    "handwritten lines Common": 2883,
+    "handwritten lines CorrWarp": 2569,
+    "handwritten lines .": 32,
+    "handwritten lines Correction": 22830,
+    "handwritten lines Epilogue": 7910,
+    "handwritten lines LdWarp": 9909,
+    "handwritten lines Lib": 5009,
+    "handwritten lines Loader": 17848,
+    "handwritten lines Mma": 17314,
+    "handwritten lines Progress": 1261,
+    "handwritten lines Protocol/.": 322,
+    "handwritten lines Protocol/Bar": 2811,
+    "handwritten lines Protocol/Bias": 1726,
+    "handwritten lines Protocol/Block": 511,
+    "handwritten lines Protocol/Corr": 189,
+    "handwritten lines Protocol/Credit": 678,
+    "handwritten lines Protocol/Free": 176,
+    "handwritten lines Protocol/KV": 2470,
+    "handwritten lines Protocol/Ld": 442,
+    "handwritten lines Protocol/Life": 1439,
+    "handwritten lines Protocol/Mbar": 2783,
+    "handwritten lines Protocol/O": 1084,
+    "handwritten lines Protocol/P": 1162,
+    "handwritten lines Protocol/Q": 1157,
+    "handwritten lines Protocol/Ready": 1117,
+    "handwritten lines Protocol/S": 226,
+    "handwritten lines Protocol/Shared": 2504,
+    "handwritten lines Protocol/Soft": 377,
+    "handwritten lines Protocol/Staging": 619,
+    "handwritten lines Protocol/Tmem": 5897,
+    "handwritten lines Protocol/Values": 5640,
+    "handwritten lines SmWarp": 2875,
+    "handwritten lines Softmax": 44525,
+    "handwritten lines Startup": 1307,
+    "handwritten lines Top/.": 1465,
+    "handwritten lines Top/Prog": 2508,
+    "handwritten lines Top/Result": 76,
+    "handwritten lines Top/Safe": 491,
+    "generated files outside Gen": 0,
+    "modules unreachable from the top": 5,
+    "common imports of role internals": 48
+  },
+  "premises": {},
+  "iface": {},
+  "lanes": {}
+}

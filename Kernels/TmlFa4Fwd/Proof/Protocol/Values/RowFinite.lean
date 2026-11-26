@@ -13,6 +13,7 @@ import Kernels.TmlFa4Fwd.Proof.Protocol.Values.StatReadsAll
 
 @[expose] public section
 namespace PTX.Kernels.TmlFa4Fwd.Proof.Values
+open PTX.Numeric.OnlineFold
 open PTX PTX.Proof PTX.Flow TcMma Tm
 
 variable {p : Params} {L : Launch} {m : Mem0} {X : Execution} {g : Nat} {t : Tile}

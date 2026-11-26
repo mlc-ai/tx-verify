@@ -7,8 +7,8 @@ import Kernels.TmlFa4Fwd.Flow.Code.Part054
 import Kernels.TmlFa4Fwd.Flow.Code.Part055
 import Kernels.TmlFa4Fwd.Flow.Code.Part081
 import Kernels.TmlFa4Fwd.Flow.Code.Part082
-import Kernels.TmlFa4Fwd.Proof.Lib.LineWord
-import Kernels.TmlFa4Fwd.Proof.Lib.LoadAt
+import Lemmas.Flow.Arith32LineWord
+import Lemmas.Flow.LoadAt
 import Kernels.TmlFa4Fwd.Proof.Softmax.Align
 
 @[expose] public section

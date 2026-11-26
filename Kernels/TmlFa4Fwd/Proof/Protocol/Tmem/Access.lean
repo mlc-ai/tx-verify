@@ -19,8 +19,8 @@ import Kernels.TmlFa4Fwd.Proof.Protocol.Tmem.Word
 /-! # ERR-TMEM-ACCESS-LIFETIME
 
 `noTmemAccess`: every Tensor Memory access is inside the MMA warp's allocation of its CTA and
-completes before its deallocation (`Tmem1.no_access_unsafe` with warp 12), from the MMA warp's
-three operations on column 0 (`tmem1Facts`), the access facts `Tmem1.AccessInfo` (`tmem_info`:
+completes before its deallocation (`Tmem.Access.no_access_unsafe` with warp 12), from the MMA warp's
+three operations on column 0 (`tmem1Facts`), the access facts `Tmem.Access.AccessInfo` (`tmem_info`:
 every access is a launched thread's MMA, `tcgen05.ld` or `tcgen05.st` of a cell of its CTA below
 column 512, and no `tcgen05.cp` or `shift` is issued), the allocation hand-off
 (`alloc_before`: every access follows lane 0 of warp 12's allocation, through barrier 2's first
@@ -38,7 +38,7 @@ variable {p : Params} {l : Launch} {m : Mem0}
 theorem noTmemAccess (hp : Pre p l m) {X : Execution}
     (hX : Consistent l kernel Assumptions.all m X) (hFw : Follow p l X) :
     ¬ Tmem.Pair.AccessUnsafe l X :=
-  Tmem1.no_access_unsafe hX (tmem1Facts hp hX hFw) (tmem_info hp hX hFw)
+  Tmem.Access.no_access_unsafe hX (tmem1Facts hp hX hFw) (tmem_info hp hX hFw)
     ⟨fun hk => alloc_before hp hX hFw hk,
       fun hd hc => ldst_dealloc hp hX hFw hd hc⟩ (mma_done hp hX hFw)
 

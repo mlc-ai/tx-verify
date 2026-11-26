@@ -1,7 +1,7 @@
 -- SPDX-License-Identifier: Apache-2.0
 module
 
-public import Kernels.TmlFa4Fwd.Proof.Lib.Interval
+public import Lemmas.Flow.Arith32Interval
 public import Kernels.TmlFa4Fwd.Proof.Loader.Ref
 public import Kernels.TmlFa4Fwd.Proof.Loader.Shape
 import Std.Tactic.BVDecide.Normalize.Prop

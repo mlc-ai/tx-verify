@@ -1,0 +1,39 @@
+{
+  "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
+  "namespace": "PTX.Tests.Gen.Core",
+  "output": "Tests/Gen/Out/Core.lean",
+  "imports": [
+    "Kernels.TmlFa4Fwd.Flow.Code",
+    "Tests.Gen.Out.CoreRules"
+  ],
+  "kernel": "PTX.Kernels.TmlFa4Fwd.Decoded.kernel",
+  "code": "PTX.Kernels.TmlFa4Fwd.Flow",
+  "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
+  "decoded": "Kernels/TmlFa4Fwd/Data/Decoded.lean",
+  "runs": [
+    {
+      "name": "ints",
+      "start": 422,
+      "end": 462,
+      "cut": 20,
+      "outputs": [],
+      "segfree": "PTX.Tests.Gen.ExpoRules.segFree {pc} rfl",
+      "rules": {
+        "core": "{lemma} (PTX.Tests.Gen.ExpoRules.segFree {pc} rfl) (PTX.Tests.Gen.CoreRules.noRule{cls} (op := {op}) {pc}) {checks}",
+        "mov": "PTX.Tests.Gen.CoreRules.rule_mov {pc}"
+      }
+    },
+    {
+      "name": "ints2",
+      "start": 912,
+      "end": 932,
+      "cut": 20,
+      "outputs": [],
+      "segfree": "PTX.Tests.Gen.ExpoRules.segFree {pc} rfl",
+      "rules": {
+        "core": "{lemma} (PTX.Tests.Gen.ExpoRules.segFree {pc} rfl) (PTX.Tests.Gen.CoreRules.noRule{cls} (op := {op}) {pc}) {checks}",
+        "mov": "PTX.Tests.Gen.CoreRules.rule_mov {pc}"
+      }
+    }
+  ]
+}

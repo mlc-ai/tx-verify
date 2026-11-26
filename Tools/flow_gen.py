@@ -342,6 +342,7 @@ def flatten(function):
                 "pc": pc,
                 "opcode": s.opcode,
                 "operands": [operand_text(o) for o in ops],
+                "resolved": [resolve_text(operand_text(o), renv) for o in ops],
                 "guard": guard,
                 "event": is_event(s.opcode),
                 "target": target,
@@ -351,6 +352,14 @@ def flatten(function):
             }
         )
     return out
+
+
+def resolve_text(text, regenv):
+    """An operand's text with its register names resolved through the lexical scopes: a name, or
+    the names of a `{a, b}` vector."""
+    if text.startswith("{") and text.endswith("}"):
+        return "{" + ",".join(resolve(n.strip(), regenv) for n in text[1:-1].split(",")) + "}"
+    return resolve(text, regenv)
 
 
 def count_instructions(body) -> int:

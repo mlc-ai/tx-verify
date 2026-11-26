@@ -4,7 +4,7 @@ module
 public import Kernels.TmlFa4Fwd.Proof.Mma.Fits
 import Kernels.TmlFa4Fwd.Flow.Code.Part033
 import Kernels.TmlFa4Fwd.Proof.Epilogue.Reads
-import Kernels.TmlFa4Fwd.Proof.Lib.LoadAl
+import Lemmas.Flow.LoadAl
 import Kernels.TmlFa4Fwd.Proof.Mma.Warp
 import Std.Tactic.BVDecide.Normalize.Prop
 

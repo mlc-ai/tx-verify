@@ -3,7 +3,7 @@ module
 
 public import Kernels.TmlFa4Fwd.Proof.Correction.Export.MemWrite
 import Kernels.TmlFa4Fwd.Flow.Code
-import Kernels.TmlFa4Fwd.Proof.Lib.LoadAt
+import Lemmas.Flow.LoadAt
 
 public import Kernels.TmlFa4Fwd.Proof.Correction.Control.Machine
 

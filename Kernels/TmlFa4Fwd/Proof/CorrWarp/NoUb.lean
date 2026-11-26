@@ -7,7 +7,7 @@ import Kernels.TmlFa4Fwd.Proof.Common.DataStop
 import Kernels.TmlFa4Fwd.Proof.Common.DataSound
 
 public import Kernels.TmlFa4Fwd.Proof.CorrWarp.Warp
-public import Kernels.TmlFa4Fwd.Proof.Lib.WordAlign
+public import Lemmas.Flow.Arith32WordAlign
 import Kernels.TmlFa4Fwd.Assumptions.Transparency
 import Kernels.TmlFa4Fwd.Flow.Code.Part121
 import Kernels.TmlFa4Fwd.Flow.Code.Part122
@@ -34,7 +34,7 @@ import Kernels.TmlFa4Fwd.Proof.Correction.Shapes
 import Kernels.TmlFa4Fwd.Proof.Correction.Steps
 import Kernels.TmlFa4Fwd.Proof.Epilogue.NoUb
 import Kernels.TmlFa4Fwd.Proof.Epilogue.Export.Safe
-import Kernels.TmlFa4Fwd.Proof.Lib.MemAl
+import Lemmas.Flow.MemAl
 import Lemmas.Kernel.NoUbFirstStop
 import Kernels.TmlFa4Fwd.Proof.Lib.SchedBand
 import Lemmas.Flow.UbFree

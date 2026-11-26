@@ -4,7 +4,7 @@ module
 public import Kernels.TmlFa4Fwd.Proof.Softmax.Data
 import Kernels.TmlFa4Fwd.Flow.Code
 import Kernels.TmlFa4Fwd.Assumptions.Transparency
-import Kernels.TmlFa4Fwd.Proof.Lib.MulEReal
+import Lemmas.Flow.MulERealBot
 import Kernels.TmlFa4Fwd.Proof.Softmax.Base
 import Kernels.TmlFa4Fwd.Proof.Softmax.PlainMaxK
 import Kernels.TmlFa4Fwd.Proof.Softmax.Scales

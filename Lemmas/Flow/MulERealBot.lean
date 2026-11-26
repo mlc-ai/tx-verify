@@ -12,11 +12,11 @@ has the infinity on the left): a positive real times `-∞` is `-∞` under the 
 softmax warps' plain rounds multiply the exponent scale (left) by `-∞` (pc 6880) when the row
 maximum before the round is `-∞`; with this fact in context the rule step evaluates. -/
 
-namespace PTX.Kernels.TmlFa4Fwd.Proof
+namespace PTX.Flow
 
 /-- A positive real times `-∞` is `-∞`. -/
 theorem mulEReal_coe_bot_pos {y : ℝ} (hy : 0 < y) :
     Assumption.mulEReal (y : EReal) ⊥ = some ⊥ := by
   simp [Assumption.mulEReal, hy.ne', EReal.coe_mul_bot_of_pos hy]
 
-end PTX.Kernels.TmlFa4Fwd.Proof
+end PTX.Flow

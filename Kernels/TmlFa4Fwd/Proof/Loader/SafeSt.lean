@@ -10,7 +10,7 @@ import Kernels.TmlFa4Fwd.Flow.Code.Part015
 import Kernels.TmlFa4Fwd.Flow.Code.Part019
 import Kernels.TmlFa4Fwd.Flow.Code.Part022
 import Kernels.TmlFa4Fwd.Flow.Code.Part025
-import Kernels.TmlFa4Fwd.Proof.Lib.MemAl
+import Lemmas.Flow.MemAl
 import Kernels.TmlFa4Fwd.Proof.Loader.Shape
 
 @[expose] public section

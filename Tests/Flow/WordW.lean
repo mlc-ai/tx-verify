@@ -6,7 +6,7 @@ public import Lemmas.Flow.Step.ShapeTc
 
 /-! # `w32k_norm`, and the named barrier whose count is the block's size
 
-Promoted from FlashMLA's `Proof2/Lib/Word.lean` (lane L2's G17, with `shape_barSyncN_block` of
+Promoted from FlashMLA's `Proof/Lib/Word.lean` (lane L2's G17, with `shape_barSyncN_block` of
 G8'): `w32k_norm` is `w32_norm` with the forms of `Arith32WordWide` (`and.b32` with `-64`/`-4`,
 `max.s32`, `neg.s32` on small words), and `w32k_close` closes an equation of words by it and then
 by their numbers. Checked on FlashMLA's shapes: a length rounded down to a multiple of 64, a

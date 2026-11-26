@@ -2,7 +2,7 @@
 module
 
 public import Kernels.TmlFa4Fwd.Proof.Epilogue.Position
-public import Kernels.TmlFa4Fwd.Proof.Lib.Interval
+public import Lemmas.Flow.Arith32Interval
 public import Kernels.TmlFa4Fwd.Proof.Mma.Warp
 public import Lemmas.Kernel.Source.WarpColl
 public import Lemmas.Step.WarpShfl

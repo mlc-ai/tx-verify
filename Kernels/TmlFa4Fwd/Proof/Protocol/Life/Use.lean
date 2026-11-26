@@ -42,7 +42,7 @@ variable (hp : Pre p L m) (hX : Consistent L kernel Assumptions.all m X) (hFw : 
 include hp hX hFw
 
 /-- **An MMA's completion precedes an exit of its CTA**, once the CTA exited. -/
-theorem mma_finished {i : EvId} (hi : Tmem1.IsMma X i) (hx : CtaExited L X (i.1 / L.block)) :
+theorem mma_finished {i : EvId} (hi : Tmem.Access.IsMma X i) (hx : CtaExited L X (i.1 / L.block)) :
     SharedFinished L kernel Assumptions.all X (.async i .mmaDone) (i.1 / L.block) := by
   have hb := hp.block
   obtain ⟨d0, s0, acc0, mask0, pc0, he0⟩ := id hi

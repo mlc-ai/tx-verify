@@ -1,13 +1,13 @@
 -- SPDX-License-Identifier: Apache-2.0
 module
 
-public import Kernels.TmlFa4Fwd.Proof.Lib.Interval
+public import Lemmas.Flow.Arith32Interval
 public import Kernels.TmlFa4Fwd.Proof.Softmax.Data
 import Kernels.TmlFa4Fwd.Proof.Softmax.Align
 import Kernels.TmlFa4Fwd.Flow.Code.Part088
 import Kernels.TmlFa4Fwd.Flow.Code.Part107
 import Kernels.TmlFa4Fwd.Flow.Code.Part118
-import Kernels.TmlFa4Fwd.Proof.Lib.StoreAt
+import Lemmas.Flow.StoreAt
 
 @[expose] public section
 

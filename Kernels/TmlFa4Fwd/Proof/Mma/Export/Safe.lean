@@ -15,7 +15,7 @@ import Kernels.TmlFa4Fwd.Flow.Code.Part039
 import Kernels.TmlFa4Fwd.Flow.Code.Part040
 import Kernels.TmlFa4Fwd.Flow.Code.Part041
 import Kernels.TmlFa4Fwd.Flow.Code.Part043
-import Kernels.TmlFa4Fwd.Proof.Lib.LoadAl
+import Lemmas.Flow.LoadAl
 import Kernels.TmlFa4Fwd.Proof.Mma.Shape
 import Lemmas.Flow.LoadShared
 import Lemmas.Flow.TmplOkSync

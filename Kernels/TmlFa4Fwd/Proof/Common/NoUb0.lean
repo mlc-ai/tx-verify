@@ -8,8 +8,8 @@ import Kernels.TmlFa4Fwd.Flow.Code.Part002
 import Kernels.TmlFa4Fwd.Proof.Common.NoUb
 import Kernels.TmlFa4Fwd.Proof.Common.Sound
 import Kernels.TmlFa4Fwd.Proof.Common.SharedSites
-import Kernels.TmlFa4Fwd.Proof.Lib.MemAl
-import Kernels.TmlFa4Fwd.Proof.Lib.WordAlign
+import Lemmas.Flow.MemAl
+import Lemmas.Flow.Arith32WordAlign
 import Lemmas.Flow.TmplOkSync
 
 @[expose] public section

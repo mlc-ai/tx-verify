@@ -46,8 +46,8 @@ theorem tmemLive : TmemLive L X := by
   obtain ⟨hacc, hno_cp, hno_shift⟩ := tmem_info hp hX hFw
   obtain ⟨he, hc, hcol, hk⟩ := hacc ha
   have hto := (tmem1Facts hp hX hFw).toTmem1Ops
-  obtain ⟨⟨pc, grp, a, n, hd⟩, hdc⟩ := Tmem1.release_info hX hto hr hrel
-  have hown := Tmem1.covers_owner hcov
+  obtain ⟨⟨pc, grp, a, n, hd⟩, hdc⟩ := Tmem.Access.release_info hX hto hr hrel
+  have hown := Tmem.Access.covers_owner hcov
   obtain ⟨hlc, -⟩ := Tmem.One.record_info hX hto hr
   have hcell : d.1 / L.block = e.1 / L.block := by rw [hdc, ← hlc, ← hown, hc]
   refine ⟨fun ⟨a', vals, sh, hld⟩ => ?_, fun ⟨a', vals, sh, hst⟩ => ?_, fun hasync => ?_⟩

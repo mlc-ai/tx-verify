@@ -7,7 +7,9 @@
 #   Tools/build.sh Mod.A Mod.B      # lake --wfail build Mod.A Mod.B
 #
 # Environment: TXVERIFY_BUILD_LOG (log path, default .lake/build-logs/<timestamp>.log),
-# TXVERIFY_BUILD_NOWFAIL=1 (plain `lake build`).
+# TXVERIFY_BUILD_NOWFAIL=1 (plain `lake build`), TXVERIFY_BUILD_SLOTS (builds through this script
+# that may run at once on the machine, across worktrees; default 2), TXVERIFY_BUILD_SLOT_DIR
+# (where the slot locks live; default /dev/shm/txverify-build-slots).
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
@@ -42,10 +44,41 @@ if ! flock -n 9; then
   echo "build.sh: waiting for another build to finish" >&2
   flock 9
 fi
+
+# Machine-wide build slots: at most TXVERIFY_BUILD_SLOTS builds started through this script run at
+# once, so that the per-file times of the logs are not a measure of the machine's load. A slot is
+# an exclusive `flock` on one file of a fixed directory, held (fd 8) until this script exits.
+SLOTS="${TXVERIFY_BUILD_SLOTS:-2}"
+SLOT_DIR="${TXVERIFY_BUILD_SLOT_DIR:-/dev/shm/txverify-build-slots}"
+if [[ ! -d "$SLOT_DIR" ]]; then
+  mkdir -p "$SLOT_DIR" && chmod 1777 "$SLOT_DIR" 2>/dev/null || true
+fi
+waited=0
+while :; do
+  for ((i = 0; i < SLOTS; i++)); do
+    exec 8>>"$SLOT_DIR/slot.$i"
+    if flock -n 8; then
+      break 2
+    fi
+    exec 8>&-
+  done
+  if [[ $waited == 0 ]]; then
+    echo "build.sh: waiting for a build slot (all $SLOTS in use, $SLOT_DIR)" >&2
+    waited=1
+  fi
+  sleep 5
+done
+[[ $waited == 1 ]] && echo "build.sh: got build slot $i" >&2
+
+# The SHA-1 of the sources and the 1-minute load average (and cores) at the start and the end go
+# to <log>.hashes.json: Tools/check_times.py takes a time as evidence only from a quiet log of the
+# module's current text.
+python3 Tools/check_times.py --record-start "$LOG" 2>/dev/null || true
 set +e
 run_lake "${FLAGS[@]}" build "$@" >"$LOG" 2>&1
 rc=$?
 set -e
+python3 Tools/check_times.py --record "$LOG" 2>/dev/null || true
 ln -sf "$(basename "$LOG")" .lake/build-logs/latest.log
 tail -n 40 "$LOG"
 echo "build.sh: rc=$rc log=$LOG"

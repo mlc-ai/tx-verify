@@ -6,7 +6,7 @@ public import Kernels.TmlFa4Fwd.Proof.Softmax.Data.Diagonal
 import Kernels.TmlFa4Fwd.Proof.Lib.BiasRounds
 import Kernels.TmlFa4Fwd.Proof.Protocol.Values.TileGeom
 import Lemmas.Flow.Arith32WordW
-import Kernels.TmlFa4Fwd.Proof.Lib.Interval
+import Lemmas.Flow.Arith32Interval
 
 @[expose] public section
 namespace PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Data

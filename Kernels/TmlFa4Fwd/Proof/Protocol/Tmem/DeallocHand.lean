@@ -12,7 +12,7 @@ public import Kernels.TmlFa4Fwd.Proof.SmWarp.Export.Follow
 public import Kernels.TmlFa4Fwd.Proof.Protocol.Bar.AccBar2
 public import Kernels.TmlFa4Fwd.Spec
 public import Lemmas.CtaBarrier.CtaBarrierIdSourceCount
-import Kernels.TmlFa4Fwd.Proof.Lib.BarUpTo
+import Lemmas.Kernel.BarUpTo
 import Kernels.TmlFa4Fwd.Proof.Mma.Warp
 import Kernels.TmlFa4Fwd.Proof.Protocol.Tmem.AllocBefore
 import Kernels.TmlFa4Fwd.Proof.Protocol.Bar.Bar2

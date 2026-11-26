@@ -2,7 +2,7 @@
 module
 
 public import Kernels.TmlFa4Fwd.Proof.SmWarp.Export.Follow
-public import Kernels.TmlFa4Fwd.Proof.Lib.TmemAccess
+public import Lemmas.Tmem.AccessClass
 public import Kernels.TmlFa4Fwd.Proof.Mma.Export.Win
 public import Kernels.TmlFa4Fwd.Proof.Protocol.O.Obj
 import Kernels.TmlFa4Fwd.Proof.Mma.Warp
@@ -152,7 +152,7 @@ theorem mma_issue_state {f pc : Nat} {dd : Nat} {sp : TcMma.OperandSpec} {acc : 
 
 set_option maxHeartbeats 8000000 in
 /-- **A successful final O poll of an MMA's CTA observes the MMA's completion.** -/
-theorem mma_observed {i : EvId} (hi : Tmem1.IsMma X i) {st : Fin 2} {h k pc : Nat}
+theorem mma_observed {i : EvId} (hi : Tmem.Access.IsMma X i) {st : Fin 2} {h k pc : Nat}
     {acq : Bool} {ws : MbarScope}
     (hw : X.get (h, k) = some ⟨pc, .wait (obj L i.1 (oOff st)) 0 true acq ws⟩) :
     AsyncCopy.AsyncObserved X i .mmaDone (h, k) acq ws := by

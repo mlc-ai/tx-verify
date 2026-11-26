@@ -4,13 +4,13 @@ module
 public import Kernels.TmlFa4Fwd.Proof.Common.Inj
 public import Kernels.TmlFa4Fwd.Proof.Lib.WarpIndex
 public import Kernels.TmlFa4Fwd.Proof.Common.Roles
-public import Kernels.TmlFa4Fwd.Proof.Lib.TmemAccess
+public import Lemmas.Tmem.AccessClass
 public import Kernels.TmlFa4Fwd.Proof.SmWarp.Export.Follow
 public import Kernels.TmlFa4Fwd.Proof.Startup.Machine
 public import Kernels.TmlFa4Fwd.Proof.Startup.Shape
 public import Kernels.TmlFa4Fwd.Proof.Top.Table
 public import Lemmas.CtaBarrier.CtaBarrierIdSourceCount
-import Kernels.TmlFa4Fwd.Proof.Lib.BarUpTo
+import Lemmas.Kernel.BarUpTo
 import Kernels.TmlFa4Fwd.Proof.Protocol.Bar.AccBar2
 import Kernels.TmlFa4Fwd.Proof.Protocol.Tmem.AllocPre
 import Kernels.TmlFa4Fwd.Proof.Protocol.Bar.Bar2
@@ -121,7 +121,7 @@ set_option maxHeartbeats 8000000 in
 /-- **Every MMA, load and store follows lane 0 of warp 12's allocation** of its CTA, in
 causality, and that lane has an event after the allocation. -/
 theorem alloc_before {e : EvId} {a : Nat} {vals : List Value} {sh : TcShape}
-    (hk : Tmem1.IsMma X e ∨ X.TLd e a vals sh ∨ X.TSt e a vals sh) :
+    (hk : Tmem.Access.IsMma X e ∨ X.TLd e a vals sh ∨ X.TSt e a vals sh) :
     ∃ j pc grp dst n, X.get ((e.1 / L.block) * L.block + 12 * 32, j) =
         some ⟨pc, .tc (.resource grp dst (.alloc n))⟩ ∧
       j + 1 < (X.tr ((e.1 / L.block) * L.block + 12 * 32)).length ∧
