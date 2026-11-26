@@ -1,7 +1,7 @@
 -- SPDX-License-Identifier: Apache-2.0
 module
 
-public import Kernels.TmlFa4Fwd.Proof.Protocol.Values.Fold
+public import Lemmas.Real.OnlineFold
 public import Kernels.TmlFa4Fwd.Proof.Protocol.Values.PvChain
 public import Kernels.TmlFa4Fwd.Proof.Protocol.Values.Score
 
@@ -18,6 +18,7 @@ row's factor, and a round without one has a factor of at least one), and the rou
 log-sum-exp store is the row's). -/
 
 namespace PTX.Kernels.TmlFa4Fwd.Proof.Values
+open PTX.Numeric.OnlineFold
 open PTX PTX.Proof PTX.Flow TcMma Tm
 
 noncomputable section

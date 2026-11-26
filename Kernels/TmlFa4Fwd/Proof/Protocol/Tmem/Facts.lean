@@ -4,7 +4,7 @@ module
 public import Kernels.TmlFa4Fwd.Proof.Common.Frame
 public import Kernels.TmlFa4Fwd.Proof.Lib.TmemRegion
 public import Core.Tc.TmemStore
-public import Kernels.TmlFa4Fwd.Proof.Lib.TmemAccess
+public import Lemmas.Tmem.AccessClass
 
 @[expose] public section
 
@@ -21,7 +21,7 @@ open PTX PTX.Proof PTX.Flow TcMma
 noncomputable section
 
 /-- An MMA issue. -/
-abbrev IsMma (X : Execution) (i : EvId) : Prop := Tmem1.IsMma X i
+abbrev IsMma (X : Execution) (i : EvId) : Prop := Tmem.Access.IsMma X i
 
 /-- The facts for the score hand-off and the P-full objects. -/
 structure ScoreFacts (L : Launch) (X : Execution) : Prop where

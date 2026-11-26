@@ -3,7 +3,7 @@ module
 
 public import Kernels.TmlFa4Fwd.Proof.Softmax.BiasAddr
 public import Lemmas.Tensor.TensorSwizzle
-import Kernels.TmlFa4Fwd.Proof.Lib.LineWord
+import Lemmas.Flow.Arith32LineWord
 
 @[expose] public section
 namespace PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Data

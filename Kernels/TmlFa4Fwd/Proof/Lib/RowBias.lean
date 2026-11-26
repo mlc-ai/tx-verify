@@ -2,7 +2,7 @@
 module
 
 public import Lemmas.Flow.Arith32Word
-import Kernels.TmlFa4Fwd.Proof.Lib.Interval
+import Lemmas.Flow.Arith32Interval
 import Lemmas.Flow.Arith32WordW
 import Lemmas.Flow.WordBound
 import Std.Tactic.BVDecide.Normalize.BitVec

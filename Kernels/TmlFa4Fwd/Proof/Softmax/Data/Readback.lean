@@ -37,7 +37,7 @@ theorem loaded_fold {p L m} (hp : Pre p L m) (g n : Nat) (hn : 0 < n)
     let v := roundState p L g bias input
     let r := roundAt bias
     let D := rowData p L g n v r
-    Values.Fold n (fun u i => weight p (adjusted p ((v u).score i)
+    PTX.Numeric.OnlineFold.Fold n (fun u i => weight p (adjusted p ((v u).score i)
       (loadedBias p L g (v u) (r u) i))) D.P D.c D.f D.rs ∧
       D.c (n-1) = (2 : ℝ) ^ (-(abiFloat p.scaleLog2Bits * D.rm)) := by
   refine ⟨?_, last_scale _ _ _ _ _ _⟩

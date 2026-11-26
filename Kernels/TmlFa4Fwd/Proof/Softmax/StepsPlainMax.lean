@@ -3,7 +3,7 @@ module
 
 public import Kernels.TmlFa4Fwd.Proof.Common.LdWait
 public import Kernels.TmlFa4Fwd.Assumptions.Transparency
-public import Kernels.TmlFa4Fwd.Proof.Lib.MulEReal
+public import Lemmas.Flow.MulERealBot
 public import Kernels.TmlFa4Fwd.Proof.Softmax.Base
 public import Kernels.TmlFa4Fwd.Proof.Softmax.Data
 public import Kernels.TmlFa4Fwd.Proof.Softmax.PlainMaxK

@@ -13,7 +13,7 @@ Generic (lane-L candidates): a `tcgen05.ld` of shape `.32x32b` whose address reg
 loads at `a`, with or without the implicit wait an assumption adds (`fires_tcLd_at`); the 32-bit
 truncation is a mask (`tb32`), which `bv_decide` handles. -/
 
-namespace PTX.Kernels.TmlFa4Fwd.Proof
+namespace PTX.Flow
 open PTX PTX.Flow PTX.Proof
 
 /-- The 32-bit truncation is the low mask. -/
@@ -81,4 +81,4 @@ theorem fires_tcSt_at {A : List Assumption} {L : Launch} {g : Nat} {t : TState}
     rw [htr] at hk
     exact ⟨hk.1.symm, hk.2.2.symm⟩
 
-end PTX.Kernels.TmlFa4Fwd.Proof
+end PTX.Flow

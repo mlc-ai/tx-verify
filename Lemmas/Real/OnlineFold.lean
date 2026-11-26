@@ -18,7 +18,7 @@ A row's tile-by-tile softmax: the probabilities of tile `u` are the weights `w u
 row sum is the weighted mean (`Fold.mean`). The tiles visit the blocks from the last one
 (`visit_sum`). -/
 
-namespace PTX.Kernels.TmlFa4Fwd.Proof.Values
+namespace PTX.Numeric.OnlineFold
 
 noncomputable section
 
@@ -101,4 +101,4 @@ theorem log_scaled {s m y : ℝ} (hy : 0 < y) :
   ring
 
 end
-end PTX.Kernels.TmlFa4Fwd.Proof.Values
+end PTX.Numeric.OnlineFold

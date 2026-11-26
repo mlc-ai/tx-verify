@@ -1,7 +1,7 @@
 -- SPDX-License-Identifier: Apache-2.0
 module
 
-public import Kernels.TmlFa4Fwd.Proof.Lib.TmemAccess
+public import Lemmas.Tmem.AccessClass
 public import Kernels.TmlFa4Fwd.Proof.Protocol.Bias.Ordered
 public import Kernels.TmlFa4Fwd.Proof.Protocol.Shared.AllocWord
 public import Kernels.TmlFa4Fwd.Proof.Protocol.Shared.ShFrame
@@ -49,7 +49,7 @@ inductive MidAcc (L : Launch) (X : Execution) (l : Loc) : Ref → Acc → Bool �
       (hlo : L.sharedBase + 3072 + 32768 * st ≤ l.addr)
       (hhi : l.addr < L.sharedBase + 3072 + 32768 * st + 32768) :
       MidAcc L X l (.async (g, k) (.mmaRead false idx)) a false
-  | mmaB {g k idx a} (hm : Tmem1.IsMma X (g, k)) (hc : l.cta = g / L.block)
+  | mmaB {g k idx a} (hm : Tmem.Access.IsMma X (g, k)) (hc : l.cta = g / L.block)
       (hlo : L.sharedBase + 68608 ≤ l.addr) :
       MidAcc L X l (.async (g, k) (.mmaRead true idx)) a false
   | st {o kt addr s x y z a} (hi : X.TensorStoreIssue (o, kt) addr s)
@@ -142,7 +142,7 @@ theorem sh_region {r : Ref} {a : Acc} {w : Bool} {l : Loc} (hi : X.Intent r a w)
   | @mmaB g k idx a st u j off t hst h hz ho hloc =>
     obtain rfl := loc_of_one hz hc
     have h3 := Nat.mod_lt t (show 0 < 3 by decide)
-    have hm : Tmem1.IsMma X (g, k) := by
+    have hm : Tmem.Access.IsMma X (g, k) := by
       rcases h with ⟨h, -⟩ | ⟨h, -⟩
       · obtain ⟨pc, _, _, he⟩ := h.issue
         exact ⟨_, _, _, _, pc, he⟩

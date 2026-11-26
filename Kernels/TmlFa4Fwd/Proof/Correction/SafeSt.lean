@@ -2,7 +2,7 @@
 module
 
 public import Kernels.TmlFa4Fwd.Proof.Correction.Machine
-public import Kernels.TmlFa4Fwd.Proof.Lib.WordAlign
+public import Lemmas.Flow.Arith32WordAlign
 import Kernels.TmlFa4Fwd.Flow.Code.Part132
 import Kernels.TmlFa4Fwd.Flow.Code.Part133
 import Kernels.TmlFa4Fwd.Flow.Code.Part134
@@ -13,7 +13,7 @@ import Kernels.TmlFa4Fwd.Flow.Code.Part138
 import Kernels.TmlFa4Fwd.Flow.Code.Part139
 import Kernels.TmlFa4Fwd.Flow.Code.Part140
 import Kernels.TmlFa4Fwd.Flow.Code.Part141
-import Kernels.TmlFa4Fwd.Proof.Lib.MemAl
+import Lemmas.Flow.MemAl
 
 @[expose] public section
 

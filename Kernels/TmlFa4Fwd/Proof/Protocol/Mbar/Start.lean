@@ -9,7 +9,7 @@ import Kernels.TmlFa4Fwd.Flow.Code.Part001
 import Kernels.TmlFa4Fwd.Flow.Code.Part002
 import Kernels.TmlFa4Fwd.Proof.Common.Sound
 import Lemmas.Kernel.FrameU
-import Kernels.TmlFa4Fwd.Proof.Lib.MbarInit
+import Lemmas.Flow.MbarInitReg
 import Lemmas.Kernel.UbLast
 import Std.Tactic.BVDecide.Normalize.Prop
 

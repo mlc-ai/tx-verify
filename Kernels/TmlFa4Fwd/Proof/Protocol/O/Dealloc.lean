@@ -8,14 +8,14 @@ public import Kernels.TmlFa4Fwd.Proof.Common.Roles
 public import Kernels.TmlFa4Fwd.Proof.Correction.Base
 public import Kernels.TmlFa4Fwd.Proof.Correction.Places
 public import Kernels.TmlFa4Fwd.Proof.Epilogue.Ideal
-public import Kernels.TmlFa4Fwd.Proof.Lib.TmemAccess
+public import Lemmas.Tmem.AccessClass
 public import Kernels.TmlFa4Fwd.Proof.Mma.Machine
 public import Kernels.TmlFa4Fwd.Proof.SmWarp.Export.Follow
 public import Kernels.TmlFa4Fwd.Proof.Top.JR
 public import Kernels.TmlFa4Fwd.Spec
 public import Lemmas.CtaBarrier.CtaBarrierIdSourceCount
 import Kernels.TmlFa4Fwd.Proof.Epilogue.Position
-import Kernels.TmlFa4Fwd.Proof.Lib.BarUpTo
+import Lemmas.Kernel.BarUpTo
 import Kernels.TmlFa4Fwd.Proof.Protocol.Bar.Bar2
 import Kernels.TmlFa4Fwd.Proof.Protocol.Bar.Bar2Exit
 import Kernels.TmlFa4Fwd.Proof.Protocol.Bar.Match
@@ -32,7 +32,7 @@ import Std.Tactic.BVDecide.Normalize.Prop
 
 @[expose] public section
 
-/-! # Every MMA is done before the deallocation (`Tmem1.MmaDoneDealloc`)
+/-! # Every MMA is done before the deallocation (`Tmem.Access.MmaDoneDealloc`)
 
 A correction lane of the deallocating CTA arrives at barrier 2's second rendezvous, and its events
 before that arrival precede the deallocation (`dealloc_arrival`). An MMA means the CTA picked a
@@ -181,7 +181,7 @@ set_option maxHeartbeats 8000000 in
 /-- **The observer of an MMA**: a correction lane's poll of its CTA's final commit, before a
 deallocation of its CTA. -/
 theorem mma_observer {i d : EvId} {pc a n : Nat} {grp : CtaGroup} {dst : Option Loc}
-    (hi : Tmem1.IsMma X i) (hd : X.get d = some ⟨pc, .tc (.resource grp dst (.dealloc a n))⟩)
+    (hi : Tmem.Access.IsMma X i) (hd : X.get d = some ⟨pc, .tc (.resource grp dst (.dealloc a n))⟩)
     (hcd : d.1 / L.block = i.1 / L.block) :
     ∃ h k pck l par, h < L.threads ∧ h / L.block = i.1 / L.block ∧
       X.get (h, k) = some ⟨pck, .wait l par true true .cta⟩ ∧
@@ -225,9 +225,9 @@ theorem mma_observer {i d : EvId} {pc a n : Nat} {grp : CtaGroup} {dst : Option 
   have hobs := mma_observed hp hX hFw ⟨dd, sp, accm, mask, pci, hei⟩ hgk
   exact ⟨_, k, pck, _, _, hh, hch, hgk, hobs, Hc k hk⟩
 
-/-- **`Tmem1.MmaDoneDealloc`**: every MMA is done, by its CTA's final commit observed by a
+/-- **`Tmem.Access.MmaDoneDealloc`**: every MMA is done, by its CTA's final commit observed by a
 correction lane's poll, before every deallocation of its CTA. -/
-theorem mma_done : Tmem1.MmaDoneDealloc L X := by
+theorem mma_done : Tmem.Access.MmaDoneDealloc L X := by
   intro i d pc a n grp dst hi hd hcd
   obtain ⟨h, k, pck, l, par, hh, hch, -, hobs, hb⟩ := mma_observer hp hX hFw hi hd hcd
   obtain ⟨_, _, _, _, _, hei⟩ := id hi

@@ -3,9 +3,9 @@ module
 
 public import Kernels.TmlFa4Fwd.Proof.Correction.Machine
 public import Kernels.TmlFa4Fwd.Proof.Correction.SafeSt
-public import Kernels.TmlFa4Fwd.Proof.Lib.Interval
-public import Kernels.TmlFa4Fwd.Proof.Lib.LineWord
-public import Kernels.TmlFa4Fwd.Proof.Lib.StoreAt
+public import Lemmas.Flow.Arith32Interval
+public import Lemmas.Flow.Arith32LineWord
+public import Lemmas.Flow.StoreAt
 import Kernels.TmlFa4Fwd.Flow.Code.Part132
 import Kernels.TmlFa4Fwd.Flow.Code.Part133
 import Kernels.TmlFa4Fwd.Flow.Code.Part134

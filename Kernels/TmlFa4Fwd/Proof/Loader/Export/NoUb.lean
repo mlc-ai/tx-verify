@@ -34,7 +34,7 @@ import Kernels.TmlFa4Fwd.Proof.LdWarp.Mem
 import Kernels.TmlFa4Fwd.Proof.LdWarp.Page
 import Kernels.TmlFa4Fwd.Proof.LdWarp.Src
 import Kernels.TmlFa4Fwd.Proof.LdWarp.Warp
-import Kernels.TmlFa4Fwd.Proof.Lib.MemAl
+import Lemmas.Flow.MemAl
 import Lemmas.Kernel.NoUbFollowedSites
 import Kernels.TmlFa4Fwd.Proof.Loader.Safe
 import Kernels.TmlFa4Fwd.Proof.Loader.SafeRd

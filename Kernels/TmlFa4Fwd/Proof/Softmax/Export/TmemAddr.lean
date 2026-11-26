@@ -11,7 +11,7 @@ import Kernels.TmlFa4Fwd.Flow.Code.Part079
 import Kernels.TmlFa4Fwd.Flow.Code.Part080
 import Kernels.TmlFa4Fwd.Flow.Code.Part104
 import Kernels.TmlFa4Fwd.Flow.Code.Part105
-import Kernels.TmlFa4Fwd.Proof.Lib.TcAddr
+import Lemmas.Flow.TcAddr
 import Lemmas.Flow.ElemAccess
 import Tactics.KernelRfl
 

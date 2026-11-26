@@ -27,7 +27,7 @@ completed allocation of its CTA and completes before every release attempt of th
   the CTA's warp `w`.
 * `no_access_unsafe`. -/
 
-namespace PTX.Kernels.TmlFa4Fwd.Proof.Tmem1
+namespace PTX.Tmem.Access
 open PTX AsyncCopy Tmem.Pair TcMma Tmem.One
 
 noncomputable section
@@ -150,4 +150,4 @@ theorem no_access_unsafe (hX : Consistent L K A mem0 X) (ht : Tmem1Facts L X w)
     · exact (hno_shift _ _ hsh).elim
 
 end
-end PTX.Kernels.TmlFa4Fwd.Proof.Tmem1
+end PTX.Tmem.Access

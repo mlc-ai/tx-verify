@@ -4,8 +4,8 @@ module
 public import Kernels.TmlFa4Fwd.Proof.Softmax.Export.BiasReadAt
 public import Kernels.TmlFa4Fwd.Proof.Softmax.Data.BiasOffset
 import Kernels.TmlFa4Fwd.Proof.Common.Sound
-import Kernels.TmlFa4Fwd.Proof.Lib.LoadAt
-import Kernels.TmlFa4Fwd.Proof.Lib.LineWord
+import Lemmas.Flow.LoadAt
+import Lemmas.Flow.Arith32LineWord
 import Lemmas.Kernel.FrameU
 
 @[expose] public section

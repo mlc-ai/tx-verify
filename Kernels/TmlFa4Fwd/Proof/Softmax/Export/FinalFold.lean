@@ -8,6 +8,7 @@ import Kernels.TmlFa4Fwd.Proof.Softmax.Export.StatSite
 
 @[expose] public section
 namespace PTX.Kernels.TmlFa4Fwd.Proof.Values
+open PTX.Numeric.OnlineFold
 open PTX.Flow Softmax
 
 /-- At the final shared sum write the running fold has covered the tile's blocks. -/

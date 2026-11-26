@@ -5,7 +5,7 @@ public import Kernels.TmlFa4Fwd.Proof.LdWarp.Fits
 import Kernels.TmlFa4Fwd.Flow.Code.Part005
 import Kernels.TmlFa4Fwd.Flow.Code.Part006
 import Kernels.TmlFa4Fwd.Proof.Epilogue.Reads
-import Kernels.TmlFa4Fwd.Proof.Lib.LoadAl
+import Lemmas.Flow.LoadAl
 import Kernels.TmlFa4Fwd.Proof.Lib.SchedBand
 import Std.Tactic.BVDecide.Normalize.Prop
 

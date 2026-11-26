@@ -2,7 +2,7 @@
 module
 
 public import Kernels.TmlFa4Fwd.Assumptions
-public import Kernels.TmlFa4Fwd.Proof.Lib.OutKinds
+public import Lemmas.Flow.OutKinds
 public import Lemmas.Flow.CvtBf
 public import Lemmas.Flow.FloatRead
 public import Lemmas.Flow.MaskedPack

@@ -5,6 +5,7 @@ public import Kernels.TmlFa4Fwd.Proof.Softmax.Export.RowHistory
 
 @[expose] public section
 namespace PTX.Kernels.TmlFa4Fwd.Proof.Values
+open PTX.Numeric.OnlineFold
 open PTX.Flow Softmax
 
 noncomputable section

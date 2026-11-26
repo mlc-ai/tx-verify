@@ -5,7 +5,7 @@ import Lemmas.Kernel.FrameU
 
 public import Kernels.TmlFa4Fwd.Proof.SmWarp.Export.Follow
 public import Kernels.TmlFa4Fwd.Proof.Common.Sound
-public import Kernels.TmlFa4Fwd.Proof.Lib.InitFirst
+public import Lemmas.Protocol.InitFirst
 import Kernels.TmlFa4Fwd.Proof.Softmax.Fragment
 public import Kernels.TmlFa4Fwd.Proof.Protocol.Bar.Count
 public import Kernels.TmlFa4Fwd.Proof.Protocol.Mbar.Init

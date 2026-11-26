@@ -2,7 +2,7 @@
 module
 
 public import Lemmas.Flow.Arith32
-public import Kernels.TmlFa4Fwd.Proof.Lib.Interval
+public import Lemmas.Flow.Arith32Interval
 
 @[expose] public section
 

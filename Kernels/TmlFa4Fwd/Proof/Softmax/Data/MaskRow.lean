@@ -3,7 +3,7 @@ module
 
 public import Kernels.TmlFa4Fwd.Proof.Softmax.Machine
 import Kernels.TmlFa4Fwd.Proof.Softmax.Align
-import Kernels.TmlFa4Fwd.Proof.Lib.TcAddr
+import Lemmas.Flow.TcAddr
 import Lemmas.Flow.Arith32WordW
 import Std.Tactic.BVDecide.Normalize.Prop
 
@@ -24,7 +24,7 @@ private theorem row_bits (x y : BitVec 64) (b : Bool) :
   unfold or32 andi shl add32 sel r32
   rw [e1, e7, e8, w0, w1, w128, w127]
   simp only [show ¬ (1 ≥ 32) by decide, show ¬ (7 ≥ 32) by decide, show ¬ (8 ≥ 32) by decide,
-    ite_false, tb32]
+    ite_false, PTX.Flow.tb32]
   have add_or := fun (a b : BitVec 64) (h : a &&& b = 0#64) => BitVec.add_eq_or_of_and_eq_zero a b h
   have bits : ∀ a b : BitVec 64, (∀ i : Fin 64, a.getLsbD i = b.getLsbD i) → a = b :=
     fun a b h => BitVec.eq_of_getLsbD_eq fun i hi => h ⟨i, hi⟩

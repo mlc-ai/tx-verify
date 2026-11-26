@@ -1,7 +1,7 @@
 -- SPDX-License-Identifier: Apache-2.0
 module
 
-public import Kernels.TmlFa4Fwd.Proof.Lib.TmemAccess
+public import Lemmas.Tmem.AccessClass
 public import Kernels.TmlFa4Fwd.Proof.Protocol.Shared.ShFrame
 public import Core.Memory.CommitOperandOrder
 import Kernels.TmlFa4Fwd.Proof.Correction.Export.FstPoll
@@ -37,7 +37,7 @@ include hp hX hFw
 /-- **The final O poll before a final store** observes every MMA of the CTA. -/
 theorem fst_observes (hw : 8 ≤ Prologue.warpIndex L h) (hw1 : Prologue.warpIndex L h ≤ 11)
     {pc : Nat} {a : Acc} {bs : List Byte} (he : X.get (h, i) = some ⟨pc, .wr a bs⟩)
-    (hs : a.loc.space = .shared) : ∃ j < i, ∀ e : EvId, Tmem1.IsMma X e →
+    (hs : a.loc.space = .shared) : ∃ j < i, ∀ e : EvId, Tmem.Access.IsMma X e →
       e.1 / L.block = h / L.block → po X (h, j) (h, i) ∧
         ∃ ws, AsyncObserved X e .mmaDone (h, j) true ws ∧ ScopesMeet L .cluster e.1 ws h := by
   obtain ⟨st, -, hk, -⟩ := corr_fst hp hX hFw hw hw1 he hs
@@ -56,7 +56,7 @@ theorem fst_observes (hw : 8 ≤ Prologue.warpIndex L h) (hw1 : Prologue.warpInd
 theorem mma_fst (hw : 8 ≤ Prologue.warpIndex L h) (hw1 : Prologue.warpIndex L h ≤ 11)
     {pc : Nat} {a : Acc} {bs : List Byte} (he : X.get (h, i) = some ⟨pc, .wr a bs⟩) {l : Loc}
     (hl : l.space = .shared) (hc : a.Covers l) {isB : Bool} {idx : Nat}
-    (hm : Tmem1.IsMma X (g, k)) (hcta : g / L.block = h / L.block)
+    (hm : Tmem.Access.IsMma X (g, k)) (hcta : g / L.block = h / L.block)
     (hr : AsyncCovers X (g, k) (.mmaRead isB idx) l) :
     modelCausality L X l (.async (g, k) (.mmaRead isB idx)) (.thread (h, i)) := by
   obtain ⟨j, hji, hall⟩ := fst_observes hp hX hFw hw hw1 he (hc.1.symm.trans hl)

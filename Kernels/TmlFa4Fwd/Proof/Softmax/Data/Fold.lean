@@ -2,7 +2,7 @@
 module
 
 public import Kernels.TmlFa4Fwd.Proof.Softmax.Data.Round
-public import Kernels.TmlFa4Fwd.Proof.Protocol.Values.Fold
+public import Lemmas.Real.OnlineFold
 
 @[expose] public section
 namespace PTX.Kernels.TmlFa4Fwd.Proof.Softmax.Data
@@ -29,8 +29,8 @@ theorem fold_of_rounds (p : Params) (n : Nat) (hn : 0 < n) (M : Nat → EReal)
     (hf : ∀ u, u+1 < n → f (u+1) = scale p (M (u+1)) / scale p (M u) ∨
       ∀ v ≤ u, ∀ k < 128, x v k = ⊥)
     (hle : ∀ u < n, f u ≤ 1) :
-    Values.Fold n (fun u k => weight p (x u k)) (fun u k => probability p (M u) (x u k))
-      (scale p ∘ M) f (s (n-1)) := by
+    PTX.Numeric.OnlineFold.Fold n (fun u k => weight p (x u k))
+      (fun u k => probability p (M u) (x u k)) (scale p ∘ M) f (s (n-1)) := by
   have pos (u : Nat) : 0 < scale p (M u) := Real.rpow_pos_of_pos (by norm_num) _
   have mass (u : Nat) : ∑ k ∈ Finset.range 128, (probability p (M u) ∘ x u) k =
       scale p (M u) * ∑ k ∈ Finset.range 128, weight p (x u k) := by

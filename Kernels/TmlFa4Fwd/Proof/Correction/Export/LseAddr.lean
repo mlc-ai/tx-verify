@@ -15,10 +15,10 @@ import Kernels.TmlFa4Fwd.Proof.Correction.Export.FinalStores
 import Kernels.TmlFa4Fwd.Proof.Correction.Export.MemWrite
 import Kernels.TmlFa4Fwd.Proof.Correction.RefCases
 import Kernels.TmlFa4Fwd.Proof.Correction.SafeSt
-import Kernels.TmlFa4Fwd.Proof.Lib.Interval
+import Lemmas.Flow.Arith32Interval
 import Kernels.TmlFa4Fwd.Proof.Lib.OutputFrame
 import Kernels.TmlFa4Fwd.Proof.Lib.RowBias
-import Kernels.TmlFa4Fwd.Proof.Lib.StoreAt
+import Lemmas.Flow.StoreAt
 import Kernels.TmlFa4Fwd.Proof.Startup.Export.Mem
 import Lemmas.Flow.Arith32WordW
 import Lemmas.Flow.UbFree

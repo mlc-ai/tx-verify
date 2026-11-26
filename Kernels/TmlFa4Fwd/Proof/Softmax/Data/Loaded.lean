@@ -62,8 +62,8 @@ theorem last_scale (p L g n v r) :
   simp only [rowData, scale, neg_mul, scl, abiFloat]
 
 private theorem replace_weight {n : Nat} {a b P : Nat → Nat → ℝ} {c f : Nat → ℝ} {s : ℝ}
-    (h : Values.Fold n a P c f s) (eq : ∀ u < n, ∀ i < 128, a u i = b u i) :
-    Values.Fold n b P c f s := by
+    (h : PTX.Numeric.OnlineFold.Fold n a P c f s) (eq : ∀ u < n, ∀ i < 128, a u i = b u i) :
+    PTX.Numeric.OnlineFold.Fold n b P c f s := by
   refine ⟨h.pos, fun u hu i hi => (h.prob u hu i hi).trans (by rw [eq u hu i hi]),
     fun u hu => (h.factor u hu).imp_right (fun z t ht k hk => (eq t (by omega) k hk).symm.trans
       (z t ht k hk)), h.le, ?_⟩
@@ -97,7 +97,8 @@ theorem tile_fold {p L m} (hp : Pre p L m) (g : Nat) (t : Values.Tile) (row : Na
       else none) :
     let v := roundState p L g bias input
     let D := rowData p L g t.n v (roundAt bias)
-    Values.Fold t.n (Values.weightOf p t row (fun u => (v u).score)) D.P D.c D.f D.rs ∧
+    PTX.Numeric.OnlineFold.Fold t.n (Values.weightOf p t row (fun u => (v u).score))
+      D.P D.c D.f D.rs ∧
       D.c (t.n-1) = (2 : ℝ) ^ (-(abiFloat p.scaleLog2Bits * D.rm)) := by
   refine ⟨replace_weight (online hp g t.n hn bias input) ?_, last_scale _ _ _ _ _ _⟩
   intro u hu i hi

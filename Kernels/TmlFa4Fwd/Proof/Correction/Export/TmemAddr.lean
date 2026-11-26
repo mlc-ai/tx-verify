@@ -5,7 +5,7 @@ public import Kernels.TmlFa4Fwd.Proof.Correction.Loads
 public import Kernels.TmlFa4Fwd.Proof.Correction.Machine
 public import Kernels.TmlFa4Fwd.Proof.Correction.Shape
 public import Kernels.TmlFa4Fwd.Proof.Correction.Shapes
-public import Kernels.TmlFa4Fwd.Proof.Lib.TcAddr
+public import Lemmas.Flow.TcAddr
 public import Lemmas.Flow.ElemAccess
 public import Lemmas.Flow.TcLdTmpl
 import Kernels.TmlFa4Fwd.Flow.Code.Part125

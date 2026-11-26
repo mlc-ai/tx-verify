@@ -27,7 +27,7 @@ import Kernels.TmlFa4Fwd.Flow.Code.Part022
 import Kernels.TmlFa4Fwd.Proof.Lib.InputRead
 import Kernels.TmlFa4Fwd.Proof.Epilogue.Reads
 import Kernels.TmlFa4Fwd.Proof.LdWarp.Warp
-import Kernels.TmlFa4Fwd.Proof.Lib.LoadAl
+import Lemmas.Flow.LoadAl
 import Lemmas.Flow.AllocTmpl
 import Lemmas.Flow.WordBound
 import Std.Tactic.BVDecide.Normalize.BitVec

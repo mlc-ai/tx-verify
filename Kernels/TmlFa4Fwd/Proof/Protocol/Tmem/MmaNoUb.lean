@@ -30,7 +30,7 @@ import Kernels.TmlFa4Fwd.Proof.Common.NoUb
 import Kernels.TmlFa4Fwd.Proof.Common.Sound
 import Kernels.TmlFa4Fwd.Proof.Epilogue.NoUb
 import Kernels.TmlFa4Fwd.Proof.Epilogue.Export.Safe
-import Kernels.TmlFa4Fwd.Proof.Lib.MemAl
+import Lemmas.Flow.MemAl
 import Kernels.TmlFa4Fwd.Proof.Lib.NoUbLive
 import Kernels.TmlFa4Fwd.Proof.Mma.Export.Safe
 import Kernels.TmlFa4Fwd.Proof.Mma.Export.SafeCm

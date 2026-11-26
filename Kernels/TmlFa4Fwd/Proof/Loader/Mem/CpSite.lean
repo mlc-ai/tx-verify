@@ -1,7 +1,7 @@
 -- SPDX-License-Identifier: Apache-2.0
 module
 
-public import Kernels.TmlFa4Fwd.Proof.Lib.WordAlign
+public import Lemmas.Flow.Arith32WordAlign
 public import Kernels.TmlFa4Fwd.Proof.Startup.Machine
 public import Kernels.TmlFa4Fwd.Proof.Loader.Mem.Addr
 public import Kernels.TmlFa4Fwd.Proof.Loader.Mem.CpOk
