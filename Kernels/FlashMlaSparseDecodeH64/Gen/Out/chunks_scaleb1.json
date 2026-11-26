@@ -1,0 +1,60 @@
+{
+  "ptx": "Kernels/FlashMlaSparseDecodeH64/v41_h64_no_split_plain.ptx",
+  "namespace": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant",
+  "output": "Kernels/FlashMlaSparseDecodeH64/Proof/Dequant/Gen/ChunksScaleB1.lean",
+  "imports": [
+    "Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.Gen.Runs10",
+    "Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.Gen.Runs11",
+    "Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.Gen.Runs6",
+    "Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.Gen.Runs9",
+    "Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.Data.Chunk",
+    "Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.Data.CoreVals"
+  ],
+  "open": [
+    "PTX.Kernels.FlashMlaSparseDecodeH64",
+    "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Numeric.Dequant"
+  ],
+  "template": "Kernels/FlashMlaSparseDecodeH64/Gen/Out/scale15.tmpl",
+  "instances": [
+    {
+      "decl": "Kernels/FlashMlaSparseDecodeH64/Gen/Out/dequant_runs6.json",
+      "run": "dr2881",
+      "prefix": "Gen.",
+      "params": {
+        "name": "scale15_2881"
+      }
+    },
+    {
+      "decl": "Kernels/FlashMlaSparseDecodeH64/Gen/Out/dequant_runs9.json",
+      "run": "dr2986",
+      "prefix": "Gen.",
+      "params": {
+        "name": "scale15_2986"
+      }
+    },
+    {
+      "decl": "Kernels/FlashMlaSparseDecodeH64/Gen/Out/dequant_runs10.json",
+      "run": "dr3010",
+      "prefix": "Gen.",
+      "params": {
+        "name": "scale15_3010"
+      }
+    },
+    {
+      "decl": "Kernels/FlashMlaSparseDecodeH64/Gen/Out/dequant_runs11.json",
+      "run": "dr3034",
+      "prefix": "Gen.",
+      "params": {
+        "name": "scale15_3034"
+      }
+    },
+    {
+      "decl": "Kernels/FlashMlaSparseDecodeH64/Gen/Out/dequant_runs11.json",
+      "run": "dr3058",
+      "prefix": "Gen.",
+      "params": {
+        "name": "scale15_3058"
+      }
+    }
+  ]
+}
