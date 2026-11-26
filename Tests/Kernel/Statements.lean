@@ -16,6 +16,7 @@ public import Kernels.FlashAttn4Fwd.Theorem
 public import Kernels.FlashMlaSparseDecodeH64.Theorem
 public import Kernels.InklingRelDecode.Theorem
 public import Kernels.TmlFa4Fwd.Theorem
+public import Kernels.FlashKdaFwd.Theorem
 
 @[expose] public section
 
@@ -28,7 +29,8 @@ For each kernel theorem, the build fails unless:
   in `Lemmas/`, `Tactics/` or the proof can add an assumption;
 * every constant its statement mentions is defined in `Core/`, `Assumption/`, the kernel's
   `Spec.lean`, `Ptx.lean`, `Assumptions.lean` or a file under its `Assumptions/`,
-  `Data/Decoded.lean` or `Data/TensorMaps.lean`,
+  `Data/Decoded.lean` or `Data/TensorMaps.lean`, the real-number recurrence of the FlashKDA
+  kernel (`Kernels/FlashKdaFwd/Data/Recurrence.lean`, Mathlib only),
   `Lemmas/Arith/FastDivmod.lean`, or the Lean and Mathlib libraries;
 * the kernel's `Spec.lean` and its assumption files import only those or the reviewed CuTeDSL
   software exp2 template shared by the two FA4 kernels.
@@ -51,11 +53,14 @@ meta def reviewed (kernel : String) (m : Name) : Bool :=
   -- A kernel's program data: the decoder cache (`Data.Decoded`, the Core decoder's output on
   -- the source, certified by the kernel's `decode_eq`) and the host-built tensor maps
   -- (`Data.TensorMaps`). FlashMLA also defines its launch parameters, sparse-slot indexing,
-  -- and audited assumption sites in dedicated data modules.
+  -- and audited assumption sites in dedicated data modules. FlashKDA states its postcondition
+  -- against a real-number recurrence (one step per token, its tile form, and the contract of
+  -- the preparation kernel): definitions over Mathlib only, no model constant.
   let programData :=
     s == s!"Kernels.{kernel}.Data.Decoded" || s == s!"Kernels.{kernel}.Data.TensorMaps" ||
     (kernel == "FlashMlaSparseDecodeH64" &&
-      ["Params", "Indices", "Sites"].any (fun suffix => s == s!"Kernels.{kernel}.Data.{suffix}"))
+      ["Params", "Indices", "Sites"].any (fun suffix => s == s!"Kernels.{kernel}.Data.{suffix}")) ||
+    (kernel == "FlashKdaFwd" && s == "Kernels.FlashKdaFwd.Data.Recurrence")
   -- The device-side FastDivmod quotient, the instruction sequence a launch premise states
   -- exact (`FastDivmod.quot`); the file defines arithmetic only.
   let arith := s == "Lemmas.Arith.FastDivmod"
@@ -160,3 +165,9 @@ end PTX.StatementCheck
 #check_theorem TmlFa4Fwd PTX.Kernels.TmlFa4Fwd.completed_execution
 
 #check_theorem TmlFa4Fwd PTX.Kernels.TmlFa4Fwd.realizable_result
+
+#check_theorem FlashKdaFwd PTX.Kernels.FlashKdaFwd.correct
+
+#check_theorem FlashKdaFwd PTX.Kernels.FlashKdaFwd.completed_execution
+
+#check_theorem FlashKdaFwd PTX.Kernels.FlashKdaFwd.realizable_result

@@ -43,6 +43,16 @@ theorem resolveScopes_of_part {depth fuel : Nat} {body resolved : List Statement
   simp only [hd, resolveScopes.eq_2, he, bind, Except.bind]
   exact hp
 
+/-- A symbol that no binding names resolves to itself. The characters `cs` of the symbol are an
+argument so that a kernel-checked audit never reduces `s.toList`: for a literal `s` that reduction
+takes time quadratic in its length, which puts a mangled C++ name of a thousand characters out of
+reach, while the kernel compares a literal with `String.ofList` of an explicit list directly. -/
+theorem resolveOperand_symbol_of_unbound {env : List Binding} {s : String} {cs : List Char}
+    (hs : s = String.ofList cs) (h : findBinding env cs = none) :
+    resolveOperand env (.symbol s) = .symbol s := by
+  subst hs
+  rw [resolveOperand, String.toList_ofList, h]
+
 /-- Separate a successful scope-resolution certificate from the rest of preparation. -/
 theorem prepare_of_resolved {globals : List (List String)} {f : Function}
     {body : List Statement} (he : f.header.take 2 = [".visible", ".entry"])

@@ -62,6 +62,11 @@ EVENT_PREFIXES = (
     "ld.shared",
     "ld.acquire",
     "st.",
+    # the warp-level matrix instructions (`Op.matrix`)
+    "ldmatrix.",
+    "stmatrix.",
+    "movmatrix.",
+    "mma.",
     "bar.",
     "barrier.",
     "shfl.",
@@ -110,6 +115,12 @@ KIND_NAMES = [
     ("barrier.arrive", "barArrive"),
     ("ld.acquire", "loadAcquire"),
     ("st.release", "storeRelease"),
+    ("ldmatrix", "matrixLoad"),
+    ("stmatrix", "matrixStore"),
+    ("movmatrix", "matrixMove"),
+    ("mma.", "warpMma"),
+    ("trap", "trap"),
+    ("brkpt", "trap"),
     ("ld.", "load"),
     ("st.", "store"),
     ("shfl.", "shfl"),
@@ -122,12 +133,28 @@ KIND_NAMES = [
 ]
 
 
+# Set by `generate(core_events=True)`: the remaining instructions that perform an event in the Core
+# (`Op.isLocal`) are sites too: a generic `ld` (no state space), and `trap` and `brkpt` (which
+# decodes to `trap`, EXT-BRKPT), a `ub` event that ends the thread. The kernels generated before
+# this option keep their site numbering.
+CORE_EVENTS = False
+CORE_EVENT_PREFIXES = ("ld.", "trap", "brkpt")
+TERMINAL = ("ret", "trap", "brkpt")
+
+
 def is_event(opcode: str) -> bool:
     if opcode.startswith("ld.param"):
         return False
     if opcode.startswith("cp.async.bulk.prefetch"):
         return False
+    if CORE_EVENTS and opcode.startswith(CORE_EVENT_PREFIXES):
+        return True
     return opcode.startswith(EVENT_PREFIXES)
+
+
+def is_terminal(opcode: str) -> bool:
+    """The thread performs no event after this one."""
+    return opcode.startswith(TERMINAL if CORE_EVENTS else ("ret",))
 
 
 def kind_name(opcode: str) -> str:
@@ -299,6 +326,9 @@ def flatten(function):
                         "vote",
                         "mbarrier.arrive",
                         "clusterlaunchcontrol.query",
+                        "ldmatrix.",
+                        "movmatrix.",
+                        "mma.",
                     )
                 )
                 and ops[0].kind != "address"
@@ -411,7 +441,7 @@ def paths_from(code, start, limit=4096, *, loop_entries=frozenset(), from_loop=F
 
 def all_successors(ins, n):
     """Control successors of any instruction (events continue at pc + 1; `ret` ends)."""
-    if ins["opcode"].startswith("ret"):
+    if is_terminal(ins["opcode"]):
         return []
     if not ins["event"]:
         return [p for p, _ in successors(ins, n)]
@@ -482,7 +512,9 @@ PART_PCS = 500
 LIVE_DOC = "Registers live before instruction `pc`."
 
 
-def generate(ptx: Path, namespace: str):
+def generate(ptx: Path, namespace: str, *, core_events: bool = False):
+    global CORE_EVENTS
+    CORE_EVENTS = core_events
     program = parse_ptx.parse(ptx.read_text())
     function = next(f for f in program.functions if not f.declaration)
     code = flatten(function)
@@ -524,7 +556,7 @@ def generate(ptx: Path, namespace: str):
     ]
     for s in site_list:
         after = paths_from(code, s["pc"] + 1, loop_entries=loop_entries)
-        if s["opcode"] == "ret":
+        if s["opcode"] == "ret" or (CORE_EVENTS and is_terminal(s["opcode"])):
             after = []
         flow["sites"].append(
             {
@@ -693,8 +725,13 @@ def main():
     parser.add_argument("--namespace", required=True)
     parser.add_argument("-o", "--out", type=Path, required=True)
     parser.add_argument("--check", action="store_true")
+    parser.add_argument(
+        "--core-events",
+        action="store_true",
+        help="a generic `ld` (no state space), `trap` and `brkpt` are sites, as in the Core",
+    )
     args = parser.parse_args()
-    lean, flow = generate(args.ptx, args.namespace)
+    lean, flow = generate(args.ptx, args.namespace, core_events=args.core_events)
     targets = {args.out / name: text for name, text in lean.items()}
     targets[args.out / "flow.json"] = flow
     if args.check:

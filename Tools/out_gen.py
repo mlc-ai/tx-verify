@@ -34,6 +34,25 @@ branch, an event or a guarded instruction stops the generator.
 An optional `"options": {"maxRecDepth": 100000}` sets Lean options for the generated file (a
 reading whose `rfl` side condition evaluates a long site list needs a deeper recursion).
 
+Forms beyond the fixed kinds are declared under `fn`, keyed by the opcode or by the opcode and
+the shape of its sources:
+
+* `"<opcode>"`: every source is a register (`cvt.rn.bf16.f32`, `fma.rn.ftz.f32`);
+* `"<opcode>#imm"`: the last source is a constant (`mul.ftz.f32 d, a, 0f…`, `shl.b32 d, a, 16`);
+  its item is `.fn (op k d [srcs]) d [srcs] (f k)` with `k` the constant (the bits of a `0f…`
+  constant as a natural number, an integer otherwise);
+* `"<opcode>#pack"`: the source is a vector `{lo, hi}` (`mov.b32 d, {lo, hi}`), read as the two
+  registers.
+
+An `fn` entry may name its item kind (`"kind"`, for the comments of the declaration only) and
+its reading lemma (`"rule"`, with `{pc}`); without `"rule"` the run's `rules["fn"]` is used.
+
+`mov.b32 {lo, hi}, a` (the kind `unpack32`) writes two registers and is no run item: the
+generator cuts the run before and after it and proves it as a piece of its own with the lemma
+`rules["unpack32"]` (of the form of `SegD.outs_lit` for one instruction: the code lemma, then
+Boolean checks by `rfl` and the stated values by `kernel_rfl`); its condition is that the value
+unpacks (`∃ x, unpackE 32 … = .ok x`).
+
     python Tools/out_gen.py decl.json            # write the output
     python Tools/out_gen.py decl.json --check    # fail if the output is stale
 """
@@ -79,11 +98,65 @@ class Run:
         self.code, self.ids, self.run = code, ids, run
         self.name = run["name"]
         self.fn = run.get("fn", {})
+        self.fn_rules = {}
 
     def rid(self, reg):
         if reg not in self.ids:
             raise GenError(f"unknown register {reg}")
         return self.ids[reg]
+
+    def fn_kind(self, spec, pc):
+        """The kind of an `fn` item: `fn`, or a kind of its own when the entry names its rule."""
+        if "rule" not in spec:
+            return "fn"
+        kind = "fn:" + spec.get("kind", spec["f"])
+        self.fn_rules[kind] = spec["rule"]
+        return kind
+
+    def shaped(self, op, ops):
+        """The item of a form declared under `fn` by opcode and source shape, or of `unpack32`."""
+        r = self.rid
+        if op == "mov.b32" and ops[0].startswith("{"):
+            (lo, hi), a = [r(x) for x in regs_of(ops[0])], r(ops[1])
+            return (
+                "unpack32",
+                (lo, hi, a),
+                [a],
+                [lo, hi],
+                lambda v: [
+                    (lo, f"(splitValue 32 ({v(a)})).1"),
+                    (hi, f"(splitValue 32 ({v(a)})).2"),
+                ],
+            )
+        if len(ops) == 2 and ops[1].startswith("{") and op + "#pack" in self.fn:
+            spec = self.fn[op + "#pack"]
+            d, srcs = r(ops[0]), [r(x) for x in regs_of(ops[1])]
+            sl = "[" + ", ".join(map(str, srcs)) + "]"
+            return (
+                self.fn_kind(spec, None),
+                f".fn ({spec['op']} {d} {sl}) {d} {sl} {spec['f']}",
+                srcs,
+                [d],
+                lambda v: [
+                    (d, f"okVal (.bits 32 0) ({spec['f']} [{', '.join(v(s) for s in srcs)}])")
+                ],
+            )
+        if len(ops) >= 2 and not ops[-1].startswith(("%", "{")) and op + "#imm" in self.fn:
+            spec = self.fn[op + "#imm"]
+            d, srcs = r(ops[0]), [r(x) for x in ops[1:-1]]
+            k = ops[-1]
+            k = str(int(k[2:], 16)) if k.startswith("0f") else (k if int(k) >= 0 else f"({k})")
+            sl = "[" + ", ".join(map(str, srcs)) + "]"
+            return (
+                self.fn_kind(spec, None),
+                f".fn ({spec['op']} {k} {d} {sl}) {d} {sl} ({spec['f']} {k})",
+                srcs,
+                [d],
+                lambda v: [
+                    (d, f"okVal (.bits 32 0) ({spec['f']} {k} [{', '.join(v(s) for s in srcs)}])")
+                ],
+            )
+        return None
 
     def item(self, ins):
         """(kind, item term, reads, writes, value builder) of an instruction."""
@@ -91,13 +164,16 @@ class Run:
         if ins["guard"] or ins["event"] or ins["target"] is not None:
             raise GenError(f"pc {pc}: {op} is not an unguarded local instruction")
         r = self.rid
+        shaped = self.shaped(op, ops)
+        if shaped is not None:
+            return shaped
         if op in self.fn:
             d, srcs = r(ops[0]), [r(x) for x in ops[1:]]
             spec = self.fn[op]
             sl = "[" + ", ".join(map(str, srcs)) + "]"
             term = f".fn ({spec['op']} {d} {sl}) {d} {sl} {spec['f']}"
             return (
-                "fn",
+                self.fn_kind(spec, pc),
                 term,
                 srcs,
                 [d],
@@ -197,6 +273,15 @@ class Run:
             cur = (cur - set(wr)) | set(rd)
             live[i] = sorted(cur)
         bounds = list(range(0, n, cut)) + [n]
+        singles = [i for i, it in enumerate(items) if it[0] == "unpack32"]
+        if singles:
+            # an unpack is a piece of its own; the stretches between unpacks are cut every `cut`
+            marks, last = {0, n}, 0
+            for i in singles + [n]:
+                marks.update(range(last, i, cut))
+                marks.update({i, min(i + 1, n)})
+                last = i + 1
+            bounds = sorted(marks)
         name = self.name
         out = []
 
@@ -239,8 +324,25 @@ class Run:
         for j in range(len(bounds) - 1):
             a, b = bounds[j], bounds[j + 1]
             its = items[a:b]
+            if its[0][0] == "unpack32":
+                (_, (lo, hi, src), _, _, pc) = its[0]
+                rule = rules.get("unpack32")
+                if rule is None:
+                    raise GenError(f"pc {pc}: no rule declared for the item kind unpack32")
+                cond = f"∃ x, unpackE 32 (lookupD ({name}_facts{j} V) {src}) = .ok x"
+                pieces.append((j, pc, pc + 1, 1, cond))
+                out.append(f"theorem {name}_piece{j} (L : Launch) (g : Nat) (V : Nat → Value) :")
+                out.append(f"    SegD {kernel} {asms} L g 1 {pc} ({name}_facts{j} V) {pc + 1}")
+                out.append(f"      ({name}_facts{j + 1} V) ({cond}) :=")
+                out.append(f"  {rule.format(pc=pc)} (lo := {lo}) (hi := {hi}) (a := {src})")
+                out.append(f"    {codens}.code_{pc} rfl rfl (by kernel_rfl) (by kernel_rfl)")
+                out.append("")
+                continue
             out.append(f"def {name}_items{j} : List XItem := [")
-            terms = [t if k in ("fn", "max2", "max3") else f".base ({t})" for k, t, _, _, _ in its]
+            terms = [
+                t if k in ("fn", "max2", "max3") or k.startswith("fn:") else f".base ({t})"
+                for k, t, _, _, _ in its
+            ]
             out += [f"  {t}," for t in terms[:-1]] + [f"  {terms[-1]}"]
             out.append("]")
             out.append("")
@@ -253,7 +355,7 @@ class Run:
             out.append(f"  SegD.outs_lit (items := {name}_items{j})")
             ats = []
             for kind, _, _, _, pc in its:
-                rule = rules.get(kind)
+                rule = self.fn_rules.get(kind) or rules.get(kind)
                 if rule is None:
                     raise GenError(f"pc {pc}: no rule declared for the item kind {kind}")
                 ats.append(

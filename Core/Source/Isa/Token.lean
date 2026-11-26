@@ -116,6 +116,7 @@ inductive Token where
   | box_dim
   | bra
   | brev
+  | brkpt
   | brx
   | bulk
   | bulk_group
@@ -679,428 +680,430 @@ def Token.ofKey_rrrlrlr (k : Nat) : Option Token :=
 
 def Token.ofKey_rrrlrll (k : Nat) : Option Token :=
   bif Nat.blt k (Nat.add (Nat.mul 6498 (Nat.pow 10 36)) 234595674247886987938650290717848292) then
-    (bif Nat.beq k (Nat.add (Nat.mul 77 (Nat.pow 10 36)) 624144590349054733232030782781699299) then
-    some .tensormap_generic else none) else (bif Nat.blt k (Nat.add (Nat.mul 6498 (Nat.pow 10 36))
-    899209672140344924390553820858020580) then (bif Nat.beq k (Nat.add (Nat.mul 6498 (Nat.pow 10
-    36)) 234595674247886987938650290717848292) then some .L1_evict_unchanged else none) else (bif
-    Nat.beq k (Nat.add (Nat.mul 6498 (Nat.pow 10 36)) 899209672140344924390553820858020580) then
-    some .L2_evict_unchanged else none))
+    (bif Nat.blt k (Nat.add (Nat.mul 77 (Nat.pow 10 36)) 624144590349054733232030782781699299) then
+    (bif Nat.beq k (Nat.add (Nat.mul 73 (Nat.pow 10 36)) 54842526965427101181996064820769522) then
+    some .multicast_cluster else none) else (bif Nat.beq k (Nat.add (Nat.mul 77 (Nat.pow 10 36))
+    624144590349054733232030782781699299) then some .tensormap_generic else none)) else (bif Nat.blt
+    k (Nat.add (Nat.mul 6498 (Nat.pow 10 36)) 899209672140344924390553820858020580) then (bif
+    Nat.beq k (Nat.add (Nat.mul 6498 (Nat.pow 10 36)) 234595674247886987938650290717848292) then
+    some .L1_evict_unchanged else none) else (bif Nat.beq k (Nat.add (Nat.mul 6498 (Nat.pow 10 36))
+    899209672140344924390553820858020580) then some .L2_evict_unchanged else none))
 
 def Token.ofKey_rrrllrr (k : Nat) : Option Token :=
-  bif Nat.blt k (Nat.add (Nat.mul 68 (Nat.pow 10 36)) 984399645953115081963202392487796090) then
-    (bif Nat.blt k (Nat.add (Nat.mul 68 (Nat.pow 10 36)) 984399645953115081963202392487796089) then
-    (bif Nat.beq k (Nat.add (Nat.mul 68 (Nat.pow 10 36)) 984399645953115081963202392487796088) then
-    some .get_first_ctaid_x else none) else (bif Nat.beq k (Nat.add (Nat.mul 68 (Nat.pow 10 36))
-    984399645953115081963202392487796089) then some .get_first_ctaid_y else none)) else (bif Nat.blt
-    k (Nat.add (Nat.mul 73 (Nat.pow 10 36)) 54842526965427101181996064820769522) then (bif Nat.beq k
-    (Nat.add (Nat.mul 68 (Nat.pow 10 36)) 984399645953115081963202392487796090) then some
-    .get_first_ctaid_z else none) else (bif Nat.beq k (Nat.add (Nat.mul 73 (Nat.pow 10 36))
-    54842526965427101181996064820769522) then some .multicast_cluster else none))
+  bif Nat.blt k (Nat.add (Nat.mul 68 (Nat.pow 10 36)) 984399645953115081963202392487796089) then
+    (bif Nat.blt k (Nat.add (Nat.mul 68 (Nat.pow 10 36)) 984399645953115081963202392487796088) then
+    (bif Nat.beq k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 989873138418161734434600045060726114) then
+    some .decompress_lut_b else none) else (bif Nat.beq k (Nat.add (Nat.mul 68 (Nat.pow 10 36))
+    984399645953115081963202392487796088) then some .get_first_ctaid_x else none)) else (bif Nat.blt
+    k (Nat.add (Nat.mul 68 (Nat.pow 10 36)) 984399645953115081963202392487796090) then (bif Nat.beq
+    k (Nat.add (Nat.mul 68 (Nat.pow 10 36)) 984399645953115081963202392487796089) then some
+    .get_first_ctaid_y else none) else (bif Nat.beq k (Nat.add (Nat.mul 68 (Nat.pow 10 36))
+    984399645953115081963202392487796090) then some .get_first_ctaid_z else none))
 
 def Token.ofKey_rrrllrl (k : Nat) : Option Token :=
-  bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158284261880919660) then
-    (bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158284021270673893) then
-    (bif Nat.beq k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158283986910935525) then
-    some .collector_b2_use else none) else (bif Nat.beq k (Nat.add (Nat.mul 66 (Nat.pow 10 36))
-    377546221687784458158284021270673893) then some .collector_b3_use else none)) else (bif Nat.blt
-    k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 989873138418161734434600045060726114) then (bif Nat.beq
-    k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158284261880919660) then some
-    .collector_b_fill else none) else (bif Nat.beq k (Nat.add (Nat.mul 66 (Nat.pow 10 36))
-    989873138418161734434600045060726114) then some .decompress_lut_b else none))
+  bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158284021270673893) then
+    (bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158283986910935525) then
+    (bif Nat.beq k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158283952551197157) then
+    some .collector_b1_use else none) else (bif Nat.beq k (Nat.add (Nat.mul 66 (Nat.pow 10 36))
+    377546221687784458158283986910935525) then some .collector_b2_use else none)) else (bif Nat.blt
+    k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158284261880919660) then (bif Nat.beq
+    k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158284021270673893) then some
+    .collector_b3_use else none) else (bif Nat.beq k (Nat.add (Nat.mul 66 (Nat.pow 10 36))
+    377546221687784458158284261880919660) then some .collector_b_fill else none))
 
 def Token.ofKey_rrrlllr (k : Nat) : Option Token :=
-  bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158283918191458789) then
-    (bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158279863834408556) then
-    (bif Nat.beq k 601161065723936942696817618345408176 then some .scaled_n2_ue8m0 else none) else
-    (bif Nat.beq k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158279863834408556) then
-    some .collector_a_fill else none)) else (bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36))
-    377546221687784458158283952551197157) then (bif Nat.beq k (Nat.add (Nat.mul 66 (Nat.pow 10 36))
-    377546221687784458158283918191458789) then some .collector_b0_use else none) else (bif Nat.beq k
-    (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158283952551197157) then some
-    .collector_b1_use else none))
+  bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158279863834408556) then
+    (bif Nat.blt k 601161065723936942696817618345408176 then (bif Nat.beq k
+    601161065723936942696254668391986864 then some .scaled_n1_ue8m0 else none) else (bif Nat.beq k
+    601161065723936942696817618345408176 then some .scaled_n2_ue8m0 else none)) else (bif Nat.blt k
+    (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158283918191458789) then (bif Nat.beq k
+    (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158279863834408556) then some
+    .collector_a_fill else none) else (bif Nat.beq k (Nat.add (Nat.mul 66 (Nat.pow 10 36))
+    377546221687784458158283918191458789) then some .collector_b0_use else none))
 
 def Token.ofKey_rrrllll (k : Nat) : Option Token :=
-  bif Nat.blt k 564740201242502746244243660178438771 then (bif Nat.beq k
-    549690314411776159311166179179756276 then some .interleave_layout else none) else (bif Nat.blt k
-    601161065723936942696254668391986864 then (bif Nat.beq k 564740201242502746244243660178438771
-    then some .launch_dependents else none) else (bif Nat.beq k 601161065723936942696254668391986864
-    then some .scaled_n1_ue8m0 else none))
+  bif Nat.blt k 549690314411776159311166179179756276 then (bif Nat.beq k
+    549628828347869529548571769664609655 then some .im2col_no_offs_w else none) else (bif Nat.blt k
+    564740201242502746244243660178438771 then (bif Nat.beq k 549690314411776159311166179179756276
+    then some .interleave_layout else none) else (bif Nat.beq k 564740201242502746244243660178438771
+    then some .launch_dependents else none))
 
 def Token.ofKey_rrlrrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 518574579856935816079361595796191717 then (bif Nat.blt k
-    518574579856935816079361561436453349 then (bif Nat.beq k 3098916630588598415815299405934828 then
-    some .L2_evict_normal else none) else (bif Nat.beq k 518574579856935816079361561436453349 then
-    some .collector_a_use else none)) else (bif Nat.blt k 549628828347869529548571769664609655 then
-    (bif Nat.beq k 518574579856935816079361595796191717 then some .collector_b_use else none) else
-    (bif Nat.beq k 549628828347869529548571769664609655 then some .im2col_no_offs_w else none))
+  bif Nat.blt k 518574579856935816079361561436453349 then (bif Nat.blt k
+    3098916630588598415815299405934828 then (bif Nat.beq k 3098599717938541358464925230133484 then
+    some .L1_evict_normal else none) else (bif Nat.beq k 3098916630588598415815299405934828 then
+    some .L2_evict_normal else none)) else (bif Nat.blt k 518574579856935816079361595796191717 then
+    (bif Nat.beq k 518574579856935816079361561436453349 then some .collector_a_use else none) else
+    (bif Nat.beq k 518574579856935816079361595796191717 then some .collector_b_use else none))
 
 def Token.ofKey_rrlrrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 36704339884964229129998742401778 then (bif Nat.blt k
-    35778632464881205394692493784697 then (bif Nat.beq k 32894325087524945775014496990436 then some
-    .get_first_ctaid else none) else (bif Nat.beq k 35778632464881205394692493784697 then some
-    .proxy_readonly else none)) else (bif Nat.blt k 3098599717938541358464925230133484 then (bif
-    Nat.beq k 36704339884964229129998742401778 then some .shared_cluster else none) else (bif
-    Nat.beq k 3098599717938541358464925230133484 then some .L1_evict_normal else none))
+  bif Nat.blt k 35778632464881205394692493784697 then (bif Nat.blt k
+    32894325087524945775014496990436 then (bif Nat.beq k 32894209951506613723289874117859 then some
+    .generic_fabric else none) else (bif Nat.beq k 32894325087524945775014496990436 then some
+    .get_first_ctaid else none)) else (bif Nat.blt k 36704339884964229129998742401778 then (bif
+    Nat.beq k 35778632464881205394692493784697 then some .proxy_readonly else none) else (bif
+    Nat.beq k 36704339884964229129998742401778 then some .shared_cluster else none))
 
 def Token.ofKey_rrlrrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 32567163621198745213535214417123 then (bif Nat.blt k
-    24210286176473425123554866543092 then (bif Nat.beq k 24207810306954893608628208040549 then some
-    .L1_no_allocate else none) else (bif Nat.beq k 24210286176473425123554866543092 then some
-    .L2_evict_first else none)) else (bif Nat.blt k 32894209951506613723289874117859 then (bif
-    Nat.beq k 32567163621198745213535214417123 then some .fabric_generic else none) else (bif
-    Nat.beq k 32894209951506613723289874117859 then some .generic_fabric else none))
+  bif Nat.blt k 24210286176473425123554866543092 then (bif Nat.blt k
+    24207810306954893608628208040549 then (bif Nat.beq k 24207810296394854363005068294644 then some
+    .L1_evict_first else none) else (bif Nat.beq k 24207810306954893608628208040549 then some
+    .L1_no_allocate else none)) else (bif Nat.blt k 32567163621198745213535214417123 then (bif
+    Nat.beq k 24210286176473425123554866543092 then some .L2_evict_first else none) else (bif
+    Nat.beq k 32567163621198745213535214417123 then some .fabric_generic else none))
 
 def Token.ofKey_rrlrrll (k : Nat) : Option Token :=
-  bif Nat.blt k 289249524768679387349806315828 then (bif Nat.blt k 266966905112402540156423090996
-    then (bif Nat.beq k 266966905112402540155367174964 then some .kind_mxf4nvf4 else none) else (bif
-    Nat.beq k 266966905112402540156423090996 then some .kind_mxf8f6f4 else none)) else (bif Nat.blt
-    k 24207810296394854363005068294644 then (bif Nat.beq k 289249524768679387349806315828 then some
-    .tile_scatter4 else none) else (bif Nat.beq k 24207810296394854363005068294644 then some
-    .L1_evict_first else none))
+  bif Nat.blt k 266966905112402540156423090996 then (bif Nat.blt k 266966905112402540155367174964
+    then (bif Nat.beq k 262083448575911297582898983795 then some .im2col_no_offs else none) else
+    (bif Nat.beq k 266966905112402540155367174964 then some .kind_mxf4nvf4 else none)) else (bif
+    Nat.blt k 289249524768679387349806315828 then (bif Nat.beq k 266966905112402540156423090996 then
+    some .kind_mxf8f6f4 else none) else (bif Nat.beq k 289249524768679387349806315828 then some
+    .tile_scatter4 else none))
 
 def Token.ofKey_rrlrlrr (k : Nat) : Option Token :=
-  bif Nat.blt k 262083448575890240001037588792 then (bif Nat.blt k 257236714927988444321332115436
-    then (bif Nat.beq k 257121562355311617179372845555 then some .global_address else none) else
-    (bif Nat.beq k 257236714927988444321332115436 then some .griddepcontrol else none)) else (bif
-    Nat.blt k 262083448575911297582898983795 then (bif Nat.beq k 262083448575890240001037588792 then
-    some .im2col_w_128 else none) else (bif Nat.beq k 262083448575911297582898983795 then some
-    .im2col_no_offs else none))
+  bif Nat.blt k 257236714927988444321332115436 then (bif Nat.blt k 257121562355311617179372845555
+    then (bif Nat.beq k 254430965790615196945285428451 then some .fabric_fabric else none) else (bif
+    Nat.beq k 257121562355311617179372845555 then some .global_address else none)) else (bif Nat.blt
+    k 262083448575890240001037588792 then (bif Nat.beq k 257236714927988444321332115436 then some
+    .griddepcontrol else none) else (bif Nat.beq k 262083448575890240001037588792 then some
+    .im2col_w_128 else none))
 
 def Token.ofKey_rrlrlrl (k : Nat) : Option Token :=
-  bif Nat.blt k 252168304064452822692947194469 then (bif Nat.blt k 247276991516576544085679878899
-    then (bif Nat.beq k 189142860753698633777784846836 then some .L2_evict_last else none) else (bif
-    Nat.beq k 247276991516576544085679878899 then some .counted_bytes else none)) else (bif Nat.blt
-    k 254430965790615196945285428451 then (bif Nat.beq k 252168304064452822692947194469 then some
-    .element_stride else none) else (bif Nat.beq k 254430965790615196945285428451 then some
-    .fabric_fabric else none))
+  bif Nat.blt k 247276991516576544085679878899 then (bif Nat.blt k 189142860753698633777784846836
+    then (bif Nat.beq k 189142860733735324004386502516 then some .L2_cache_hint else none) else (bif
+    Nat.beq k 189142860753698633777784846836 then some .L2_evict_last else none)) else (bif Nat.blt
+    k 252168304064452822692947194469 then (bif Nat.beq k 247276991516576544085679878899 then some
+    .counted_bytes else none) else (bif Nat.beq k 252168304064452822692947194469 then some
+    .element_stride else none))
 
 def Token.ofKey_rrlrllr (k : Nat) : Option Token :=
-  bif Nat.blt k 189123517940584799710989548020 then (bif Nat.blt k 2316588615246827114783561907 then
-    (bif Nat.beq k 2316588615246827114781464883 then some .warpx2_01_23 else none) else (bif Nat.beq
-    k 2316588615246827114783561907 then some .warpx2_02_13 else none)) else (bif Nat.blt k
-    189142860733735324004386502516 then (bif Nat.beq k 189123517940584799710989548020 then some
-    .L1_evict_last else none) else (bif Nat.beq k 189142860733735324004386502516 then some
-    .L2_cache_hint else none))
+  bif Nat.blt k 2316588615246827114783561907 then (bif Nat.blt k 2316588615246827114781464883 then
+    (bif Nat.beq k 2259761912255254873467615540 then some .tile_gather4 else none) else (bif Nat.beq
+    k 2316588615246827114781464883 then some .warpx2_01_23 else none)) else (bif Nat.blt k
+    189123517940584799710989548020 then (bif Nat.beq k 2316588615246827114783561907 then some
+    .warpx2_02_13 else none) else (bif Nat.beq k 189123517940584799710989548020 then some
+    .L1_evict_last else none))
 
 def Token.ofKey_rrlrlll (k : Nat) : Option Token :=
-  bif Nat.blt k 2239499485951857996633905752 then (bif Nat.beq k 2239499485951857996633905496 then
-    some .scale_vec_2X else none) else (bif Nat.blt k 2259761912255254873467615540 then (bif Nat.beq
-    k 2239499485951857996633905752 then some .scale_vec_4X else none) else (bif Nat.beq k
-    2259761912255254873467615540 then some .tile_gather4 else none))
+  bif Nat.blt k 2239499485951857996633905496 then (bif Nat.beq k 2239499485951857996633905368 then
+    some .scale_vec_1X else none) else (bif Nat.blt k 2239499485951857996633905752 then (bif Nat.beq
+    k 2239499485951857996633905496 then some .scale_vec_2X else none) else (bif Nat.beq k
+    2239499485951857996633905752 then some .scale_vec_4X else none))
 
 def Token.ofKey_rrllrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 2181788552265960933759481716 then (bif Nat.blt k 2123291547823937889282798836 then
-    (bif Nat.beq k 2008762205900872632013320805 then some .global_stride else none) else (bif
-    Nat.beq k 2123291547823937889282798836 then some .mbarrier_init else none)) else (bif Nat.blt k
-    2239499485951857996633905368 then (bif Nat.beq k 2181788552265960933759481716 then some
-    .pending_count else none) else (bif Nat.beq k 2239499485951857996633905368 then some
-    .scale_vec_1X else none))
+  bif Nat.blt k 2123291547823937889282798836 then (bif Nat.blt k 2008762205900872632013320805 then
+    (bif Nat.beq k 1931976564072273734392347769 then some .cp_fenceproxy else none) else (bif
+    Nat.beq k 2008762205900872632013320805 then some .global_stride else none)) else (bif Nat.blt k
+    2181788552265960933759481716 then (bif Nat.beq k 2123291547823937889282798836 then some
+    .mbarrier_init else none) else (bif Nat.beq k 2181788552265960933759481716 then some
+    .pending_count else none))
 
 def Token.ofKey_rrllrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 1893311064684733906456050297 then (bif Nat.blt k 17519776374074388116140645 then
-    (bif Nat.beq k 17511464589725331829127667 then some .spdecompress else none) else (bif Nat.beq k
-    17519776374074388116140645 then some .swizzle_mode else none)) else (bif Nat.blt k
-    1931976564072273734392347769 then (bif Nat.beq k 1893311064684733906456050297 then some
-    .applypriority else none) else (bif Nat.beq k 1931976564072273734392347769 then some
-    .cp_fenceproxy else none))
+  bif Nat.blt k 17519776374074388116140645 then (bif Nat.blt k 17511464589725331829127667 then (bif
+    Nat.beq k 17215146265360203538559724 then some .query_cancel else none) else (bif Nat.beq k
+    17511464589725331829127667 then some .spdecompress else none)) else (bif Nat.blt k
+    1893311064684733906456050297 then (bif Nat.beq k 17519776374074388116140645 then some
+    .swizzle_mode else none) else (bif Nat.beq k 1893311064684733906456050297 then some
+    .applypriority else none))
 
 def Token.ofKey_rrllrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 17040537377431872295745913 then (bif Nat.blt k 16294366767114155153273652 then (bif
-    Nat.beq k 15098307216782332343000370 then some .cta_group_2 else none) else (bif Nat.beq k
-    16294366767114155153273652 then some .kind_f8f6f4 else none)) else (bif Nat.blt k
-    17215146265360203538559724 then (bif Nat.beq k 17040537377431872295745913 then some .param_entry
-    else none) else (bif Nat.beq k 17215146265360203538559724 then some .query_cancel else none))
+  bif Nat.blt k 16294366767114155153273652 then (bif Nat.blt k 15098307216782332343000370 then (bif
+    Nat.beq k 15098307216782332343000369 then some .cta_group_1 else none) else (bif Nat.beq k
+    15098307216782332343000370 then some .cta_group_2 else none)) else (bif Nat.blt k
+    17040537377431872295745913 then (bif Nat.beq k 16294366767114155153273652 then some .kind_f8f6f4
+    else none) else (bif Nat.beq k 17040537377431872295745913 then some .param_entry else none))
 
 def Token.ofKey_rrllrll (k : Nat) : Option Token :=
-  bif Nat.blt k 15095983078405440546697721 then (bif Nat.beq k 15092515949083646565808880 then some
-    .commit_group else none) else (bif Nat.blt k 15098307216782332343000369 then (bif Nat.beq k
-    15095983078405440546697721 then some .createpolicy else none) else (bif Nat.beq k
-    15098307216782332343000369 then some .cta_group_1 else none))
+  bif Nat.blt k 15092515949083646565808880 then (bif Nat.beq k 15084177301220375479974644 then some
+    .check_layout else none) else (bif Nat.blt k 15095983078405440546697721 then (bif Nat.beq k
+    15092515949083646565808880 then some .commit_group else none) else (bif Nat.beq k
+    15095983078405440546697721 then some .createpolicy else none))
 
 def Token.ofKey_rrlllrr (k : Nat) : Option Token :=
-  bif Nat.blt k 139151916043767665941346 then (bif Nat.blt k 138008865361175837979364 then (bif
-    Nat.beq k 136734321284905929603681 then some .shared_cta else none) else (bif Nat.beq k
-    138008865361175837979364 then some .try_pullred else none)) else (bif Nat.blt k
-    15084177301220375479974644 then (bif Nat.beq k 139151916043767665941346 then some .unpack_16b
-    else none) else (bif Nat.beq k 15084177301220375479974644 then some .check_layout else none))
+  bif Nat.blt k 138008865361175837979364 then (bif Nat.blt k 136734321284905929603681 then (bif
+    Nat.beq k 133129198261186504521571 then some .param_func else none) else (bif Nat.beq k
+    136734321284905929603681 then some .shared_cta else none)) else (bif Nat.blt k
+    139151916043767665941346 then (bif Nat.beq k 138008865361175837979364 then some .try_pullred
+    else none) else (bif Nat.beq k 139151916043767665941346 then some .unpack_16b else none))
 
 def Token.ofKey_rrlllrl (k : Nat) : Option Token :=
-  bif Nat.blt k 125029709593462349443812 then (bif Nat.blt k 117910282553750225156728 then (bif
-    Nat.beq k 116702157609156453365349 then some .block_scale else none) else (bif Nat.beq k
-    117910282553750225156728 then some .complete_tx else none)) else (bif Nat.blt k
-    133129198261186504521571 then (bif Nat.beq k 125029709593462349443812 then some .is_canceled
-    else none) else (bif Nat.beq k 133129198261186504521571 then some .param_func else none))
+  bif Nat.blt k 117910282553750225156728 then (bif Nat.blt k 116702157609156453365349 then (bif
+    Nat.beq k 115577125819721308747760 then some .arrive_drop else none) else (bif Nat.beq k
+    116702157609156453365349 then some .block_scale else none)) else (bif Nat.blt k
+    125029709593462349443812 then (bif Nat.beq k 117910282553750225156728 then some .complete_tx
+    else none) else (bif Nat.beq k 125029709593462349443812 then some .is_canceled else none))
 
 def Token.ofKey_rrllllr (k : Nat) : Option Token :=
-  bif Nat.blt k 1104630482217966762736 then (bif Nat.blt k 1095408750822076002930 then (bif Nat.beq
-    k 1078194260182144971500 then some .try_cancel else none) else (bif Nat.beq k
-    1095408750822076002930 then some .valid_addr else none)) else (bif Nat.blt k
-    115577125819721308747760 then (bif Nat.beq k 1104630482217966762736 then some .wait_group else
-    none) else (bif Nat.beq k 115577125819721308747760 then some .arrive_drop else none))
+  bif Nat.blt k 1095408750822076002930 then (bif Nat.blt k 1078194260182144971500 then (bif Nat.beq
+    k 1068814458774615587315 then some .spcompress else none) else (bif Nat.beq k
+    1078194260182144971500 then some .try_cancel else none)) else (bif Nat.blt k
+    1104630482217966762736 then (bif Nat.beq k 1095408750822076002930 then some .valid_addr else
+    none) else (bif Nat.beq k 1104630482217966762736 then some .wait_group else none))
 
 def Token.ofKey_rrlllll (k : Nat) : Option Token :=
-  bif Nat.blt k 1068031386183135965927 then (bif Nat.beq k 1022635049608552166130 then some
-    .notanumber else none) else (bif Nat.blt k 1068814458774615587315 then (bif Nat.beq k
-    1068031386183135965927 then some .setmaxnreg else none) else (bif Nat.beq k
-    1068814458774615587315 then some .spcompress else none))
+  bif Nat.blt k 1022635049608552166130 then (bif Nat.beq k 1022607526597781715557 then some
+    .noComplete else none) else (bif Nat.blt k 1068031386183135965927 then (bif Nat.beq k
+    1022635049608552166130 then some .notanumber else none) else (bif Nat.beq k
+    1068031386183135965927 then some .setmaxnreg else none))
 
 def Token.ofKey_rlrrrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 1003182375780872010545 then (bif Nat.blt k 1003182375780872010544 then (bif Nat.beq
-    k 994529221625649977526 then some .kind_ti16 else none) else (bif Nat.beq k
-    1003182375780872010544 then some .layout_v0 else none)) else (bif Nat.blt k
-    1022607526597781715557 then (bif Nat.beq k 1003182375780872010545 then some .layout_v1 else
-    none) else (bif Nat.beq k 1022607526597781715557 then some .noComplete else none))
+  bif Nat.blt k 1003182375780872010544 then (bif Nat.blt k 994529221625649977526 then (bif Nat.beq k
+    994529221625649928626 then some .kind_tf32 else none) else (bif Nat.beq k 994529221625649977526
+    then some .kind_ti16 else none)) else (bif Nat.blt k 1003182375780872010545 then (bif Nat.beq k
+    1003182375780872010544 then some .layout_v0 else none) else (bif Nat.beq k
+    1003182375780872010545 then some .layout_v1 else none))
 
 def Token.ofKey_rlrrrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 994529221625635550004 then (bif Nat.blt k 975938412678020331490 then (bif Nat.beq k
-    957852461767612511469 then some .global_dim else none) else (bif Nat.beq k 975938412678020331490
-    then some .ignore_oob else none)) else (bif Nat.blt k 994529221625649928626 then (bif Nat.beq k
-    994529221625635550004 then some .kind_mxf4 else none) else (bif Nat.beq k 994529221625649928626
-    then some .kind_tf32 else none))
+  bif Nat.blt k 975938412678020331490 then (bif Nat.blt k 957852461767612511469 then (bif Nat.beq k
+    957350878407082669931 then some .getctarank else none) else (bif Nat.beq k 957852461767612511469
+    then some .global_dim else none)) else (bif Nat.blt k 994529221625635550004 then (bif Nat.beq k
+    975938412678020331490 then some .ignore_oob else none) else (bif Nat.beq k 994529221625635550004
+    then some .kind_mxf4 else none))
 
 def Token.ofKey_rlrrrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 949053559045747355884 then (bif Nat.blt k 912382470592216693488 then (bif Nat.beq k
-    901866557455939959275 then some .activemask else none) else (bif Nat.beq k 912382470592216693488
-    then some .bulk_group else none)) else (bif Nat.blt k 957350878407082669931 then (bif Nat.beq k
-    949053559045747355884 then some .fractional else none) else (bif Nat.beq k 957350878407082669931
-    then some .getctarank else none))
+  bif Nat.blt k 912382470592216693488 then (bif Nat.blt k 901866557455939959275 then (bif Nat.beq k
+    8416048640526152948 then some .test_wait else none) else (bif Nat.beq k 901866557455939959275
+    then some .activemask else none)) else (bif Nat.blt k 949053559045747355884 then (bif Nat.beq k
+    912382470592216693488 then some .bulk_group else none) else (bif Nat.beq k 949053559045747355884
+    then some .fractional else none))
 
 def Token.ofKey_rlrrrll (k : Nat) : Option Token :=
-  bif Nat.blt k 8416026620218536176 then (bif Nat.blt k 8352923277078524140 then (bif Nat.beq k
-    8341743166350326373 then some .satfinite else none) else (bif Nat.beq k 8352923277078524140 then
-    some .subnormal else none)) else (bif Nat.blt k 8416048640526152948 then (bif Nat.beq k
-    8416026620218536176 then some .tensormap else none) else (bif Nat.beq k 8416048640526152948 then
-    some .test_wait else none))
+  bif Nat.blt k 8352923277078524140 then (bif Nat.blt k 8341743166350326373 then (bif Nat.beq k
+    8135074561685779573 then some .prefetchu else none) else (bif Nat.beq k 8341743166350326373 then
+    some .satfinite else none)) else (bif Nat.blt k 8416026620218536176 then (bif Nat.beq k
+    8352923277078524140 then some .subnormal else none) else (bif Nat.beq k 8416026620218536176 then
+    some .tensormap else none))
 
 def Token.ofKey_rlrrlrr (k : Nat) : Option Token :=
-  bif Nat.blt k 8125495776518101858 then (bif Nat.blt k 7981429119799358192 then (bif Nat.beq k
-    7917287935947093240 then some .movmatrix else none) else (bif Nat.beq k 7981429119799358192 then
-    some .nanosleep else none)) else (bif Nat.blt k 8135074561685779573 then (bif Nat.beq k
-    8125495776518101858 then some .pack_16b else none) else (bif Nat.beq k 8135074561685779573 then
-    some .prefetchu else none))
+  bif Nat.blt k 7981429119799358192 then (bif Nat.blt k 7917287935947093240 then (bif Nat.beq k
+    7882103587192216246 then some .m16n8k256 else none) else (bif Nat.beq k 7917287935947093240 then
+    some .movmatrix else none)) else (bif Nat.blt k 8125495776518101858 then (bif Nat.beq k
+    7981429119799358192 then some .nanosleep else none) else (bif Nat.beq k 8125495776518101858 then
+    some .pack_16b else none))
 
 def Token.ofKey_rlrrlrl (k : Nat) : Option Token :=
-  bif Nat.blt k 7882103587192199480 then (bif Nat.blt k 7838936910190703077 then (bif Nat.beq k
-    7769759543950153910 then some .kind_f16 else none) else (bif Nat.beq k 7838936910190703077 then
-    some .ld_reduce else none)) else (bif Nat.blt k 7882103587192216246 then (bif Nat.beq k
-    7882103587192199480 then some .m16n8k128 else none) else (bif Nat.beq k 7882103587192216246 then
-    some .m16n8k256 else none))
+  bif Nat.blt k 7838936910190703077 then (bif Nat.blt k 7769759543950153910 then (bif Nat.beq k
+    7627632252868795767 then some .im2col_w else none) else (bif Nat.beq k 7769759543950153910 then
+    some .kind_f16 else none)) else (bif Nat.blt k 7882103587192199480 then (bif Nat.beq k
+    7838936910190703077 then some .ld_reduce else none) else (bif Nat.beq k 7882103587192199480 then
+    some .m16n8k128 else none))
 
 def Token.ofKey_rlrrllr (k : Nat) : Option Token :=
-  bif Nat.blt k 7409463062584619621 then (bif Nat.blt k 7345867070604049016 then (bif Nat.beq k
-    7345810141347478373 then some .exclusive else none) else (bif Nat.beq k 7345867070604049016 then
-    some .expect_tx else none)) else (bif Nat.blt k 7627632252868795767 then (bif Nat.beq k
-    7409463062584619621 then some .fill_mode else none) else (bif Nat.beq k 7627632252868795767 then
-    some .im2col_w else none))
+  bif Nat.blt k 7345867070604049016 then (bif Nat.blt k 7345810141347478373 then (bif Nat.beq k
+    7092572977106786738 then some .b6x16_p32 else none) else (bif Nat.beq k 7345810141347478373 then
+    some .exclusive else none)) else (bif Nat.blt k 7409463062584619621 then (bif Nat.beq k
+    7345867070604049016 then some .expect_tx else none) else (bif Nat.beq k 7409463062584619621 then
+    some .fill_mode else none))
 
 def Token.ofKey_rlrrlll (k : Nat) : Option Token :=
-  bif Nat.blt k 7091447077199944500 then (bif Nat.beq k 67421294080587372 then some .wait_all else
-    none) else (bif Nat.blt k 7092572977106786738 then (bif Nat.beq k 7091447077199944500 then some
-    .b4x16_p64 else none) else (bif Nat.beq k 7092572977106786738 then some .b6x16_p32 else none))
+  bif Nat.blt k 67421294080587372 then (bif Nat.beq k 67421294002354676 then some .wait_st else
+    none) else (bif Nat.blt k 7091447077199944500 then (bif Nat.beq k 67421294080587372 then some
+    .wait_all else none) else (bif Nat.beq k 7091447077199944500 then some .b4x16_p64 else none))
 
 def Token.ofKey_rlrlrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 67421294002353764 then (bif Nat.blt k 66920014801434213 then (bif Nat.beq k
-    65807755180012788 then some .try_wait else none) else (bif Nat.beq k 66920014801434213 then some
-    .volatile else none)) else (bif Nat.blt k 67421294002354676 then (bif Nat.beq k
-    67421294002353764 then some .wait_ld else none) else (bif Nat.beq k 67421294002354676 then some
-    .wait_st else none))
+  bif Nat.blt k 66920014801434213 then (bif Nat.blt k 65807755180012788 then (bif Nat.beq k
+    65253189533611256 then some .stmatrix else none) else (bif Nat.beq k 65807755180012788 then some
+    .try_wait else none)) else (bif Nat.blt k 67421294002353764 then (bif Nat.beq k
+    66920014801434213 then some .volatile else none) else (bif Nat.beq k 67421294002353764 then some
+    .wait_ld else none))
 
 def Token.ofKey_rlrlrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 65233834396784822 then (bif Nat.blt k 65233834392590518 then (bif Nat.beq k
-    65233834390493366 then some .sp_1_16 else none) else (bif Nat.beq k 65233834392590518 then some
-    .sp_2_16 else none)) else (bif Nat.blt k 65253189533611256 then (bif Nat.beq k 65233834396784822
-    then some .sp_4_16 else none) else (bif Nat.beq k 65253189533611256 then some .stmatrix else
+  bif Nat.blt k 65233834392590518 then (bif Nat.blt k 65233834390493366 then (bif Nat.beq k
+    65200276878423796 then some .shiftamt else none) else (bif Nat.beq k 65233834390493366 then some
+    .sp_1_16 else none)) else (bif Nat.blt k 65233834396784822 then (bif Nat.beq k 65233834392590518
+    then some .sp_2_16 else none) else (bif Nat.beq k 65233834396784822 then some .sp_4_16 else
     none))
 
 def Token.ofKey_rlrlrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 63555270013170152 then (bif Nat.blt k 61879858576978669 then (bif Nat.beq k
-    61795917218083570 then some .mbarrier else none) else (bif Nat.beq k 61879858576978669 then some
-    .multimem else none)) else (bif Nat.blt k 65200276878423796 then (bif Nat.beq k
-    63555270013170152 then some .prefetch else none) else (bif Nat.beq k 65200276878423796 then some
-    .shiftamt else none))
+  bif Nat.blt k 61879858576978669 then (bif Nat.blt k 61795917218083570 then (bif Nat.beq k
+    61611630356355384 then some .m8n8k128 else none) else (bif Nat.beq k 61795917218083570 then some
+    .mbarrier else none)) else (bif Nat.blt k 63555270013170152 then (bif Nat.beq k
+    61879858576978669 then some .multimem else none) else (bif Nat.beq k 63555270013170152 then some
+    .prefetch else none))
 
 def Token.ofKey_rlrlrll (k : Nat) : Option Token :=
-  bif Nat.blt k 61578934274939700 then (bif Nat.beq k 61578934274939314 then some .m16n8k32 else
-    none) else (bif Nat.blt k 61611630356355384 then (bif Nat.beq k 61578934274939700 then some
-    .m16n8k64 else none) else (bif Nat.beq k 61611630356355384 then some .m8n8k128 else none))
+  bif Nat.blt k 61578934274939314 then (bif Nat.beq k 61578934274939062 then some .m16n8k16 else
+    none) else (bif Nat.blt k 61578934274939700 then (bif Nat.beq k 61578934274939314 then some
+    .m16n8k32 else none) else (bif Nat.beq k 61578934274939700 then some .m16n8k64 else none))
 
 def Token.ofKey_rlrllrr (k : Nat) : Option Token :=
-  bif Nat.blt k 61242171115484408 then (bif Nat.blt k 60701246437110968 then (bif Nat.beq k
-    59619502097756912 then some .isspacep else none) else (bif Nat.beq k 60701246437110968 then some
-    .kind_i8 else none)) else (bif Nat.blt k 61578934274939062 then (bif Nat.beq k 61242171115484408
-    then some .ldmatrix else none) else (bif Nat.beq k 61578934274939062 then some .m16n8k16 else
-    none))
+  bif Nat.blt k 60701246437110968 then (bif Nat.blt k 59619502097756912 then (bif Nat.beq k
+    59597063336917605 then some .infinite else none) else (bif Nat.beq k 59619502097756912 then some
+    .isspacep else none)) else (bif Nat.blt k 61242171115484408 then (bif Nat.beq k
+    60701246437110968 then some .kind_i8 else none) else (bif Nat.beq k 61242171115484408 then some
+    .ldmatrix else none))
 
 def Token.ofKey_rlrllrl (k : Nat) : Option Token :=
-  bif Nat.blt k 57336434157058149 then (bif Nat.blt k 56224109565735918 then (bif Nat.beq k
-    55044969393134002 then some .acc_f32 else none) else (bif Nat.beq k 56224109565735918 then some
-    .copysign else none)) else (bif Nat.blt k 59597063336917605 then (bif Nat.beq k
-    57336434157058149 then some .elemtype else none) else (bif Nat.beq k 59597063336917605 then some
-    .infinite else none))
+  bif Nat.blt k 56224109565735918 then (bif Nat.blt k 55044969393134002 then (bif Nat.beq k
+    43006107325389634 then some .L2_256B else none) else (bif Nat.beq k 55044969393134002 then some
+    .acc_f32 else none)) else (bif Nat.blt k 57336434157058149 then (bif Nat.beq k 56224109565735918
+    then some .copysign else none) else (bif Nat.beq k 57336434157058149 then some .elemtype else
+    none))
 
 def Token.ofKey_rlrlllr (k : Nat) : Option Token :=
-  bif Nat.blt k 43006107323243586 then (bif Nat.blt k 27826179194534962 then (bif Nat.beq k
-    27806406506535778 then some .x128x256b else none) else (bif Nat.beq k 27826179194534962 then
-    some .x16x32bx2 else none)) else (bif Nat.blt k 43006107325389634 then (bif Nat.beq k
-    43006107323243586 then some .L2_128B else none) else (bif Nat.beq k 43006107325389634 then some
-    .L2_256B else none))
+  bif Nat.blt k 27826179194534962 then (bif Nat.blt k 27806406506535778 then (bif Nat.beq k
+    27806406504389730 then some .x128x128b else none) else (bif Nat.beq k 27806406506535778 then
+    some .x128x256b else none)) else (bif Nat.blt k 43006107323243586 then (bif Nat.beq k
+    27826179194534962 then some .x16x32bx2 else none) else (bif Nat.beq k 43006107323243586 then
+    some .L2_128B else none))
 
 def Token.ofKey_rlrllll (k : Nat) : Option Token :=
-  bif Nat.blt k 531610356839406 then (bif Nat.beq k 518057037151282 then some .ue8m0x2 else none)
-    else (bif Nat.blt k 27806406504389730 then (bif Nat.beq k 531610356839406 then some .xorsign
-    else none) else (bif Nat.beq k 27806406504389730 then some .x128x128b else none))
+  bif Nat.blt k 518057037151282 then (bif Nat.beq k 518056231894066 then some .ue5m3x2 else none)
+    else (bif Nat.blt k 531610356839406 then (bif Nat.beq k 518057037151282 then some .ue8m0x2 else
+    none) else (bif Nat.beq k 531610356839406 then some .xorsign else none))
 
 def Token.ofKey_rllrrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 514123087262436 then (bif Nat.blt k 514123087231732 then (bif Nat.beq k
-    514123087082228 then some .try_get else none) else (bif Nat.beq k 514123087231732 then some
-    .try_put else none)) else (bif Nat.blt k 518056231894066 then (bif Nat.beq k 514123087262436
-    then some .try_red else none) else (bif Nat.beq k 518056231894066 then some .ue5m3x2 else none))
+  bif Nat.blt k 514123087231732 then (bif Nat.blt k 514123087082228 then (bif Nat.beq k
+    513602871859253 then some .tcgen05 else none) else (bif Nat.beq k 514123087082228 then some
+    .try_get else none)) else (bif Nat.blt k 514123087262436 then (bif Nat.beq k 514123087231732
+    then some .try_put else none) else (bif Nat.beq k 514123087262436 then some .try_red else none))
 
 def Token.ofKey_rllrrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 509639331224888 then (bif Nat.blt k 509639331192120 then (bif Nat.beq k
-    509639331192116 then some .sp_2_4 else none) else (bif Nat.beq k 509639331192120 then some
-    .sp_2_8 else none)) else (bif Nat.blt k 513602871859253 then (bif Nat.beq k 509639331224888 then
-    some .sp_4_8 else none) else (bif Nat.beq k 513602871859253 then some .tcgen05 else none))
+  bif Nat.blt k 509639331192120 then (bif Nat.blt k 509639331192116 then (bif Nat.beq k
+    509639331175736 then some .sp_1_8 else none) else (bif Nat.beq k 509639331192116 then some
+    .sp_2_4 else none)) else (bif Nat.blt k 509639331224888 then (bif Nat.beq k 509639331192120 then
+    some .sp_2_8 else none) else (bif Nat.beq k 509639331224888 then some .sp_4_8 else none))
 
 def Token.ofKey_rllrrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 509639331175732 then (bif Nat.blt k 509639331175730 then (bif Nat.beq k
-    504877928706533 then some .replace else none) else (bif Nat.beq k 509639331175730 then some
-    .sp_1_2 else none)) else (bif Nat.blt k 509639331175736 then (bif Nat.beq k 509639331175732 then
-    some .sp_1_4 else none) else (bif Nat.beq k 509639331175736 then some .sp_1_8 else none))
+  bif Nat.blt k 509639331175730 then (bif Nat.blt k 504877928706533 then (bif Nat.beq k
+    504876840286693 then some .release else none) else (bif Nat.beq k 504877928706533 then some
+    .replace else none)) else (bif Nat.blt k 509639331175732 then (bif Nat.beq k 509639331175730
+    then some .sp_1_2 else none) else (bif Nat.beq k 509639331175732 then some .sp_1_4 else none))
 
 def Token.ofKey_rllrrll (k : Nat) : Option Token :=
-  bif Nat.blt k 504876832273124 then (bif Nat.blt k 496353781839732 then (bif Nat.beq k
-    481340862159282 then some .m8n8k32 else none) else (bif Nat.beq k 496353781839732 then some
-    .pmevent else none)) else (bif Nat.blt k 504876840286693 then (bif Nat.beq k 504876832273124
-    then some .relaxed else none) else (bif Nat.beq k 504876840286693 then some .release else none))
+  bif Nat.blt k 496353781839732 then (bif Nat.blt k 481340862159282 then (bif Nat.beq k
+    481340862159030 then some .m8n8k16 else none) else (bif Nat.beq k 481340862159282 then some
+    .m8n8k32 else none)) else (bif Nat.blt k 504876832273124 then (bif Nat.beq k 496353781839732
+    then some .pmevent else none) else (bif Nat.beq k 504876832273124 then some .relaxed else none))
 
 def Token.ofKey_rllrlrr (k : Nat) : Option Token :=
-  bif Nat.blt k 481085424022968 then (bif Nat.blt k 481085424022964 then (bif Nat.beq k
-    443443502938468 then some .discard else none) else (bif Nat.beq k 481085424022964 then some
-    .m16n8k4 else none)) else (bif Nat.blt k 481340862159030 then (bif Nat.beq k 481085424022968
-    then some .m16n8k8 else none) else (bif Nat.beq k 481340862159030 then some .m8n8k16 else none))
+  bif Nat.blt k 481085424022964 then (bif Nat.blt k 443443502938468 then (bif Nat.beq k
+    443301251200995 then some .dealloc else none) else (bif Nat.beq k 443443502938468 then some
+    .discard else none)) else (bif Nat.blt k 481085424022968 then (bif Nat.beq k 481085424022964
+    then some .m16n8k4 else none) else (bif Nat.beq k 481085424022968 then some .m16n8k8 else none))
 
 def Token.ofKey_rllrlrl (k : Nat) : Option Token :=
-  bif Nat.blt k 439280626858475 then (bif Nat.blt k 439149106377458 then (bif Nat.beq k
-    434854902183149 then some .box_dim else none) else (bif Nat.beq k 439149106377458 then some
-    .cluster else none)) else (bif Nat.blt k 443301251200995 then (bif Nat.beq k 439280626858475
-    then some .cp_mask else none) else (bif Nat.beq k 443301251200995 then some .dealloc else none))
+  bif Nat.blt k 439149106377458 then (bif Nat.blt k 434854902183149 then (bif Nat.beq k
+    434749415545266 then some .block32 else none) else (bif Nat.beq k 434854902183149 then some
+    .box_dim else none)) else (bif Nat.blt k 439280626858475 then (bif Nat.beq k 439149106377458
+    then some .cluster else none) else (bif Nat.beq k 439280626858475 then some .cp_mask else none))
 
 def Token.ofKey_rllrllr (k : Nat) : Option Token :=
-  bif Nat.blt k 434749415545014 then (bif Nat.blt k 434372295160562 then (bif Nat.beq k
-    430349766865636 then some .aligned else none) else (bif Nat.beq k 434372295160562 then some
-    .barrier else none)) else (bif Nat.blt k 434749415545266 then (bif Nat.beq k 434749415545014
-    then some .block16 else none) else (bif Nat.beq k 434749415545266 then some .block32 else none))
+  bif Nat.blt k 434372295160562 then (bif Nat.blt k 430349766865636 then (bif Nat.beq k
+    430042705983845 then some .acquire else none) else (bif Nat.beq k 430349766865636 then some
+    .aligned else none)) else (bif Nat.blt k 434749415545014 then (bif Nat.beq k 434372295160562
+    then some .barrier else none) else (bif Nat.beq k 434749415545014 then some .block16 else none))
 
 def Token.ofKey_rllrlll (k : Nat) : Option Token :=
-  bif Nat.blt k 430042659992300 then (bif Nat.beq k 335985213545026 then some .L2_64B else none)
-    else (bif Nat.blt k 430042705983845 then (bif Nat.beq k 430042659992300 then some .acq_rel else
-    none) else (bif Nat.beq k 430042705983845 then some .acquire else none))
+  bif Nat.blt k 335985213545026 then (bif Nat.beq k 335950853757250 then some .L1_32B else none)
+    else (bif Nat.blt k 430042659992300 then (bif Nat.beq k 335985213545026 then some .L2_64B else
+    none) else (bif Nat.beq k 430042659992300 then some .acq_rel else none))
 
 def Token.ofKey_rlllrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 239313533836386 then (bif Nat.blt k 226050674826338 then (bif Nat.beq k
-    217392022903650 then some .x16x256b else none) else (bif Nat.beq k 226050674826338 then some
-    .x32x128b else none)) else (bif Nat.blt k 335950853757250 then (bif Nat.beq k 239313533836386
-    then some .x64x128b else none) else (bif Nat.beq k 335950853757250 then some .L1_32B else none))
+  bif Nat.blt k 226050674826338 then (bif Nat.blt k 217392022903650 then (bif Nat.beq k
+    217392020757602 then some .x16x128b else none) else (bif Nat.beq k 217392022903650 then some
+    .x16x256b else none)) else (bif Nat.blt k 239313533836386 then (bif Nat.beq k 226050674826338
+    then some .x32x128b else none) else (bif Nat.beq k 239313533836386 then some .x64x128b else
+    none))
 
 def Token.ofKey_rlllrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 4115088030772 then (bif Nat.blt k 4013074216946 then (bif Nat.beq k 3982984180980
-    then some .submit else none) else (bif Nat.beq k 4013074216946 then some .tensor else none))
-    else (bif Nat.blt k 217392020757602 then (bif Nat.beq k 4115088030772 then some .warpx4 else
-    none) else (bif Nat.beq k 217392020757602 then some .x16x128b else none))
+  bif Nat.blt k 4013074216946 then (bif Nat.blt k 3982984180980 then (bif Nat.beq k 3979492504292
+    then some .shared else none) else (bif Nat.beq k 3982984180980 then some .submit else none))
+    else (bif Nat.blt k 4115088030772 then (bif Nat.beq k 4013074216946 then some .tensor else none)
+    else (bif Nat.beq k 4115088030772 then some .warpx4 else none))
 
 def Token.ofKey_rlllrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 3965006494770 then (bif Nat.blt k 3944333799909 then (bif Nat.beq k 3874569747065
-    then some .parity else none) else (bif Nat.beq k 3944333799909 then some .reduce else none))
-    else (bif Nat.blt k 3979492504292 then (bif Nat.beq k 3965006494770 then some .s2f6x2 else none)
-    else (bif Nat.beq k 3979492504292 then some .shared else none))
+  bif Nat.blt k 3944333799909 then (bif Nat.blt k 3874569747065 then (bif Nat.beq k 3811208377074
+    then some .number else none) else (bif Nat.beq k 3874569747065 then some .parity else none))
+    else (bif Nat.blt k 3965006494770 then (bif Nat.beq k 3944333799909 then some .reduce else none)
+    else (bif Nat.beq k 3965006494770 then some .s2f6x2 else none))
 
 def Token.ofKey_rlllrll (k : Nat) : Option Token :=
-  bif Nat.blt k 3809608429804 then (bif Nat.beq k 3772553670898 then some .membar else none) else
-    (bif Nat.blt k 3811208377074 then (bif Nat.beq k 3809608429804 then some .normal else none) else
-    (bif Nat.beq k 3811208377074 then some .number else none))
+  bif Nat.blt k 3772553670898 then (bif Nat.beq k 3760475485620 then some .m8n8k4 else none) else
+    (bif Nat.blt k 3809608429804 then (bif Nat.beq k 3772553670898 then some .membar else none) else
+    (bif Nat.beq k 3809608429804 then some .normal else none))
 
 def Token.ofKey_rllllrr (k : Nat) : Option Token :=
-  bif Nat.blt k 3758479874230 then (bif Nat.blt k 3637138487276 then (bif Nat.beq k 3568278483180
-    then some .global_ else none) else (bif Nat.beq k 3637138487276 then some .im2col else none))
-    else (bif Nat.blt k 3760475485620 then (bif Nat.beq k 3758479874230 then some .m16n16 else none)
-    else (bif Nat.beq k 3760475485620 then some .m8n8k4 else none))
+  bif Nat.blt k 3637138487276 then (bif Nat.blt k 3568278483180 then (bif Nat.beq k 3533111458405
+    then some .finite else none) else (bif Nat.beq k 3568278483180 then some .global_ else none))
+    else (bif Nat.blt k 3758479874230 then (bif Nat.beq k 3637138487276 then some .im2col else none)
+    else (bif Nat.beq k 3758479874230 then some .m16n16 else none))
 
 def Token.ofKey_rllllrl (k : Nat) : Option Token :=
-  bif Nat.blt k 3530938954979 then (bif Nat.blt k 3484790078516 then (bif Nat.beq k 3484790078514
-    then some .e5m2x2 else none) else (bif Nat.beq k 3484790078516 then some .e5m2x4 else none))
-    else (bif Nat.blt k 3533111458405 then (bif Nat.beq k 3530938954979 then some .fabric else none)
-    else (bif Nat.beq k 3533111458405 then some .finite else none))
+  bif Nat.blt k 3484790078516 then (bif Nat.blt k 3484790078514 then (bif Nat.beq k 3484521659444
+    then some .e4m3x4 else none) else (bif Nat.beq k 3484790078514 then some .e5m2x2 else none))
+    else (bif Nat.blt k 3530938954979 then (bif Nat.beq k 3484790078516 then some .e5m2x4 else none)
+    else (bif Nat.beq k 3530938954979 then some .fabric else none))
 
 def Token.ofKey_rlllllr (k : Nat) : Option Token :=
-  bif Nat.blt k 3484521659442 then (bif Nat.blt k 3484253207604 then (bif Nat.beq k 3484253207602
-    then some .e3m2x2 else none) else (bif Nat.beq k 3484253207604 then some .e3m2x4 else none))
-    else (bif Nat.blt k 3484521659444 then (bif Nat.beq k 3484521659442 then some .e4m3x2 else none)
-    else (bif Nat.beq k 3484521659444 then some .e4m3x4 else none))
+  bif Nat.blt k 3484253207604 then (bif Nat.blt k 3484253207602 then (bif Nat.beq k 3483984788532
+    then some .e2m3x4 else none) else (bif Nat.beq k 3484253207602 then some .e3m2x2 else none))
+    else (bif Nat.blt k 3484521659442 then (bif Nat.beq k 3484253207604 then some .e3m2x4 else none)
+    else (bif Nat.beq k 3484521659442 then some .e4m3x2 else none))
 
 def Token.ofKey_rllllll (k : Nat) : Option Token :=
-  bif Nat.blt k 3483984788530 then (bif Nat.beq k 3483984755764 then some .e2m1x4 else none) else
-    (bif Nat.blt k 3483984788532 then (bif Nat.beq k 3483984788530 then some .e2m3x2 else none) else
-    (bif Nat.beq k 3483984788532 then some .e2m3x4 else none))
+  bif Nat.blt k 3483984755764 then (bif Nat.beq k 3483984755762 then some .e2m1x2 else none) else
+    (bif Nat.blt k 3483984788530 then (bif Nat.beq k 3483984755764 then some .e2m1x4 else none) else
+    (bif Nat.beq k 3483984788530 then some .e2m3x2 else none))
 
 def Token.ofKey_lrrrrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 3431640823028 then (bif Nat.blt k 3394738437170 then (bif Nat.beq k 3393520875508
-    then some .ballot else none) else (bif Nat.beq k 3394738437170 then some .bf16x2 else none))
-    else (bif Nat.blt k 3483984755762 then (bif Nat.beq k 3431640823028 then some .commit else none)
-    else (bif Nat.beq k 3483984755762 then some .e2m1x2 else none))
+  bif Nat.blt k 3394738437170 then (bif Nat.blt k 3393520875508 then (bif Nat.beq k 3363984536436
+    then some .ashift else none) else (bif Nat.beq k 3393520875508 then some .ballot else none))
+    else (bif Nat.blt k 3431640823028 then (bif Nat.beq k 3394738437170 then some .bf16x2 else none)
+    else (bif Nat.beq k 3431640823028 then some .commit else none))
 
 def Token.ofKey_lrrrrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 3363737074533 then (bif Nat.blt k 3363196155896 then (bif Nat.beq k 1819024382818
-    then some .x4x256b else none) else (bif Nat.beq k 3363196155896 then some .approx else none))
-    else (bif Nat.blt k 3363984536436 then (bif Nat.beq k 3363737074533 then some .arrive else none)
-    else (bif Nat.beq k 3363984536436 then some .ashift else none))
+  bif Nat.blt k 3363196155896 then (bif Nat.blt k 1819024382818 then (bif Nat.beq k 1766020929890
+    then some .x32x32b else none) else (bif Nat.beq k 1819024382818 then some .x4x256b else none))
+    else (bif Nat.blt k 3363737074533 then (bif Nat.beq k 3363196155896 then some .approx else none)
+    else (bif Nat.beq k 3363737074533 then some .arrive else none))
 
 def Token.ofKey_lrrrrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 1698375244386 then (bif Nat.blt k 32161625825 then (bif Nat.beq k 31510608946 then
-    some .u16x2 else none) else (bif Nat.beq k 32161625825 then some .wgmma else none)) else (bif
-    Nat.blt k 1766020929890 then (bif Nat.beq k 1698375244386 then some .x16x64b else none) else
-    (bif Nat.beq k 1766020929890 then some .x32x32b else none))
+  bif Nat.blt k 32161625825 then (bif Nat.blt k 31510608946 then (bif Nat.beq k 31379191667 then
+    some .trans else none) else (bif Nat.beq k 31510608946 then some .u16x2 else none)) else (bif
+    Nat.blt k 1698375244386 then (bif Nat.beq k 32161625825 then some .wgmma else none) else (bif
+    Nat.beq k 1698375244386 then some .x16x64b else none))
 
 def Token.ofKey_lrrrrll (k : Nat) : Option Token :=
-  bif Nat.blt k 31352224368 then (bif Nat.blt k 31127600244 then (bif Nat.beq k 31089914740 then
-    some .shift else none) else (bif Nat.beq k 31127600244 then some .szext else none)) else (bif
-    Nat.blt k 31379191667 then (bif Nat.beq k 31352224368 then some .testp else none) else (bif
-    Nat.beq k 31379191667 then some .trans else none))
+  bif Nat.blt k 31127600244 then (bif Nat.blt k 31089914740 then (bif Nat.beq k 30973738034 then
+    some .s16x2 else none) else (bif Nat.beq k 31089914740 then some .shift else none)) else (bif
+    Nat.blt k 31352224368 then (bif Nat.beq k 31127600244 then some .szext else none) else (bif
+    Nat.beq k 31352224368 then some .testp else none))
 
 def Token.ofKey_lrrrlrr (k : Nat) : Option Token :=
-  bif Nat.blt k 30844680564 then (bif Nat.blt k 30815107832 then (bif Nat.beq k 30806881253 then
-    some .range else none) else (bif Nat.beq k 30815107832 then some .redux else none)) else (bif
-    Nat.blt k 30973738034 then (bif Nat.beq k 30844680564 then some .rsqrt else none) else (bif
-    Nat.beq k 30973738034 then some .s16x2 else none))
+  bif Nat.blt k 30815107832 then (bif Nat.blt k 30806881253 then (bif Nat.beq k 30305680505 then
+    some .proxy else none) else (bif Nat.beq k 30806881253 then some .range else none)) else (bif
+    Nat.blt k 30844680564 then (bif Nat.beq k 30815107832 then some .redux else none) else (bif
+    Nat.beq k 30844680564 then some .rsqrt else none))
 
 def Token.ofKey_lrrrlrl (k : Nat) : Option Token :=
-  bif Nat.blt k 30270075117 then (bif Nat.blt k 29762418531 then (bif Nat.beq k 29762370170 then
-    some .noftz else none) else (bif Nat.beq k 29762418531 then some .noinc else none)) else (bif
-    Nat.blt k 30305680505 then (bif Nat.beq k 30270075117 then some .param else none) else (bif
-    Nat.beq k 30305680505 then some .proxy else none))
+  bif Nat.blt k 29762418531 then (bif Nat.blt k 29762370170 then (bif Nat.beq k 29506607412 then
+    some .mul24 else none) else (bif Nat.beq k 29762370170 then some .noftz else none)) else (bif
+    Nat.blt k 30270075117 then (bif Nat.beq k 29762418531 then some .noinc else none) else (bif
+    Nat.beq k 30270075117 then some .param else none))
 
 def Token.ofKey_lrrrllr (k : Nat) : Option Token :=
-  bif Nat.blt k 29464801768 then (bif Nat.blt k 29464533300 then (bif Nat.beq k 29378713782 then
-    some .m8n16 else none) else (bif Nat.beq k 29464533300 then some .mad24 else none)) else (bif
-    Nat.blt k 29506607412 then (bif Nat.beq k 29464801768 then some .match_ else none) else (bif
-    Nat.beq k 29506607412 then some .mul24 else none))
+  bif Nat.blt k 29464533300 then (bif Nat.blt k 29378713782 then (bif Nat.beq k 29363124024 then
+    some .m16n8 else none) else (bif Nat.beq k 29378713782 then some .m8n16 else none)) else (bif
+    Nat.blt k 29464801768 then (bif Nat.beq k 29464533300 then some .mad24 else none) else (bif
+    Nat.beq k 29464801768 then some .match_ else none))
 
 def Token.ofKey_lrrrlll (k : Nat) : Option Token :=
-  bif Nat.blt k 29225447660 then (bif Nat.beq k 28418355436 then some .inval else none) else (bif
-    Nat.blt k 29363124024 then (bif Nat.beq k 29225447660 then some .local_ else none) else (bif
-    Nat.beq k 29363124024 then some .m16n8 else none))
+  bif Nat.blt k 28418355436 then (bif Nat.beq k 27594043877 then some .fence else none) else (bif
+    Nat.blt k 29225447660 then (bif Nat.beq k 28418355436 then some .inval else none) else (bif
+    Nat.beq k 29225447660 then some .local_ else none))
 
 def Token.ofKey_lrrlrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 27488205874 then (bif Nat.blt k 27484077106 then (bif Nat.beq k 27340141044 then
-    some .elect else none) else (bif Nat.beq k 27484077106 then some .f16x2 else none)) else (bif
-    Nat.blt k 27594043877 then (bif Nat.beq k 27488205874 then some .f32x2 else none) else (bif
-    Nat.beq k 27594043877 then some .fence else none))
+  bif Nat.blt k 27484077106 then (bif Nat.blt k 27340141044 then (bif Nat.beq k 26809711092 then
+    some .const else none) else (bif Nat.beq k 27340141044 then some .elect else none)) else (bif
+    Nat.blt k 27488205874 then (bif Nat.beq k 27484077106 then some .f16x2 else none) else (bif
+    Nat.beq k 27488205874 then some .f32x2 else none))
 
 def Token.ofKey_lrrlrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 26803400932 then (bif Nat.blt k 26803205872 then (bif Nat.beq k 26522318692 then
-    some .bfind else none) else (bif Nat.beq k 26803205872 then some .clamp else none)) else (bif
-    Nat.blt k 26809711092 then (bif Nat.beq k 26803400932 then some .clmad else none) else (bif
-    Nat.beq k 26809711092 then some .const else none))
+  bif Nat.blt k 26803205872 then (bif Nat.blt k 26547517556 then (bif Nat.beq k 26522318692 then
+    some .bfind else none) else (bif Nat.beq k 26547517556 then some .brkpt else none)) else (bif
+    Nat.blt k 26803400932 then (bif Nat.beq k 26803205872 then some .clamp else none) else (bif
+    Nat.beq k 26803400932 then some .clmad else none))
 
 def Token.ofKey_lrrlrlr (k : Nat) : Option Token :=
   bif Nat.blt k 26410228020 then (bif Nat.blt k 26281408355 then (bif Nat.beq k 26266515427 then
@@ -1427,101 +1430,101 @@ def Token.ofKey_rrrlrl (k : Nat) : Option Token :=
     Token.ofKey_rrrlrll k else Token.ofKey_rrrlrlr k
 
 def Token.ofKey_rrrllr (k : Nat) : Option Token :=
-  bif Nat.blt k (Nat.add (Nat.mul 68 (Nat.pow 10 36)) 984399645953115081963202392487796088) then
+  bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 989873138418161734434600045060726114) then
     Token.ofKey_rrrllrl k else Token.ofKey_rrrllrr k
 
 def Token.ofKey_rrrlll (k : Nat) : Option Token :=
-  bif Nat.blt k 601161065723936942696817618345408176 then Token.ofKey_rrrllll k else
+  bif Nat.blt k 601161065723936942696254668391986864 then Token.ofKey_rrrllll k else
     Token.ofKey_rrrlllr k
 
 def Token.ofKey_rrlrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 3098916630588598415815299405934828 then Token.ofKey_rrlrrrl k else
+  bif Nat.blt k 3098599717938541358464925230133484 then Token.ofKey_rrlrrrl k else
     Token.ofKey_rrlrrrr k
 
 def Token.ofKey_rrlrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 24207810306954893608628208040549 then Token.ofKey_rrlrrll k else Token.ofKey_rrlrrlr
+  bif Nat.blt k 24207810296394854363005068294644 then Token.ofKey_rrlrrll k else Token.ofKey_rrlrrlr
     k
 
 def Token.ofKey_rrlrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 257121562355311617179372845555 then Token.ofKey_rrlrlrl k else Token.ofKey_rrlrlrr k
+  bif Nat.blt k 254430965790615196945285428451 then Token.ofKey_rrlrlrl k else Token.ofKey_rrlrlrr k
 
 def Token.ofKey_rrlrll (k : Nat) : Option Token :=
-  bif Nat.blt k 2316588615246827114781464883 then Token.ofKey_rrlrlll k else Token.ofKey_rrlrllr k
+  bif Nat.blt k 2259761912255254873467615540 then Token.ofKey_rrlrlll k else Token.ofKey_rrlrllr k
 
 def Token.ofKey_rrllrr (k : Nat) : Option Token :=
-  bif Nat.blt k 2008762205900872632013320805 then Token.ofKey_rrllrrl k else Token.ofKey_rrllrrr k
+  bif Nat.blt k 1931976564072273734392347769 then Token.ofKey_rrllrrl k else Token.ofKey_rrllrrr k
 
 def Token.ofKey_rrllrl (k : Nat) : Option Token :=
-  bif Nat.blt k 15098307216782332343000370 then Token.ofKey_rrllrll k else Token.ofKey_rrllrlr k
+  bif Nat.blt k 15098307216782332343000369 then Token.ofKey_rrllrll k else Token.ofKey_rrllrlr k
 
 def Token.ofKey_rrlllr (k : Nat) : Option Token :=
-  bif Nat.blt k 136734321284905929603681 then Token.ofKey_rrlllrl k else Token.ofKey_rrlllrr k
+  bif Nat.blt k 133129198261186504521571 then Token.ofKey_rrlllrl k else Token.ofKey_rrlllrr k
 
 def Token.ofKey_rrllll (k : Nat) : Option Token :=
-  bif Nat.blt k 1078194260182144971500 then Token.ofKey_rrlllll k else Token.ofKey_rrllllr k
+  bif Nat.blt k 1068814458774615587315 then Token.ofKey_rrlllll k else Token.ofKey_rrllllr k
 
 def Token.ofKey_rlrrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 994529221625649977526 then Token.ofKey_rlrrrrl k else Token.ofKey_rlrrrrr k
+  bif Nat.blt k 994529221625649928626 then Token.ofKey_rlrrrrl k else Token.ofKey_rlrrrrr k
 
 def Token.ofKey_rlrrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 901866557455939959275 then Token.ofKey_rlrrrll k else Token.ofKey_rlrrrlr k
+  bif Nat.blt k 8416048640526152948 then Token.ofKey_rlrrrll k else Token.ofKey_rlrrrlr k
 
 def Token.ofKey_rlrrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 7917287935947093240 then Token.ofKey_rlrrlrl k else Token.ofKey_rlrrlrr k
+  bif Nat.blt k 7882103587192216246 then Token.ofKey_rlrrlrl k else Token.ofKey_rlrrlrr k
 
 def Token.ofKey_rlrrll (k : Nat) : Option Token :=
-  bif Nat.blt k 7345810141347478373 then Token.ofKey_rlrrlll k else Token.ofKey_rlrrllr k
+  bif Nat.blt k 7092572977106786738 then Token.ofKey_rlrrlll k else Token.ofKey_rlrrllr k
 
 def Token.ofKey_rlrlrr (k : Nat) : Option Token :=
-  bif Nat.blt k 65807755180012788 then Token.ofKey_rlrlrrl k else Token.ofKey_rlrlrrr k
+  bif Nat.blt k 65253189533611256 then Token.ofKey_rlrlrrl k else Token.ofKey_rlrlrrr k
 
 def Token.ofKey_rlrlrl (k : Nat) : Option Token :=
-  bif Nat.blt k 61795917218083570 then Token.ofKey_rlrlrll k else Token.ofKey_rlrlrlr k
+  bif Nat.blt k 61611630356355384 then Token.ofKey_rlrlrll k else Token.ofKey_rlrlrlr k
 
 def Token.ofKey_rlrllr (k : Nat) : Option Token :=
-  bif Nat.blt k 59619502097756912 then Token.ofKey_rlrllrl k else Token.ofKey_rlrllrr k
+  bif Nat.blt k 59597063336917605 then Token.ofKey_rlrllrl k else Token.ofKey_rlrllrr k
 
 def Token.ofKey_rlrlll (k : Nat) : Option Token :=
-  bif Nat.blt k 27806406506535778 then Token.ofKey_rlrllll k else Token.ofKey_rlrlllr k
+  bif Nat.blt k 27806406504389730 then Token.ofKey_rlrllll k else Token.ofKey_rlrlllr k
 
 def Token.ofKey_rllrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 514123087082228 then Token.ofKey_rllrrrl k else Token.ofKey_rllrrrr k
+  bif Nat.blt k 513602871859253 then Token.ofKey_rllrrrl k else Token.ofKey_rllrrrr k
 
 def Token.ofKey_rllrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 504877928706533 then Token.ofKey_rllrrll k else Token.ofKey_rllrrlr k
+  bif Nat.blt k 504876840286693 then Token.ofKey_rllrrll k else Token.ofKey_rllrrlr k
 
 def Token.ofKey_rllrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 443443502938468 then Token.ofKey_rllrlrl k else Token.ofKey_rllrlrr k
+  bif Nat.blt k 443301251200995 then Token.ofKey_rllrlrl k else Token.ofKey_rllrlrr k
 
 def Token.ofKey_rllrll (k : Nat) : Option Token :=
-  bif Nat.blt k 430349766865636 then Token.ofKey_rllrlll k else Token.ofKey_rllrllr k
+  bif Nat.blt k 430042705983845 then Token.ofKey_rllrlll k else Token.ofKey_rllrllr k
 
 def Token.ofKey_rlllrr (k : Nat) : Option Token :=
-  bif Nat.blt k 217392022903650 then Token.ofKey_rlllrrl k else Token.ofKey_rlllrrr k
+  bif Nat.blt k 217392020757602 then Token.ofKey_rlllrrl k else Token.ofKey_rlllrrr k
 
 def Token.ofKey_rlllrl (k : Nat) : Option Token :=
-  bif Nat.blt k 3874569747065 then Token.ofKey_rlllrll k else Token.ofKey_rlllrlr k
+  bif Nat.blt k 3811208377074 then Token.ofKey_rlllrll k else Token.ofKey_rlllrlr k
 
 def Token.ofKey_rllllr (k : Nat) : Option Token :=
-  bif Nat.blt k 3568278483180 then Token.ofKey_rllllrl k else Token.ofKey_rllllrr k
+  bif Nat.blt k 3533111458405 then Token.ofKey_rllllrl k else Token.ofKey_rllllrr k
 
 def Token.ofKey_rlllll (k : Nat) : Option Token :=
-  bif Nat.blt k 3484253207602 then Token.ofKey_rllllll k else Token.ofKey_rlllllr k
+  bif Nat.blt k 3483984788532 then Token.ofKey_rllllll k else Token.ofKey_rlllllr k
 
 def Token.ofKey_lrrrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 3393520875508 then Token.ofKey_lrrrrrl k else Token.ofKey_lrrrrrr k
+  bif Nat.blt k 3363984536436 then Token.ofKey_lrrrrrl k else Token.ofKey_lrrrrrr k
 
 def Token.ofKey_lrrrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 31510608946 then Token.ofKey_lrrrrll k else Token.ofKey_lrrrrlr k
+  bif Nat.blt k 31379191667 then Token.ofKey_lrrrrll k else Token.ofKey_lrrrrlr k
 
 def Token.ofKey_lrrrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 30806881253 then Token.ofKey_lrrrlrl k else Token.ofKey_lrrrlrr k
+  bif Nat.blt k 30305680505 then Token.ofKey_lrrrlrl k else Token.ofKey_lrrrlrr k
 
 def Token.ofKey_lrrrll (k : Nat) : Option Token :=
-  bif Nat.blt k 29378713782 then Token.ofKey_lrrrlll k else Token.ofKey_lrrrllr k
+  bif Nat.blt k 29363124024 then Token.ofKey_lrrrlll k else Token.ofKey_lrrrllr k
 
 def Token.ofKey_lrrlrr (k : Nat) : Option Token :=
-  bif Nat.blt k 27340141044 then Token.ofKey_lrrlrrl k else Token.ofKey_lrrlrrr k
+  bif Nat.blt k 26809711092 then Token.ofKey_lrrlrrl k else Token.ofKey_lrrlrrr k
 
 def Token.ofKey_lrrlrl (k : Nat) : Option Token :=
   bif Nat.blt k 26266515427 then Token.ofKey_lrrlrll k else Token.ofKey_lrrlrlr k
@@ -1617,50 +1620,50 @@ def Token.ofKey_rrrlr (k : Nat) : Option Token :=
     Token.ofKey_rrrlrl k else Token.ofKey_rrrlrr k
 
 def Token.ofKey_rrrll (k : Nat) : Option Token :=
-  bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158283986910935525) then
+  bif Nat.blt k (Nat.add (Nat.mul 66 (Nat.pow 10 36)) 377546221687784458158283952551197157) then
     Token.ofKey_rrrlll k else Token.ofKey_rrrllr k
 
 def Token.ofKey_rrlrr (k : Nat) : Option Token :=
-  bif Nat.blt k 32894325087524945775014496990436 then Token.ofKey_rrlrrl k else Token.ofKey_rrlrrr k
+  bif Nat.blt k 32894209951506613723289874117859 then Token.ofKey_rrlrrl k else Token.ofKey_rrlrrr k
 
 def Token.ofKey_rrlrl (k : Nat) : Option Token :=
-  bif Nat.blt k 189142860753698633777784846836 then Token.ofKey_rrlrll k else Token.ofKey_rrlrlr k
+  bif Nat.blt k 189142860733735324004386502516 then Token.ofKey_rrlrll k else Token.ofKey_rrlrlr k
 
 def Token.ofKey_rrllr (k : Nat) : Option Token :=
-  bif Nat.blt k 17511464589725331829127667 then Token.ofKey_rrllrl k else Token.ofKey_rrllrr k
+  bif Nat.blt k 17215146265360203538559724 then Token.ofKey_rrllrl k else Token.ofKey_rrllrr k
 
 def Token.ofKey_rrlll (k : Nat) : Option Token :=
-  bif Nat.blt k 116702157609156453365349 then Token.ofKey_rrllll k else Token.ofKey_rrlllr k
+  bif Nat.blt k 115577125819721308747760 then Token.ofKey_rrllll k else Token.ofKey_rrlllr k
 
 def Token.ofKey_rlrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 957852461767612511469 then Token.ofKey_rlrrrl k else Token.ofKey_rlrrrr k
+  bif Nat.blt k 957350878407082669931 then Token.ofKey_rlrrrl k else Token.ofKey_rlrrrr k
 
 def Token.ofKey_rlrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 7769759543950153910 then Token.ofKey_rlrrll k else Token.ofKey_rlrrlr k
+  bif Nat.blt k 7627632252868795767 then Token.ofKey_rlrrll k else Token.ofKey_rlrrlr k
 
 def Token.ofKey_rlrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 65233834390493366 then Token.ofKey_rlrlrl k else Token.ofKey_rlrlrr k
+  bif Nat.blt k 65200276878423796 then Token.ofKey_rlrlrl k else Token.ofKey_rlrlrr k
 
 def Token.ofKey_rlrll (k : Nat) : Option Token :=
-  bif Nat.blt k 55044969393134002 then Token.ofKey_rlrlll k else Token.ofKey_rlrllr k
+  bif Nat.blt k 43006107325389634 then Token.ofKey_rlrlll k else Token.ofKey_rlrllr k
 
 def Token.ofKey_rllrr (k : Nat) : Option Token :=
-  bif Nat.blt k 509639331192116 then Token.ofKey_rllrrl k else Token.ofKey_rllrrr k
+  bif Nat.blt k 509639331175736 then Token.ofKey_rllrrl k else Token.ofKey_rllrrr k
 
 def Token.ofKey_rllrl (k : Nat) : Option Token :=
-  bif Nat.blt k 434854902183149 then Token.ofKey_rllrll k else Token.ofKey_rllrlr k
+  bif Nat.blt k 434749415545266 then Token.ofKey_rllrll k else Token.ofKey_rllrlr k
 
 def Token.ofKey_rlllr (k : Nat) : Option Token :=
-  bif Nat.blt k 3982984180980 then Token.ofKey_rlllrl k else Token.ofKey_rlllrr k
+  bif Nat.blt k 3979492504292 then Token.ofKey_rlllrl k else Token.ofKey_rlllrr k
 
 def Token.ofKey_rllll (k : Nat) : Option Token :=
-  bif Nat.blt k 3484790078514 then Token.ofKey_rlllll k else Token.ofKey_rllllr k
+  bif Nat.blt k 3484521659444 then Token.ofKey_rlllll k else Token.ofKey_rllllr k
 
 def Token.ofKey_lrrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 1819024382818 then Token.ofKey_lrrrrl k else Token.ofKey_lrrrrr k
+  bif Nat.blt k 1766020929890 then Token.ofKey_lrrrrl k else Token.ofKey_lrrrrr k
 
 def Token.ofKey_lrrrl (k : Nat) : Option Token :=
-  bif Nat.blt k 29762370170 then Token.ofKey_lrrrll k else Token.ofKey_lrrrlr k
+  bif Nat.blt k 29506607412 then Token.ofKey_lrrrll k else Token.ofKey_lrrrlr k
 
 def Token.ofKey_lrrlr (k : Nat) : Option Token :=
   bif Nat.blt k 26522318692 then Token.ofKey_lrrlrl k else Token.ofKey_lrrlrr k
@@ -1709,29 +1712,29 @@ def Token.ofKey_rrrr (k : Nat) : Option Token :=
     404769438536544134799470381001045236) then Token.ofKey_rrrrl k else Token.ofKey_rrrrr k
 
 def Token.ofKey_rrrl (k : Nat) : Option Token :=
-  bif Nat.blt k (Nat.add (Nat.mul 77 (Nat.pow 10 36)) 624144590349054733232030782781699299) then
+  bif Nat.blt k (Nat.add (Nat.mul 73 (Nat.pow 10 36)) 54842526965427101181996064820769522) then
     Token.ofKey_rrrll k else Token.ofKey_rrrlr k
 
 def Token.ofKey_rrlr (k : Nat) : Option Token :=
-  bif Nat.blt k 266966905112402540155367174964 then Token.ofKey_rrlrl k else Token.ofKey_rrlrr k
+  bif Nat.blt k 262083448575911297582898983795 then Token.ofKey_rrlrl k else Token.ofKey_rrlrr k
 
 def Token.ofKey_rrll (k : Nat) : Option Token :=
-  bif Nat.blt k 15092515949083646565808880 then Token.ofKey_rrlll k else Token.ofKey_rrllr k
+  bif Nat.blt k 15084177301220375479974644 then Token.ofKey_rrlll k else Token.ofKey_rrllr k
 
 def Token.ofKey_rlrr (k : Nat) : Option Token :=
-  bif Nat.blt k 8341743166350326373 then Token.ofKey_rlrrl k else Token.ofKey_rlrrr k
+  bif Nat.blt k 8135074561685779573 then Token.ofKey_rlrrl k else Token.ofKey_rlrrr k
 
 def Token.ofKey_rlrl (k : Nat) : Option Token :=
-  bif Nat.blt k 61578934274939314 then Token.ofKey_rlrll k else Token.ofKey_rlrlr k
+  bif Nat.blt k 61578934274939062 then Token.ofKey_rlrll k else Token.ofKey_rlrlr k
 
 def Token.ofKey_rllr (k : Nat) : Option Token :=
-  bif Nat.blt k 481340862159282 then Token.ofKey_rllrl k else Token.ofKey_rllrr k
+  bif Nat.blt k 481340862159030 then Token.ofKey_rllrl k else Token.ofKey_rllrr k
 
 def Token.ofKey_rlll (k : Nat) : Option Token :=
-  bif Nat.blt k 3772553670898 then Token.ofKey_rllll k else Token.ofKey_rlllr k
+  bif Nat.blt k 3760475485620 then Token.ofKey_rllll k else Token.ofKey_rlllr k
 
 def Token.ofKey_lrrr (k : Nat) : Option Token :=
-  bif Nat.blt k 31089914740 then Token.ofKey_lrrrl k else Token.ofKey_lrrrr k
+  bif Nat.blt k 30973738034 then Token.ofKey_lrrrl k else Token.ofKey_lrrrr k
 
 def Token.ofKey_lrrl (k : Nat) : Option Token :=
   bif Nat.blt k 251441392 then Token.ofKey_lrrll k else Token.ofKey_lrrlr k
@@ -1759,16 +1762,16 @@ def Token.ofKey_rrr (k : Nat) : Option Token :=
     then Token.ofKey_rrrl k else Token.ofKey_rrrr k
 
 def Token.ofKey_rrl (k : Nat) : Option Token :=
-  bif Nat.blt k 2239499485951857996633905496 then Token.ofKey_rrll k else Token.ofKey_rrlr k
+  bif Nat.blt k 2239499485951857996633905368 then Token.ofKey_rrll k else Token.ofKey_rrlr k
 
 def Token.ofKey_rlr (k : Nat) : Option Token :=
-  bif Nat.blt k 67421294080587372 then Token.ofKey_rlrl k else Token.ofKey_rlrr k
+  bif Nat.blt k 67421294002354676 then Token.ofKey_rlrl k else Token.ofKey_rlrr k
 
 def Token.ofKey_rll (k : Nat) : Option Token :=
-  bif Nat.blt k 335985213545026 then Token.ofKey_rlll k else Token.ofKey_rllr k
+  bif Nat.blt k 335950853757250 then Token.ofKey_rlll k else Token.ofKey_rllr k
 
 def Token.ofKey_lrr (k : Nat) : Option Token :=
-  bif Nat.blt k 28418355436 then Token.ofKey_lrrl k else Token.ofKey_lrrr k
+  bif Nat.blt k 27594043877 then Token.ofKey_lrrl k else Token.ofKey_lrrr k
 
 def Token.ofKey_lrl (k : Nat) : Option Token :=
   bif Nat.blt k 207321579 then Token.ofKey_lrll k else Token.ofKey_lrlr k
@@ -1780,10 +1783,10 @@ def Token.ofKey_lll (k : Nat) : Option Token :=
   bif Nat.blt k 13941 then Token.ofKey_llll k else Token.ofKey_lllr k
 
 def Token.ofKey_rr (k : Nat) : Option Token :=
-  bif Nat.blt k 549690314411776159311166179179756276 then Token.ofKey_rrl k else Token.ofKey_rrr k
+  bif Nat.blt k 549628828347869529548571769664609655 then Token.ofKey_rrl k else Token.ofKey_rrr k
 
 def Token.ofKey_rl (k : Nat) : Option Token :=
-  bif Nat.blt k 518057037151282 then Token.ofKey_rll k else Token.ofKey_rlr k
+  bif Nat.blt k 518056231894066 then Token.ofKey_rll k else Token.ofKey_rlr k
 
 def Token.ofKey_lr (k : Nat) : Option Token :=
   bif Nat.blt k 242889580 then Token.ofKey_lrl k else Token.ofKey_lrr k
@@ -1792,13 +1795,13 @@ def Token.ofKey_ll (k : Nat) : Option Token :=
   bif Nat.blt k 1601907 then Token.ofKey_lll k else Token.ofKey_llr k
 
 def Token.ofKey_r (k : Nat) : Option Token :=
-  bif Nat.blt k 1022635049608552166130 then Token.ofKey_rl k else Token.ofKey_rr k
+  bif Nat.blt k 1022607526597781715557 then Token.ofKey_rl k else Token.ofKey_rr k
 
 def Token.ofKey_l (k : Nat) : Option Token :=
   bif Nat.blt k 1881953 then Token.ofKey_ll k else Token.ofKey_lr k
 
 def Token.ofKey? (k : Nat) : Option Token :=
-  bif Nat.blt k 3483984755764 then Token.ofKey_l k else Token.ofKey_r k
+  bif Nat.blt k 3483984755762 then Token.ofKey_l k else Token.ofKey_r k
 
 /-- The key of a segment from its UTF-8 bytes: ASCII codes as base-128 digits; `none`
 for any other byte. -/
@@ -1961,7 +1964,7 @@ def Slot.code_abs (i : Nat) : Nat :=
 
 /-- Codes of slot `abtype`, by the token's constructor index. -/
 def Slot.code_abtype (i : Nat) : Nat :=
-  bif Nat.beq i 370 then 1 else 0
+  bif Nat.beq i 371 then 1 else 0
 
 /-- Codes of slot `acc`, by the token's constructor index. -/
 def Slot.code_acc (i : Nat) : Nat :=
@@ -1969,38 +1972,38 @@ def Slot.code_acc (i : Nat) : Nat :=
 
 /-- Codes of slot `action`, by the token's constructor index. -/
 def Slot.code_action (i : Nat) : Nat :=
-  bif Nat.blt i 330 then (bif Nat.blt i 169 then (bif Nat.blt i 121 then (bif Nat.blt i 48 then (bif
+  bif Nat.blt i 331 then (bif Nat.blt i 170 then (bif Nat.blt i 122 then (bif Nat.blt i 48 then (bif
     Nat.blt i 47 then (bif Nat.beq i 42 then 5 else 0) else (bif Nat.beq i 47 then 3 else 0)) else
-    (bif Nat.blt i 88 then (bif Nat.beq i 48 then 4 else 0) else (bif Nat.blt i 120 then (bif
-    Nat.beq i 88 then 28 else 0) else (bif Nat.beq i 120 then 7 else 0)))) else (bif Nat.blt i 127
-    then (bif Nat.blt i 122 then (bif Nat.beq i 121 then 12 else 0) else (bif Nat.beq i 122 then 2
-    else 0)) else (bif Nat.blt i 138 then (bif Nat.beq i 127 then 35 else 0) else (bif Nat.blt i 139
-    then (bif Nat.beq i 138 then 6 else 0) else (bif Nat.beq i 139 then 39 else 0))))) else (bif
-    Nat.blt i 219 then (bif Nat.blt i 181 then (bif Nat.blt i 180 then (bif Nat.beq i 169 then 1
-    else 0) else (bif Nat.beq i 180 then 37 else 0)) else (bif Nat.blt i 215 then (bif Nat.beq i 181
-    then 36 else 0) else (bif Nat.blt i 217 then (bif Nat.beq i 215 then 38 else 0) else (bif
-    Nat.beq i 217 then 23 else 0)))) else (bif Nat.blt i 234 then (bif Nat.blt i 231 then (bif
-    Nat.beq i 219 then 26 else 0) else (bif Nat.beq i 231 then 22 else 0)) else (bif Nat.blt i 287
-    then (bif Nat.beq i 234 then 8 else 0) else (bif Nat.blt i 324 then (bif Nat.beq i 287 then 10
-    else 0) else (bif Nat.beq i 324 then 27 else 0)))))) else (bif Nat.blt i 441 then (bif Nat.blt i
-    413 then (bif Nat.blt i 344 then (bif Nat.blt i 336 then (bif Nat.beq i 330 then 9 else 0) else
-    (bif Nat.beq i 336 then 30 else 0)) else (bif Nat.blt i 349 then (bif Nat.beq i 344 then 21 else
-    0) else (bif Nat.blt i 393 then (bif Nat.beq i 349 then 31 else 0) else (bif Nat.beq i 393 then
-    40 else 0)))) else (bif Nat.blt i 420 then (bif Nat.blt i 417 then (bif Nat.beq i 413 then 32
-    else 0) else (bif Nat.beq i 417 then 18 else 0)) else (bif Nat.blt i 431 then (bif Nat.beq i 420
-    then 20 else 0) else (bif Nat.blt i 440 then (bif Nat.beq i 431 then 24 else 0) else (bif
-    Nat.beq i 440 then 29 else 0))))) else (bif Nat.blt i 465 then (bif Nat.blt i 443 then (bif
-    Nat.blt i 442 then (bif Nat.beq i 441 then 14 else 0) else (bif Nat.beq i 442 then 17 else 0))
-    else (bif Nat.blt i 444 then (bif Nat.beq i 443 then 15 else 0) else (bif Nat.blt i 445 then
-    (bif Nat.beq i 444 then 16 else 0) else (bif Nat.beq i 445 then 25 else 0)))) else (bif Nat.blt
-    i 467 then (bif Nat.blt i 466 then (bif Nat.beq i 465 then 19 else 0) else (bif Nat.beq i 466
-    then 33 else 0)) else (bif Nat.blt i 468 then (bif Nat.beq i 467 then 34 else 0) else (bif
-    Nat.blt i 469 then (bif Nat.beq i 468 then 13 else 0) else (bif Nat.beq i 469 then 11 else
+    (bif Nat.blt i 89 then (bif Nat.beq i 48 then 4 else 0) else (bif Nat.blt i 121 then (bif
+    Nat.beq i 89 then 28 else 0) else (bif Nat.beq i 121 then 7 else 0)))) else (bif Nat.blt i 128
+    then (bif Nat.blt i 123 then (bif Nat.beq i 122 then 12 else 0) else (bif Nat.beq i 123 then 2
+    else 0)) else (bif Nat.blt i 139 then (bif Nat.beq i 128 then 35 else 0) else (bif Nat.blt i 140
+    then (bif Nat.beq i 139 then 6 else 0) else (bif Nat.beq i 140 then 39 else 0))))) else (bif
+    Nat.blt i 220 then (bif Nat.blt i 182 then (bif Nat.blt i 181 then (bif Nat.beq i 170 then 1
+    else 0) else (bif Nat.beq i 181 then 37 else 0)) else (bif Nat.blt i 216 then (bif Nat.beq i 182
+    then 36 else 0) else (bif Nat.blt i 218 then (bif Nat.beq i 216 then 38 else 0) else (bif
+    Nat.beq i 218 then 23 else 0)))) else (bif Nat.blt i 235 then (bif Nat.blt i 232 then (bif
+    Nat.beq i 220 then 26 else 0) else (bif Nat.beq i 232 then 22 else 0)) else (bif Nat.blt i 288
+    then (bif Nat.beq i 235 then 8 else 0) else (bif Nat.blt i 325 then (bif Nat.beq i 288 then 10
+    else 0) else (bif Nat.beq i 325 then 27 else 0)))))) else (bif Nat.blt i 442 then (bif Nat.blt i
+    414 then (bif Nat.blt i 345 then (bif Nat.blt i 337 then (bif Nat.beq i 331 then 9 else 0) else
+    (bif Nat.beq i 337 then 30 else 0)) else (bif Nat.blt i 350 then (bif Nat.beq i 345 then 21 else
+    0) else (bif Nat.blt i 394 then (bif Nat.beq i 350 then 31 else 0) else (bif Nat.beq i 394 then
+    40 else 0)))) else (bif Nat.blt i 421 then (bif Nat.blt i 418 then (bif Nat.beq i 414 then 32
+    else 0) else (bif Nat.beq i 418 then 18 else 0)) else (bif Nat.blt i 432 then (bif Nat.beq i 421
+    then 20 else 0) else (bif Nat.blt i 441 then (bif Nat.beq i 432 then 24 else 0) else (bif
+    Nat.beq i 441 then 29 else 0))))) else (bif Nat.blt i 466 then (bif Nat.blt i 444 then (bif
+    Nat.blt i 443 then (bif Nat.beq i 442 then 14 else 0) else (bif Nat.beq i 443 then 17 else 0))
+    else (bif Nat.blt i 445 then (bif Nat.beq i 444 then 15 else 0) else (bif Nat.blt i 446 then
+    (bif Nat.beq i 445 then 16 else 0) else (bif Nat.beq i 446 then 25 else 0)))) else (bif Nat.blt
+    i 468 then (bif Nat.blt i 467 then (bif Nat.beq i 466 then 19 else 0) else (bif Nat.beq i 467
+    then 33 else 0)) else (bif Nat.blt i 469 then (bif Nat.beq i 468 then 34 else 0) else (bif
+    Nat.blt i 470 then (bif Nat.beq i 469 then 13 else 0) else (bif Nat.beq i 470 then 11 else
     0))))))
 
 /-- Codes of slot `alayout`, by the token's constructor index. -/
 def Slot.code_alayout (i : Nat) : Nat :=
-  bif Nat.blt i 359 then (bif Nat.beq i 95 then 2 else 0) else (bif Nat.beq i 359 then 1 else 0)
+  bif Nat.blt i 360 then (bif Nat.beq i 96 then 2 else 0) else (bif Nat.beq i 360 then 1 else 0)
 
 /-- Codes of slot `aligned`, by the token's constructor index. -/
 def Slot.code_aligned (i : Nat) : Nat :=
@@ -2020,34 +2023,34 @@ def Slot.code_async_ (i : Nat) : Nat :=
 
 /-- Codes of slot `atype`, by the token's constructor index. -/
 def Slot.code_atype (i : Nat) : Nat :=
-  bif Nat.blt i 175 then (bif Nat.blt i 153 then (bif Nat.blt i 146 then (bif Nat.blt i 68 then (bif
+  bif Nat.blt i 176 then (bif Nat.blt i 154 then (bif Nat.blt i 147 then (bif Nat.blt i 68 then (bif
     Nat.beq i 52 then 29 else 0) else (bif Nat.blt i 69 then (bif Nat.beq i 68 then 14 else 0) else
-    (bif Nat.beq i 69 then 2 else 0))) else (bif Nat.blt i 150 then (bif Nat.blt i 148 then (bif
-    Nat.beq i 146 then 20 else 0) else (bif Nat.beq i 148 then 21 else 0)) else (bif Nat.blt i 152
-    then (bif Nat.beq i 150 then 22 else 0) else (bif Nat.beq i 152 then 25 else 0)))) else (bif
-    Nat.blt i 170 then (bif Nat.blt i 155 then (bif Nat.beq i 153 then 18 else 0) else (bif Nat.blt
-    i 156 then (bif Nat.beq i 155 then 26 else 0) else (bif Nat.beq i 156 then 19 else 0))) else
-    (bif Nat.blt i 172 then (bif Nat.blt i 171 then (bif Nat.beq i 170 then 15 else 0) else (bif
-    Nat.beq i 171 then 1 else 0)) else (bif Nat.blt i 173 then (bif Nat.beq i 172 then 4 else 0)
-    else (bif Nat.beq i 173 then 3 else 0))))) else (bif Nat.blt i 433 then (bif Nat.blt i 370 then
-    (bif Nat.blt i 366 then (bif Nat.beq i 175 then 16 else 0) else (bif Nat.blt i 369 then (bif
-    Nat.beq i 366 then 12 else 0) else (bif Nat.beq i 369 then 23 else 0))) else (bif Nat.blt i 372
-    then (bif Nat.blt i 371 then (bif Nat.beq i 370 then 7 else 0) else (bif Nat.beq i 371 then 28
-    else 0)) else (bif Nat.blt i 373 then (bif Nat.beq i 372 then 13 else 0) else (bif Nat.beq i 373
-    then 11 else 0)))) else (bif Nat.blt i 451 then (bif Nat.blt i 449 then (bif Nat.blt i 446 then
-    (bif Nat.beq i 433 then 24 else 0) else (bif Nat.beq i 446 then 9 else 0)) else (bif Nat.blt i
-    450 then (bif Nat.beq i 449 then 6 else 0) else (bif Nat.beq i 450 then 27 else 0))) else (bif
-    Nat.blt i 454 then (bif Nat.blt i 452 then (bif Nat.beq i 451 then 10 else 0) else (bif Nat.beq
-    i 452 then 8 else 0)) else (bif Nat.blt i 455 then (bif Nat.beq i 454 then 5 else 0) else (bif
-    Nat.beq i 455 then 17 else 0)))))
+    (bif Nat.beq i 69 then 2 else 0))) else (bif Nat.blt i 151 then (bif Nat.blt i 149 then (bif
+    Nat.beq i 147 then 20 else 0) else (bif Nat.beq i 149 then 21 else 0)) else (bif Nat.blt i 153
+    then (bif Nat.beq i 151 then 22 else 0) else (bif Nat.beq i 153 then 25 else 0)))) else (bif
+    Nat.blt i 171 then (bif Nat.blt i 156 then (bif Nat.beq i 154 then 18 else 0) else (bif Nat.blt
+    i 157 then (bif Nat.beq i 156 then 26 else 0) else (bif Nat.beq i 157 then 19 else 0))) else
+    (bif Nat.blt i 173 then (bif Nat.blt i 172 then (bif Nat.beq i 171 then 15 else 0) else (bif
+    Nat.beq i 172 then 1 else 0)) else (bif Nat.blt i 174 then (bif Nat.beq i 173 then 4 else 0)
+    else (bif Nat.beq i 174 then 3 else 0))))) else (bif Nat.blt i 434 then (bif Nat.blt i 371 then
+    (bif Nat.blt i 367 then (bif Nat.beq i 176 then 16 else 0) else (bif Nat.blt i 370 then (bif
+    Nat.beq i 367 then 12 else 0) else (bif Nat.beq i 370 then 23 else 0))) else (bif Nat.blt i 373
+    then (bif Nat.blt i 372 then (bif Nat.beq i 371 then 7 else 0) else (bif Nat.beq i 372 then 28
+    else 0)) else (bif Nat.blt i 374 then (bif Nat.beq i 373 then 13 else 0) else (bif Nat.beq i 374
+    then 11 else 0)))) else (bif Nat.blt i 452 then (bif Nat.blt i 450 then (bif Nat.blt i 447 then
+    (bif Nat.beq i 434 then 24 else 0) else (bif Nat.beq i 447 then 9 else 0)) else (bif Nat.blt i
+    451 then (bif Nat.beq i 450 then 6 else 0) else (bif Nat.beq i 451 then 27 else 0))) else (bif
+    Nat.blt i 455 then (bif Nat.blt i 453 then (bif Nat.beq i 452 then 10 else 0) else (bif Nat.beq
+    i 453 then 8 else 0)) else (bif Nat.blt i 456 then (bif Nat.beq i 455 then 5 else 0) else (bif
+    Nat.beq i 456 then 17 else 0)))))
 
 /-- Codes of slot `bitop`, by the token's constructor index. -/
 def Slot.code_bitop (i : Nat) : Nat :=
-  bif Nat.blt i 489 then (bif Nat.beq i 43 then 2 else 0) else (bif Nat.beq i 489 then 1 else 0)
+  bif Nat.blt i 490 then (bif Nat.beq i 43 then 2 else 0) else (bif Nat.beq i 490 then 1 else 0)
 
 /-- Codes of slot `blayout`, by the token's constructor index. -/
 def Slot.code_blayout (i : Nat) : Nat :=
-  bif Nat.blt i 359 then (bif Nat.beq i 95 then 2 else 0) else (bif Nat.beq i 359 then 1 else 0)
+  bif Nat.blt i 360 then (bif Nat.beq i 96 then 2 else 0) else (bif Nat.beq i 360 then 1 else 0)
 
 /-- Codes of slot `block_scale`, by the token's constructor index. -/
 def Slot.code_block_scale (i : Nat) : Nat :=
@@ -2059,20 +2062,20 @@ def Slot.code_block_size (i : Nat) : Nat :=
 
 /-- Codes of slot `boolop`, by the token's constructor index. -/
 def Slot.code_boolop (i : Nat) : Nat :=
-  bif Nat.blt i 314 then (bif Nat.beq i 43 then 1 else 0) else (bif Nat.blt i 489 then (bif Nat.beq
-    i 314 then 2 else 0) else (bif Nat.beq i 489 then 3 else 0))
+  bif Nat.blt i 315 then (bif Nat.beq i 43 then 1 else 0) else (bif Nat.blt i 490 then (bif Nat.beq
+    i 315 then 2 else 0) else (bif Nat.beq i 490 then 3 else 0))
 
 /-- Codes of slot `btype`, by the token's constructor index. -/
 def Slot.code_btype (i : Nat) : Nat :=
-  bif Nat.blt i 370 then (bif Nat.blt i 155 then (bif Nat.blt i 68 then (bif Nat.beq i 52 then 13
-    else 0) else (bif Nat.blt i 152 then (bif Nat.beq i 68 then 5 else 0) else (bif Nat.beq i 152
-    then 7 else 0))) else (bif Nat.blt i 173 then (bif Nat.blt i 170 then (bif Nat.beq i 155 then 8
-    else 0) else (bif Nat.beq i 170 then 4 else 0)) else (bif Nat.blt i 175 then (bif Nat.beq i 173
-    then 1 else 0) else (bif Nat.beq i 175 then 14 else 0)))) else (bif Nat.blt i 433 then (bif
-    Nat.blt i 371 then (bif Nat.beq i 370 then 3 else 0) else (bif Nat.blt i 373 then (bif Nat.beq i
-    371 then 12 else 0) else (bif Nat.beq i 373 then 10 else 0))) else (bif Nat.blt i 450 then (bif
-    Nat.blt i 449 then (bif Nat.beq i 433 then 6 else 0) else (bif Nat.beq i 449 then 2 else 0))
-    else (bif Nat.blt i 452 then (bif Nat.beq i 450 then 11 else 0) else (bif Nat.beq i 452 then 9
+  bif Nat.blt i 371 then (bif Nat.blt i 156 then (bif Nat.blt i 68 then (bif Nat.beq i 52 then 13
+    else 0) else (bif Nat.blt i 153 then (bif Nat.beq i 68 then 5 else 0) else (bif Nat.beq i 153
+    then 7 else 0))) else (bif Nat.blt i 174 then (bif Nat.blt i 171 then (bif Nat.beq i 156 then 8
+    else 0) else (bif Nat.beq i 171 then 4 else 0)) else (bif Nat.blt i 176 then (bif Nat.beq i 174
+    then 1 else 0) else (bif Nat.beq i 176 then 14 else 0)))) else (bif Nat.blt i 434 then (bif
+    Nat.blt i 372 then (bif Nat.beq i 371 then 3 else 0) else (bif Nat.blt i 374 then (bif Nat.beq i
+    372 then 12 else 0) else (bif Nat.beq i 374 then 10 else 0))) else (bif Nat.blt i 451 then (bif
+    Nat.blt i 450 then (bif Nat.beq i 434 then 6 else 0) else (bif Nat.beq i 450 then 2 else 0))
+    else (bif Nat.blt i 453 then (bif Nat.beq i 451 then 11 else 0) else (bif Nat.beq i 453 then 9
     else 0))))
 
 /-- Codes of slot `cache`, by the token's constructor index. -/
@@ -2081,98 +2084,98 @@ def Slot.code_cache (i : Nat) : Nat :=
 
 /-- Codes of slot `cc`, by the token's constructor index. -/
 def Slot.code_cc (i : Nat) : Nat :=
-  bif Nat.beq i 86 then 1 else 0
+  bif Nat.beq i 87 then 1 else 0
 
 /-- Codes of slot `cluster`, by the token's constructor index. -/
 def Slot.code_cluster (i : Nat) : Nat :=
-  bif Nat.beq i 91 then 1 else 0
+  bif Nat.beq i 92 then 1 else 0
 
 /-- Codes of slot `cmp`, by the token's constructor index. -/
 def Slot.code_cmp (i : Nat) : Nat :=
-  bif Nat.blt i 239 then (bif Nat.blt i 204 then (bif Nat.blt i 189 then (bif Nat.blt i 164 then
-    (bif Nat.beq i 163 then 1 else 0) else (bif Nat.beq i 164 then 11 else 0)) else (bif Nat.blt i
-    196 then (bif Nat.beq i 189 then 6 else 0) else (bif Nat.beq i 196 then 16 else 0))) else (bif
-    Nat.blt i 206 then (bif Nat.blt i 205 then (bif Nat.beq i 204 then 5 else 0) else (bif Nat.beq i
-    205 then 15 else 0)) else (bif Nat.blt i 207 then (bif Nat.beq i 206 then 9 else 0) else (bif
-    Nat.blt i 238 then (bif Nat.beq i 207 then 10 else 0) else (bif Nat.beq i 238 then 4 else 0)))))
-    else (bif Nat.blt i 246 then (bif Nat.blt i 244 then (bif Nat.blt i 241 then (bif Nat.beq i 239
-    then 14 else 0) else (bif Nat.beq i 241 then 7 else 0)) else (bif Nat.blt i 245 then (bif
-    Nat.beq i 244 then 8 else 0) else (bif Nat.beq i 245 then 3 else 0))) else (bif Nat.blt i 301
-    then (bif Nat.blt i 298 then (bif Nat.beq i 246 then 13 else 0) else (bif Nat.beq i 298 then 18
-    else 0)) else (bif Nat.blt i 303 then (bif Nat.beq i 301 then 2 else 0) else (bif Nat.blt i 310
-    then (bif Nat.beq i 303 then 12 else 0) else (bif Nat.beq i 310 then 17 else 0)))))
+  bif Nat.blt i 240 then (bif Nat.blt i 205 then (bif Nat.blt i 190 then (bif Nat.blt i 165 then
+    (bif Nat.beq i 164 then 1 else 0) else (bif Nat.beq i 165 then 11 else 0)) else (bif Nat.blt i
+    197 then (bif Nat.beq i 190 then 6 else 0) else (bif Nat.beq i 197 then 16 else 0))) else (bif
+    Nat.blt i 207 then (bif Nat.blt i 206 then (bif Nat.beq i 205 then 5 else 0) else (bif Nat.beq i
+    206 then 15 else 0)) else (bif Nat.blt i 208 then (bif Nat.beq i 207 then 9 else 0) else (bif
+    Nat.blt i 239 then (bif Nat.beq i 208 then 10 else 0) else (bif Nat.beq i 239 then 4 else 0)))))
+    else (bif Nat.blt i 247 then (bif Nat.blt i 245 then (bif Nat.blt i 242 then (bif Nat.beq i 240
+    then 14 else 0) else (bif Nat.beq i 242 then 7 else 0)) else (bif Nat.blt i 246 then (bif
+    Nat.beq i 245 then 8 else 0) else (bif Nat.beq i 246 then 3 else 0))) else (bif Nat.blt i 302
+    then (bif Nat.blt i 299 then (bif Nat.beq i 247 then 13 else 0) else (bif Nat.beq i 299 then 18
+    else 0)) else (bif Nat.blt i 304 then (bif Nat.beq i 302 then 2 else 0) else (bif Nat.blt i 311
+    then (bif Nat.beq i 304 then 12 else 0) else (bif Nat.beq i 311 then 17 else 0)))))
 
 /-- Codes of slot `collector_a`, by the token's constructor index. -/
 def Slot.code_collector_a (i : Nat) : Nat :=
-  bif Nat.blt i 98 then (bif Nat.blt i 97 then (bif Nat.beq i 96 then 4 else 0) else (bif Nat.beq i
-    97 then 1 else 0)) else (bif Nat.blt i 99 then (bif Nat.beq i 98 then 3 else 0) else (bif
-    Nat.beq i 99 then 2 else 0))
+  bif Nat.blt i 99 then (bif Nat.blt i 98 then (bif Nat.beq i 97 then 4 else 0) else (bif Nat.beq i
+    98 then 1 else 0)) else (bif Nat.blt i 100 then (bif Nat.beq i 99 then 3 else 0) else (bif
+    Nat.beq i 100 then 2 else 0))
 
 /-- Codes of slot `collector_b`, by the token's constructor index. -/
 def Slot.code_collector_b (i : Nat) : Nat :=
-  bif Nat.blt i 110 then (bif Nat.blt i 105 then (bif Nat.blt i 102 then (bif Nat.blt i 101 then
-    (bif Nat.beq i 100 then 8 else 0) else (bif Nat.beq i 101 then 5 else 0)) else (bif Nat.blt i
-    103 then (bif Nat.beq i 102 then 7 else 0) else (bif Nat.blt i 104 then (bif Nat.beq i 103 then
-    6 else 0) else (bif Nat.beq i 104 then 12 else 0)))) else (bif Nat.blt i 107 then (bif Nat.blt i
-    106 then (bif Nat.beq i 105 then 9 else 0) else (bif Nat.beq i 106 then 11 else 0)) else (bif
-    Nat.blt i 108 then (bif Nat.beq i 107 then 10 else 0) else (bif Nat.blt i 109 then (bif Nat.beq
-    i 108 then 16 else 0) else (bif Nat.beq i 109 then 13 else 0))))) else (bif Nat.blt i 115 then
-    (bif Nat.blt i 112 then (bif Nat.blt i 111 then (bif Nat.beq i 110 then 15 else 0) else (bif
-    Nat.beq i 111 then 14 else 0)) else (bif Nat.blt i 113 then (bif Nat.beq i 112 then 20 else 0)
-    else (bif Nat.blt i 114 then (bif Nat.beq i 113 then 17 else 0) else (bif Nat.beq i 114 then 19
-    else 0)))) else (bif Nat.blt i 117 then (bif Nat.blt i 116 then (bif Nat.beq i 115 then 18 else
-    0) else (bif Nat.beq i 116 then 4 else 0)) else (bif Nat.blt i 118 then (bif Nat.beq i 117 then
-    1 else 0) else (bif Nat.blt i 119 then (bif Nat.beq i 118 then 3 else 0) else (bif Nat.beq i 119
+  bif Nat.blt i 111 then (bif Nat.blt i 106 then (bif Nat.blt i 103 then (bif Nat.blt i 102 then
+    (bif Nat.beq i 101 then 8 else 0) else (bif Nat.beq i 102 then 5 else 0)) else (bif Nat.blt i
+    104 then (bif Nat.beq i 103 then 7 else 0) else (bif Nat.blt i 105 then (bif Nat.beq i 104 then
+    6 else 0) else (bif Nat.beq i 105 then 12 else 0)))) else (bif Nat.blt i 108 then (bif Nat.blt i
+    107 then (bif Nat.beq i 106 then 9 else 0) else (bif Nat.beq i 107 then 11 else 0)) else (bif
+    Nat.blt i 109 then (bif Nat.beq i 108 then 10 else 0) else (bif Nat.blt i 110 then (bif Nat.beq
+    i 109 then 16 else 0) else (bif Nat.beq i 110 then 13 else 0))))) else (bif Nat.blt i 116 then
+    (bif Nat.blt i 113 then (bif Nat.blt i 112 then (bif Nat.beq i 111 then 15 else 0) else (bif
+    Nat.beq i 112 then 14 else 0)) else (bif Nat.blt i 114 then (bif Nat.beq i 113 then 20 else 0)
+    else (bif Nat.blt i 115 then (bif Nat.beq i 114 then 17 else 0) else (bif Nat.beq i 115 then 19
+    else 0)))) else (bif Nat.blt i 118 then (bif Nat.blt i 117 then (bif Nat.beq i 116 then 18 else
+    0) else (bif Nat.beq i 117 then 4 else 0)) else (bif Nat.blt i 119 then (bif Nat.beq i 118 then
+    1 else 0) else (bif Nat.blt i 120 then (bif Nat.beq i 119 then 3 else 0) else (bif Nat.beq i 120
     then 2 else 0)))))
 
 /-- Codes of slot `completion`, by the token's constructor index. -/
 def Slot.code_completion (i : Nat) : Nat :=
-  bif Nat.blt i 274 then (bif Nat.blt i 271 then (bif Nat.beq i 83 then 3 else 0) else (bif Nat.blt
-    i 273 then (bif Nat.beq i 271 then 2 else 0) else (bif Nat.beq i 273 then 5 else 0))) else (bif
-    Nat.blt i 275 then (bif Nat.beq i 274 then 6 else 0) else (bif Nat.blt i 276 then (bif Nat.beq i
-    275 then 1 else 0) else (bif Nat.beq i 276 then 4 else 0)))
+  bif Nat.blt i 275 then (bif Nat.blt i 272 then (bif Nat.beq i 84 then 3 else 0) else (bif Nat.blt
+    i 274 then (bif Nat.beq i 272 then 2 else 0) else (bif Nat.beq i 274 then 5 else 0))) else (bif
+    Nat.blt i 276 then (bif Nat.beq i 275 then 6 else 0) else (bif Nat.blt i 277 then (bif Nat.beq i
+    276 then 1 else 0) else (bif Nat.beq i 277 then 4 else 0)))
 
 /-- Codes of slot `convert`, by the token's constructor index. -/
 def Slot.code_convert (i : Nat) : Nat :=
-  bif Nat.blt i 446 then (bif Nat.blt i 371 then (bif Nat.blt i 368 then (bif Nat.beq i 366 then 2
-    else 0) else (bif Nat.beq i 368 then 4 else 0)) else (bif Nat.blt i 373 then (bif Nat.beq i 371
-    then 6 else 0) else (bif Nat.beq i 373 then 8 else 0))) else (bif Nat.blt i 450 then (bif
-    Nat.blt i 448 then (bif Nat.beq i 446 then 1 else 0) else (bif Nat.beq i 448 then 3 else 0))
-    else (bif Nat.blt i 452 then (bif Nat.beq i 450 then 5 else 0) else (bif Nat.beq i 452 then 7
+  bif Nat.blt i 447 then (bif Nat.blt i 372 then (bif Nat.blt i 369 then (bif Nat.beq i 367 then 2
+    else 0) else (bif Nat.beq i 369 then 4 else 0)) else (bif Nat.blt i 374 then (bif Nat.beq i 372
+    then 6 else 0) else (bif Nat.beq i 374 then 8 else 0))) else (bif Nat.blt i 451 then (bif
+    Nat.blt i 449 then (bif Nat.beq i 447 then 1 else 0) else (bif Nat.beq i 449 then 3 else 0))
+    else (bif Nat.blt i 453 then (bif Nat.beq i 451 then 5 else 0) else (bif Nat.beq i 453 then 7
     else 0)))
 
 /-- Codes of slot `cop`, by the token's constructor index. -/
 def Slot.code_cop (i : Nat) : Nat :=
-  bif Nat.blt i 135 then (bif Nat.blt i 87 then (bif Nat.beq i 84 then 1 else 0) else (bif Nat.blt i
-    131 then (bif Nat.beq i 87 then 2 else 0) else (bif Nat.beq i 131 then 3 else 0))) else (bif
-    Nat.blt i 474 then (bif Nat.blt i 247 then (bif Nat.beq i 135 then 5 else 0) else (bif Nat.beq i
-    247 then 4 else 0)) else (bif Nat.blt i 480 then (bif Nat.beq i 474 then 6 else 0) else (bif
-    Nat.beq i 480 then 7 else 0)))
+  bif Nat.blt i 136 then (bif Nat.blt i 88 then (bif Nat.beq i 85 then 1 else 0) else (bif Nat.blt i
+    132 then (bif Nat.beq i 88 then 2 else 0) else (bif Nat.beq i 132 then 3 else 0))) else (bif
+    Nat.blt i 475 then (bif Nat.blt i 248 then (bif Nat.beq i 136 then 5 else 0) else (bif Nat.beq i
+    248 then 4 else 0)) else (bif Nat.blt i 481 then (bif Nat.beq i 475 then 6 else 0) else (bif
+    Nat.beq i 481 then 7 else 0)))
 
 /-- Codes of slot `cp_mask`, by the token's constructor index. -/
 def Slot.code_cp_mask (i : Nat) : Nat :=
-  bif Nat.beq i 129 then 1 else 0
+  bif Nat.beq i 130 then 1 else 0
 
 /-- Codes of slot `cta`, by the token's constructor index. -/
 def Slot.code_cta (i : Nat) : Nat :=
-  bif Nat.beq i 132 then 1 else 0
+  bif Nat.beq i 133 then 1 else 0
 
 /-- Codes of slot `cta_group`, by the token's constructor index. -/
 def Slot.code_cta_group (i : Nat) : Nat :=
-  bif Nat.blt i 134 then (bif Nat.beq i 133 then 1 else 0) else (bif Nat.beq i 134 then 2 else 0)
+  bif Nat.blt i 135 then (bif Nat.beq i 134 then 1 else 0) else (bif Nat.beq i 135 then 2 else 0)
 
 /-- Codes of slot `ctype`, by the token's constructor index. -/
 def Slot.code_ctype (i : Nat) : Nat :=
-  bif Nat.blt i 172 then (bif Nat.blt i 170 then (bif Nat.blt i 69 then (bif Nat.beq i 57 then 7
-    else 0) else (bif Nat.beq i 69 then 3 else 0)) else (bif Nat.blt i 171 then (bif Nat.beq i 170
-    then 8 else 0) else (bif Nat.beq i 171 then 2 else 0))) else (bif Nat.blt i 175 then (bif
-    Nat.blt i 173 then (bif Nat.beq i 172 then 6 else 0) else (bif Nat.beq i 173 then 1 else 0))
-    else (bif Nat.blt i 370 then (bif Nat.beq i 175 then 9 else 0) else (bif Nat.blt i 371 then (bif
-    Nat.beq i 370 then 5 else 0) else (bif Nat.beq i 371 then 4 else 0))))
+  bif Nat.blt i 173 then (bif Nat.blt i 171 then (bif Nat.blt i 69 then (bif Nat.beq i 57 then 7
+    else 0) else (bif Nat.beq i 69 then 3 else 0)) else (bif Nat.blt i 172 then (bif Nat.beq i 171
+    then 8 else 0) else (bif Nat.beq i 172 then 2 else 0))) else (bif Nat.blt i 176 then (bif
+    Nat.blt i 174 then (bif Nat.beq i 173 then 6 else 0) else (bif Nat.beq i 174 then 1 else 0))
+    else (bif Nat.blt i 371 then (bif Nat.beq i 176 then 9 else 0) else (bif Nat.blt i 372 then (bif
+    Nat.beq i 371 then 5 else 0) else (bif Nat.beq i 372 then 4 else 0))))
 
 /-- Codes of slot `decompress`, by the token's constructor index. -/
 def Slot.code_decompress (i : Nat) : Nat :=
-  bif Nat.beq i 140 then 1 else 0
+  bif Nat.beq i 141 then 1 else 0
 
 /-- Codes of slot `dim`, by the token's constructor index. -/
 def Slot.code_dim (i : Nat) : Nat :=
@@ -2182,19 +2185,19 @@ def Slot.code_dim (i : Nat) : Nat :=
 
 /-- Codes of slot `dir`, by the token's constructor index. -/
 def Slot.code_dir (i : Nat) : Nat :=
-  bif Nat.blt i 337 then (bif Nat.beq i 230 then 1 else 0) else (bif Nat.blt i 437 then (bif Nat.beq
-    i 337 then 2 else 0) else (bif Nat.beq i 437 then 3 else 0))
+  bif Nat.blt i 338 then (bif Nat.beq i 231 then 1 else 0) else (bif Nat.blt i 438 then (bif Nat.beq
+    i 338 then 2 else 0) else (bif Nat.beq i 438 then 3 else 0))
 
 /-- Codes of slot `direction`, by the token's constructor index. -/
 def Slot.code_direction (i : Nat) : Nat :=
-  bif Nat.blt i 178 then (bif Nat.beq i 177 then 3 else 0) else (bif Nat.blt i 190 then (bif Nat.beq
-    i 178 then 2 else 0) else (bif Nat.beq i 190 then 1 else 0))
+  bif Nat.blt i 179 then (bif Nat.beq i 178 then 3 else 0) else (bif Nat.blt i 191 then (bif Nat.beq
+    i 179 then 2 else 0) else (bif Nat.beq i 191 then 1 else 0))
 
 /-- Codes of slot `dst`, by the token's constructor index. -/
 def Slot.code_dst (i : Nat) : Nat :=
-  bif Nat.blt i 389 then (bif Nat.blt i 388 then (bif Nat.beq i 198 then 3 else 0) else (bif Nat.beq
-    i 388 then 4 else 0)) else (bif Nat.blt i 390 then (bif Nat.beq i 389 then 1 else 0) else (bif
-    Nat.beq i 390 then 2 else 0))
+  bif Nat.blt i 390 then (bif Nat.blt i 389 then (bif Nat.beq i 199 then 3 else 0) else (bif Nat.beq
+    i 389 then 4 else 0)) else (bif Nat.blt i 391 then (bif Nat.beq i 390 then 1 else 0) else (bif
+    Nat.beq i 391 then 2 else 0))
 
 /-- Codes of slot `dst_fmt`, by the token's constructor index. -/
 def Slot.code_dst_fmt (i : Nat) : Nat :=
@@ -2202,27 +2205,27 @@ def Slot.code_dst_fmt (i : Nat) : Nat :=
 
 /-- Codes of slot `dtype`, by the token's constructor index. -/
 def Slot.code_dtype (i : Nat) : Nat :=
-  bif Nat.blt i 171 then (bif Nat.blt i 149 then (bif Nat.blt i 69 then (bif Nat.blt i 61 then (bif
+  bif Nat.blt i 172 then (bif Nat.blt i 150 then (bif Nat.blt i 69 then (bif Nat.blt i 61 then (bif
     Nat.blt i 57 then (bif Nat.beq i 55 then 17 else 0) else (bif Nat.beq i 57 then 18 else 0)) else
     (bif Nat.blt i 68 then (bif Nat.beq i 61 then 19 else 0) else (bif Nat.beq i 68 then 5 else 0)))
-    else (bif Nat.blt i 147 then (bif Nat.blt i 146 then (bif Nat.beq i 69 then 3 else 0) else (bif
-    Nat.beq i 146 then 9 else 0)) else (bif Nat.blt i 148 then (bif Nat.beq i 147 then 29 else 0)
-    else (bif Nat.beq i 148 then 10 else 0)))) else (bif Nat.blt i 154 then (bif Nat.blt i 151 then
-    (bif Nat.blt i 150 then (bif Nat.beq i 149 then 30 else 0) else (bif Nat.beq i 150 then 11 else
-    0)) else (bif Nat.blt i 153 then (bif Nat.beq i 151 then 31 else 0) else (bif Nat.beq i 153 then
-    7 else 0))) else (bif Nat.blt i 157 then (bif Nat.blt i 156 then (bif Nat.beq i 154 then 27 else
-    0) else (bif Nat.beq i 156 then 8 else 0)) else (bif Nat.blt i 170 then (bif Nat.beq i 157 then
-    28 else 0) else (bif Nat.beq i 170 then 4 else 0))))) else (bif Nat.blt i 373 then (bif Nat.blt
-    i 366 then (bif Nat.blt i 173 then (bif Nat.blt i 172 then (bif Nat.beq i 171 then 2 else 0)
-    else (bif Nat.beq i 172 then 16 else 0)) else (bif Nat.blt i 175 then (bif Nat.beq i 173 then 1
-    else 0) else (bif Nat.beq i 175 then 24 else 0))) else (bif Nat.blt i 370 then (bif Nat.blt i
-    369 then (bif Nat.beq i 366 then 22 else 0) else (bif Nat.beq i 369 then 32 else 0)) else (bif
-    Nat.blt i 372 then (bif Nat.beq i 370 then 15 else 0) else (bif Nat.beq i 372 then 23 else 0))))
-    else (bif Nat.blt i 451 then (bif Nat.blt i 446 then (bif Nat.blt i 433 then (bif Nat.beq i 373
-    then 13 else 0) else (bif Nat.beq i 433 then 6 else 0)) else (bif Nat.blt i 449 then (bif
-    Nat.beq i 446 then 20 else 0) else (bif Nat.beq i 449 then 14 else 0))) else (bif Nat.blt i 454
-    then (bif Nat.blt i 452 then (bif Nat.beq i 451 then 21 else 0) else (bif Nat.beq i 452 then 25
-    else 0)) else (bif Nat.blt i 455 then (bif Nat.beq i 454 then 12 else 0) else (bif Nat.beq i 455
+    else (bif Nat.blt i 148 then (bif Nat.blt i 147 then (bif Nat.beq i 69 then 3 else 0) else (bif
+    Nat.beq i 147 then 9 else 0)) else (bif Nat.blt i 149 then (bif Nat.beq i 148 then 29 else 0)
+    else (bif Nat.beq i 149 then 10 else 0)))) else (bif Nat.blt i 155 then (bif Nat.blt i 152 then
+    (bif Nat.blt i 151 then (bif Nat.beq i 150 then 30 else 0) else (bif Nat.beq i 151 then 11 else
+    0)) else (bif Nat.blt i 154 then (bif Nat.beq i 152 then 31 else 0) else (bif Nat.beq i 154 then
+    7 else 0))) else (bif Nat.blt i 158 then (bif Nat.blt i 157 then (bif Nat.beq i 155 then 27 else
+    0) else (bif Nat.beq i 157 then 8 else 0)) else (bif Nat.blt i 171 then (bif Nat.beq i 158 then
+    28 else 0) else (bif Nat.beq i 171 then 4 else 0))))) else (bif Nat.blt i 374 then (bif Nat.blt
+    i 367 then (bif Nat.blt i 174 then (bif Nat.blt i 173 then (bif Nat.beq i 172 then 2 else 0)
+    else (bif Nat.beq i 173 then 16 else 0)) else (bif Nat.blt i 176 then (bif Nat.beq i 174 then 1
+    else 0) else (bif Nat.beq i 176 then 24 else 0))) else (bif Nat.blt i 371 then (bif Nat.blt i
+    370 then (bif Nat.beq i 367 then 22 else 0) else (bif Nat.beq i 370 then 32 else 0)) else (bif
+    Nat.blt i 373 then (bif Nat.beq i 371 then 15 else 0) else (bif Nat.beq i 373 then 23 else 0))))
+    else (bif Nat.blt i 452 then (bif Nat.blt i 447 then (bif Nat.blt i 434 then (bif Nat.beq i 374
+    then 13 else 0) else (bif Nat.beq i 434 then 6 else 0)) else (bif Nat.blt i 450 then (bif
+    Nat.beq i 447 then 20 else 0) else (bif Nat.beq i 450 then 14 else 0))) else (bif Nat.blt i 455
+    then (bif Nat.blt i 453 then (bif Nat.beq i 452 then 21 else 0) else (bif Nat.beq i 453 then 25
+    else 0)) else (bif Nat.blt i 456 then (bif Nat.beq i 455 then 12 else 0) else (bif Nat.beq i 456
     then 26 else 0)))))
 
 /-- Codes of slot `elemsize`, by the token's constructor index. -/
@@ -2235,25 +2238,25 @@ def Slot.code_evict (i : Nat) : Nat :=
 
 /-- Codes of slot `exclusive`, by the token's constructor index. -/
 def Slot.code_exclusive (i : Nat) : Nat :=
-  bif Nat.beq i 167 then 1 else 0
+  bif Nat.beq i 168 then 1 else 0
 
 /-- Codes of slot `expect_tx`, by the token's constructor index. -/
 def Slot.code_expect_tx (i : Nat) : Nat :=
-  bif Nat.beq i 169 then 1 else 0
+  bif Nat.beq i 170 then 1 else 0
 
 /-- Codes of slot `field`, by the token's constructor index. -/
 def Slot.code_field (i : Nat) : Nat :=
-  bif Nat.blt i 200 then (bif Nat.blt i 162 then (bif Nat.blt i 161 then (bif Nat.beq i 78 then 4
-    else 0) else (bif Nat.beq i 161 then 6 else 0)) else (bif Nat.blt i 182 then (bif Nat.beq i 162
-    then 7 else 0) else (bif Nat.blt i 199 then (bif Nat.beq i 182 then 10 else 0) else (bif Nat.beq
-    i 199 then 1 else 0)))) else (bif Nat.blt i 218 then (bif Nat.blt i 201 then (bif Nat.beq i 200
-    then 5 else 0) else (bif Nat.beq i 201 then 3 else 0)) else (bif Nat.blt i 339 then (bif Nat.beq
-    i 218 then 8 else 0) else (bif Nat.blt i 419 then (bif Nat.beq i 339 then 2 else 0) else (bif
-    Nat.beq i 419 then 9 else 0))))
+  bif Nat.blt i 201 then (bif Nat.blt i 163 then (bif Nat.blt i 162 then (bif Nat.beq i 78 then 4
+    else 0) else (bif Nat.beq i 162 then 6 else 0)) else (bif Nat.blt i 183 then (bif Nat.beq i 163
+    then 7 else 0) else (bif Nat.blt i 200 then (bif Nat.beq i 183 then 10 else 0) else (bif Nat.beq
+    i 200 then 1 else 0)))) else (bif Nat.blt i 219 then (bif Nat.blt i 202 then (bif Nat.beq i 201
+    then 5 else 0) else (bif Nat.beq i 202 then 3 else 0)) else (bif Nat.blt i 340 then (bif Nat.beq
+    i 219 then 8 else 0) else (bif Nat.blt i 420 then (bif Nat.beq i 340 then 2 else 0) else (bif
+    Nat.beq i 420 then 9 else 0))))
 
 /-- Codes of slot `ftz`, by the token's constructor index. -/
 def Slot.code_ftz (i : Nat) : Nat :=
-  bif Nat.beq i 187 then 1 else 0
+  bif Nat.beq i 188 then 1 else 0
 
 /-- Codes of slot `idxsize`, by the token's constructor index. -/
 def Slot.code_idxsize (i : Nat) : Nat :=
@@ -2261,18 +2264,18 @@ def Slot.code_idxsize (i : Nat) : Nat :=
 
 /-- Codes of slot `ignore_oob`, by the token's constructor index. -/
 def Slot.code_ignore_oob (i : Nat) : Nat :=
-  bif Nat.beq i 209 then 1 else 0
+  bif Nat.beq i 210 then 1 else 0
 
 /-- Codes of slot `kind`, by the token's constructor index. -/
 def Slot.code_kind (i : Nat) : Nat :=
-  bif Nat.blt i 225 then (bif Nat.blt i 222 then (bif Nat.blt i 136 then (bif Nat.beq i 82 then 1
-    else 0) else (bif Nat.blt i 186 then (bif Nat.beq i 136 then 11 else 0) else (bif Nat.beq i 186
-    then 10 else 0))) else (bif Nat.blt i 223 then (bif Nat.beq i 222 then 5 else 0) else (bif
-    Nat.blt i 224 then (bif Nat.beq i 223 then 3 else 0) else (bif Nat.beq i 224 then 12 else 0))))
-    else (bif Nat.blt i 228 then (bif Nat.blt i 226 then (bif Nat.beq i 225 then 7 else 0) else (bif
-    Nat.blt i 227 then (bif Nat.beq i 226 then 8 else 0) else (bif Nat.beq i 227 then 4 else 0)))
-    else (bif Nat.blt i 229 then (bif Nat.beq i 228 then 6 else 0) else (bif Nat.blt i 338 then (bif
-    Nat.beq i 229 then 2 else 0) else (bif Nat.beq i 338 then 9 else 0))))
+  bif Nat.blt i 226 then (bif Nat.blt i 223 then (bif Nat.blt i 137 then (bif Nat.beq i 83 then 1
+    else 0) else (bif Nat.blt i 187 then (bif Nat.beq i 137 then 11 else 0) else (bif Nat.beq i 187
+    then 10 else 0))) else (bif Nat.blt i 224 then (bif Nat.beq i 223 then 5 else 0) else (bif
+    Nat.blt i 225 then (bif Nat.beq i 224 then 3 else 0) else (bif Nat.beq i 225 then 12 else 0))))
+    else (bif Nat.blt i 229 then (bif Nat.blt i 227 then (bif Nat.beq i 226 then 7 else 0) else (bif
+    Nat.blt i 228 then (bif Nat.beq i 227 then 8 else 0) else (bif Nat.beq i 228 then 4 else 0)))
+    else (bif Nat.blt i 230 then (bif Nat.beq i 229 then 6 else 0) else (bif Nat.blt i 339 then (bif
+    Nat.beq i 230 then 2 else 0) else (bif Nat.beq i 339 then 9 else 0))))
 
 /-- Codes of slot `l1ev`, by the token's constructor index. -/
 def Slot.code_l1ev (i : Nat) : Nat :=
@@ -2287,64 +2290,64 @@ def Slot.code_l2ev (i : Nat) : Nat :=
 
 /-- Codes of slot `layout`, by the token's constructor index. -/
 def Slot.code_layout (i : Nat) : Nat :=
-  bif Nat.blt i 233 then (bif Nat.beq i 232 then 1 else 0) else (bif Nat.beq i 233 then 2 else 0)
+  bif Nat.blt i 234 then (bif Nat.beq i 233 then 1 else 0) else (bif Nat.beq i 234 then 2 else 0)
 
 /-- Codes of slot `level`, by the token's constructor index. -/
 def Slot.code_level (i : Nat) : Nat :=
   bif Nat.blt i 29 then (bif Nat.blt i 16 then (bif Nat.beq i 15 then 3 else 0) else (bif Nat.blt i
     22 then (bif Nat.beq i 16 then 1 else 0) else (bif Nat.beq i 22 then 2 else 0))) else (bif
-    Nat.blt i 197 then (bif Nat.blt i 132 then (bif Nat.beq i 29 then 4 else 0) else (bif Nat.beq i
-    132 then 5 else 0)) else (bif Nat.blt i 424 then (bif Nat.beq i 197 then 6 else 0) else (bif
-    Nat.beq i 424 then 7 else 0)))
+    Nat.blt i 198 then (bif Nat.blt i 133 then (bif Nat.beq i 29 then 4 else 0) else (bif Nat.beq i
+    133 then 5 else 0)) else (bif Nat.blt i 425 then (bif Nat.beq i 198 then 6 else 0) else (bif
+    Nat.beq i 425 then 7 else 0)))
 
 /-- Codes of slot `load_mode`, by the token's constructor index. -/
 def Slot.code_load_mode (i : Nat) : Nat :=
-  bif Nat.blt i 214 then (bif Nat.blt i 212 then (bif Nat.blt i 211 then (bif Nat.beq i 210 then 3
-    else 0) else (bif Nat.beq i 211 then 4 else 0)) else (bif Nat.blt i 213 then (bif Nat.beq i 212
-    then 5 else 0) else (bif Nat.beq i 213 then 6 else 0))) else (bif Nat.blt i 435 then (bif
-    Nat.blt i 434 then (bif Nat.beq i 214 then 7 else 0) else (bif Nat.beq i 434 then 1 else 0))
-    else (bif Nat.blt i 436 then (bif Nat.beq i 435 then 2 else 0) else (bif Nat.beq i 436 then 8
+  bif Nat.blt i 215 then (bif Nat.blt i 213 then (bif Nat.blt i 212 then (bif Nat.beq i 211 then 3
+    else 0) else (bif Nat.beq i 212 then 4 else 0)) else (bif Nat.blt i 214 then (bif Nat.beq i 213
+    then 5 else 0) else (bif Nat.beq i 214 then 6 else 0))) else (bif Nat.blt i 436 then (bif
+    Nat.blt i 435 then (bif Nat.beq i 215 then 7 else 0) else (bif Nat.beq i 435 then 1 else 0))
+    else (bif Nat.blt i 437 then (bif Nat.beq i 436 then 2 else 0) else (bif Nat.beq i 437 then 8
     else 0)))
 
 /-- Codes of slot `mask`, by the token's constructor index. -/
 def Slot.code_mask (i : Nat) : Nat :=
-  bif Nat.beq i 267 then 1 else 0
+  bif Nat.beq i 268 then 1 else 0
 
 /-- Codes of slot `mmio`, by the token's constructor index. -/
 def Slot.code_mmio (i : Nat) : Nat :=
-  bif Nat.beq i 288 then 1 else 0
+  bif Nat.beq i 289 then 1 else 0
 
 /-- Codes of slot `mode`, by the token's constructor index. -/
 def Slot.code_mode (i : Nat) : Nat :=
-  bif Nat.blt i 208 then (bif Nat.blt i 89 then (bif Nat.blt i 59 then (bif Nat.blt i 44 then (bif
+  bif Nat.blt i 209 then (bif Nat.blt i 90 then (bif Nat.blt i 59 then (bif Nat.blt i 44 then (bif
     Nat.beq i 41 then 23 else 0) else (bif Nat.blt i 46 then (bif Nat.beq i 44 then 24 else 0) else
     (bif Nat.beq i 46 then 6 else 0))) else (bif Nat.blt i 65 then (bif Nat.beq i 59 then 14 else 0)
     else (bif Nat.blt i 73 then (bif Nat.beq i 65 then 26 else 0) else (bif Nat.beq i 73 then 21
-    else 0)))) else (bif Nat.blt i 159 then (bif Nat.blt i 143 then (bif Nat.beq i 89 then 4 else 0)
-    else (bif Nat.blt i 158 then (bif Nat.beq i 143 then 20 else 0) else (bif Nat.beq i 158 then 16
-    else 0))) else (bif Nat.blt i 188 then (bif Nat.blt i 174 then (bif Nat.beq i 159 then 17 else
-    0) else (bif Nat.beq i 174 then 13 else 0)) else (bif Nat.blt i 206 then (bif Nat.beq i 188 then
-    7 else 0) else (bif Nat.beq i 206 then 1 else 0))))) else (bif Nat.blt i 360 then (bif Nat.blt i
-    341 then (bif Nat.blt i 241 then (bif Nat.beq i 208 then 22 else 0) else (bif Nat.blt i 340 then
-    (bif Nat.beq i 241 then 2 else 0) else (bif Nat.beq i 340 then 18 else 0))) else (bif Nat.blt i
-    354 then (bif Nat.beq i 341 then 15 else 0) else (bif Nat.blt i 356 then (bif Nat.beq i 354 then
-    10 else 0) else (bif Nat.beq i 356 then 8 else 0)))) else (bif Nat.blt i 456 then (bif Nat.blt i
-    364 then (bif Nat.beq i 360 then 11 else 0) else (bif Nat.blt i 434 then (bif Nat.beq i 364 then
-    9 else 0) else (bif Nat.beq i 434 then 12 else 0))) else (bif Nat.blt i 477 then (bif Nat.blt i
-    458 then (bif Nat.beq i 456 then 25 else 0) else (bif Nat.beq i 458 then 19 else 0)) else (bif
-    Nat.blt i 478 then (bif Nat.beq i 477 then 3 else 0) else (bif Nat.beq i 478 then 5 else 0)))))
+    else 0)))) else (bif Nat.blt i 160 then (bif Nat.blt i 144 then (bif Nat.beq i 90 then 4 else 0)
+    else (bif Nat.blt i 159 then (bif Nat.beq i 144 then 20 else 0) else (bif Nat.beq i 159 then 16
+    else 0))) else (bif Nat.blt i 189 then (bif Nat.blt i 175 then (bif Nat.beq i 160 then 17 else
+    0) else (bif Nat.beq i 175 then 13 else 0)) else (bif Nat.blt i 207 then (bif Nat.beq i 189 then
+    7 else 0) else (bif Nat.beq i 207 then 1 else 0))))) else (bif Nat.blt i 361 then (bif Nat.blt i
+    342 then (bif Nat.blt i 242 then (bif Nat.beq i 209 then 22 else 0) else (bif Nat.blt i 341 then
+    (bif Nat.beq i 242 then 2 else 0) else (bif Nat.beq i 341 then 18 else 0))) else (bif Nat.blt i
+    355 then (bif Nat.beq i 342 then 15 else 0) else (bif Nat.blt i 357 then (bif Nat.beq i 355 then
+    10 else 0) else (bif Nat.beq i 357 then 8 else 0)))) else (bif Nat.blt i 457 then (bif Nat.blt i
+    365 then (bif Nat.beq i 361 then 11 else 0) else (bif Nat.blt i 435 then (bif Nat.beq i 365 then
+    9 else 0) else (bif Nat.beq i 435 then 12 else 0))) else (bif Nat.blt i 478 then (bif Nat.blt i
+    459 then (bif Nat.beq i 457 then 25 else 0) else (bif Nat.beq i 459 then 19 else 0)) else (bif
+    Nat.blt i 479 then (bif Nat.beq i 478 then 3 else 0) else (bif Nat.beq i 479 then 5 else 0)))))
 
 /-- Codes of slot `multicast`, by the token's constructor index. -/
 def Slot.code_multicast (i : Nat) : Nat :=
-  bif Nat.blt i 296 then (bif Nat.blt i 294 then (bif Nat.beq i 293 then 3 else 0) else (bif Nat.blt
-    i 295 then (bif Nat.beq i 294 then 2 else 0) else (bif Nat.beq i 295 then 1 else 0))) else (bif
-    Nat.blt i 472 then (bif Nat.blt i 471 then (bif Nat.beq i 296 then 4 else 0) else (bif Nat.beq i
-    471 then 6 else 0)) else (bif Nat.blt i 473 then (bif Nat.beq i 472 then 5 else 0) else (bif
-    Nat.beq i 473 then 7 else 0)))
+  bif Nat.blt i 297 then (bif Nat.blt i 295 then (bif Nat.beq i 294 then 3 else 0) else (bif Nat.blt
+    i 296 then (bif Nat.beq i 295 then 2 else 0) else (bif Nat.beq i 296 then 1 else 0))) else (bif
+    Nat.blt i 473 then (bif Nat.blt i 472 then (bif Nat.beq i 297 then 4 else 0) else (bif Nat.beq i
+    472 then 6 else 0)) else (bif Nat.blt i 474 then (bif Nat.beq i 473 then 5 else 0) else (bif
+    Nat.beq i 474 then 7 else 0)))
 
 /-- Codes of slot `multimem`, by the token's constructor index. -/
 def Slot.code_multimem (i : Nat) : Nat :=
-  bif Nat.beq i 297 then 1 else 0
+  bif Nat.beq i 298 then 1 else 0
 
 /-- Codes of slot `nan`, by the token's constructor index. -/
 def Slot.code_nan (i : Nat) : Nat :=
@@ -2352,76 +2355,76 @@ def Slot.code_nan (i : Nat) : Nat :=
 
 /-- Codes of slot `nc`, by the token's constructor index. -/
 def Slot.code_nc (i : Nat) : Nat :=
-  bif Nat.beq i 300 then 1 else 0
+  bif Nat.beq i 301 then 1 else 0
 
 /-- Codes of slot `nocomplete`, by the token's constructor index. -/
 def Slot.code_nocomplete (i : Nat) : Nat :=
-  bif Nat.beq i 304 then 1 else 0
+  bif Nat.beq i 305 then 1 else 0
 
 /-- Codes of slot `noftz`, by the token's constructor index. -/
 def Slot.code_noftz (i : Nat) : Nat :=
-  bif Nat.beq i 305 then 1 else 0
+  bif Nat.beq i 306 then 1 else 0
 
 /-- Codes of slot `noinc`, by the token's constructor index. -/
 def Slot.code_noinc (i : Nat) : Nat :=
-  bif Nat.beq i 306 then 1 else 0
+  bif Nat.beq i 307 then 1 else 0
 
 /-- Codes of slot `num`, by the token's constructor index. -/
 def Slot.code_num (i : Nat) : Nat :=
-  bif Nat.blt i 485 then (bif Nat.blt i 483 then (bif Nat.blt i 482 then (bif Nat.beq i 481 then 1
-    else 0) else (bif Nat.beq i 482 then 8 else 0)) else (bif Nat.blt i 484 then (bif Nat.beq i 483
-    then 5 else 0) else (bif Nat.beq i 484 then 2 else 0))) else (bif Nat.blt i 487 then (bif
-    Nat.blt i 486 then (bif Nat.beq i 485 then 6 else 0) else (bif Nat.beq i 486 then 3 else 0))
-    else (bif Nat.blt i 488 then (bif Nat.beq i 487 then 7 else 0) else (bif Nat.beq i 488 then 4
+  bif Nat.blt i 486 then (bif Nat.blt i 484 then (bif Nat.blt i 483 then (bif Nat.beq i 482 then 1
+    else 0) else (bif Nat.beq i 483 then 8 else 0)) else (bif Nat.blt i 485 then (bif Nat.beq i 484
+    then 5 else 0) else (bif Nat.beq i 485 then 2 else 0))) else (bif Nat.blt i 488 then (bif
+    Nat.blt i 487 then (bif Nat.beq i 486 then 6 else 0) else (bif Nat.beq i 487 then 3 else 0))
+    else (bif Nat.blt i 489 then (bif Nat.beq i 488 then 7 else 0) else (bif Nat.beq i 489 then 4
     else 0)))
 
 /-- Codes of slot `oob`, by the token's constructor index. -/
 def Slot.code_oob (i : Nat) : Nat :=
-  bif Nat.beq i 312 then 1 else 0
+  bif Nat.beq i 313 then 1 else 0
 
 /-- Codes of slot `op`, by the token's constructor index. -/
 def Slot.code_op (i : Nat) : Nat :=
-  bif Nat.blt i 286 then (bif Nat.blt i 166 then (bif Nat.blt i 85 then (bif Nat.blt i 43 then (bif
-    Nat.beq i 37 then 3 else 0) else (bif Nat.beq i 43 then 12 else 0)) else (bif Nat.blt i 139 then
-    (bif Nat.beq i 85 then 18 else 0) else (bif Nat.beq i 139 then 17 else 0))) else (bif Nat.blt i
-    215 then (bif Nat.blt i 183 then (bif Nat.beq i 166 then 19 else 0) else (bif Nat.beq i 183 then
-    4 else 0)) else (bif Nat.blt i 216 then (bif Nat.beq i 215 then 16 else 0) else (bif Nat.blt i
-    269 then (bif Nat.beq i 216 then 5 else 0) else (bif Nat.beq i 269 then 11 else 0))))) else (bif
-    Nat.blt i 328 then (bif Nat.blt i 309 then (bif Nat.blt i 307 then (bif Nat.beq i 286 then 10
-    else 0) else (bif Nat.beq i 307 then 8 else 0)) else (bif Nat.blt i 311 then (bif Nat.beq i 309
-    then 7 else 0) else (bif Nat.blt i 314 then (bif Nat.beq i 311 then 6 else 0) else (bif Nat.beq
-    i 314 then 13 else 0)))) else (bif Nat.blt i 345 then (bif Nat.blt i 330 then (bif Nat.beq i 328
-    then 15 else 0) else (bif Nat.beq i 330 then 1 else 0)) else (bif Nat.blt i 418 then (bif
-    Nat.beq i 345 then 2 else 0) else (bif Nat.blt i 489 then (bif Nat.beq i 418 then 9 else 0) else
-    (bif Nat.beq i 489 then 14 else 0)))))
+  bif Nat.blt i 287 then (bif Nat.blt i 167 then (bif Nat.blt i 86 then (bif Nat.blt i 43 then (bif
+    Nat.beq i 37 then 3 else 0) else (bif Nat.beq i 43 then 12 else 0)) else (bif Nat.blt i 140 then
+    (bif Nat.beq i 86 then 18 else 0) else (bif Nat.beq i 140 then 17 else 0))) else (bif Nat.blt i
+    216 then (bif Nat.blt i 184 then (bif Nat.beq i 167 then 19 else 0) else (bif Nat.beq i 184 then
+    4 else 0)) else (bif Nat.blt i 217 then (bif Nat.beq i 216 then 16 else 0) else (bif Nat.blt i
+    270 then (bif Nat.beq i 217 then 5 else 0) else (bif Nat.beq i 270 then 11 else 0))))) else (bif
+    Nat.blt i 329 then (bif Nat.blt i 310 then (bif Nat.blt i 308 then (bif Nat.beq i 287 then 10
+    else 0) else (bif Nat.beq i 308 then 8 else 0)) else (bif Nat.blt i 312 then (bif Nat.beq i 310
+    then 7 else 0) else (bif Nat.blt i 315 then (bif Nat.beq i 312 then 6 else 0) else (bif Nat.beq
+    i 315 then 13 else 0)))) else (bif Nat.blt i 346 then (bif Nat.blt i 331 then (bif Nat.beq i 329
+    then 15 else 0) else (bif Nat.beq i 331 then 1 else 0)) else (bif Nat.blt i 419 then (bif
+    Nat.beq i 346 then 2 else 0) else (bif Nat.blt i 490 then (bif Nat.beq i 419 then 9 else 0) else
+    (bif Nat.beq i 490 then 14 else 0)))))
 
 /-- Codes of slot `op_restrict`, by the token's constructor index. -/
 def Slot.code_op_restrict (i : Nat) : Nat :=
-  bif Nat.beq i 284 then 1 else 0
+  bif Nat.beq i 285 then 1 else 0
 
 /-- Codes of slot `override_address`, by the token's constructor index. -/
 def Slot.code_override_address (i : Nat) : Nat :=
-  bif Nat.beq i 315 then 1 else 0
+  bif Nat.beq i 316 then 1 else 0
 
 /-- Codes of slot `override_attribute`, by the token's constructor index. -/
 def Slot.code_override_attribute (i : Nat) : Nat :=
-  bif Nat.blt i 317 then (bif Nat.beq i 316 then 1 else 0) else (bif Nat.beq i 317 then 2 else 0)
+  bif Nat.blt i 318 then (bif Nat.beq i 317 then 1 else 0) else (bif Nat.beq i 318 then 2 else 0)
 
 /-- Codes of slot `pack`, by the token's constructor index. -/
 def Slot.code_pack (i : Nat) : Nat :=
-  bif Nat.beq i 319 then 1 else 0
+  bif Nat.beq i 320 then 1 else 0
 
 /-- Codes of slot `parity`, by the token's constructor index. -/
 def Slot.code_parity (i : Nat) : Nat :=
-  bif Nat.beq i 323 then 1 else 0
+  bif Nat.beq i 324 then 1 else 0
 
 /-- Codes of slot `phase_type`, by the token's constructor index. -/
 def Slot.code_phase_type (i : Nat) : Nat :=
-  bif Nat.blt i 326 then (bif Nat.beq i 325 then 2 else 0) else (bif Nat.beq i 326 then 1 else 0)
+  bif Nat.blt i 327 then (bif Nat.beq i 326 then 2 else 0) else (bif Nat.beq i 327 then 1 else 0)
 
 /-- Codes of slot `popc`, by the token's constructor index. -/
 def Slot.code_popc (i : Nat) : Nat :=
-  bif Nat.beq i 328 then 1 else 0
+  bif Nat.beq i 329 then 1 else 0
 
 /-- Codes of slot `prefetch`, by the token's constructor index. -/
 def Slot.code_prefetch (i : Nat) : Nat :=
@@ -2440,92 +2443,92 @@ def Slot.code_priority (i : Nat) : Nat :=
 
 /-- Codes of slot `proxy`, by the token's constructor index. -/
 def Slot.code_proxy (i : Nat) : Nat :=
-  bif Nat.blt i 334 then (bif Nat.beq i 333 then 2 else 0) else (bif Nat.blt i 430 then (bif Nat.beq
-    i 334 then 1 else 0) else (bif Nat.beq i 430 then 3 else 0))
+  bif Nat.blt i 335 then (bif Nat.beq i 334 then 2 else 0) else (bif Nat.blt i 431 then (bif Nat.beq
+    i 335 then 1 else 0) else (bif Nat.beq i 431 then 3 else 0))
 
 /-- Codes of slot `proxykind`, by the token's constructor index. -/
 def Slot.code_proxykind (i : Nat) : Nat :=
-  bif Nat.blt i 50 then (bif Nat.beq i 39 then 1 else 0) else (bif Nat.blt i 430 then (bif Nat.beq i
-    50 then 2 else 0) else (bif Nat.beq i 430 then 3 else 0))
+  bif Nat.blt i 50 then (bif Nat.beq i 39 then 1 else 0) else (bif Nat.blt i 431 then (bif Nat.beq i
+    50 then 2 else 0) else (bif Nat.beq i 431 then 3 else 0))
 
 /-- Codes of slot `ptype`, by the token's constructor index. -/
 def Slot.code_ptype (i : Nat) : Nat :=
-  bif Nat.beq i 329 then 1 else 0
+  bif Nat.beq i 330 then 1 else 0
 
 /-- Codes of slot `pzo`, by the token's constructor index. -/
 def Slot.code_pzo (i : Nat) : Nat :=
-  bif Nat.beq i 335 then 1 else 0
+  bif Nat.beq i 336 then 1 else 0
 
 /-- Codes of slot `query`, by the token's constructor index. -/
 def Slot.code_query (i : Nat) : Nat :=
-  bif Nat.blt i 193 then (bif Nat.blt i 192 then (bif Nat.beq i 191 then 5 else 0) else (bif Nat.beq
-    i 192 then 2 else 0)) else (bif Nat.blt i 194 then (bif Nat.beq i 193 then 3 else 0) else (bif
-    Nat.blt i 220 then (bif Nat.beq i 194 then 4 else 0) else (bif Nat.beq i 220 then 1 else 0)))
+  bif Nat.blt i 194 then (bif Nat.blt i 193 then (bif Nat.beq i 192 then 5 else 0) else (bif Nat.beq
+    i 193 then 2 else 0)) else (bif Nat.blt i 195 then (bif Nat.beq i 194 then 3 else 0) else (bif
+    Nat.blt i 221 then (bif Nat.beq i 195 then 4 else 0) else (bif Nat.beq i 221 then 1 else 0)))
 
 /-- Codes of slot `read`, by the token's constructor index. -/
 def Slot.code_read (i : Nat) : Nat :=
-  bif Nat.blt i 421 then (bif Nat.beq i 343 then 1 else 0) else (bif Nat.beq i 421 then 2 else 0)
+  bif Nat.blt i 422 then (bif Nat.beq i 344 then 1 else 0) else (bif Nat.beq i 422 then 2 else 0)
 
 /-- Codes of slot `red`, by the token's constructor index. -/
 def Slot.code_red (i : Nat) : Nat :=
-  bif Nat.beq i 344 then 1 else 0
+  bif Nat.beq i 345 then 1 else 0
 
 /-- Codes of slot `redop`, by the token's constructor index. -/
 def Slot.code_redop (i : Nat) : Nat :=
-  bif Nat.blt i 269 then (bif Nat.blt i 139 then (bif Nat.blt i 43 then (bif Nat.beq i 37 then 1
-    else 0) else (bif Nat.beq i 43 then 6 else 0)) else (bif Nat.blt i 215 then (bif Nat.beq i 139
-    then 5 else 0) else (bif Nat.beq i 215 then 4 else 0))) else (bif Nat.blt i 314 then (bif
-    Nat.blt i 286 then (bif Nat.beq i 269 then 3 else 0) else (bif Nat.beq i 286 then 2 else 0))
-    else (bif Nat.blt i 489 then (bif Nat.beq i 314 then 7 else 0) else (bif Nat.beq i 489 then 8
+  bif Nat.blt i 270 then (bif Nat.blt i 140 then (bif Nat.blt i 43 then (bif Nat.beq i 37 then 1
+    else 0) else (bif Nat.beq i 43 then 6 else 0)) else (bif Nat.blt i 216 then (bif Nat.beq i 140
+    then 5 else 0) else (bif Nat.beq i 216 then 4 else 0))) else (bif Nat.blt i 315 then (bif
+    Nat.blt i 287 then (bif Nat.beq i 270 then 3 else 0) else (bif Nat.beq i 287 then 2 else 0))
+    else (bif Nat.blt i 490 then (bif Nat.beq i 315 then 7 else 0) else (bif Nat.beq i 490 then 8
     else 0)))
 
 /-- Codes of slot `relu`, by the token's constructor index. -/
 def Slot.code_relu (i : Nat) : Nat :=
-  bif Nat.beq i 350 then 1 else 0
+  bif Nat.beq i 351 then 1 else 0
 
 /-- Codes of slot `report`, by the token's constructor index. -/
 def Slot.code_report (i : Nat) : Nat :=
-  bif Nat.blt i 281 then (bif Nat.blt i 279 then (bif Nat.beq i 277 then 1 else 0) else (bif Nat.blt
-    i 280 then (bif Nat.beq i 279 then 5 else 0) else (bif Nat.beq i 280 then 4 else 0))) else (bif
-    Nat.blt i 282 then (bif Nat.beq i 281 then 3 else 0) else (bif Nat.blt i 283 then (bif Nat.beq i
-    282 then 2 else 0) else (bif Nat.beq i 283 then 6 else 0)))
+  bif Nat.blt i 282 then (bif Nat.blt i 280 then (bif Nat.beq i 278 then 1 else 0) else (bif Nat.blt
+    i 281 then (bif Nat.beq i 280 then 5 else 0) else (bif Nat.beq i 281 then 4 else 0))) else (bif
+    Nat.blt i 283 then (bif Nat.beq i 282 then 3 else 0) else (bif Nat.blt i 284 then (bif Nat.beq i
+    283 then 2 else 0) else (bif Nat.beq i 284 then 6 else 0)))
 
 /-- Codes of slot `rnd`, by the token's constructor index. -/
 def Slot.code_rnd (i : Nat) : Nat :=
-  bif Nat.blt i 360 then (bif Nat.blt i 356 then (bif Nat.blt i 355 then (bif Nat.beq i 354 then 3
-    else 0) else (bif Nat.beq i 355 then 7 else 0)) else (bif Nat.blt i 357 then (bif Nat.beq i 356
-    then 1 else 0) else (bif Nat.blt i 358 then (bif Nat.beq i 357 then 9 else 0) else (bif Nat.beq
-    i 358 then 5 else 0)))) else (bif Nat.blt i 362 then (bif Nat.blt i 361 then (bif Nat.beq i 360
-    then 4 else 0) else (bif Nat.beq i 361 then 8 else 0)) else (bif Nat.blt i 364 then (bif Nat.beq
-    i 362 then 10 else 0) else (bif Nat.blt i 365 then (bif Nat.beq i 364 then 2 else 0) else (bif
-    Nat.beq i 365 then 6 else 0))))
+  bif Nat.blt i 361 then (bif Nat.blt i 357 then (bif Nat.blt i 356 then (bif Nat.beq i 355 then 3
+    else 0) else (bif Nat.beq i 356 then 7 else 0)) else (bif Nat.blt i 358 then (bif Nat.beq i 357
+    then 1 else 0) else (bif Nat.blt i 359 then (bif Nat.beq i 358 then 9 else 0) else (bif Nat.beq
+    i 359 then 5 else 0)))) else (bif Nat.blt i 363 then (bif Nat.blt i 362 then (bif Nat.beq i 361
+    then 4 else 0) else (bif Nat.beq i 362 then 8 else 0)) else (bif Nat.blt i 365 then (bif Nat.beq
+    i 363 then 10 else 0) else (bif Nat.blt i 366 then (bif Nat.beq i 365 then 2 else 0) else (bif
+    Nat.beq i 366 then 6 else 0))))
 
 /-- Codes of slot `rowop`, by the token's constructor index. -/
 def Slot.code_rowop (i : Nat) : Nat :=
-  bif Nat.blt i 286 then (bif Nat.beq i 269 then 2 else 0) else (bif Nat.beq i 286 then 1 else 0)
+  bif Nat.blt i 287 then (bif Nat.beq i 270 then 2 else 0) else (bif Nat.beq i 287 then 1 else 0)
 
 /-- Codes of slot `sat`, by the token's constructor index. -/
 def Slot.code_sat (i : Nat) : Nat :=
-  bif Nat.beq i 376 then 1 else 0
+  bif Nat.beq i 377 then 1 else 0
 
 /-- Codes of slot `satfinite`, by the token's constructor index. -/
 def Slot.code_satfinite (i : Nat) : Nat :=
-  bif Nat.beq i 377 then 1 else 0
+  bif Nat.beq i 378 then 1 else 0
 
 /-- Codes of slot `scale_vec`, by the token's constructor index. -/
 def Slot.code_scale_vec (i : Nat) : Nat :=
-  bif Nat.blt i 380 then (bif Nat.beq i 379 then 1 else 0) else (bif Nat.blt i 381 then (bif Nat.beq
-    i 380 then 2 else 0) else (bif Nat.beq i 381 then 3 else 0))
+  bif Nat.blt i 381 then (bif Nat.beq i 380 then 1 else 0) else (bif Nat.blt i 382 then (bif Nat.beq
+    i 381 then 2 else 0) else (bif Nat.beq i 382 then 3 else 0))
 
 /-- Codes of slot `scaled`, by the token's constructor index. -/
 def Slot.code_scaled (i : Nat) : Nat :=
-  bif Nat.blt i 383 then (bif Nat.beq i 382 then 1 else 0) else (bif Nat.beq i 383 then 2 else 0)
+  bif Nat.blt i 384 then (bif Nat.beq i 383 then 1 else 0) else (bif Nat.beq i 384 then 2 else 0)
 
 /-- Codes of slot `scope`, by the token's constructor index. -/
 def Slot.code_scope (i : Nat) : Nat :=
-  bif Nat.blt i 202 then (bif Nat.blt i 132 then (bif Nat.beq i 91 then 2 else 0) else (bif Nat.beq
-    i 132 then 1 else 0)) else (bif Nat.blt i 424 then (bif Nat.beq i 202 then 3 else 0) else (bif
-    Nat.beq i 424 then 4 else 0))
+  bif Nat.blt i 203 then (bif Nat.blt i 133 then (bif Nat.beq i 92 then 2 else 0) else (bif Nat.beq
+    i 133 then 1 else 0)) else (bif Nat.blt i 425 then (bif Nat.beq i 203 then 3 else 0) else (bif
+    Nat.beq i 425 then 4 else 0))
 
 /-- Codes of slot `sec`, by the token's constructor index. -/
 def Slot.code_sec (i : Nat) : Nat :=
@@ -2533,73 +2536,73 @@ def Slot.code_sec (i : Nat) : Nat :=
 
 /-- Codes of slot `sem`, by the token's constructor index. -/
 def Slot.code_sem (i : Nat) : Nat :=
-  bif Nat.blt i 348 then (bif Nat.blt i 35 then (bif Nat.beq i 34 then 5 else 0) else (bif Nat.blt i
-    347 then (bif Nat.beq i 35 then 4 else 0) else (bif Nat.beq i 347 then 2 else 0))) else (bif
-    Nat.blt i 463 then (bif Nat.blt i 378 then (bif Nat.beq i 348 then 3 else 0) else (bif Nat.beq i
-    378 then 7 else 0)) else (bif Nat.blt i 475 then (bif Nat.beq i 463 then 6 else 0) else (bif
-    Nat.beq i 475 then 1 else 0)))
+  bif Nat.blt i 349 then (bif Nat.blt i 35 then (bif Nat.beq i 34 then 5 else 0) else (bif Nat.blt i
+    348 then (bif Nat.beq i 35 then 4 else 0) else (bif Nat.beq i 348 then 2 else 0))) else (bif
+    Nat.blt i 464 then (bif Nat.blt i 379 then (bif Nat.beq i 349 then 3 else 0) else (bif Nat.beq i
+    379 then 7 else 0)) else (bif Nat.blt i 476 then (bif Nat.beq i 464 then 6 else 0) else (bif
+    Nat.beq i 476 then 1 else 0)))
 
 /-- Codes of slot `shape`, by the token's constructor index. -/
 def Slot.code_shape (i : Nat) : Nat :=
-  bif Nat.blt i 250 then (bif Nat.blt i 8 then (bif Nat.blt i 3 then (bif Nat.blt i 1 then (bif
+  bif Nat.blt i 251 then (bif Nat.blt i 8 then (bif Nat.blt i 3 then (bif Nat.blt i 1 then (bif
     Nat.beq i 0 then 23 else 0) else (bif Nat.blt i 2 then (bif Nat.beq i 1 then 21 else 0) else
     (bif Nat.beq i 2 then 18 else 0))) else (bif Nat.blt i 4 then (bif Nat.beq i 3 then 19 else 0)
     else (bif Nat.blt i 5 then (bif Nat.beq i 4 then 20 else 0) else (bif Nat.beq i 5 then 17 else
     0)))) else (bif Nat.blt i 14 then (bif Nat.blt i 9 then (bif Nat.beq i 8 then 25 else 0) else
     (bif Nat.blt i 12 then (bif Nat.beq i 9 then 1 else 0) else (bif Nat.beq i 12 then 22 else 0)))
-    else (bif Nat.blt i 248 then (bif Nat.beq i 14 then 24 else 0) else (bif Nat.blt i 249 then (bif
-    Nat.beq i 248 then 15 else 0) else (bif Nat.beq i 249 then 16 else 0))))) else (bif Nat.blt i
-    256 then (bif Nat.blt i 253 then (bif Nat.blt i 251 then (bif Nat.beq i 250 then 12 else 0) else
-    (bif Nat.blt i 252 then (bif Nat.beq i 251 then 6 else 0) else (bif Nat.beq i 252 then 13 else
-    0))) else (bif Nat.blt i 254 then (bif Nat.beq i 253 then 7 else 0) else (bif Nat.blt i 255 then
-    (bif Nat.beq i 254 then 4 else 0) else (bif Nat.beq i 255 then 10 else 0)))) else (bif Nat.blt i
-    259 then (bif Nat.blt i 257 then (bif Nat.beq i 256 then 5 else 0) else (bif Nat.blt i 258 then
-    (bif Nat.beq i 257 then 2 else 0) else (bif Nat.beq i 258 then 14 else 0))) else (bif Nat.blt i
-    261 then (bif Nat.blt i 260 then (bif Nat.beq i 259 then 11 else 0) else (bif Nat.beq i 260 then
-    8 else 0)) else (bif Nat.blt i 262 then (bif Nat.beq i 261 then 9 else 0) else (bif Nat.beq i
-    262 then 3 else 0)))))
+    else (bif Nat.blt i 249 then (bif Nat.beq i 14 then 24 else 0) else (bif Nat.blt i 250 then (bif
+    Nat.beq i 249 then 15 else 0) else (bif Nat.beq i 250 then 16 else 0))))) else (bif Nat.blt i
+    257 then (bif Nat.blt i 254 then (bif Nat.blt i 252 then (bif Nat.beq i 251 then 12 else 0) else
+    (bif Nat.blt i 253 then (bif Nat.beq i 252 then 6 else 0) else (bif Nat.beq i 253 then 13 else
+    0))) else (bif Nat.blt i 255 then (bif Nat.beq i 254 then 7 else 0) else (bif Nat.blt i 256 then
+    (bif Nat.beq i 255 then 4 else 0) else (bif Nat.beq i 256 then 10 else 0)))) else (bif Nat.blt i
+    260 then (bif Nat.blt i 258 then (bif Nat.beq i 257 then 5 else 0) else (bif Nat.blt i 259 then
+    (bif Nat.beq i 258 then 2 else 0) else (bif Nat.beq i 259 then 14 else 0))) else (bif Nat.blt i
+    262 then (bif Nat.blt i 261 then (bif Nat.beq i 260 then 11 else 0) else (bif Nat.beq i 261 then
+    8 else 0)) else (bif Nat.blt i 263 then (bif Nat.beq i 262 then 9 else 0) else (bif Nat.beq i
+    263 then 3 else 0)))))
 
 /-- Codes of slot `shift_dir`, by the token's constructor index. -/
 def Slot.code_shift_dir (i : Nat) : Nat :=
-  bif Nat.beq i 143 then 1 else 0
+  bif Nat.beq i 144 then 1 else 0
 
 /-- Codes of slot `shiftamt`, by the token's constructor index. -/
 def Slot.code_shiftamt (i : Nat) : Nat :=
-  bif Nat.beq i 394 then 1 else 0
+  bif Nat.beq i 395 then 1 else 0
 
 /-- Codes of slot `sp`, by the token's constructor index. -/
 def Slot.code_sp (i : Nat) : Nat :=
-  bif Nat.beq i 399 then 1 else 0
+  bif Nat.beq i 400 then 1 else 0
 
 /-- Codes of slot `space`, by the token's constructor index. -/
 def Slot.code_space (i : Nat) : Nat :=
-  bif Nat.blt i 321 then (bif Nat.blt i 242 then (bif Nat.blt i 198 then (bif Nat.beq i 123 then 6
-    else 0) else (bif Nat.beq i 198 then 1 else 0)) else (bif Nat.blt i 320 then (bif Nat.beq i 242
-    then 5 else 0) else (bif Nat.beq i 320 then 7 else 0))) else (bif Nat.blt i 388 then (bif
-    Nat.blt i 322 then (bif Nat.beq i 321 then 8 else 0) else (bif Nat.beq i 322 then 9 else 0))
-    else (bif Nat.blt i 389 then (bif Nat.beq i 388 then 4 else 0) else (bif Nat.blt i 390 then (bif
-    Nat.beq i 389 then 2 else 0) else (bif Nat.beq i 390 then 3 else 0))))
+  bif Nat.blt i 322 then (bif Nat.blt i 243 then (bif Nat.blt i 199 then (bif Nat.beq i 124 then 6
+    else 0) else (bif Nat.beq i 199 then 1 else 0)) else (bif Nat.blt i 321 then (bif Nat.beq i 243
+    then 5 else 0) else (bif Nat.beq i 321 then 7 else 0))) else (bif Nat.blt i 389 then (bif
+    Nat.blt i 323 then (bif Nat.beq i 322 then 8 else 0) else (bif Nat.beq i 323 then 9 else 0))
+    else (bif Nat.blt i 390 then (bif Nat.beq i 389 then 4 else 0) else (bif Nat.blt i 391 then (bif
+    Nat.beq i 390 then 2 else 0) else (bif Nat.beq i 391 then 3 else 0))))
 
 /-- Codes of slot `spcompress`, by the token's constructor index. -/
 def Slot.code_spcompress (i : Nat) : Nat :=
-  bif Nat.beq i 410 then 1 else 0
+  bif Nat.beq i 411 then 1 else 0
 
 /-- Codes of slot `spfactor`, by the token's constructor index. -/
 def Slot.code_spfactor (i : Nat) : Nat :=
-  bif Nat.blt i 404 then (bif Nat.blt i 402 then (bif Nat.blt i 401 then (bif Nat.beq i 400 then 5
-    else 0) else (bif Nat.beq i 401 then 2 else 0)) else (bif Nat.blt i 403 then (bif Nat.beq i 402
-    then 3 else 0) else (bif Nat.beq i 403 then 4 else 0))) else (bif Nat.blt i 406 then (bif
-    Nat.blt i 405 then (bif Nat.beq i 404 then 7 else 0) else (bif Nat.beq i 405 then 1 else 0))
-    else (bif Nat.blt i 407 then (bif Nat.beq i 406 then 6 else 0) else (bif Nat.blt i 408 then (bif
-    Nat.beq i 407 then 9 else 0) else (bif Nat.beq i 408 then 8 else 0))))
+  bif Nat.blt i 405 then (bif Nat.blt i 403 then (bif Nat.blt i 402 then (bif Nat.beq i 401 then 5
+    else 0) else (bif Nat.beq i 402 then 2 else 0)) else (bif Nat.blt i 404 then (bif Nat.beq i 403
+    then 3 else 0) else (bif Nat.beq i 404 then 4 else 0))) else (bif Nat.blt i 407 then (bif
+    Nat.blt i 406 then (bif Nat.beq i 405 then 7 else 0) else (bif Nat.beq i 406 then 1 else 0))
+    else (bif Nat.blt i 408 then (bif Nat.beq i 407 then 6 else 0) else (bif Nat.blt i 409 then (bif
+    Nat.beq i 408 then 9 else 0) else (bif Nat.beq i 409 then 8 else 0))))
 
 /-- Codes of slot `spvariant`, by the token's constructor index. -/
 def Slot.code_spvariant (i : Nat) : Nat :=
-  bif Nat.blt i 409 then (bif Nat.beq i 399 then 1 else 0) else (bif Nat.beq i 409 then 2 else 0)
+  bif Nat.blt i 410 then (bif Nat.beq i 400 then 1 else 0) else (bif Nat.beq i 410 then 2 else 0)
 
 /-- Codes of slot `src`, by the token's constructor index. -/
 def Slot.code_src (i : Nat) : Nat :=
-  bif Nat.blt i 390 then (bif Nat.beq i 198 then 1 else 0) else (bif Nat.beq i 390 then 2 else 0)
+  bif Nat.blt i 391 then (bif Nat.beq i 199 then 1 else 0) else (bif Nat.beq i 391 then 2 else 0)
 
 /-- Codes of slot `src_fmt`, by the token's constructor index. -/
 def Slot.code_src_fmt (i : Nat) : Nat :=
@@ -2607,97 +2610,97 @@ def Slot.code_src_fmt (i : Nat) : Nat :=
 
 /-- Codes of slot `srctype`, by the token's constructor index. -/
 def Slot.code_srctype (i : Nat) : Nat :=
-  bif Nat.blt i 170 then (bif Nat.beq i 68 then 2 else 0) else (bif Nat.beq i 170 then 1 else 0)
+  bif Nat.blt i 171 then (bif Nat.beq i 68 then 2 else 0) else (bif Nat.beq i 171 then 1 else 0)
 
 /-- Codes of slot `stype`, by the token's constructor index. -/
 def Slot.code_stype (i : Nat) : Nat :=
-  bif Nat.blt i 172 then (bif Nat.blt i 68 then (bif Nat.blt i 57 then (bif Nat.beq i 55 then 3 else
+  bif Nat.blt i 173 then (bif Nat.blt i 68 then (bif Nat.blt i 57 then (bif Nat.beq i 55 then 3 else
     0) else (bif Nat.blt i 61 then (bif Nat.beq i 57 then 4 else 0) else (bif Nat.beq i 61 then 5
-    else 0))) else (bif Nat.blt i 170 then (bif Nat.blt i 69 then (bif Nat.beq i 68 then 13 else 0)
-    else (bif Nat.beq i 69 then 15 else 0)) else (bif Nat.blt i 171 then (bif Nat.beq i 170 then 12
-    else 0) else (bif Nat.beq i 171 then 14 else 0)))) else (bif Nat.blt i 372 then (bif Nat.blt i
-    366 then (bif Nat.blt i 175 then (bif Nat.beq i 172 then 1 else 0) else (bif Nat.beq i 175 then
-    2 else 0)) else (bif Nat.blt i 370 then (bif Nat.beq i 366 then 9 else 0) else (bif Nat.beq i
-    370 then 10 else 0))) else (bif Nat.blt i 449 then (bif Nat.blt i 446 then (bif Nat.beq i 372
-    then 11 else 0) else (bif Nat.beq i 446 then 6 else 0)) else (bif Nat.blt i 451 then (bif
-    Nat.beq i 449 then 7 else 0) else (bif Nat.beq i 451 then 8 else 0))))
+    else 0))) else (bif Nat.blt i 171 then (bif Nat.blt i 69 then (bif Nat.beq i 68 then 13 else 0)
+    else (bif Nat.beq i 69 then 15 else 0)) else (bif Nat.blt i 172 then (bif Nat.beq i 171 then 12
+    else 0) else (bif Nat.beq i 172 then 14 else 0)))) else (bif Nat.blt i 373 then (bif Nat.blt i
+    367 then (bif Nat.blt i 176 then (bif Nat.beq i 173 then 1 else 0) else (bif Nat.beq i 176 then
+    2 else 0)) else (bif Nat.blt i 371 then (bif Nat.beq i 367 then 9 else 0) else (bif Nat.beq i
+    371 then 10 else 0))) else (bif Nat.blt i 450 then (bif Nat.blt i 447 then (bif Nat.beq i 373
+    then 11 else 0) else (bif Nat.beq i 447 then 6 else 0)) else (bif Nat.blt i 452 then (bif
+    Nat.beq i 450 then 7 else 0) else (bif Nat.beq i 452 then 8 else 0))))
 
 /-- Codes of slot `submitop`, by the token's constructor index. -/
 def Slot.code_submitop (i : Nat) : Nat :=
-  bif Nat.beq i 313 then 1 else 0
+  bif Nat.beq i 314 then 1 else 0
 
 /-- Codes of slot `sync`, by the token's constructor index. -/
 def Slot.code_sync (i : Nat) : Nat :=
-  bif Nat.beq i 420 then 1 else 0
+  bif Nat.beq i 421 then 1 else 0
 
 /-- Codes of slot `sync_restrict`, by the token's constructor index. -/
 def Slot.code_sync_restrict (i : Nat) : Nat :=
-  bif Nat.beq i 423 then 1 else 0
+  bif Nat.beq i 424 then 1 else 0
 
 /-- Codes of slot `target`, by the token's constructor index. -/
 def Slot.code_target (i : Nat) : Nat :=
-  bif Nat.beq i 270 then 1 else 0
+  bif Nat.beq i 271 then 1 else 0
 
 /-- Codes of slot `tensormap`, by the token's constructor index. -/
 def Slot.code_tensormap (i : Nat) : Nat :=
-  bif Nat.beq i 429 then 1 else 0
+  bif Nat.beq i 430 then 1 else 0
 
 /-- Codes of slot `trans`, by the token's constructor index. -/
 def Slot.code_trans (i : Nat) : Nat :=
-  bif Nat.beq i 438 then 1 else 0
+  bif Nat.beq i 439 then 1 else 0
 
 /-- Codes of slot `type`, by the token's constructor index. -/
 def Slot.code_type (i : Nat) : Nat :=
-  bif Nat.blt i 329 then (bif Nat.blt i 69 then (bif Nat.blt i 61 then (bif Nat.blt i 55 then (bif
+  bif Nat.blt i 330 then (bif Nat.blt i 69 then (bif Nat.blt i 61 then (bif Nat.blt i 55 then (bif
     Nat.beq i 54 then 19 else 0) else (bif Nat.blt i 57 then (bif Nat.beq i 55 then 8 else 0) else
     (bif Nat.beq i 57 then 11 else 0))) else (bif Nat.blt i 63 then (bif Nat.beq i 61 then 14 else
     0) else (bif Nat.blt i 68 then (bif Nat.beq i 63 then 5 else 0) else (bif Nat.beq i 68 then 22
-    else 0)))) else (bif Nat.blt i 172 then (bif Nat.blt i 170 then (bif Nat.beq i 69 then 23 else
-    0) else (bif Nat.blt i 171 then (bif Nat.beq i 170 then 20 else 0) else (bif Nat.beq i 171 then
-    21 else 0))) else (bif Nat.blt i 173 then (bif Nat.beq i 172 then 17 else 0) else (bif Nat.blt i
-    175 then (bif Nat.beq i 173 then 24 else 0) else (bif Nat.beq i 175 then 18 else 0))))) else
-    (bif Nat.blt i 374 then (bif Nat.blt i 370 then (bif Nat.blt i 366 then (bif Nat.beq i 329 then
-    25 else 0) else (bif Nat.blt i 367 then (bif Nat.beq i 366 then 10 else 0) else (bif Nat.beq i
-    367 then 4 else 0))) else (bif Nat.blt i 372 then (bif Nat.beq i 370 then 13 else 0) else (bif
-    Nat.blt i 373 then (bif Nat.beq i 372 then 16 else 0) else (bif Nat.beq i 373 then 7 else 0))))
-    else (bif Nat.blt i 449 then (bif Nat.blt i 446 then (bif Nat.beq i 374 then 2 else 0) else (bif
-    Nat.blt i 447 then (bif Nat.beq i 446 then 9 else 0) else (bif Nat.beq i 447 then 3 else 0)))
-    else (bif Nat.blt i 452 then (bif Nat.blt i 451 then (bif Nat.beq i 449 then 12 else 0) else
-    (bif Nat.beq i 451 then 15 else 0)) else (bif Nat.blt i 453 then (bif Nat.beq i 452 then 6 else
-    0) else (bif Nat.beq i 453 then 1 else 0)))))
+    else 0)))) else (bif Nat.blt i 173 then (bif Nat.blt i 171 then (bif Nat.beq i 69 then 23 else
+    0) else (bif Nat.blt i 172 then (bif Nat.beq i 171 then 20 else 0) else (bif Nat.beq i 172 then
+    21 else 0))) else (bif Nat.blt i 174 then (bif Nat.beq i 173 then 17 else 0) else (bif Nat.blt i
+    176 then (bif Nat.beq i 174 then 24 else 0) else (bif Nat.beq i 176 then 18 else 0))))) else
+    (bif Nat.blt i 375 then (bif Nat.blt i 371 then (bif Nat.blt i 367 then (bif Nat.beq i 330 then
+    25 else 0) else (bif Nat.blt i 368 then (bif Nat.beq i 367 then 10 else 0) else (bif Nat.beq i
+    368 then 4 else 0))) else (bif Nat.blt i 373 then (bif Nat.beq i 371 then 13 else 0) else (bif
+    Nat.blt i 374 then (bif Nat.beq i 373 then 16 else 0) else (bif Nat.beq i 374 then 7 else 0))))
+    else (bif Nat.blt i 450 then (bif Nat.blt i 447 then (bif Nat.beq i 375 then 2 else 0) else (bif
+    Nat.blt i 448 then (bif Nat.beq i 447 then 9 else 0) else (bif Nat.beq i 448 then 3 else 0)))
+    else (bif Nat.blt i 453 then (bif Nat.blt i 452 then (bif Nat.beq i 450 then 12 else 0) else
+    (bif Nat.beq i 452 then 15 else 0)) else (bif Nat.blt i 454 then (bif Nat.beq i 453 then 6 else
+    0) else (bif Nat.beq i 454 then 1 else 0)))))
 
 /-- Codes of slot `uni`, by the token's constructor index. -/
 def Slot.code_uni (i : Nat) : Nat :=
-  bif Nat.beq i 456 then 1 else 0
+  bif Nat.beq i 457 then 1 else 0
 
 /-- Codes of slot `unit`, by the token's constructor index. -/
 def Slot.code_unit (i : Nat) : Nat :=
-  bif Nat.beq i 428 then 1 else 0
+  bif Nat.beq i 429 then 1 else 0
 
 /-- Codes of slot `unpack`, by the token's constructor index. -/
 def Slot.code_unpack (i : Nat) : Nat :=
-  bif Nat.beq i 457 then 1 else 0
+  bif Nat.beq i 458 then 1 else 0
 
 /-- Codes of slot `valid_addr`, by the token's constructor index. -/
 def Slot.code_valid_addr (i : Nat) : Nat :=
-  bif Nat.beq i 462 then 1 else 0
+  bif Nat.beq i 463 then 1 else 0
 
 /-- Codes of slot `vec`, by the token's constructor index. -/
 def Slot.code_vec (i : Nat) : Nat :=
-  bif Nat.blt i 460 then (bif Nat.beq i 459 then 1 else 0) else (bif Nat.blt i 461 then (bif Nat.beq
-    i 460 then 2 else 0) else (bif Nat.beq i 461 then 3 else 0))
+  bif Nat.blt i 461 then (bif Nat.beq i 460 then 1 else 0) else (bif Nat.blt i 462 then (bif Nat.beq
+    i 461 then 2 else 0) else (bif Nat.beq i 462 then 3 else 0))
 
 /-- Codes of slot `waitop`, by the token's constructor index. -/
 def Slot.code_waitop (i : Nat) : Nat :=
-  bif Nat.beq i 422 then 1 else 0
+  bif Nat.beq i 423 then 1 else 0
 
 /-- Codes of slot `warp`, by the token's constructor index. -/
 def Slot.code_warp (i : Nat) : Nat :=
-  bif Nat.beq i 470 then 1 else 0
+  bif Nat.beq i 471 then 1 else 0
 
 /-- Codes of slot `weak`, by the token's constructor index. -/
 def Slot.code_weak (i : Nat) : Nat :=
-  bif Nat.beq i 475 then 1 else 0
+  bif Nat.beq i 476 then 1 else 0
 
 /-- Codes of slot `width`, by the token's constructor index. -/
 def Slot.code_width (i : Nat) : Nat :=
@@ -2705,11 +2708,11 @@ def Slot.code_width (i : Nat) : Nat :=
 
 /-- Codes of slot `ws`, by the token's constructor index. -/
 def Slot.code_ws (i : Nat) : Nat :=
-  bif Nat.beq i 479 then 1 else 0
+  bif Nat.beq i 480 then 1 else 0
 
 /-- Codes of slot `xorsign`, by the token's constructor index. -/
 def Slot.code_xorsign (i : Nat) : Nat :=
-  bif Nat.beq i 490 then 1 else 0
+  bif Nat.beq i 491 then 1 else 0
 
 /-- The code of a token in a slot: its position among the slot's choices. -/
 def Slot.code (s : Slot) (t : Token) : Nat :=

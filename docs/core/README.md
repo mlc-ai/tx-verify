@@ -8,7 +8,7 @@ This document describes the TxVerify model of PTX execution (`Core/`) for a read
 
 In reading order:
 
-1. [The program, its values and the launch](program.md): How the model represents a kernel before it runs: the parsed PTX source, its decoding into typed instructions, the values and bytes that registers and memory hold, and the launch that fixes the grid. (33 concepts, 16 rules, 3 EXT notes)
+1. [The program, its values and the launch](program.md): How the model represents a kernel before it runs: the parsed PTX source, its decoding into typed instructions, the values and bytes that registers and memory hold, and the launch that fixes the grid. (33 concepts, 16 rules, 4 EXT notes)
 2. [Instructions: families, rules and tables](instructions.md): How a decoded instruction gets its meaning. (13 concepts, 16 rules, 0 EXT notes)
 3. [Threads: state, local steps and events](threads.md): How one thread runs: its local state, the registers and local instructions, the events it emits for every other instruction, and the events and executions that collect them. (48 concepts, 38 rules, 11 EXT notes)
 4. [Memory model](memory.md): How the model orders memory accesses and decides which values a read may return: byte locations and footprints, scopes, program order, base causality order, the byte-specific model causality order that also covers asynchronous accesses, the reads-from and coherence axioms, and the memory errors (data races, including the exemption for writes of identical values, mixed-size conflicts, unallocated bytes and the shared-memory lifetime). (35 concepts, 14 rules, 4 EXT notes)

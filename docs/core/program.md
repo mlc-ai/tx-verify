@@ -52,6 +52,7 @@ Generated from the Lean comments of `Core/` and `Assumption/` by `Tools/coredoc.
     - [legal modifier combinations](#prog-isa-constraint) (`PROG-ISA-CONSTRAINT`)
     - [recognizing an instruction](#prog-isa-grammar) (`PROG-ISA-GRAMMAR`)
     - [from source to instructions](#prog-decode) (`PROG-DECODE`)
+      - [a reached breakpoint aborts the kernel](#ext-brkpt) (`EXT-BRKPT`)
       - [shared memory layout](#ext-shared) (`EXT-SHARED`)
       - [local and constant variable layout](#ext-local-const-layout) (`EXT-LOCAL-CONST-LAYOUT`)
   - [Instructions](#instructions)
@@ -147,7 +148,7 @@ an address, a vector, a base with a signed offset, a negation, or a pair.
 
 Decode kernel `f` of module `m`: the module's target, then the kernel.
 
-[Lean source: `Core/Source/Decode.lean` L867-L870](../../Core/Source/Decode.lean#L867-L870)
+[Lean source: `Core/Source/Decode.lean` L890-L893](../../Core/Source/Decode.lean#L890-L893)
 
 ### Kernel and instructions
 
@@ -651,7 +652,7 @@ Lean definitions: every definition of [`Core/Source/Isa/Token.lean`](../../Core/
 <a id="prog-isa-entry"></a>
 #### instruction entries (`PROG-ISA-ENTRY`)
 
-*Rule* · [Lean comment: `Core/Source/Isa/Entry.lean` L11-L93](../../Core/Source/Isa/Entry.lean#L11-L93)
+*Rule* · [Lean comment: `Core/Source/Isa/Entry.lean` L11-L94](../../Core/Source/Isa/Entry.lean#L11-L94)
 
 Every instruction entry of the vendored table that is decoded, and every entry added for instructions the table lacks, is a constructor of `Entry`, with its mnemonic, family, effect class, PTX ISA section, modifier slots and operands. The file is generated from the vendored instruction table by `Tools/isa/gen_lean.py`; the assignment of entries to families is `Tools/isa/families.py`.
 
@@ -718,6 +719,7 @@ Lean definitions: every definition of [`Core/Source/Isa/Entry.lean`](../../Core/
 - §9.7.15.4: ".proxykind = { .alias, .async, .async.global, .async.shared::{cta, cluster} };"
 - §9.7.14.6: "ret{.uni};"
 - §9.7.14.7: "Syntax exit;"
+- §9.7.21.1: "Syntax brkpt;"
 - §9.7.21.4: "Syntax trap;"
 - §9.7.18.9.3: "tcgen05.shift.cta_group.down [taddr];"
 - §9.7.18.9.3: ".cta_group = { .cta_group::1, .cta_group::2 }"
@@ -861,10 +863,30 @@ Lean definitions: every definition of [`Core/Source/Decode.lean`](../../Core/Sou
 
 </details>
 
+<a id="ext-brkpt"></a>
+##### a reached breakpoint aborts the kernel (`EXT-BRKPT`)
+
+*Interpretation (EXT)* · [Lean comment: `Core/Source/Decode.lean` L203-L222](../../Core/Source/Decode.lean#L203-L222)
+
+The model reads `brkpt` as `trap`: a thread that executes it performs an event of undefined behaviour, so no execution that reaches a breakpoint is accepted.
+
+Direction: `stricter` (the entry uses a stricter protocol; review its exact effect on executions and rejection). This is an interpretation (EXT): a reading the model adopts beyond what the PTX text states.
+
+<details>
+<summary>Details for reviewers</summary>
+
+**Why it is not spec text:** The ISA says only that `brkpt` suspends execution. It does not say what a suspended thread does when no debugger is attached, whether it resumes, or what the other threads of the launch observe meanwhile. Compilers emit it behind a guarded branch for a failed debug assertion (CUTLASS `CUTLASS_ASSERT` under `nvcc` without `-DNDEBUG`), where reaching it means the program's own invariant is broken.
+
+**Evidence:** PTX ISA §9.7.21.1 (brkpt): "Suspends execution" and §9.7.21.4 (trap): "Abort execution and generate an interrupt to the host CPU."
+
+**Effect:** A kernel that contains `brkpt` can be proved only by showing that no consistent execution reaches one (`Correct.safe`). The decoded program holds `Op.trap` at the position of every `brkpt`; the instruction reads no register, so it does not affect DEP-CANONICAL-SPIN. Disclosed by every kernel whose statement names `Op.trap`: FlashMlaSparseDecodeH64.
+
+</details>
+
 <a id="ext-shared"></a>
 ##### shared memory layout (`EXT-SHARED`)
 
-*Interpretation (EXT)* · [Lean comment: `Core/Source/Decode.lean` L203-L224](../../Core/Source/Decode.lean#L203-L224)
+*Interpretation (EXT)* · [Lean comment: `Core/Source/Decode.lean` L224-L245](../../Core/Source/Decode.lean#L224-L245)
 
 The model places each `.shared` variable at the decoder's offset from the shared base, in disjoint and aligned bytes of the CTA's shared memory. The PTX ISA does not say where variables are placed, so a kernel whose behaviour depends on the addresses beyond disjointness and alignment is outside the claim.
 
@@ -884,7 +906,7 @@ Direction: `reading` (the entry relies on an interpretation or a named external 
 <a id="ext-local-const-layout"></a>
 ##### local and constant variable layout (`EXT-LOCAL-CONST-LAYOUT`)
 
-*Interpretation (EXT)* · [Lean comment: `Core/Source/Decode.lean` L226-L255](../../Core/Source/Decode.lean#L226-L255)
+*Interpretation (EXT)* · [Lean comment: `Core/Source/Decode.lean` L247-L276](../../Core/Source/Decode.lean#L247-L276)
 
 The model places each `.local` variable at the decoder's offset from the local base in every thread's local memory, and each `.const` variable at the decoder's offset from the constant base, in disjoint and aligned bytes. The PTX ISA does not say where variables are placed, so a kernel whose behaviour depends on the addresses beyond disjointness and alignment is outside the claim.
 

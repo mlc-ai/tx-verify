@@ -17,6 +17,8 @@ The checks in `Tools/reading_uses.py` derive this list from the instruction form
 and assumption constructors of the public statement.
 
 - EXT-ISA and EXT-IMPORT connect the frozen compiled PTX with the ISA implemented by the hardware.
+- EXT-BRKPT is listed because the kernel has `trap` (2 sites), from which a decoded `brkpt` cannot
+  be told; the kernel has no `brkpt`, so the reading does not change its meaning.
 - EXT-LAUNCH and EXT-FAIR provide the launch obligations and fair scheduling of threads and
   asynchronous completions.
 - EXT-ADDR-WRAP, EXT-CVTA and EXT-SHARED interpret address arithmetic, pointer conversion and

@@ -1,0 +1,59 @@
+{
+  "source": {
+    "repository": "https://github.com/MoonshotAI/FlashKDA",
+    "commit": "b8a96a6db49e785ba0ee103e9d87d2588ffcc4f2",
+    "cutlass": "5c149f52a436782210263fb2f19b354443a61c6a",
+    "file": "csrc/smxx/fwd_launch.cu",
+    "patch": {
+      "file": "checks/proxy_fence.patch",
+      "sha256": "011d968326e9f9253849d31fafb5d2d81e4c8230a89e85bca7ac280e36f6ce68",
+      "applies_to": "csrc/smxx/fwd_kernel2.cuh",
+      "summary": "one added cutlass::arch::fence_view_async_shared() before the __syncthreads() that separates the generic-proxy reads of the FP32 state buffer from the TMA loads that reuse it",
+      "effect_on_ptx": "one added instruction, fence.proxy.async.shared::cta, at index 1401"
+    }
+  },
+  "compiler": {
+    "nvcc": "13.2.51",
+    "architecture": "sm_100a",
+    "ptx_isa": "9.2",
+    "source_line_info": false
+  },
+  "entry": {
+    "original_index": 3,
+    "symbol_sha256": "90c7b6ce9ed03f9abd6bf8c5cf58fff0f3898cc966ace698d074e047863f0e17",
+    "mode": "packed variable-length sequences",
+    "head_dimension": 128,
+    "initial_state": "float32",
+    "final_state": "float32",
+    "threads": 192,
+    "instructions": 3836
+  },
+  "ptx": {
+    "file": "packed_fp32_sm100a.ptx",
+    "sha256": "19629983dc136cc19e18811d12ce4d423b775e7dc8d5ec29f7423b450c546108",
+    "compiler_module_sha256": "35edd06844892aba07fd0d52a942af20b17f2f3722262eab2df0cf925cbe7858"
+  },
+  "native_code": {
+    "section": ".text.<selected entry>",
+    "bytes": 72064,
+    "sha256": "679282b6ed874c019ebfe19d1b2bceef29a4246ee57ff0a6574bd7771c9e0a17",
+    "ptxas_options": [
+      "-arch=sm_100a",
+      "-m64",
+      "--register-usage-level=10",
+      "--warn-on-spills"
+    ]
+  },
+  "upstream": {
+    "ptx": {
+      "file": "checks/upstream_packed_fp32_sm100a.ptx",
+      "sha256": "e29a0cb8857abafe4955dc815da54b37e13ad4dd63374180962737ff0033f59e",
+      "compiler_module_sha256": "cca047b15c2ff4621950ca9977fd36d5a774f594237714b62e9b0afc0b3da7e3"
+    },
+    "native_code": {
+      "bytes": 72064,
+      "sha256": "6ec78e1f7fcbebb5a1e2480a464a257778f202b35c495d52d42555d84cb99b59"
+    },
+    "instructions": 3835
+  }
+}

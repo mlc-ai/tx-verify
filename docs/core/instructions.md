@@ -1224,11 +1224,12 @@ Entries: 12 with Core semantics, 1 decode only, 0 rejected.
 
 Decoded to their own constructors of `Op`. `Op.rule` (PROG-INSTR-RULE) names THREAD-BRANCH for `bra` and for `brx.idx` without `.uni`, THREAD-RUN for `ret`, `exit` and `trap`, and no rule for `brx.idx.uni`.
 
-Entries: 5 with Core semantics, 0 decode only, 0 rejected.
+Entries: 6 with Core semantics, 0 decode only, 0 rejected.
 
 | Instruction | Modifiers | Operands | Kind | Status | Rule | Manual |
 |---|---|---|---|---|---|---|
 | `bra{.uni}` | **With semantics:** uni: (omitted), `uni` | `tgt` | control | Core semantics | [THREAD-BRANCH](threads.md#thread-branch) | §9.7.14.3 |
+| `brkpt` | none | none | control | Core semantics | [THREAD-RUN](threads.md#thread-run) | §9.7.21.1 |
 | `brx.idx{.uni}` | **With semantics:** uni: (omitted), `uni` | `index, tlist` | control | Core semantics | [THREAD-BRANCH](threads.md#thread-branch) | §9.7.14.4 |
 | `exit` | none | none | control | Core semantics | [THREAD-RUN](threads.md#thread-run) | §9.7.14.7 |
 | `ret{.uni}` | **With semantics:** uni: (omitted) | none | control | Core semantics (1 of 2)<br>Rejected at decoding (1 of 2): ret.uni is not decoded | [THREAD-RUN](threads.md#thread-run) | §9.7.14.6 |

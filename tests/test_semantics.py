@@ -27,6 +27,7 @@ KERNELS = {
     "FlashMlaSparseDecodeH64": "v41_h64_no_split_plain",
     "InklingRelDecode": "rel_verify_sm100a",
     "TmlFa4Fwd": "full_p16_s1",
+    "FlashKdaFwd": "packed_fp32_sm100a",
 }
 # Kernels compiled from CUDA in this directory (rmsnorm comes from tirx-kernels; see
 # Kernels/RmsNorm/gen_ptx.py).
@@ -230,6 +231,7 @@ FLOW = {
     "FlashMlaSparseDecodeH64": "v41_h64_no_split_plain",
     "InklingRelDecode": "rel_verify_sm100a",
     "TmlFa4Fwd": "full_p16_s1",
+    "FlashKdaFwd": "packed_fp32_sm100a",
 }
 
 
@@ -340,7 +342,11 @@ CODE_TABLE = [
     "FlashMlaSparseDecodeH64",
     "InklingRelDecode",
     "TmlFa4Fwd",
+    "FlashKdaFwd",
 ]
+# Kernels whose lookups are stated over the decoder cache (`Data/Decoded.lean`) instead of
+# `Spec.lean`, so that the specification can change without rebuilding the tables.
+CODE_OVER_DECODED = {"TmlFa4Fwd", "FlashKdaFwd"}
 
 
 @pytest.mark.parametrize("kernel", CODE_TABLE)
@@ -351,8 +357,9 @@ def test_code_table_is_fresh(kernel):
     if not decoded.exists():
         decoded = folder / "Spec.lean"
     slices = kernel == "TmlFa4Fwd"
-    kernel_ref = f"PTX.Kernels.{kernel}" + (".Decoded.kernel" if slices else ".kernel")
-    import_module = f"Kernels.{kernel}" + (".Data.Decoded" if slices else ".Spec")
+    cache = kernel in CODE_OVER_DECODED
+    kernel_ref = f"PTX.Kernels.{kernel}" + (".Decoded.kernel" if cache else ".kernel")
+    import_module = f"Kernels.{kernel}" + (".Data.Decoded" if cache else ".Spec")
     result = subprocess.run(
         [
             "python3",
@@ -376,6 +383,11 @@ def test_code_table_is_fresh(kernel):
     assert result.returncode == 0, result.stdout + result.stderr
 
 
+# Kernels whose flow also lists the instructions that perform an event only in the Core model
+# (`flow_gen.generate(core_events=True)`).
+CORE_EVENT_FLOWS = {"FlashKdaFwd"}
+
+
 @pytest.mark.parametrize("kernel", sorted(FLOW))
 def test_flow_is_fresh(kernel):
     folder = EXAMPLE / "Kernels" / kernel
@@ -389,6 +401,7 @@ def test_flow_is_fresh(kernel):
             "-o",
             str(folder / "Flow"),
             "--check",
+            *(["--core-events"] if kernel in CORE_EVENT_FLOWS else []),
         ],
         capture_output=True,
         text=True,
@@ -425,6 +438,24 @@ DECODED = {
     "TmlFa4Fwd": "kernel_cutlass_kernel_flash_attncuteflash_fwd_sm100"
     "FlashAttentionForwardSm100_object_at__tensor000o111012_tensorptrbf16gmemalign16oi64div81"
     "i64div8i64div8_tensorptrbf16gmemalign16o1i64div8_0",
+    "FlashKdaFwd": "_Z25_flash_kda_fwd_recurrenceIN4cute9TiledCopyINS0_9Copy_AtomIJNS0_11Copy_Traits"
+    "INS0_13SM90_TMA_LOADEJNS0_1CILi2048EEENS0_12AuxTmaParamsINS0_5tupleIJNS0_11Scale"
+    "dBasisINS5_ILi1EEEJLi2EEEENS9_ISA_JLi1EEEENS9_IiJLi0EEEEEEERKNS0_6LayoutINS8_IJN"
+    "S5_ILi8EEENS5_ILi16EEESA_EEENS8_IJSB_SC_NS9_ISA_JLi0EEEEEEEEERKNS0_7SwizzleILi0E"
+    "Li4ELi3EEEEEEEEN7cutlass10bfloat16_tEEEENSF_INS8_IJSA_NS8_IJNS8_IJNS8_IJSG_SH_EE"
+    "ESH_EEEEEEEEENS8_IJNS5_ILi0EEENS8_IJNS8_IJNS8_IJSH_SA_EEENS5_ILi128EEEEEEEEEEEEE"
+    "ENS8_IJSA_SH_S13_EEEEENS1_INS2_IJNS3_IS4_JNS5_ILi512EEENS7_INS8_IJSJ_EEERKNSF_IN"
+    "S8_IJNS5_ILi32EEEEEES1B_EESR_EEEEESV_EEENSF_INS8_IJSA_NS8_IJNS8_IJS1C_SA_EEEEEEE"
+    "EENS8_IJS11_NS8_IJNS8_IJSA_S11_EEEEEEEEEEES1D_EENS1_INS2_IJNS3_IS4_JS6_NS7_ISK_S"
+    "N_SR_EEEEESV_EEES17_S18_EES1V_S1V_NS1_INS2_IJNS3_IS4_JNS5_ILi4096EEENS7_INS8_IJS"
+    "C_SJ_EEERKNSF_INS8_IJS13_SA_EEES1X_EESR_EEEEEfEEENSF_INS8_IJSA_NS8_IJS1Y_EEEEEES"
+    "1P_EENS8_IJSA_S13_EEEEENS1_IS1U_NSF_INS8_IJSA_NS8_IJNS8_IJSX_NS5_ILi2EEEEEEEEEEE"
+    "ES16_EENS8_IJSA_SH_SH_EEEEES2G_NS1_INS2_IJNS3_IS4_JNS5_ILi32768EEENS7_ISK_RKNSF_"
+    "INS8_IJSG_S13_SA_EEESK_EERKNSO_ILi1ELi4ELi3EEEEEEEEfEEENSF_INS8_IJSA_NS8_IJNS8_I"
+    "JNS8_IJSG_S13_EEESH_EEEEEEEEENS8_IJS11_NS8_IJNS8_IJS1Y_NS5_ILi1024EEEEEEEEEEEEEE"
+    "NS8_IJSA_S13_S13_EEEEENS1_INS2_IJNS3_INS0_14SM90_TMA_STOREEJS2H_S2P_EEEfEEES30_S"
+    "31_EENS1_INS2_IJNS3_IS33_JS6_SS_EEESV_EEES17_S18_EELi16ELi128ELi3ELi2ELi192ELb1E"
+    "Lb1ELb1ELb1EEvT_T0_T1_T2_T3_T4_T5_T6_T7_T8_T9_PSV_iiiPKli",
 }
 
 
@@ -477,6 +508,56 @@ def test_flashmla_regeneration_is_fresh():
         [
             "python3",
             str(EXAMPLE / "Kernels" / "FlashMlaSparseDecodeH64" / "regenerate.py"),
+            "--check",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+@pytest.mark.skipif(not os.environ.get("TXVERIFY_BUILD"), reason="set TXVERIFY_BUILD=1 (slow)")
+def test_flashkda_regeneration_is_fresh():
+    """The FlashKDA regeneration command verifies all generated files from the frozen PTX: the
+    exported module, the decoder cache, the chunked decode audit, the flow and the code
+    lookups."""
+    if shutil.which("lake") is None:
+        pytest.skip("lake unavailable")
+    result = subprocess.run(
+        [
+            "python3",
+            str(EXAMPLE / "Kernels" / "FlashKdaFwd" / "regenerate.py"),
+            "--check",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_flashkda_thread_layer_is_fresh():
+    """The generated thread machine of the FlashKDA kernel (`Proof/Thread`) is the output of
+    its generator on the frozen flow."""
+    result = subprocess.run(
+        [
+            "python3",
+            str(EXAMPLE / "Kernels" / "FlashKdaFwd" / "Gen" / "thread.py"),
+            "--check",
+        ],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_flashkda_matrix_table_is_fresh():
+    """The register table of the FlashKDA tile loop and the generated `Math/FragmentsTable.lean`
+    are the output of their script on the frozen PTX (the script also re-runs its checks of the
+    table against a symbolic run of the tile loop)."""
+    result = subprocess.run(
+        [
+            "python3",
+            str(EXAMPLE / "Kernels" / "FlashKdaFwd" / "Gen" / "matrix_table.py"),
             "--check",
         ],
         capture_output=True,
