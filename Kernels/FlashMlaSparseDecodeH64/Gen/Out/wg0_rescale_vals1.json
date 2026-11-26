@@ -1,0 +1,28 @@
+{
+ "ptx": "Kernels/FlashMlaSparseDecodeH64/v41_h64_no_split_plain.ptx",
+ "namespace": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.Gen",
+ "output": "Kernels/FlashMlaSparseDecodeH64/Proof/Wg0/Gen/RescaleVals1.lean",
+ "imports": [
+  "Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.Gen.Rescale2",
+  "Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.Gen.Rescale3",
+  "Lemmas.Flow.Mul2NVal"
+ ],
+ "open": [],
+ "template": "Kernels/FlashMlaSparseDecodeH64/Gen/Out/wg0_rescale.tmpl",
+ "instances": [
+  {
+   "decl": "Kernels/FlashMlaSparseDecodeH64/Gen/Out/wg0_rescale2.json",
+   "run": "rs2",
+   "params": {
+    "name": "rs2_vals"
+   }
+  },
+  {
+   "decl": "Kernels/FlashMlaSparseDecodeH64/Gen/Out/wg0_rescale3.json",
+   "run": "rs3",
+   "params": {
+    "name": "rs3_vals"
+   }
+  }
+ ]
+}

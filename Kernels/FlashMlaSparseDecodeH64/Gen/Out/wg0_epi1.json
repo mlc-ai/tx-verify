@@ -1,0 +1,119 @@
+{
+ "ptx": "Kernels/FlashMlaSparseDecodeH64/v41_h64_no_split_plain.ptx",
+ "namespace": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.Gen",
+ "output": "Kernels/FlashMlaSparseDecodeH64/Proof/Wg0/Gen/Epi1.lean",
+ "decoded": "Kernels/FlashMlaSparseDecodeH64/Data/Decoded.lean",
+ "imports": [
+  "Kernels.FlashMlaSparseDecodeH64.Flow.Code",
+  "Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.GenRules2"
+ ],
+ "kernel": "PTX.Kernels.FlashMlaSparseDecodeH64.kernel",
+ "code": "PTX.Kernels.FlashMlaSparseDecodeH64.Flow",
+ "assumptions": "PTX.Kernels.FlashMlaSparseDecodeH64.Assumptions.all",
+ "runs": [
+  {
+   "name": "es1",
+   "start": 1363,
+   "end": 1491,
+   "cut": 32,
+   "outputs": [
+    "%r1523",
+    "%r1526",
+    "%r1529",
+    "%r1532",
+    "%r1535",
+    "%r1538",
+    "%r1541",
+    "%r1544",
+    "%r1547",
+    "%r1550",
+    "%r1553",
+    "%r1556",
+    "%r1559",
+    "%r1562",
+    "%r1565",
+    "%r1568",
+    "%r1571",
+    "%r1574",
+    "%r1577",
+    "%r1580",
+    "%r1583",
+    "%r1586",
+    "%r1589",
+    "%r1592",
+    "%r1595",
+    "%r1598",
+    "%r1601",
+    "%r1604",
+    "%r1607",
+    "%r1610",
+    "%r1613",
+    "%r1616"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "unpack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "mov": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "movImm": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "selp": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "fma2": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_w0 {pc} rfl",
+    "add2": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_w0 {pc} rfl",
+    "mul": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_w0 {pc} rfl",
+    "sub": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_w0 {pc} rfl",
+    "add": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_w0 {pc} rfl",
+    "setp": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_w0 {pc} rfl",
+    "ex2": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_w0ex2 {pc} rfl",
+    "sink": "PTX.Flow.XItem.core_sink (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.noRuleW0 {pc} rfl) rfl",
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.noRuleW0 (op := {op}) {pc} rfl) {checks}"
+   },
+   "fn": {
+    "max.ftz.f32": {
+     "op": "(PTX.Flow.fOp PTX.Flow.maxFI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.maxFL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_maxF {pc} rfl rfl"
+    },
+    "add.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.add2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.add2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_add2N {pc} rfl"
+    },
+    "mul.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.mul2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.mul2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_mul2N {pc} rfl"
+    },
+    "neg.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.negI true) {d} [{o1}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.negL true) [{o1}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_negF {pc} rfl rfl"
+    },
+    "fma.rn.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.fmaI .rn true) {d} [{o1}, {o2}, {o3}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.floatE (PTX.Flow.fmaI .rn true)) [{o1}, {o2}, {o3}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_fmaF {pc} rfl rfl"
+    },
+    "div.approx.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.divI true) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.approxE (PTX.Flow.divI true)) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_divF {pc} rfl rfl"
+    },
+    "cvt.rn.bf16x2.f32": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.bfOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.bfE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_bf {pc} rfl"
+    },
+    "lg2.approx.ftz.f32": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.lg2Op",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.lg2E",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_lg2 {pc} rfl"
+    },
+    "bfe.s32": {
+     "op": "(PTX.Flow.bfeOp .s 32 {d} {o1} {o2} {o3})",
+     "f": "(fun vs => PTX.Flow.bfeW .s 32 {o1} {o2} {o3} (PTX.Flow.lk {srcs} vs))",
+     "rule": "PTX.Flow.XItem.core_bfe (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.noRuleW0 {pc} rfl) rfl rfl"
+    }
+   }
+  }
+ ]
+}

@@ -64,7 +64,7 @@ FlashMLA prepare OK: 3612 instructions, sharedBytes 0, maxThreads (some 384), pa
 
 ## Allocation result visibility
 
-[The allocation audit](Proof/Protocol/AllocationAudit.lean) identifies lane 0's actual
+[The allocation audit](Proof/Protocol/Shared/AllocRead.lean) identifies lane 0's actual
 allocation result and lane 1's actual readback at shared offset 222752. The generic Core
 allocation-result rule orders the accesses at each of the four overlapping bytes, using the
 warp's matching collective instance. The rule follows the blocking allocation and its immediate
@@ -89,26 +89,25 @@ shared byte that both operations cover. For any supported block count, a complet
 trace orders that read before all 16 bytes of each lane's first block-zero store.
 The Q wait observes all eight TMA tiles. The same source-reuse reading orders the actual
 TMA writer of each of those 16 bytes before the overwrite through the intervening copy read.
-[Query TMA reuse order](Proof/Protocol/QueryReuseTma.lean) ·
-[Single-block witness](Proof/Protocol/SingleBlockAudit.lean)
+[Query TMA reuse order](Proof/Protocol/Query/LagTma.lean)
 The same proof covers every overlapping dequantization store in the 64 KiB query window.
 The elected MMA lane, unique tile issue and inverse SW128 layout identify the actual TMA
-writer of each reused byte. [Query writer order](Proof/Protocol/QueryWriters.lean)
+writer of each reused byte. [Query writer order](Proof/Protocol/Query/Observe.lean)
 
 The first 16-byte dequantization write at shared offset 65536 aliases columns zero through seven
 of row zero in the first TMA output tile. The proof orders every byte of this write.
 For earlier blocks, the last block's QK acquire observes the relevant PV operation. For the
 last block, the final PV acquire observes that block's own commit. The proof covers both
-cases for any supported block count. [Output reuse order](Proof/Protocol/OutputReuseComplete.lean)
+cases for any supported block count. [Output reuse order](Proof/Protocol/Shared/StageStore.lean)
 The same operand handoff orders every slot-one dequantization write before any output
-staging write that covers the same byte. [Staging reuse order](Proof/Protocol/OutputStageReuse.lean)
+staging write that covers the same byte. [Staging reuse order](Proof/Protocol/Shared/StageEpi.lean)
 
 The padded main-cache length always contributes at least one block. The epilogue acquires
 the last block's PV notification before the closing CTA barrier. When the preceding PV slot
 has no reuse wait, the commit-order assumption at site 2148 orders that notification before
 the elected MMA thread's next notification. [Commit-order assumption](Assumptions.lean)
 
-[The final-byte theorems](Proof/Result/FinalOutput.lean) recover unique actual O and LSE writes
+[The final-byte theorems](Proof/Top/Result/OutFinal.lean) recover unique actual O and LSE writes
 for a complete tracked execution. `pv_cell_of_observed_issue` derives the final numerator
 from the actual PV inputs and rescale stores. The final row mass and reference determine the
 normalization and LSE for both empty and nonempty rows. `post_of_complete` proves `Post`,
@@ -116,25 +115,25 @@ including untouched bytes, for every consistent, complete execution. Causal indu
 tracking for every consistent prefix. The output load guards use actual PV commit observations
 and the FP32 results of the preceding or final block. In a maximal execution, strict descent
 forces all lanes to reach the closing barrier, after which resource and asynchronous histories
-drain. [PV recurrence](Proof/Result/ActualPvRun.lean) · [Postcondition](Proof/Result/ActualPost.lean) ·
-[Tracking](Proof/Protocol/TrackingSoftmaxSuccessor.lean) ·
-[Maximal progress](Proof/Progress/PendingDescent.lean) · [Correctness](Proof/Correct.lean)
+drain. [PV recurrence](Proof/Top/Result/PvRec.lean) · [Postcondition](Proof/Top/Result/Output.lean) ·
+[Tracking](Proof/Common/Follow.lean) ·
+[Maximal progress](Proof/Top/Assembly.lean) · [Correctness](Proof/Correct.lean)
 
 For a followed trace, the index and raw rings recover the actual coordinate, mask and
 dequantization bytes. The completed QK sequence supplies both FP32 score halves, whose sum
 is the logical dot product for the head and sparse slot. The actual WG0 loads and peer exchange
 recover the corresponding register words.
-[Coordinates](Proof/Protocol/IndexTmaReadback.lean) ·
-[Mask](Proof/Protocol/MaskReadback.lean) ·
-[Raw gathers](Proof/Protocol/RawReadback.lean) ·
-[Score words](Proof/Result/ActualScoreWords.lean) ·
-[Peer exchange](Proof/Protocol/Wg0PeerReadback.lean)
+[Coordinates](Proof/Protocol/Values/CoordRead.lean) ·
+[Mask](Proof/Protocol/Values/MaskRead.lean) ·
+[Raw gathers](Proof/Protocol/Values/RawBytes.lean) ·
+[Score words](Proof/Top/Result/ScoreWord.lean) ·
+[Peer exchange](Proof/Protocol/Values/PeerRead.lean)
 
 The actual QK and PV B operands recover the dequantized KV rows. The same-thread observing
 acquire orders shared operand reads before both later dequantization writes and output staging
 under the Core source-reuse reading. PV A reads select the actual probability writes.
-[KV operands](Proof/Result/ActualKvOperands.lean) ·
-[PV probability sources](Proof/Result/PvProbabilityReadback.lean)
+[KV operands](Proof/Protocol/Values/QkBSlot.lean) ·
+[PV probability sources](Proof/Protocol/Values/PvAElem.lean)
 
 ## Modules
 
@@ -146,22 +145,26 @@ under the Core source-reuse reading. PV A reads select the actual probability wr
 - [Data/Sites.lean](Data/Sites.lean): the instruction sites the proof and assumptions name.
 - [Assumptions.lean](Assumptions.lean), [Assumptions/Numerics.lean](Assumptions/Numerics.lean):
   the kernel's assumptions, each narrowed to its forms or pcs.
-- [Proof/Thread/Roles.lean](Proof/Thread/Roles.lean): the pc partition into roles and the branch
-  containment; [Proof/Thread/Prologue.lean](Proof/Thread/Prologue.lean): the prologue machine;
-  [Proof/Thread/Wg1Mma.lean](Proof/Thread/Wg1Mma.lean), [Wg1Tma.lean](Proof/Thread/Wg1Tma.lean),
-  [Wg1Index.lean](Proof/Thread/Wg1Index.lean), [Wg1Idle.lean](Proof/Thread/Wg1Idle.lean),
-  [Wg2.lean](Proof/Thread/Wg2.lean), [Wg0.lean](Proof/Thread/Wg0.lean): the role machines.
-- [Proof/Thread/Wg0Sound.lean](Proof/Thread/Wg0Sound.lean): warpgroup 0 and composed launch
-  soundness.
-- [Proof/Result/Run.lean](Proof/Result/Run.lean), [Post.lean](Proof/Result/Post.lean),
-  [Softmax.lean](Proof/Result/Softmax.lean): the result layer's algebra.
-- [Proof/Protocol/Mbar.lean](Proof/Protocol/Mbar.lean): the synchronization objects.
-- [Proof/Protocol/CtaRings.lean](Proof/Protocol/CtaRings.lean),
-  [GemmDequantRing.lean](Proof/Protocol/GemmDequantRing.lean),
-  [GemmScoreRing.lean](Proof/Protocol/GemmScoreRing.lean): concrete index, raw, dequantization
-  and score handoffs.
-- [Proof/Result/GlobalFrame.lean](Proof/Result/GlobalFrame.lean): global writes are inside O or LSE
-  for a followed trace. [Proof/Bound/Goal.lean](Proof/Bound/Goal.lean) proves the execution size
-  bound given tracking of consistent prefixes.
-- [Proof/Progress/OutputDrain.lean](Proof/Progress/OutputDrain.lean) proves that issued output TMA
-  stores are drained in maximal tracked executions.
+- [Proof/Common/Roles.lean](Proof/Common/Roles.lean): the pc partition into roles and the branch
+  containment; [Proof/Startup/Machine.lean](Proof/Startup/Machine.lean): the prologue machine;
+  [Proof/Mma/Machine.lean](Proof/Mma/Machine.lean), [Tma](Proof/Tma/Machine.lean),
+  [Index](Proof/Index/Machine.lean), [Wg1](Proof/Wg1/Machine.lean),
+  [Dequant](Proof/Dequant/Ref.lean), [Wg0](Proof/Wg0/Ref.lean): the role machines,
+  one directory per role; roles import no other role.
+- [Proof/Common/Sound.lean](Proof/Common/Sound.lean): composed launch soundness of the role
+  tables.
+- [Proof/Top/Result/Output.lean](Proof/Top/Result/Output.lean) and
+  [Lse.lean](Proof/Top/Result/Lse.lean): the result layer, from the values the protocol
+  lanes recover.
+- [Proof/Iface/Objects.lean](Proof/Iface/Objects.lean): the synchronization objects.
+- [Proof/Protocol/Coord/Handoff.lean](Proof/Protocol/Coord/Handoff.lean),
+  [Raw](Proof/Protocol/Raw/Handoff.lean), [Query](Proof/Protocol/Query/Handoff.lean),
+  [Dequant](Proof/Protocol/Dequant/Obj.lean) and [Score](Proof/Protocol/Score/Obj.lean): the
+  index, raw, query, dequantization and score handoffs, one directory per channel.
+- [Proof/Top/Result/Frame.lean](Proof/Top/Result/Frame.lean): global writes are inside O or LSE
+  for a followed trace. [Proof/Top/Bound.lean](Proof/Top/Bound.lean) proves the execution size
+  bound.
+- [Proof/Top/Prog/Store.lean](Proof/Top/Prog/Store.lean) proves progress at the output TMA
+  stores.
+- [Proof/Top/Correct.lean](Proof/Top/Correct.lean) states `correct` from `Pre` alone;
+  [Proof/Correct.lean](Proof/Correct.lean) gives the theorem's three statements.

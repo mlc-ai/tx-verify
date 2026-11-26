@@ -1,0 +1,139 @@
+{
+ "ptx": "Kernels/FlashMlaSparseDecodeH64/v41_h64_no_split_plain.ptx",
+ "namespace": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.Gen",
+ "output": "Kernels/FlashMlaSparseDecodeH64/Proof/Wg0/Gen/Peer0.lean",
+ "decoded": "Kernels/FlashMlaSparseDecodeH64/Data/Decoded.lean",
+ "imports": [
+  "Kernels.FlashMlaSparseDecodeH64.Flow.Code",
+  "Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.PeerRules"
+ ],
+ "kernel": "PTX.Kernels.FlashMlaSparseDecodeH64.kernel",
+ "code": "PTX.Kernels.FlashMlaSparseDecodeH64.Flow",
+ "assumptions": "PTX.Kernels.FlashMlaSparseDecodeH64.Assumptions.all",
+ "runs": [
+  {
+   "name": "pk394",
+   "start": 394,
+   "end": 403,
+   "cut": 32,
+   "outputs": [
+    "%rq1"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.noRule{cls} (op := {op}) {pc}) {checks}",
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_pack {pc}"
+   },
+   "fn": {
+    "cvt.u64.u32": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_ext {pc} rfl"
+    },
+    "shl.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upperE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_upper {pc} rfl"
+    },
+    "or.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mgOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mergeE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_merge {pc} rfl"
+    }
+   }
+  },
+  {
+   "name": "pk404",
+   "start": 404,
+   "end": 413,
+   "cut": 32,
+   "outputs": [
+    "%rq2"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.noRule{cls} (op := {op}) {pc}) {checks}",
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_pack {pc}"
+   },
+   "fn": {
+    "cvt.u64.u32": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_ext {pc} rfl"
+    },
+    "shl.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upperE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_upper {pc} rfl"
+    },
+    "or.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mgOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mergeE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_merge {pc} rfl"
+    }
+   }
+  },
+  {
+   "name": "pk414",
+   "start": 414,
+   "end": 423,
+   "cut": 32,
+   "outputs": [
+    "%rq3"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.noRule{cls} (op := {op}) {pc}) {checks}",
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_pack {pc}"
+   },
+   "fn": {
+    "cvt.u64.u32": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_ext {pc} rfl"
+    },
+    "shl.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upperE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_upper {pc} rfl"
+    },
+    "or.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mgOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mergeE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_merge {pc} rfl"
+    }
+   }
+  },
+  {
+   "name": "pk424",
+   "start": 424,
+   "end": 433,
+   "cut": 32,
+   "outputs": [
+    "%rq4"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.noRule{cls} (op := {op}) {pc}) {checks}",
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_pack {pc}"
+   },
+   "fn": {
+    "cvt.u64.u32": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_ext {pc} rfl"
+    },
+    "shl.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upperE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_upper {pc} rfl"
+    },
+    "or.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mgOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mergeE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_merge {pc} rfl"
+    }
+   }
+  }
+ ]
+}
