@@ -1,0 +1,22 @@
+{
+ "decoded": "Kernels/FlashMlaSparseDecodeH64/Data/Decoded.lean",
+ "output": "Kernels/FlashMlaSparseDecodeH64/Gen/StepWg1.lean",
+ "namespace": "PTX.Kernels.FlashMlaSparseDecodeH64.Flow",
+ "kernel": "PTX.Kernels.FlashMlaSparseDecodeH64.kernel",
+ "assumptions": "PTX.Kernels.FlashMlaSparseDecodeH64.Assumptions.all",
+ "imports": [
+  "Kernels.FlashMlaSparseDecodeH64.Flow.Code",
+  "Kernels.FlashMlaSparseDecodeH64.Proof.Lib.Seg"
+ ],
+ "ranges": [
+  [
+   1842,
+   1850
+  ],
+  [
+   2587,
+   2606
+  ]
+ ],
+ "segfree": "exact PTX.Kernels.FlashMlaSparseDecodeH64.Proof.noSegments.segFreePc"
+}

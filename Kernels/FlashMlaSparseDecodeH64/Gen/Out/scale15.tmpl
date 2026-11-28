@@ -1,0 +1,72 @@
+-- shape: selp.b16 mul.lo.s16 cvt.rn.bf16x2.ue8m0x2 cvt.rn.bf16x2.e4m3x2 mul.bf16x2 cvt.rn.bf16x2.e4m3x2 mul.bf16x2 cvt.rn.bf16x2.e4m3x2 mul.bf16x2 cvt.rn.bf16x2.e4m3x2 mul.bf16x2 mov.b64 mov.b64 add.s32 mov.b128
+/-- The registers at the start of `${run}`. -/
+def ${name}_V (p : Bool) (lo hi w : Nat) (a : Value) (r : Nat) : Value :=
+  if r = ${s0_2} then .pred p
+  else if r = ${s3_0} then bits16 (byteAt w 0 + 256 * byteAt w 1)
+  else if r = ${s5_0} then bits16 (byteAt w 2 + 256 * byteAt w 3)
+  else if r = ${s7_0} then bits16 (byteAt w 4 + 256 * byteAt w 5)
+  else if r = ${s9_0} then bits16 (byteAt w 6 + 256 * byteAt w 7)
+  else if r = ${s0_1} then bits16 lo
+  else if r = ${s0_0} then bits16 hi
+  else a
+
+/-- **The chunk of `${run}`**: from the halfwords of `w`, the two scale bytes and the selector,
+the local code reaches pc ${end} with `dequantChunk w s` of the selected scale byte `s`, and the next address `a'`. -/
+theorem ${name} {L : Launch} {g : Nat} {w lo hi : Nat} (p : Bool) (hw : RawOk w)
+    (hlo : lo < 255) (hhi : hi < 255) (a : Value)
+    {a' : Value} (ha : coreF ${op13} [${s13_0}] [a] = .ok a') :
+    Seg kernel Assumptions.all L g ${len} ${start}
+      [(${s0_2}, .pred p), (${s3_0}, bits16 (byteAt w 0 + 256 * byteAt w 1)),
+        (${s5_0}, bits16 (byteAt w 2 + 256 * byteAt w 3)),
+        (${s7_0}, bits16 (byteAt w 4 + 256 * byteAt w 5)),
+        (${s9_0}, bits16 (byteAt w 6 + 256 * byteAt w 7)), (${s0_1}, bits16 lo),
+        (${s0_0}, bits16 hi), (${in7}, a)] ${end}
+      [(${out0}, a'), (${out1}, dequantChunk w (if p then hi else lo))] := by
+  have hs : (if p then hi else lo) < 255 := by split <;> assumption
+  have ha' : coreF ${op13} [${s13_0}] [${name}_V p lo hi w a ${s13_0}] = .ok a' := ha
+  have hsel : coreF ${op0} [${s0_0}, ${s0_1}, ${s0_2}]
+      [${name}_V p lo hi w a ${s0_0}, ${name}_V p lo hi w a ${s0_1},
+        ${name}_V p lo hi w a ${s0_2}] = .ok (bits16 (if p then hi else lo)) :=
+    sel_val p (by decide) (by decide) (by decide)
+  have hdup : coreF ${op1} [${s1_0}] [bits16 (if p then hi else lo)] =
+      .ok (bits16 ((if p then hi else lo) + 256 * (if p then hi else lo))) := dup_val (by omega)
+  have h2 : ${v1} (${name}_V p lo hi w a) =
+      bits16 ((if p then hi else lo) + 256 * (if p then hi else lo)) := by
+    simp only [${v1}, ${v0}, hsel, hdup, okVal]
+  have hp (k : Nat) (hk : k < 4) := pair_val L hw hs k hk
+  have p0 : ${v4} (${name}_V p lo hi w a) = dequantPair w (if p then hi else lo) 0 := by
+    simp only [${v4}, ${v3}, ${v2}, h2]; exact hp 0 (by decide)
+  have p1 : ${v6} (${name}_V p lo hi w a) = dequantPair w (if p then hi else lo) 1 := by
+    simp only [${v6}, ${v5}, ${v2}, h2]; exact hp 1 (by decide)
+  have p2 : ${v8} (${name}_V p lo hi w a) = dequantPair w (if p then hi else lo) 2 := by
+    simp only [${v8}, ${v7}, ${v2}, h2]; exact hp 2 (by decide)
+  have p3 : ${v10} (${name}_V p lo hi w a) = dequantPair w (if p then hi else lo) 3 := by
+    simp only [${v10}, ${v9}, ${v2}, h2]; exact hp 3 (by decide)
+  have h : ${v14} (${name}_V p lo hi w a) = dequantChunk w (if p then hi else lo) := by
+    simp only [${v14}, ${v12}, ${v11}, ${op14}, p0, p1, p2, p3]
+    rw [pack_val _ _ (by decide) rfl rfl]
+    exact join_chunk w _
+  have he (r k : Nat) (hk : k < 4)
+      (hr : ${name}_V p lo hi w a r = bits16 (byteAt w (2 * k) + 256 * byteAt w (2 * k + 1))) :
+      e4E [${name}_V p lo hi w a r] =
+        .ok (.pair (e4m3Widened (byteAt w (2 * k))) (e4m3Widened (byteAt w (2 * k + 1)))) := by
+    rw [hr]; exact e4E_byte L hw k hk
+  have hsc := ue8E_val L hs
+  have hpk (x0 x1 x2 x3 y0 y1 y2 y3 : ℝ) := pack_val (d := ${d14})
+    (.pair (Assumptions.bf16Pair x0 x1) (Assumptions.bf16Pair x2 x3))
+    (.pair (Assumptions.bf16Pair y0 y1) (Assumptions.bf16Pair y2 y3))
+    (by decide : ${s14_0} ≠ ${s14_1}) rfl rfl
+  have hc : ${run}_cond (${name}_V p lo hi w a) := by
+    simp only [${run}_cond, ${run}_items0, ${run}_facts0, xCond, XItem.cond, XItem.upd,
+      XItem.vals, OItem.cond, OItem.vals, List.foldl, List.map, lookupD, List.lookup,
+      Function.update_apply, Nat.reduceBEq, Nat.reduceEqDiff, ↓reduceIte, Option.getD_some,
+      hsel, okVal, hdup, hsc, he ${s3_0} 0 (by decide) rfl, he ${s5_0} 1 (by decide) rfl,
+      he ${s7_0} 2 (by decide) rfl, he ${s9_0} 3 (by decide) rfl, mulE_val L, Except.ok.injEq,
+      exists_eq', bf16Pair_bytes, and_self, ${op14}, ha']
+    simp only [true_and, and_true]
+    exact ⟨_, hpk ..⟩
+  have hr := (${run}_run L g (${name}_V p lo hi w a)).seg hc
+  have e : ${run}_facts1 (${name}_V p lo hi w a) = [(${out0}, a'), (${out1}, dequantChunk w (if p then hi else lo))] := by
+    rw [← h]; simp only [${run}_facts1, ${v13}, ha', okVal]
+  rw [e] at hr
+  exact hr

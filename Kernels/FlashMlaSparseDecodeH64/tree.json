@@ -1,0 +1,509 @@
+{
+  "kernel": "FlashMlaSparseDecodeH64",
+  "instructions": 3612,
+  "root": "Kernels/FlashMlaSparseDecodeH64/Proof",
+  "namespace": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof",
+  "old_roots": [],
+  "roles": {
+    "Startup": [],
+    "Wg1": [],
+    "Index": [],
+    "Tma": [],
+    "Mma": [],
+    "Dequant": [],
+    "Wg0": []
+  },
+  "common": "Common",
+  "lower": [
+    "Iface",
+    "Lib"
+  ],
+  "upper": [
+    "Protocol",
+    "Top",
+    "Bound"
+  ],
+  "generated": [
+    "Gen"
+  ],
+  "state_names": [
+    "stateAt",
+    "\\.D\\b",
+    "\\bSite\\b",
+    "\\bRef[A-Z]?\\w*"
+  ],
+  "top": {
+    "correct": "Top/Correct.lean",
+    "theorem": "correct",
+    "open": null,
+    "variables": [
+      "{P : Params}",
+      "{L : Launch}",
+      "{mem0 : Mem0}"
+    ],
+    "hypothesis": "(hp : Pre P L mem0)",
+    "conclusion": "Correct kernel Assumptions.all L mem0 (Post P mem0)"
+  },
+  "closed": true,
+  "ceilings": {
+    "upper imports of role internals": 0,
+    "imports between roles": 0,
+    "upper import all": 0,
+    "upper names of role invariants": 0,
+    "upper case splits on the role": 0,
+    "state names in public statements": 0,
+    "imports of old roots": 0,
+    "duplicate public names": 0,
+    "positional projections": 0,
+    "copied proof lines": 0,
+    "files over 500 lines": 0,
+    "maxHeartbeats raises": 0,
+    "handwritten lines": 144951,
+    "handwritten lines Common": 24026,
+    "handwritten lines Dequant": 9047,
+    "handwritten lines Iface": 3676,
+    "handwritten lines Index": 8860,
+    "handwritten lines Lib": 9647,
+    "handwritten lines Mma": 9022,
+    "handwritten lines Protocol/Bar": 747,
+    "handwritten lines Protocol/Close": 218,
+    "handwritten lines Protocol/Coord": 811,
+    "handwritten lines Protocol/Dequant": 662,
+    "handwritten lines Protocol/Life": 1164,
+    "handwritten lines Protocol/Mbar": 1267,
+    "handwritten lines Protocol/MbarUse": 330,
+    "handwritten lines Protocol/Query": 1217,
+    "handwritten lines Protocol/Raw": 821,
+    "handwritten lines Protocol/Score": 780,
+    "handwritten lines Protocol/Shared": 3424,
+    "handwritten lines Protocol/TmemRace": 2595,
+    "handwritten lines Protocol/Values": 8447,
+    "handwritten lines Startup": 2848,
+    "handwritten lines Tma": 6666,
+    "handwritten lines Top/.": 466,
+    "handwritten lines Top/Prog": 2271,
+    "handwritten lines Top/Result": 2435,
+    "handwritten lines Top/Safe": 3300,
+    "handwritten lines Wg0": 39078,
+    "handwritten lines Wg1": 1085,
+    "generated files outside Gen": 0,
+    "modules unreachable from the top": 1,
+    "common imports of role internals": 157,
+    "copied proof lines zone A": 0,
+    "copied proof lines zone B": 0,
+    "handwritten lines .": 41
+  },
+  "premises": {},
+  "iface": {
+    "RescaleStep": {
+      "producer": "W1",
+      "domain": "consistent",
+      "status": "proved"
+    },
+    "AllocRead": {
+      "producer": "R",
+      "domain": "consistent",
+      "status": "proved"
+    },
+    "MbarRow.Startup": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MbarRow.Wg1": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MbarRow.Mma": {
+      "producer": "B",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MbarRow.Tma": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MbarRow.Index": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MbarRow.Dequant": {
+      "producer": "D",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MbarRow.Wg0": {
+      "producer": "W1",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MbarRow.Place": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MmaOne": {
+      "producer": "B",
+      "domain": "consistent",
+      "status": "row-proved"
+    },
+    "TmaOne": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved"
+    },
+    "BarRow.Startup": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "BarRow.Wg0": {
+      "producer": "W1",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "BarRow.Wg1": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "BarRow.Mma": {
+      "producer": "B",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "BarRow.Tma": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "BarRow.Index": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "BarRow.Dequant": {
+      "producer": "D",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "BarRow.Place": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MemRow.Dequant": {
+      "producer": "D",
+      "domain": "consistent",
+      "status": "row-proved"
+    },
+    "TmemRow.Startup": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "TmemRow.Wg0": {
+      "producer": "W1",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "TmemRow.Mma": {
+      "producer": "B",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "TmemRow.Wg1": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "TmemRow.Tma": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "TmemRow.Index": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "TmemRow.Dequant": {
+      "producer": "D",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "TmemRow.Place": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MemRow.Startup": {
+      "producer": "C",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MemRow.Wg1": {
+      "producer": "C",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MemRow.Mma": {
+      "producer": "C",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MemRow.MmaFoot": {
+      "producer": "C",
+      "domain": "consistent",
+      "status": "row-proved"
+    },
+    "MemRow.MmaLoad": {
+      "producer": "C",
+      "domain": "consistent",
+      "status": "row-proved"
+    },
+    "MemRow.Tma": {
+      "producer": "C",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MemRow.Index": {
+      "producer": "C",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "MemRow.Wg0": {
+      "producer": "W1",
+      "domain": "consistent",
+      "status": "row-proved"
+    },
+    "MemRow.Place": {
+      "producer": "C",
+      "domain": "consistent",
+      "status": "row-proved",
+      "ahead": true
+    },
+    "DqValid": {
+      "producer": "D",
+      "domain": "consistent",
+      "status": "proved"
+    },
+    "GatherSlot": {
+      "producer": "N",
+      "domain": "consistent",
+      "status": "proved"
+    },
+    "GatherRowsGood": {
+      "producer": "A",
+      "domain": "consistent",
+      "status": "proved"
+    },
+    "W0Words": {
+      "producer": "W1",
+      "domain": "consistent",
+      "status": "stated"
+    },
+    "W0Valid": {
+      "producer": "W1",
+      "domain": "consistent",
+      "status": "stated"
+    },
+    "W0Payloads": {
+      "producer": "W1",
+      "domain": "consistent",
+      "status": "stated",
+      "ahead": true
+    },
+    "W0Rows": {
+      "producer": "N",
+      "domain": "consistent",
+      "status": "stated"
+    },
+    "ScoreRead": {
+      "producer": "N",
+      "domain": "valid-rows",
+      "status": "stated"
+    },
+    "MaskRead": {
+      "producer": "N",
+      "domain": "valid-rows",
+      "status": "stated"
+    },
+    "OutRead": {
+      "producer": "N",
+      "domain": "valid-rows",
+      "status": "stated"
+    },
+    "W0Loaded": {
+      "producer": "W1",
+      "domain": "consistent",
+      "status": "stated"
+    }
+  },
+  "lanes": {
+    "C": [
+      "Common/",
+      "Top/",
+      "Kernels/FlashMlaSparseDecodeH64/tree.json",
+      "Lib/",
+      "Iface/",
+      "Kernels/FlashMlaSparseDecodeH64/Gen/",
+      "Tests/",
+      "Lemmas/",
+      "Protocol/",
+      "Startup/",
+      "Wg1/",
+      "Index/",
+      "Tma/",
+      "Mma/",
+      "Dequant/",
+      "Wg0/",
+      "Tools/out_gen.py",
+      "tests/test_out_gen.py"
+    ],
+    "A": [
+      "Startup/",
+      "Wg1/",
+      "Index/",
+      "Tma/",
+      "Protocol/Mbar/",
+      "Common/",
+      "Lib/",
+      "Iface/",
+      "Kernels/FlashMlaSparseDecodeH64/Gen/",
+      "Kernels/FlashMlaSparseDecodeH64/tree.json",
+      "Tests/",
+      "Lemmas/",
+      "Top/Prog/"
+    ],
+    "B": [
+      "Mma/",
+      "Protocol/Query/",
+      "Top/Prog/",
+      "Top/Assembly.lean",
+      "Top/Safe/",
+      "Common/",
+      "Lib/",
+      "Iface/",
+      "Kernels/FlashMlaSparseDecodeH64/Gen/",
+      "Kernels/FlashMlaSparseDecodeH64/tree.json",
+      "Tests/",
+      "Lemmas/"
+    ],
+    "D": [
+      "Dequant/",
+      "Lib/",
+      "Iface/",
+      "Kernels/FlashMlaSparseDecodeH64/Gen/",
+      "Kernels/FlashMlaSparseDecodeH64/tree.json",
+      "Tests/",
+      "Lemmas/",
+      "Common/",
+      "Top/Prog/"
+    ],
+    "W1": [
+      "Wg0/",
+      "Lib/",
+      "Iface/",
+      "Kernels/FlashMlaSparseDecodeH64/Gen/",
+      "Kernels/FlashMlaSparseDecodeH64/tree.json",
+      "Tests/",
+      "Lemmas/",
+      "Common/",
+      "Top/Prog/"
+    ],
+    "W2": [
+      "Wg0/Epi/",
+      "Lib/",
+      "Iface/",
+      "Kernels/FlashMlaSparseDecodeH64/Gen/",
+      "Kernels/FlashMlaSparseDecodeH64/tree.json",
+      "Tests/",
+      "Lemmas/",
+      "Common/",
+      "Top/Prog/"
+    ],
+    "N": [
+      "Dequant/",
+      "Wg0/",
+      "Protocol/Values/",
+      "Top/Result/",
+      "Lib/",
+      "Iface/",
+      "Kernels/FlashMlaSparseDecodeH64/Gen/",
+      "Kernels/FlashMlaSparseDecodeH64/tree.json",
+      "Tests/",
+      "Lemmas/",
+      "Common/",
+      "Top/Prog/"
+    ],
+    "R": [
+      "Protocol/",
+      "Lib/",
+      "Iface/",
+      "Kernels/FlashMlaSparseDecodeH64/Gen/",
+      "Kernels/FlashMlaSparseDecodeH64/tree.json",
+      "Tests/",
+      "Common/Export/",
+      "Lemmas/",
+      "Top/Prog/",
+      "Top/Assembly.lean"
+    ],
+    "L": [
+      "Lemmas/",
+      "Tools/",
+      "tests/",
+      "Tests/",
+      "Lib/WfStep.lean",
+      "Kernels/FlashMlaSparseDecodeH64/tree.json"
+    ]
+  },
+  "budget": {
+    "Startup": 1800,
+    "Wg1": 800,
+    "Index": 3500,
+    "Tma": 3800,
+    "Mma": 5800,
+    "Dequant": 6000,
+    "Wg0": 15000,
+    "Common+Lib+Iface": 10500,
+    "Protocol": 19500,
+    "Top+Bound": 4400
+  },
+  "bundles": [
+    "Rows",
+    "QueryTime"
+  ]
+}

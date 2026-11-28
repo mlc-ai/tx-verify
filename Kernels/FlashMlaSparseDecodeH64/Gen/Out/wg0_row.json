@@ -1,0 +1,317 @@
+{
+ "ptx": "Kernels/FlashMlaSparseDecodeH64/v41_h64_no_split_plain.ptx",
+ "namespace": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.Gen",
+ "output": "Kernels/FlashMlaSparseDecodeH64/Proof/Wg0/Gen/Row.lean",
+ "decoded": "Kernels/FlashMlaSparseDecodeH64/Data/Decoded.lean",
+ "imports": [
+  "Kernels.FlashMlaSparseDecodeH64.Flow.Code",
+  "Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.GenRules2"
+ ],
+ "kernel": "PTX.Kernels.FlashMlaSparseDecodeH64.kernel",
+ "code": "PTX.Kernels.FlashMlaSparseDecodeH64.Flow",
+ "assumptions": "PTX.Kernels.FlashMlaSparseDecodeH64.Assumptions.all",
+ "runs": [
+  {
+   "name": "sum0",
+   "start": 478,
+   "end": 482,
+   "cut": 32,
+   "outputs": [
+    "%rd253",
+    "%rd158",
+    "%rd258",
+    "%rd160"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "unpack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl"
+   },
+   "fn": {
+    "max.ftz.f32": {
+     "op": "(PTX.Flow.fOp PTX.Flow.maxFI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.maxFL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_maxF {pc} rfl rfl"
+    },
+    "add.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.add2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.add2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_add2N {pc} rfl"
+    },
+    "mul.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.mulI true) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.mulL true) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_mulF {pc} rfl rfl"
+    }
+   }
+  },
+  {
+   "name": "sum1",
+   "start": 483,
+   "end": 487,
+   "cut": 32,
+   "outputs": [
+    "%rd263",
+    "%rd162",
+    "%rd267",
+    "%rd164"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "unpack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl"
+   },
+   "fn": {
+    "max.ftz.f32": {
+     "op": "(PTX.Flow.fOp PTX.Flow.maxFI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.maxFL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_maxF {pc} rfl rfl"
+    },
+    "add.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.add2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.add2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_add2N {pc} rfl"
+    },
+    "mul.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.mulI true) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.mulL true) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_mulF {pc} rfl rfl"
+    }
+   }
+  },
+  {
+   "name": "sum2",
+   "start": 488,
+   "end": 492,
+   "cut": 32,
+   "outputs": [
+    "%rd271",
+    "%rd166",
+    "%rd275",
+    "%rd168"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "unpack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl"
+   },
+   "fn": {
+    "max.ftz.f32": {
+     "op": "(PTX.Flow.fOp PTX.Flow.maxFI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.maxFL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_maxF {pc} rfl rfl"
+    },
+    "add.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.add2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.add2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_add2N {pc} rfl"
+    },
+    "mul.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.mulI true) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.mulL true) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_mulF {pc} rfl rfl"
+    }
+   }
+  },
+  {
+   "name": "sum3",
+   "start": 493,
+   "end": 497,
+   "cut": 32,
+   "outputs": [
+    "%rd279",
+    "%rd170",
+    "%rd283",
+    "%rd172"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "unpack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl"
+   },
+   "fn": {
+    "max.ftz.f32": {
+     "op": "(PTX.Flow.fOp PTX.Flow.maxFI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.maxFL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_maxF {pc} rfl rfl"
+    },
+    "add.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.add2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.add2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_add2N {pc} rfl"
+    },
+    "mul.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.mulI true) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.mulL true) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_mulF {pc} rfl rfl"
+    }
+   }
+  },
+  {
+   "name": "sum4",
+   "start": 498,
+   "end": 502,
+   "cut": 32,
+   "outputs": [
+    "%rd287",
+    "%rd174",
+    "%rd291",
+    "%rd176"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "unpack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl"
+   },
+   "fn": {
+    "max.ftz.f32": {
+     "op": "(PTX.Flow.fOp PTX.Flow.maxFI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.maxFL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_maxF {pc} rfl rfl"
+    },
+    "add.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.add2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.add2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_add2N {pc} rfl"
+    },
+    "mul.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.mulI true) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.mulL true) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_mulF {pc} rfl rfl"
+    }
+   }
+  },
+  {
+   "name": "sum5",
+   "start": 503,
+   "end": 507,
+   "cut": 32,
+   "outputs": [
+    "%rd295",
+    "%rd178",
+    "%rd299",
+    "%rd180"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "unpack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl"
+   },
+   "fn": {
+    "max.ftz.f32": {
+     "op": "(PTX.Flow.fOp PTX.Flow.maxFI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.maxFL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_maxF {pc} rfl rfl"
+    },
+    "add.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.add2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.add2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_add2N {pc} rfl"
+    },
+    "mul.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.mulI true) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.mulL true) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_mulF {pc} rfl rfl"
+    }
+   }
+  },
+  {
+   "name": "sum6",
+   "start": 508,
+   "end": 512,
+   "cut": 32,
+   "outputs": [
+    "%rd303",
+    "%rd182",
+    "%rd307",
+    "%rd184"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "unpack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl"
+   },
+   "fn": {
+    "max.ftz.f32": {
+     "op": "(PTX.Flow.fOp PTX.Flow.maxFI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.maxFL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_maxF {pc} rfl rfl"
+    },
+    "add.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.add2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.add2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_add2N {pc} rfl"
+    },
+    "mul.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.mulI true) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.mulL true) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_mulF {pc} rfl rfl"
+    }
+   }
+  },
+  {
+   "name": "sum7",
+   "start": 513,
+   "end": 516,
+   "cut": 32,
+   "outputs": [
+    "%rd311",
+    "%rd186",
+    "%rd315"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "unpack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl"
+   },
+   "fn": {
+    "max.ftz.f32": {
+     "op": "(PTX.Flow.fOp PTX.Flow.maxFI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.maxFL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_maxF {pc} rfl rfl"
+    },
+    "add.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.add2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.add2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_add2N {pc} rfl"
+    },
+    "mul.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.mulI true) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.mulL true) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_mulF {pc} rfl rfl"
+    }
+   }
+  },
+  {
+   "name": "rmax",
+   "start": 516,
+   "end": 566,
+   "cut": 32,
+   "outputs": [
+    "%r651"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl",
+    "unpack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_move {pc} rfl"
+   },
+   "fn": {
+    "max.ftz.f32": {
+     "op": "(PTX.Flow.fOp PTX.Flow.maxFI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.maxFL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_maxF {pc} rfl rfl"
+    },
+    "add.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.add2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.add2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_add2N {pc} rfl"
+    },
+    "mul.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.mulI true) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.mulL true) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_mulF {pc} rfl rfl"
+    }
+   }
+  }
+ ]
+}

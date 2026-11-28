@@ -1,0 +1,26 @@
+{
+  "ptx": "Kernels/FlashMlaSparseDecodeH64/v41_h64_no_split_plain.ptx",
+  "namespace": "PTX.Tests.Gen.Prmt",
+  "output": "Tests/Gen/Out/Prmt.lean",
+  "imports": [
+    "Kernels.FlashMlaSparseDecodeH64.Flow.Code",
+    "Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.CoreRules"
+  ],
+  "kernel": "PTX.Kernels.FlashMlaSparseDecodeH64.kernel",
+  "code": "PTX.Kernels.FlashMlaSparseDecodeH64.Flow",
+  "assumptions": "PTX.Kernels.FlashMlaSparseDecodeH64.Assumptions.all",
+  "decoded": "Kernels/FlashMlaSparseDecodeH64/Data/Decoded.lean",
+  "runs": [
+    {
+      "name": "scales",
+      "start": 2696,
+      "end": 2712,
+      "cut": 16,
+      "outputs": ["%rs214", "%rs215", "%rs216", "%rs217", "%rs218", "%rs219", "%rs220", "%rs221"],
+      "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.dqSegFree {pc}",
+      "rules": {
+        "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.dqSegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.noRule{cls} (op := {op}) {pc}) {checks}"
+      }
+    }
+  ]
+}

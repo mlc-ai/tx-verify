@@ -1,0 +1,113 @@
+{
+ "ptx": "Kernels/FlashMlaSparseDecodeH64/v41_h64_no_split_plain.ptx",
+ "namespace": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.Gen",
+ "output": "Kernels/FlashMlaSparseDecodeH64/Proof/Dequant/Gen/Runs13.lean",
+ "decoded": "Kernels/FlashMlaSparseDecodeH64/Data/Decoded.lean",
+ "imports": [
+  "Kernels.FlashMlaSparseDecodeH64.Flow.Code",
+  "Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.CoreRules"
+ ],
+ "kernel": "PTX.Kernels.FlashMlaSparseDecodeH64.kernel",
+ "code": "PTX.Kernels.FlashMlaSparseDecodeH64.Flow",
+ "assumptions": "PTX.Kernels.FlashMlaSparseDecodeH64.Assumptions.all",
+ "runs": [
+  {
+   "name": "dr3106",
+   "start": 3106,
+   "end": 3121,
+   "cut": 32,
+   "outputs": [
+    "%r2154",
+    "%rq23"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.dqSegFree {pc}",
+   "rules": {
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.dqSegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.noRule{cls} (op := {op}) {pc}) {checks}",
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_pack {pc} (by decide)"
+   },
+   "fn": {
+    "cvt.rn.bf16x2.ue8m0x2": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.ue8Op",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.ue8E",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_ue8 {pc} (by decide)"
+    },
+    "cvt.rn.bf16x2.e4m3x2": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.e4Op",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.e4E",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_e4 {pc} (by decide)"
+    },
+    "mul.bf16x2": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.mulOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.mulE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_mul {pc} (by decide)"
+    }
+   }
+  },
+  {
+   "name": "dr3122",
+   "start": 3122,
+   "end": 3129,
+   "cut": 32,
+   "outputs": [
+    "%rs128",
+    "%rs129",
+    "%rs130",
+    "%rs131"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.dqSegFree {pc}",
+   "rules": {
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.dqSegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.noRule{cls} (op := {op}) {pc}) {checks}",
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_pack {pc} (by decide)"
+   },
+   "fn": {
+    "cvt.rn.bf16x2.ue8m0x2": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.ue8Op",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.ue8E",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_ue8 {pc} (by decide)"
+    },
+    "cvt.rn.bf16x2.e4m3x2": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.e4Op",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.e4E",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_e4 {pc} (by decide)"
+    },
+    "mul.bf16x2": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.mulOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.mulE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_mul {pc} (by decide)"
+    }
+   }
+  },
+  {
+   "name": "dr3129",
+   "start": 3129,
+   "end": 3144,
+   "cut": 32,
+   "outputs": [
+    "%r2164",
+    "%rq24"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.dqSegFree {pc}",
+   "rules": {
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.dqSegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.noRule{cls} (op := {op}) {pc}) {checks}",
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_pack {pc} (by decide)"
+   },
+   "fn": {
+    "cvt.rn.bf16x2.ue8m0x2": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.ue8Op",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.ue8E",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_ue8 {pc} (by decide)"
+    },
+    "cvt.rn.bf16x2.e4m3x2": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.e4Op",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.e4E",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_e4 {pc} (by decide)"
+    },
+    "mul.bf16x2": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.mulOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.mulE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Dequant.rule_mul {pc} (by decide)"
+    }
+   }
+  }
+ ]
+}
