@@ -8,7 +8,9 @@ facts at the piece's end with each register's value as the literal term the code
 `def` per written register, in terms of the values `V` at the start of the run), and the proof:
 item by item the code lemma `Flow.code_<pc>` and the role's segment and reading lemmas the
 declaration names, Boolean checks by `rfl`, and the stated values by `kernel_rfl`. The run
-theorem composes the pieces. No proof searches: every lemma is named and every check evaluates
+theorem composes the pieces (with `"at": true` in the run, the code and rule proofs of a
+piece are a theorem `<name>_at<j>` of their own, so that prefixes of the items can use them). No proof
+searches: every lemma is named and every check evaluates
 literals.
 
 It reads only the PTX (instruction order and register ids as `Tools/flow_gen.py` and
@@ -50,24 +52,12 @@ lemma `XItem.core_<form>`) and `{checks}` (the lemma's `rfl` checks), e.g.
 `"{lemma} (R.segFree {pc} rfl) (R.noRule{cls} {pc}) {checks}"`, with `{cls}` the family of the
 instruction (`Int`, `Move` or `Cvt`); `{op}` names the instruction's `def`.
 
-A `fn` declaration keyed `"<opcode>@<pc>"` applies at that pc only, before the opcode's
-(an opcode with two operand orders at different sites). With `"out"` (a Lean term in `{V}`) a
-run also gets `<run>_out` (its last facts are that term, by `rfl`) and `<run>_seg` (the run as a
-`Seg` under its condition, to those facts). A source path that makes the generated-file comment
-longer than the line width is written on a line of its own.
-
-A declaration with `"template"` is a run family's instances (`Tools/out_family.py`): one copy
-of a handwritten Lean template per generated run of the same shape, with its names substituted.
-
-An optional `"options": {"maxRecDepth": 100000}` sets Lean options for the generated file (a
-reading whose `rfl` side condition evaluates a long site list needs a deeper recursion).
-
 Forms beyond the fixed kinds are declared under `fn`, keyed by the opcode or by the opcode and
 the shape of its sources:
 
 * `"<opcode>"`: every source is a register (`cvt.rn.bf16.f32`, `fma.rn.ftz.f32`);
-* `"<opcode>#imm"`: the last source is a constant (`mul.ftz.f32 d, a, 0f…`, `shl.b32 d, a, 16`);
-  its item is `.fn (op k d [srcs]) d [srcs] (f k)` with `k` the constant (the bits of a `0f…`
+* `"<opcode>#imm"`: the last source is a constant (`mul.ftz.f32 d, a, 0f...`, `shl.b32 d, a, 16`);
+  its item is `.fn (op k d [srcs]) d [srcs] (f k)` with `k` the constant (the bits of a `0f...`
   constant as a natural number, an integer otherwise);
 * `"<opcode>#pack"`: the source is a vector `{lo, hi}` (`mov.b32 d, {lo, hi}`), read as the two
   registers.
@@ -79,7 +69,27 @@ its reading lemma (`"rule"`, with `{pc}`); without `"rule"` the run's `rules["fn
 generator cuts the run before and after it and proves it as a piece of its own with the lemma
 `rules["unpack32"]` (of the form of `SegD.outs_lit` for one instruction: the code lemma, then
 Boolean checks by `rfl` and the stated values by `kernel_rfl`); its condition is that the value
-unpacks (`∃ x, unpackE 32 … = .ok x`).
+unpacks (`∃ x, unpackE 32 ... = .ok x`).
+
+With `"yunpack": true` in the run, the unpack is instead an item of a run of `YItem`s
+(`Lemmas/Flow/OutUnpack.lean`, proved by `SegD.outs_litY`): it is `.unpack 32 lo hi a` with
+`rules["unpack32"]` (for instance `"PTX.Flow.YItem.unpack_rule rfl (R.noRule {pc})"`), and every
+other item `.x it` with its usual rule.
+
+A `fn` declaration keyed `"<opcode>@<pc>"` applies at that pc only, before the opcode's
+(an opcode with two operand orders at different sites). With `"out"` (a Lean term in `{V}`) a
+run also gets `<run>_out` (its last facts are that term, by `rfl`) and `<run>_seg` (the run as a
+`Seg` under its condition, to those facts). A source path that makes the generated-file comment
+longer than the line width is written on a line of its own.
+
+A declaration with `"template"` is a run family's instances (`Tools/out_family.py`): one copy
+of a handwritten Lean template per generated run of the same shape, with its names substituted.
+
+A run with `"core_selp": true` reads `selp.f32` as Core's `selp` (a `fn` item), for a predicate that
+an integer `setp` computed from values the run does not know.
+
+An optional `"options": {"maxRecDepth": 100000}` sets Lean options for the generated file (a
+reading whose `rfl` side condition evaluates a long site list needs a deeper recursion).
 
     python Tools/out_gen.py decl.json            # write the output
     python Tools/out_gen.py decl.json --check    # fail if the output is stale
@@ -122,7 +132,7 @@ INT_TYPES = ("s16", "u16", "s32", "u32", "s64", "u64", "b16", "b32", "b64")
 SETP_CMP = ("eq", "ne", "lt", "le", "gt", "ge", "lo", "ls", "hi", "hs")
 
 
-def core_form(op, ops):
+def core_form(op, ops, core_selp=False):
     """(rule lemma, checks) of Core's forms (`Lemmas/Flow/OutCore.lean`), or None."""
     parts = op.split(".")
     head = parts[0]
@@ -140,7 +150,12 @@ def core_form(op, ops):
         return "core_mulLo", "rfl"
     if op == "prmt.b32" and len(ops) == 4:
         return "core_prmt", "rfl"
-    if head == "selp" and len(parts) == 2 and parts[1] in INT_TYPES and len(ops) == 4:
+    if (
+        head == "selp"
+        and len(parts) == 2
+        and len(ops) == 4
+        and (parts[1] in INT_TYPES or (core_selp and parts[1] == "f32"))
+    ):
         return "core_selp", "rfl"
     if op == "mov.pred" and len(ops) == 2:
         return "core_mov", "rfl"
@@ -158,6 +173,20 @@ def core_form(op, ops):
     if op == "cvt.f32.bf16":
         return "core_cvtFloat", "rfl rfl rfl rfl"
     return None
+
+
+def any_unpack32(decl):
+    """Whether a run of the declaration has `mov.b32 {lo, hi}, a` (a `YItem` run)."""
+    ptx = ROOT / decl["ptx"]
+    program = parse_ptx.parse(ptx.read_text())
+    function = next(f for f in program.functions if not f.declaration)
+    code = flow_gen.flatten(function)
+    return any(
+        code[pc]["opcode"] == "mov.b32" and code[pc]["operands"][0].startswith("{")
+        for run in decl["runs"]
+        if run.get("yunpack")
+        for pc in range(run["start"], run["end"])
+    )
 
 
 def decoded_ops(path):
@@ -186,6 +215,10 @@ class Run:
         self.ops = None
         self.opdefs = []
         self.fn_rules = {}
+        for k, spec in self.fn.items():
+            if "rule" in spec and "#" not in k:
+                spec.setdefault("kind", "fn:" + k)
+                self.fn_rules[spec["kind"]] = spec["rule"]
 
     def opnd(self, x):
         """The `Opnd` term of an operand: a register, an integer immediate or a `0f` constant."""
@@ -215,9 +248,16 @@ class Run:
         return kind
 
     def shaped(self, op, ops):
-        """The item of a form declared under `fn` by opcode and source shape, or of `unpack32`."""
+        """The item of a form declared under `fn` by opcode and source shape, or of `unpack32`.
+
+        With `"yunpack": true` in the run, `mov.b32 {lo, hi}, a` is a `YItem` instead (`item`)."""
         r = self.rid
-        if op == "mov.b32" and ops[0].startswith("{") and "_" not in regs_of(ops[0]):
+        if (
+            op == "mov.b32"
+            and ops[0].startswith("{")
+            and "_" not in regs_of(ops[0])
+            and not self.run.get("yunpack")
+        ):
             (lo, hi), a = [r(x) for x in regs_of(ops[0])], r(ops[1])
             return (
                 "unpack32",
@@ -280,7 +320,7 @@ class Run:
                 fop, ff = spec["op"].format(**fmt), spec["f"].format(**fmt)
                 term = f".fn ({fop}) {d} {sl} ({ff})"
                 return (
-                    self.fn_kind(spec, pc),
+                    spec.get("kind", "fn"),
                     term,
                     srcs,
                     [d],
@@ -288,11 +328,12 @@ class Run:
                         (d, f"okVal (.bits 32 0) (({ff}) [{', '.join(v(x) for x in srcs)}])")
                     ],
                 )
-            srcs = [r(x) for x in ops[1:]]
+            # a braced operand `{a, b}` contributes its registers in order
+            srcs = [r(y) for x in ops[1:] for y in (regs_of(x) if x.startswith("{") else [x])]
             sl = "[" + ", ".join(map(str, srcs)) + "]"
             term = f".fn ({spec['op']} {d} {sl}) {d} {sl} {spec['f']}"
             return (
-                self.fn_kind(spec, pc),
+                spec.get("kind", "fn"),
                 term,
                 srcs,
                 [d],
@@ -323,12 +364,12 @@ class Run:
                 [d],
                 lambda v: [(d, "okVal (.bits 32 0) (" + e.format(fz=fz, a=v(a), b=v(b)) + ")")],
             )
-        m = re.fullmatch(r"setp\.(eq|ne|lt|le|gt|ge)(\.ftz)?\.f32", op)
+        m = re.fullmatch(r"setp\.(eq|ne|lt|le|gt|ge)(u)?(\.ftz)?\.f32", op)
         if m and len(ops) == 3 and self.is_reg(ops[1]) and ops[2].startswith(("0f", "0F")):
             # `setp.<cmp>{.ftz}.f32 p, a, 0f…`: the library item `setp` (ordered comparison)
-            fz = "true" if m.group(2) else "false"
+            fz = "true" if m.group(3) else "false"
             p, a, k = r(ops[0]), r(ops[1]), int(ops[2][2:], 16)
-            c = f"(.ord .{m.group(1)})"
+            c = f"(.{'unord' if m.group(2) else 'ord'} .{m.group(1)})"
             return (
                 "setp",
                 f".setp {c} {fz} {p} {a} {k}",
@@ -405,6 +446,23 @@ class Run:
                     (hi, f"(splitValue 64 ({v(a)})).2"),
                 ],
             )
+        if (
+            op == "mov.b32"
+            and ops[0].startswith("{")
+            and len(regs_of(ops[0])) == 2
+            and self.run.get("yunpack")
+        ):
+            (lo, hi), a = [r(x) for x in regs_of(ops[0])], r(ops[1])
+            return (
+                "unpack32",
+                f"!.unpack 32 {lo} {hi} {a}",
+                [a],
+                [lo, hi],
+                lambda v: [
+                    (lo, f"(splitValue 32 ({v(a)})).1"),
+                    (hi, f"(splitValue 32 ({v(a)})).2"),
+                ],
+            )
         if op in ("mov.b32", "mov.f32", "mov.u32") and self.is_reg(ops[1]):
             d, a = r(ops[0]), r(ops[1])
             return ("mov", f".mov {d} {a}", [a], [d], lambda v: [(d, v(a))])
@@ -417,7 +475,12 @@ class Run:
                 [d],
                 lambda v: [(d, f"(.bits 32 (BitVec.ofNat 64 {b}))")],
             )
-        if op == "selp.f32" and len(ops) == 4 and self.is_reg(ops[3]):
+        if (
+            op == "selp.f32"
+            and len(ops) == 4
+            and self.is_reg(ops[3])
+            and not self.run.get("core_selp")
+        ):
             d, p = r(ops[0]), r(ops[3])
             a, b = self.opnd(ops[1]), self.opnd(ops[2])
             rd = [r(x) for x in ops[1:3] if self.is_reg(x)] + [p]
@@ -434,7 +497,7 @@ class Run:
                     (d, f"if predOf ({v(p)}) then {sv(v, ops[1], a)} else {sv(v, ops[2], b)}")
                 ],
             )
-        form = core_form(op, ops)
+        form = core_form(op, ops, bool(self.run.get("core_selp")))
         if form is not None and self.ops is not None:
             return self.core_item(pc, op, ops, form)
         raise GenError(f'pc {pc}: {op} has no item; declare it under "fn"')
@@ -478,7 +541,9 @@ class Run:
             cur = (cur - set(wr)) | set(rd)
             live[i] = sorted(cur)
         bounds = list(range(0, n, cut)) + [n]
-        singles = [i for i, it in enumerate(items) if it[0] == "unpack32"]
+        singles = [
+            i for i, it in enumerate(items) if it[0] == "unpack32" and isinstance(it[1], tuple)
+        ]
         if singles:
             # an unpack is a piece of its own; the stretches between unpacks are cut every `cut`
             marks, last = {0, n}, 0
@@ -532,7 +597,7 @@ class Run:
         for j in range(len(bounds) - 1):
             a, b = bounds[j], bounds[j + 1]
             its = items[a:b]
-            if its[0][0] == "unpack32":
+            if its[0][0] == "unpack32" and isinstance(its[0][1], tuple):
                 (_, (lo, hi, src), _, _, pc) = its[0]
                 rule = rules.get("unpack32")
                 if rule is None:
@@ -546,18 +611,17 @@ class Run:
                 out.append(f"    {codens}.code_{pc} rfl rfl (by kernel_rfl) (by kernel_rfl)")
                 out.append("")
                 continue
-            out.append(f"def {name}_items{j} : List XItem := [")
-            terms = [t if t.startswith(".fn ") else f".base ({t})" for _, t, _, _, _ in its]
+            y = any(isinstance(t, str) and t.startswith("!") for _, t, _, _, _ in items)
+            out.append(f"def {name}_items{j} : List {'YItem' if y else 'XItem'} := [")
+            terms = [t if t.startswith((".fn ", "!")) else f".base ({t})" for _, t, _, _, _ in its]
+            if y:
+                terms = [t[1:] if t.startswith("!") else f".x ({t})" for t in terms]
             out += [f"  {t}," for t in terms[:-1]] + [f"  {terms[-1]}"]
             out.append("]")
             out.append("")
             pa, pb = start + a, start + b
-            cond = f"xCond (lookupD ({name}_facts{j} V)) {name}_items{j}"
+            cond = f"{'yCond' if y else 'xCond'} (lookupD ({name}_facts{j} V)) {name}_items{j}"
             pieces.append((j, pa, pb, b - a, cond))
-            out.append(f"theorem {name}_piece{j} (L : Launch) (g : Nat) (V : Nat → Value) :")
-            out.append(f"    SegD {kernel} {asms} L g {b - a} {pa} ({name}_facts{j} V) {pb}")
-            out.append(f"      ({name}_facts{j + 1} V) ({cond}) :=")
-            out.append(f"  SegD.outs_lit (items := {name}_items{j})")
             ats = []
             for kind, _, _, _, pc in its:
                 if isinstance(kind, tuple):
@@ -579,15 +643,47 @@ class Run:
                         raise GenError(f"pc {pc}: no rule declared for the item kind {kind}")
                     rule = rule.format(pc=pc)
                 ats.append(
-                    f"⟨XItem.codeB_of {codens}.code_{pc} rfl, {segfree.format(pc=pc)}, {rule}⟩"
+                    f"⟨{'YItem' if y else 'XItem'}.codeB_of {codens}.code_{pc} rfl, "
+                    f"{segfree.format(pc=pc)}, {rule}⟩"
                 )
-            out.append("    ⟨" + ats[0] + ",")
-            out += [f"     {x}," for x in ats[1:]]
-            out.append("     trivial⟩")
-            out.append("    rfl (by kernel_rfl) rfl (by kernel_rfl) (by kernel_rfl)")
+            if run.get("at"):
+                out.append(f"theorem {name}_at{j} (L : Launch) (g : Nat) :")
+                oat = "OAtY" if y else "OAt"
+                out.append(f"    {oat} {kernel} {asms} L g {pa} {name}_items{j} :=")
+                out.append("    ⟨" + ats[0] + ",")
+                out += [f"     {x}," for x in ats[1:]]
+                out.append("     trivial⟩")
+                out.append("")
+            hyp = run.get("req_hyp")
+            if hyp and len(bounds) != 2:
+                raise GenError(f"run {name}: req_hyp needs one piece")
+            hq = ""
+            if hyp:
+                hq = f" (hq : xReq (lookupD ({name}_facts{j} V)) {name}_items{j} = true)"
+            req = "hq" if hyp else "rfl"
+            out.append(f"theorem {name}_piece{j} (L : Launch) (g : Nat) (V : Nat → Value){hq} :")
+            out.append(f"    SegD {kernel} {asms} L g {b - a} {pa} ({name}_facts{j} V) {pb}")
+            out.append(f"      ({name}_facts{j + 1} V) ({cond}) :=")
+            out.append(f"  SegD.outs_lit{'Y' if y else ''} (items := {name}_items{j})")
+            if run.get("at"):
+                out.append(f"    ({name}_at{j} L g)")
+            else:
+                out.append("    ⟨" + ats[0] + ",")
+                out += [f"     {x}," for x in ats[1:]]
+                out.append("     trivial⟩")
+            out.append(f"    rfl (by kernel_rfl) {req} (by kernel_rfl) (by kernel_rfl)")
             out.append("")
+            if run.get("path"):
+                if y or not run.get("at"):
+                    raise GenError(f"run {name}: path needs at and no YItem")
+                out.append(f"theorem {name}_path{j} (L : Launch) (g : Nat) (V : Nat → Value) :")
+                out.append(f"    PathD {kernel} {asms} L g {b - a} {pa} ({name}_facts{j} V) {pb}")
+                out.append(f"      ({name}_facts{j + 1} V) ({cond}) :=")
+                out.append(f"  PathD.outs_lit (items := {name}_items{j}) ({name}_at{j} L g)")
+                out.append("    rfl (by kernel_rfl) rfl (by kernel_rfl) (by kernel_rfl)")
+                out.append("")
         conj = pieces[0][4]
-        proof = f"{name}_piece0 L g V"
+        proof = f"{name}_piece0 L g V" + (" hq" if run.get("req_hyp") else "")
         total = pieces[0][3]
         for j, _, _, ln, cond in pieces[1:]:
             conj = f"({conj}) ∧ ({cond})"
@@ -597,11 +693,23 @@ class Run:
         out.append(f"def {name}_cond (V : Nat → Value) : Prop :=")
         out.append(f"  {conj}")
         out.append("")
-        out.append(f"theorem {name}_run (L : Launch) (g : Nat) (V : Nat → Value) :")
+        rq = ""
+        if run.get("req_hyp"):
+            rq = f" (hq : xReq (lookupD ({name}_facts0 V)) {name}_items0 = true)"
+        out.append(f"theorem {name}_run (L : Launch) (g : Nat) (V : Nat → Value){rq} :")
         out.append(f"    SegD {kernel} {asms} L g {total} {start} ({name}_facts0 V) {end}")
         out.append(f"      ({name}_facts{len(bounds) - 1} V) ({name}_cond V) :=")
         out.append(f"  {proof}")
         out.append("")
+        if run.get("path"):
+            pp = f"{name}_path0 L g V"
+            for j in range(1, len(pieces)):
+                pp = f"({pp}).comp ({name}_path{j} L g V) (by omega)"
+            out.append(f"theorem {name}_path (L : Launch) (g : Nat) (V : Nat → Value) :")
+            out.append(f"    PathD {kernel} {asms} L g {total} {start} ({name}_facts0 V) {end}")
+            out.append(f"      ({name}_facts{len(bounds) - 1} V) ({name}_cond V) :=")
+            out.append(f"  {pp}")
+            out.append("")
         if "out" in run:
             last = len(bounds) - 1
             out.append(f"/-- The facts at the end of `{name}`, in the role's form. -/")
@@ -627,6 +735,20 @@ def header(ptx):
 
 
 def render(decl):
+    if "typed_lane" in decl:
+        import typed_gen
+
+        try:
+            return typed_gen.render_lane(decl, header)
+        except typed_gen.TypedError as e:
+            raise GenError(str(e)) from None
+    if "typed" in decl:
+        import typed_gen
+
+        try:
+            return typed_gen.render_typed(decl, header)
+        except typed_gen.TypedError as e:
+            raise GenError(str(e)) from None
     if "template" in decl:
         import out_family
 
@@ -648,6 +770,8 @@ def render(decl):
             f"public import {m}"
             for m in [
                 "Lemmas.Flow.OutCoreRules" if "decoded" in decl else "Lemmas.Flow.OutLit",
+                *(["Lemmas.Flow.OutUnpack"] if any_unpack32(decl) else []),
+                *(["Lemmas.Flow.OutPath"] if any(r.get("path") for r in decl["runs"]) else []),
                 "Tactics.KernelRfl",
                 *decl.get("imports", []),
             ]

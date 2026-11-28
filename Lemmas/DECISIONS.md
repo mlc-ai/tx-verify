@@ -2068,8 +2068,7 @@ to imports and names, so the lane replaces its file by an import.
   of the thread's CTA below column 512; lane 0 of warp `w` of the CTA allocated before the access
   and went on; the access completes before every deallocation of its CTA. The generic part of
   Inkling's first-tree `TmemAccess.lean` (allocation recorded and covering, release = the CTA's
-  deallocation); the completion orders stay the kernel's (its MMA commit and waits). Test
-  `Tests/Tmem/Tmem1Access.lean`: Inkling's `no_access_unsafe` conclusion from its own premises.
+  deallocation); the completion orders stay the kernel's (its MMA commit and waits).
 - **Not done here**: FlashMLA G26/G27/G28 (`out_gen` kinds) go with item 2 (per-pc step lemmas
   for every local instruction kind), since a per-pc lemma for each instruction is what an
   `out_gen` item would be.

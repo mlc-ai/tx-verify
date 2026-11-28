@@ -1,0 +1,242 @@
+{
+ "ptx": "Kernels/InklingRelDecode/rel_verify_sm100a.ptx",
+ "namespace": "PTX.Kernels.InklingRelDecode.Proof.Softmax.Gen",
+ "output": "Kernels/InklingRelDecode/Gen/EpiZero.lean",
+ "imports": [
+  "Kernels.InklingRelDecode.Flow.Code",
+  "Kernels.InklingRelDecode.Proof.Softmax.GenRulesZ"
+ ],
+ "kernel": "PTX.Kernels.InklingRelDecode.kernel",
+ "code": "PTX.Kernels.InklingRelDecode.Flow",
+ "assumptions": "PTX.Kernels.InklingRelDecode.Assumptions.all",
+ "runs": [
+  {
+   "name": "epz",
+   "at": true,
+   "start": 2567,
+   "end": 2600,
+   "cut": 33,
+   "outputs": [
+    "%rd531",
+    "%rd532",
+    "%rd533",
+    "%rd534",
+    "%rd535",
+    "%rd536",
+    "%rd537",
+    "%rd538",
+    "%rd539",
+    "%rd540",
+    "%rd541",
+    "%rd542",
+    "%rd543",
+    "%rd544",
+    "%rd545",
+    "%rd546",
+    "%rd547",
+    "%rd548",
+    "%rd549",
+    "%rd550",
+    "%rd551",
+    "%rd552",
+    "%rd553",
+    "%rd554",
+    "%rd555",
+    "%rd556",
+    "%rd557",
+    "%rd558",
+    "%rd559",
+    "%rd560",
+    "%rd561",
+    "%rd562",
+    "%p178"
+   ],
+   "segfree": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.zSegFree (pc := {pc}) rfl)",
+   "rules": {
+    "pack": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_moveZ {pc} rfl",
+    "mov": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_moveZ {pc} rfl",
+    "setp": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_setpZ {pc} rfl"
+   },
+   "fn": {
+    "mov.b64@2569": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2570": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2571": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2572": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2573": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2574": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2575": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2576": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2577": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2578": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2579": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2580": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2581": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2582": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2583": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2584": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2585": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2586": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2587": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2588": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2589": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2590": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2591": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2592": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2593": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2594": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2595": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2596": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2597": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2598": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    },
+    "mov.b64@2599": {
+     "op": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64Op {d} {o1})",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.mov64L [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mov64Z {pc} rfl"
+    }
+   }
+  },
+  {
+   "name": "epr",
+   "at": true,
+   "start": 2601,
+   "end": 2603,
+   "cut": 2,
+   "outputs": [
+    "%r1301",
+    "%r1300"
+   ],
+   "segfree": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.zSegFree (pc := {pc}) rfl)",
+   "rules": {
+    "selp": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_moveZ {pc} rfl"
+   },
+   "fn": {
+    "rcp.approx.ftz.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.rcpI true) {d} [{o1}])",
+     "f": "(PTX.Flow.fF (PTX.Kernels.InklingRelDecode.Proof.Softmax.rcpL true) [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_rcpZ {pc} rfl"
+    }
+   },
+   "req_hyp": true
+  }
+ ]
+}

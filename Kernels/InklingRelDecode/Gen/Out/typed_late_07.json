@@ -1,0 +1,217 @@
+{
+  "output": "Kernels/InklingRelDecode/Gen/TypedLate07.lean",
+  "typed": {
+    "ptx": "Kernels/InklingRelDecode/rel_verify_sm100a.ptx",
+    "namespace": "PTX.Kernels.InklingRelDecode.Gen.TypedLate07",
+    "kernel": "PTX.Kernels.InklingRelDecode.kernel",
+    "code": "PTX.Kernels.InklingRelDecode.Flow",
+    "code_length": "PTX.Kernels.InklingRelDecode.kernel_code_length",
+    "imports": [
+      "Kernels.InklingRelDecode.Flow.Code"
+    ],
+    "family": 5,
+    "delta": true,
+    "results": [
+      {
+        "from": 1913,
+        "step": 11,
+        "count": 16,
+        "offset": 10,
+        "tag": "dat32"
+      },
+      {
+        "from": 59,
+        "step": 1,
+        "count": 1,
+        "offset": 0,
+        "tag": "bits32"
+      }
+    ],
+    "auto": {
+      "prefix": "l07_",
+      "from": 574,
+      "to": 2853,
+      "skip": [
+        [
+          1913,
+          2089
+        ]
+      ],
+      "part": [
+        7,
+        250
+      ],
+      "gaps": true,
+      "part_starts": [
+        847,
+        1051,
+        1375,
+        1467,
+        1839,
+        2278,
+        2683
+      ],
+      "cut_pcs": [
+        814,
+        943,
+        1756,
+        1764
+      ],
+      "skip_pcs": [
+        949,
+        1049,
+        2256,
+        2257,
+        2564
+      ]
+    },
+    "ctl": {
+      "ids": [
+        3,
+        169,
+        174,
+        175,
+        176,
+        177,
+        478,
+        481,
+        483,
+        527,
+        610,
+        666,
+        1532,
+        1533,
+        1534,
+        1536,
+        1538,
+        1540,
+        1542,
+        1543,
+        1544,
+        1611,
+        1676,
+        1709,
+        1760,
+        1827,
+        1828,
+        1829,
+        1830,
+        1896,
+        1897,
+        1898,
+        1899,
+        1900,
+        1993,
+        2019,
+        2446,
+        2511,
+        2608
+      ],
+      "ranges": [
+        [
+          85,
+          95
+        ],
+        [
+          171,
+          173
+        ],
+        [
+          327,
+          331
+        ],
+        [
+          462,
+          464
+        ],
+        [
+          485,
+          487
+        ],
+        [
+          490,
+          491
+        ],
+        [
+          496,
+          497
+        ],
+        [
+          500,
+          506
+        ],
+        [
+          532,
+          533
+        ],
+        [
+          623,
+          624
+        ],
+        [
+          792,
+          798
+        ],
+        [
+          801,
+          803
+        ],
+        [
+          806,
+          809
+        ],
+        [
+          874,
+          875
+        ],
+        [
+          940,
+          945
+        ],
+        [
+          1912,
+          1913
+        ],
+        [
+          1956,
+          1959
+        ],
+        [
+          2023,
+          2024
+        ],
+        [
+          2141,
+          2204
+        ],
+        [
+          2206,
+          2274
+        ],
+        [
+          2379,
+          2445
+        ]
+      ]
+    },
+    "events": [
+      {
+        "match": "^tcgen05\\.ld",
+        "tag": "dat32"
+      },
+      {
+        "match": "^shfl\\.sync\\.bfly",
+        "tag": "dat32"
+      },
+      {
+        "match": "^ld\\.shared\\.b32",
+        "tag": "dat32"
+      },
+      {
+        "match": "^ld\\.global\\.b16",
+        "tag": "none"
+      }
+    ],
+    "half": true
+  }
+}

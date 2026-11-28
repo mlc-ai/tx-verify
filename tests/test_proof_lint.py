@@ -34,7 +34,6 @@ FRAMEWORK_KERNELS = [
     "RmsNorm",
     "AddOne",
     "FlashAttn4Fwd",
-    "InklingRelDecode",
 ]
 GEMM = ROOT / "Kernels" / "Fp16Gemm8192"
 PROOF = GEMM / "Proof"
