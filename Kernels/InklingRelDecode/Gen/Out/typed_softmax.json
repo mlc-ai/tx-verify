@@ -1,0 +1,14 @@
+{
+  "output": "Kernels/InklingRelDecode/Gen/TypedSoftmax.lean",
+  "typed": {
+    "ptx": "Kernels/InklingRelDecode/rel_verify_sm100a.ptx",
+    "namespace": "PTX.Kernels.InklingRelDecode.Gen.Typed",
+    "kernel": "PTX.Kernels.InklingRelDecode.kernel",
+    "code": "PTX.Kernels.InklingRelDecode.Flow",
+    "code_length": "PTX.Kernels.InklingRelDecode.kernel_code_length",
+    "imports": ["Kernels.InklingRelDecode.Flow.Code"],
+    "windows": [
+      {"name": "sm1", "start": 1299, "end": 1838, "exit": 8, "branches": {"1302": false, "1466": false}}
+    ]
+  }
+}

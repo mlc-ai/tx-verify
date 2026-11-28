@@ -1,0 +1,57 @@
+-- shape: prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 prmt.b32 cvt.u16.u32 add.s32
+/-- **The scale bytes of `${run}`** (pcs ${start} to ${end}): from the four words of the row's
+scale load, the sixteen halfword registers from ${d1} hold the scale bytes (`scaleFacts`), and every
+outcome before the address `add` is defined. -/
+theorem ${name} {w0 w1 w2 w3 : Nat} (h0 : w0 < 2 ^ 32) (h1 : w1 < 2 ^ 32) (h2 : w2 < 2 ^ 32)
+    (h3 : w3 < 2 ^ 32) {V : Nat → Value} (hV0 : V ${s24_0} = .bits 32 (BitVec.ofNat 64 w0))
+    (hV1 : V ${s16_0} = .bits 32 (BitVec.ofNat 64 w1))
+    (hV2 : V ${s8_0} = .bits 32 (BitVec.ofNat 64 w2))
+    (hV3 : V ${s0_0} = .bits 32 (BitVec.ofNat 64 w3))
+    (ha : xCond (lookupD (${run}_facts1 V)) ${run}_items1) :
+    ${run}_cond V ∧
+      ∀ R, Holds R (${run}_facts2 V) → Holds R (scaleFacts ${d1} (scWord w0 w1 w2 w3)) := by
+  obtain ⟨b00, b10, b20, b30⟩ := byteAt_scWord (w3 := w3) h0 h1 h2 0 (by decide)
+  obtain ⟨b01, b11, b21, b31⟩ := byteAt_scWord (w3 := w3) h0 h1 h2 1 (by decide)
+  obtain ⟨b02, b12, b22, b32⟩ := byteAt_scWord (w3 := w3) h0 h1 h2 2 (by decide)
+  obtain ⟨b03, b13, b23, b33⟩ := byteAt_scWord (w3 := w3) h0 h1 h2 3 (by decide)
+  have q0 := prmt_val (d := ${d0}) (a := ${s0_0}) (c := 30578) 2 rfl (by decide) h3
+  have c0 := cvt16w_val (d := ${d1}) (a := ${d0}) (byteAt_lt w3 2)
+  have q1 := prmt_val (d := ${d2}) (a := ${s2_0}) (c := 30579) 3 rfl (by decide) h3
+  have c1 := cvt16w_val (d := ${d3}) (a := ${d2}) (byteAt_lt w3 3)
+  have q2 := prmt_val (d := ${d4}) (a := ${s4_0}) (c := 30576) 0 rfl (by decide) h3
+  have c2 := cvt16w_val (d := ${d5}) (a := ${d4}) (byteAt_lt w3 0)
+  have q3 := prmt_val (d := ${d6}) (a := ${s6_0}) (c := 30577) 1 rfl (by decide) h3
+  have c3 := cvt16w_val (d := ${d7}) (a := ${d6}) (byteAt_lt w3 1)
+  have q4 := prmt_val (d := ${d8}) (a := ${s8_0}) (c := 30578) 2 rfl (by decide) h2
+  have c4 := cvt16w_val (d := ${d9}) (a := ${d8}) (byteAt_lt w2 2)
+  have q5 := prmt_val (d := ${d10}) (a := ${s10_0}) (c := 30579) 3 rfl (by decide) h2
+  have c5 := cvt16w_val (d := ${d11}) (a := ${d10}) (byteAt_lt w2 3)
+  have q6 := prmt_val (d := ${d12}) (a := ${s12_0}) (c := 30576) 0 rfl (by decide) h2
+  have c6 := cvt16w_val (d := ${d13}) (a := ${d12}) (byteAt_lt w2 0)
+  have q7 := prmt_val (d := ${d14}) (a := ${s14_0}) (c := 30577) 1 rfl (by decide) h2
+  have c7 := cvt16w_val (d := ${d15}) (a := ${d14}) (byteAt_lt w2 1)
+  have q8 := prmt_val (d := ${d16}) (a := ${s16_0}) (c := 30578) 2 rfl (by decide) h1
+  have c8 := cvt16w_val (d := ${d17}) (a := ${d16}) (byteAt_lt w1 2)
+  have q9 := prmt_val (d := ${d18}) (a := ${s18_0}) (c := 30579) 3 rfl (by decide) h1
+  have c9 := cvt16w_val (d := ${d19}) (a := ${d18}) (byteAt_lt w1 3)
+  have q10 := prmt_val (d := ${d20}) (a := ${s20_0}) (c := 30576) 0 rfl (by decide) h1
+  have c10 := cvt16w_val (d := ${d21}) (a := ${d20}) (byteAt_lt w1 0)
+  have q11 := prmt_val (d := ${d22}) (a := ${s22_0}) (c := 30577) 1 rfl (by decide) h1
+  have c11 := cvt16w_val (d := ${d23}) (a := ${d22}) (byteAt_lt w1 1)
+  have q12 := prmt_val (d := ${d24}) (a := ${s24_0}) (c := 30578) 2 rfl (by decide) h0
+  have c12 := cvt16w_val (d := ${d25}) (a := ${d24}) (byteAt_lt w0 2)
+  have q13 := prmt_val (d := ${d26}) (a := ${s26_0}) (c := 30579) 3 rfl (by decide) h0
+  have c13 := cvt16w_val (d := ${d27}) (a := ${d26}) (byteAt_lt w0 3)
+  have q14 := prmt_val (d := ${d28}) (a := ${s28_0}) (c := 30576) 0 rfl (by decide) h0
+  have c14 := cvt16w_val (d := ${d29}) (a := ${d28}) (byteAt_lt w0 0)
+  have q15 := prmt_val (d := ${d30}) (a := ${s30_0}) (c := 30577) 1 rfl (by decide) h0
+  have c15 := cvt16w_val (d := ${d31}) (a := ${d30}) (byteAt_lt w0 1)
+  refine ⟨⟨?_, ha⟩, fun R hR => ?_⟩
+  · simp only [${run}_items0, ${run}_facts0, xCond, XItem.cond, XItem.upd, XItem.vals,
+      List.foldl, List.map, lookupD, List.lookup, Function.update_apply, Nat.reduceBEq,
+      Nat.reduceEqDiff, ↓reduceIte, Option.getD_some, ${op0}, ${op1}, ${op2}, ${op3}, ${op4}, ${op5}, ${op6}, ${op7}, ${op8}, ${op9}, ${op10}, ${op11}, ${op12}, ${op13}, ${op14}, ${op15}, ${op16}, ${op17}, ${op18}, ${op19}, ${op20}, ${op21}, ${op22}, ${op23}, ${op24}, ${op25}, ${op26}, ${op27}, ${op28}, ${op29}, ${op30}, ${op31}, hV0, hV1, hV2, hV3, q0, c0, q1, c1, q2, c2, q3, c3, q4, c4, q5, c5, q6, c6, q7, c7, q8, c8, q9, c9, q10, c10, q11, c11, q12, c12, q13, c13, q14, c14, q15, c15, okVal,
+      Except.ok.injEq, exists_eq', and_self]
+  · simp only [${run}_facts2, ${v0}, ${v1}, ${v2}, ${v3}, ${v4}, ${v5}, ${v6}, ${v7}, ${v8}, ${v9}, ${v10}, ${v11}, ${v12}, ${v13}, ${v14}, ${v15}, ${v16}, ${v17}, ${v18}, ${v19}, ${v20}, ${v21}, ${v22}, ${v23}, ${v24}, ${v25}, ${v26}, ${v27}, ${v28}, ${v29}, ${v30}, ${v31}, ${op0}, ${op1}, ${op2}, ${op3}, ${op4}, ${op5}, ${op6}, ${op7}, ${op8}, ${op9}, ${op10}, ${op11}, ${op12}, ${op13}, ${op14}, ${op15}, ${op16}, ${op17}, ${op18}, ${op19}, ${op20}, ${op21}, ${op22}, ${op23}, ${op24}, ${op25}, ${op26}, ${op27}, ${op28}, ${op29}, ${op30}, ${op31}, hV0, hV1, hV2, hV3, q0, c0, q1, c1, q2, c2, q3, c3, q4, c4, q5, c5, q6, c6, q7, c7, q8, c8, q9, c9, q10, c10, q11, c11, q12, c12, q13, c13, q14, c14, q15, c15, okVal, holds_cons,
+      holds_nil, and_true] at hR
+    simp only [scaleFacts, holds_cons, holds_nil, Nat.reduceAdd, b00, b01, b02, b03,
+      b10, b11, b12, b13, b20, b21, b22, b23, b30, b31, b32, b33, hR, and_self]

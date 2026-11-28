@@ -1,0 +1,61 @@
+{
+ "ptx": "Kernels/InklingRelDecode/rel_verify_sm100a.ptx",
+ "namespace": "PTX.Kernels.InklingRelDecode.Proof.Softmax.Gen",
+ "output": "Kernels/InklingRelDecode/Gen/EpiPack.lean",
+ "imports": [
+  "Kernels.InklingRelDecode.Flow.Code",
+  "Kernels.InklingRelDecode.Proof.Softmax.GenRulesL"
+ ],
+ "kernel": "PTX.Kernels.InklingRelDecode.kernel",
+ "code": "PTX.Kernels.InklingRelDecode.Flow",
+ "assumptions": "PTX.Kernels.InklingRelDecode.Assumptions.all",
+ "runs": [
+  {
+   "name": "epk",
+   "at": true,
+   "start": 2609,
+   "end": 2642,
+   "cut": 33,
+   "outputs": [
+    "%rd398",
+    "%rd399",
+    "%rd400",
+    "%rd401",
+    "%rd402",
+    "%rd403",
+    "%rd404",
+    "%rd405",
+    "%rd406",
+    "%rd407",
+    "%rd408",
+    "%rd409",
+    "%rd410",
+    "%rd411",
+    "%rd412",
+    "%rd413",
+    "%rd414",
+    "%rd415",
+    "%rd416",
+    "%rd417",
+    "%rd418",
+    "%rd419",
+    "%rd420",
+    "%rd421",
+    "%rd422",
+    "%rd423",
+    "%rd424",
+    "%rd425",
+    "%rd426",
+    "%rd427",
+    "%rd428",
+    "%rd429",
+    "%rd430"
+   ],
+   "segfree": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.epSegFree (pc := {pc}) rfl)",
+   "rules": {
+    "pack": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_moveL {pc} rfl"
+   },
+   "fn": {}
+  }
+ ]
+}

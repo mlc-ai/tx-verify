@@ -1,0 +1,108 @@
+{
+ "ptx": "Kernels/FlashMlaSparseDecodeH64/v41_h64_no_split_plain.ptx",
+ "namespace": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.Gen",
+ "output": "Kernels/FlashMlaSparseDecodeH64/Proof/Wg0/Gen/Peer1.lean",
+ "decoded": "Kernels/FlashMlaSparseDecodeH64/Data/Decoded.lean",
+ "imports": [
+  "Kernels.FlashMlaSparseDecodeH64.Flow.Code",
+  "Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.PeerRules"
+ ],
+ "kernel": "PTX.Kernels.FlashMlaSparseDecodeH64.kernel",
+ "code": "PTX.Kernels.FlashMlaSparseDecodeH64.Flow",
+ "assumptions": "PTX.Kernels.FlashMlaSparseDecodeH64.Assumptions.all",
+ "runs": [
+  {
+   "name": "pk434",
+   "start": 434,
+   "end": 443,
+   "cut": 32,
+   "outputs": [
+    "%rq5"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.noRule{cls} (op := {op}) {pc}) {checks}",
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_pack {pc}"
+   },
+   "fn": {
+    "cvt.u64.u32": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_ext {pc} rfl"
+    },
+    "shl.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upperE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_upper {pc} rfl"
+    },
+    "or.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mgOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mergeE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_merge {pc} rfl"
+    }
+   }
+  },
+  {
+   "name": "pk444",
+   "start": 444,
+   "end": 453,
+   "cut": 32,
+   "outputs": [
+    "%rq6"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.noRule{cls} (op := {op}) {pc}) {checks}",
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_pack {pc}"
+   },
+   "fn": {
+    "cvt.u64.u32": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_ext {pc} rfl"
+    },
+    "shl.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upperE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_upper {pc} rfl"
+    },
+    "or.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mgOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mergeE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_merge {pc} rfl"
+    }
+   }
+  },
+  {
+   "name": "pk454",
+   "start": 454,
+   "end": 463,
+   "cut": 32,
+   "outputs": [
+    "%rq7"
+   ],
+   "segfree": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}",
+   "rules": {
+    "core": "{lemma} (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.w0SegFree {pc}) (PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.noRule{cls} (op := {op}) {pc}) {checks}",
+    "pack": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_pack {pc}"
+   },
+   "fn": {
+    "cvt.u64.u32": {
+     "op": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extOp",
+     "f": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.extE",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_ext {pc} rfl"
+    },
+    "shl.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.upperE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_upper {pc} rfl"
+    },
+    "or.b64": {
+     "op": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mgOp {d} {srcs})",
+     "f": "(PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.mergeE {d} {srcs})",
+     "rule": "PTX.Kernels.FlashMlaSparseDecodeH64.Proof.Wg0.rule_merge {pc} rfl"
+    }
+   }
+  }
+ ]
+}

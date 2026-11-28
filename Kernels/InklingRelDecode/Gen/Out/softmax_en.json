@@ -1,0 +1,183 @@
+{
+ "ptx": "Kernels/InklingRelDecode/rel_verify_sm100a.ptx",
+ "namespace": "PTX.Kernels.InklingRelDecode.Proof.Softmax.Gen",
+ "output": "Kernels/InklingRelDecode/Gen/SoftmaxEntry.lean",
+ "decoded": "Kernels/InklingRelDecode/Data/Decoded.lean",
+ "imports": [
+  "Kernels.InklingRelDecode.Flow.Code",
+  "Kernels.InklingRelDecode.Proof.Softmax.GenRulesC"
+ ],
+ "kernel": "PTX.Kernels.InklingRelDecode.kernel",
+ "code": "PTX.Kernels.InklingRelDecode.Flow",
+ "assumptions": "PTX.Kernels.InklingRelDecode.Assumptions.all",
+ "runs": [
+  {
+   "name": "en",
+   "at": true,
+   "start": 576,
+   "end": 597,
+   "cut": 32,
+   "outputs": [
+    "%r35",
+    "%r337",
+    "%p1",
+    "%p2"
+   ],
+   "segfree": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.smSegFree (pc := {pc}) rfl)",
+   "rules": {
+    "pack": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "mov": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "movImm": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "selp": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "core": "{lemma} (PTX.Kernels.InklingRelDecode.Proof.Softmax.smSegFree (pc := {pc}) rfl) (PTX.Kernels.InklingRelDecode.Proof.Softmax.noRuleSm (op := {op}) {pc} rfl rfl) {checks}"
+   },
+   "fn": {}
+  },
+  {
+   "name": "dv",
+   "at": true,
+   "start": 599,
+   "end": 602,
+   "cut": 32,
+   "outputs": [
+    "%r344",
+    "%r37"
+   ],
+   "segfree": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.segFreeLt (pc := {pc}) (by omega))",
+   "rules": {
+    "pack": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "mov": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "movImm": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "selp": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "core": "{lemma} (PTX.Kernels.InklingRelDecode.Proof.Softmax.smSegFree (pc := {pc}) rfl) (PTX.Kernels.InklingRelDecode.Proof.Softmax.noRuleSm (op := {op}) {pc} rfl rfl) {checks}"
+   },
+   "fn": {
+    "div.full.f32": {
+     "op": "(PTX.Flow.fOp PTX.Kernels.InklingRelDecode.Proof.Softmax.divFullI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Kernels.InklingRelDecode.Proof.Softmax.divFullE [{o1}, {o2}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_divFull {pc} rfl rfl"
+    },
+    "mul.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.mulI false) {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.mulL false) [{o1}, {o2}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_mulC {pc} rfl rfl"
+    }
+   }
+  },
+  {
+   "name": "e8",
+   "at": true,
+   "start": 609,
+   "end": 610,
+   "cut": 32,
+   "outputs": [
+    "%rd8"
+   ],
+   "segfree": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.smSegFree (pc := {pc}) rfl)",
+   "rules": {
+    "pack": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "mov": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "movImm": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "selp": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "core": "{lemma} (PTX.Kernels.InklingRelDecode.Proof.Softmax.smSegFree (pc := {pc}) rfl) (PTX.Kernels.InklingRelDecode.Proof.Softmax.noRuleSm (op := {op}) {pc} rfl rfl) {checks}"
+   },
+   "fn": {}
+  },
+  {
+   "name": "ng",
+   "at": true,
+   "start": 807,
+   "end": 808,
+   "cut": 32,
+   "outputs": [
+    "%r38"
+   ],
+   "segfree": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.segFreeLt (pc := {pc}) (by omega))",
+   "rules": {
+    "pack": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "mov": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "movImm": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "selp": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "core": "{lemma} (PTX.Kernels.InklingRelDecode.Proof.Softmax.smSegFree (pc := {pc}) rfl) (PTX.Kernels.InklingRelDecode.Proof.Softmax.noRuleSm (op := {op}) {pc} rfl rfl) {checks}"
+   },
+   "fn": {
+    "neg.f32": {
+     "op": "(PTX.Flow.fOp (PTX.Flow.negI false) {d} [{o1}])",
+     "f": "(PTX.Flow.fF (PTX.Flow.negL false) [{o1}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_negC {pc} rfl rfl"
+    }
+   }
+  },
+  {
+   "name": "ie",
+   "at": true,
+   "start": 814,
+   "end": 816,
+   "cut": 32,
+   "outputs": [
+    "%r349",
+    "%r350"
+   ],
+   "segfree": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.smSegFree (pc := {pc}) rfl)",
+   "rules": {
+    "pack": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "mov": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "movImm": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "selp": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "core": "{lemma} (PTX.Kernels.InklingRelDecode.Proof.Softmax.smSegFree (pc := {pc}) rfl) (PTX.Kernels.InklingRelDecode.Proof.Softmax.noRuleSm (op := {op}) {pc} rfl rfl) {checks}"
+   },
+   "fn": {}
+  },
+  {
+   "name": "io",
+   "at": true,
+   "start": 848,
+   "end": 943,
+   "cut": 32,
+   "outputs": [
+    "%rd12",
+    "%rd13",
+    "%rd14",
+    "%rd15",
+    "%rd16",
+    "%rd17",
+    "%rd18",
+    "%rd19",
+    "%rd20",
+    "%rd21",
+    "%rd22",
+    "%rd23",
+    "%rd24",
+    "%rd25",
+    "%rd26",
+    "%rd27",
+    "%rd28",
+    "%rd29",
+    "%rd30",
+    "%rd31",
+    "%rd32",
+    "%rd33",
+    "%rd34",
+    "%rd35",
+    "%rd36",
+    "%rd37",
+    "%rd38",
+    "%rd39",
+    "%rd40",
+    "%rd41",
+    "%rd42",
+    "%rd43",
+    "%rd44"
+   ],
+   "segfree": "(PTX.Kernels.InklingRelDecode.Proof.Softmax.smSegFree (pc := {pc}) rfl)",
+   "rules": {
+    "pack": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "mov": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "movImm": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "selp": "PTX.Kernels.InklingRelDecode.Proof.Softmax.rule_move {pc} rfl rfl",
+    "core": "{lemma} (PTX.Kernels.InklingRelDecode.Proof.Softmax.smSegFree (pc := {pc}) rfl) (PTX.Kernels.InklingRelDecode.Proof.Softmax.noRuleSm (op := {op}) {pc} rfl rfl) {checks}"
+   },
+   "fn": {}
+  }
+ ]
+}

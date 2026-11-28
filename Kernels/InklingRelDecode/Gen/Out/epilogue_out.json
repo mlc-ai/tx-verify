@@ -1,0 +1,64 @@
+{
+ "ptx": "Kernels/InklingRelDecode/rel_verify_sm100a.ptx",
+ "namespace": "PTX.Kernels.InklingRelDecode.Proof.Epilogue.Gen",
+ "output": "Kernels/InklingRelDecode/Gen/EpiOut.lean",
+ "imports": [
+  "Kernels.InklingRelDecode.Flow.Code",
+  "Kernels.InklingRelDecode.Proof.Lib.EpiRules"
+ ],
+ "kernel": "PTX.Kernels.InklingRelDecode.kernel",
+ "code": "PTX.Kernels.InklingRelDecode.Flow",
+ "assumptions": "PTX.Kernels.InklingRelDecode.Assumptions.all",
+ "runs": [
+  {
+   "name": "epm",
+   "at": true,
+   "start": 2642,
+   "end": 2674,
+   "cut": 32,
+   "outputs": [
+    "%rd531",
+    "%rd532",
+    "%rd533",
+    "%rd534",
+    "%rd535",
+    "%rd536",
+    "%rd537",
+    "%rd538",
+    "%rd539",
+    "%rd540",
+    "%rd541",
+    "%rd542",
+    "%rd543",
+    "%rd544",
+    "%rd545",
+    "%rd546",
+    "%rd547",
+    "%rd548",
+    "%rd549",
+    "%rd550",
+    "%rd551",
+    "%rd552",
+    "%rd553",
+    "%rd554",
+    "%rd555",
+    "%rd556",
+    "%rd557",
+    "%rd558",
+    "%rd559",
+    "%rd560",
+    "%rd561",
+    "%rd562"
+   ],
+   "segfree": "(PTX.Kernels.InklingRelDecode.Proof.Lib.epmSegFree (pc := {pc}) rfl)",
+   "rules": {},
+   "fn": {
+    "mul.f32x2": {
+     "op": "(PTX.Flow.fOp PTX.Flow.mul2NI {d} [{o1}, {o2}])",
+     "f": "(PTX.Flow.fF PTX.Flow.mul2NL [{o1}, {o2}])",
+     "rule": "PTX.Kernels.InklingRelDecode.Proof.Lib.rule_mul2N {pc} rfl"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+  "ptx": "Kernels/TmlFa4Fwd/full_p16_s1.ptx",
+  "namespace": "PTX.Tests.Gen.Unpack",
+  "output": "Tests/Gen/Out/Unpack.lean",
+  "imports": [
+    "Kernels.TmlFa4Fwd.Flow.Code",
+    "Tests.Gen.Out.ExpoRules"
+  ],
+  "kernel": "PTX.Kernels.TmlFa4Fwd.Decoded.kernel",
+  "code": "PTX.Kernels.TmlFa4Fwd.Flow",
+  "assumptions": "PTX.Kernels.TmlFa4Fwd.Assumptions.all",
+  "runs": [
+    {
+      "name": "unp",
+      "yunpack": true,
+      "start": 3502,
+      "end": 3506,
+      "cut": 2,
+      "outputs": [
+        "%rs1",
+        "%rs2",
+        "%rs7",
+        "%rs8"
+      ],
+      "segfree": "PTX.Tests.Gen.ExpoRules.segFree {pc} rfl",
+      "rules": {
+        "unpack32": "PTX.Flow.YItem.unpack_rule rfl (fun s _ => PTX.Tests.Gen.ExpoRules.moveNone s _)"
+      },
+      "out": "unp_facts2 {V}"
+    }
+  ]
+}

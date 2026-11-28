@@ -1,0 +1,18 @@
+{
+  "decoded": "Kernels/InklingRelDecode/Data/Decoded.lean",
+  "output": "Kernels/InklingRelDecode/Gen/StepPrologue05.lean",
+  "namespace": "PTX.Kernels.InklingRelDecode.Flow",
+  "kernel": "PTX.Kernels.InklingRelDecode.kernel",
+  "assumptions": "PTX.Kernels.InklingRelDecode.Assumptions.all",
+  "imports": [
+    "Kernels.InklingRelDecode.Flow.Code",
+    "Kernels.InklingRelDecode.Proof.Lib.Segments"
+  ],
+  "ranges": [
+    [
+      274,
+      328
+    ]
+  ],
+  "segfree": "exact PTX.Kernels.InklingRelDecode.Proof.segFree (by decide)"
+}

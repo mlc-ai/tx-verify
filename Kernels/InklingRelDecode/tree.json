@@ -1,0 +1,339 @@
+{
+  "kernel": "InklingRelDecode",
+  "instructions": 2856,
+  "root": "Kernels/InklingRelDecode/Proof",
+  "namespace": "PTX.Kernels.InklingRelDecode.Proof",
+  "old_roots": [],
+  "roles": {
+    "Startup": [],
+    "Prologue": [],
+    "Softmax": [],
+    "Epilogue": [],
+    "Dispatch": [],
+    "Loader": [],
+    "Mma": []
+  },
+  "common": "Common",
+  "lower": [
+    "Iface",
+    "Lib"
+  ],
+  "upper": [
+    "Protocol",
+    "Top",
+    "Bound"
+  ],
+  "generated": [
+    "Gen"
+  ],
+  "state_names": [
+    "stateAt",
+    "\\.D\\b",
+    "\\bSite\\b",
+    "\\bRef[A-Z]?\\w*"
+  ],
+  "top": {
+    "correct": "Top/Correct.lean",
+    "theorem": "correct",
+    "open": null,
+    "variables": [
+      "{Q : Params}",
+      "{L : Launch}",
+      "{m : Mem0}"
+    ],
+    "hypothesis": "(hp : Pre Q L m)",
+    "conclusion": "Correct kernel Assumptions.all L m (Post Q m)"
+  },
+  "closed": true,
+  "ceilings": {
+    "upper imports of role internals": 0,
+    "imports between roles": 0,
+    "upper import all": 0,
+    "upper names of role invariants": 0,
+    "upper case splits on the role": 0,
+    "upper state names": 0,
+    "imports of old trees": 0,
+    "positional projections": 0,
+    "copied proof lines": 0,
+    "hData hN hD hS call lines": 0,
+    "cases i with": 0,
+    "lane invariant unfolded": 0,
+    "all_goals simp_all": 0,
+    "code lookups per list element": 0,
+    "role table re-entered": 0,
+    "maxHeartbeats raises": 0,
+    "files over 500 lines": 0,
+    "handwritten lines": 130176,
+    "handwritten lines Common": 19736,
+    "handwritten lines Dispatch": 1277,
+    "handwritten lines Epilogue": 3824,
+    "handwritten lines Iface": 993,
+    "handwritten lines Lib": 10815,
+    "handwritten lines Loader": 5778,
+    "handwritten lines Mma": 7431,
+    "handwritten lines Prologue": 16845,
+    "handwritten lines Protocol/Alloc": 207,
+    "handwritten lines Protocol/Bar": 1277,
+    "handwritten lines Protocol/KV": 1979,
+    "handwritten lines Protocol/Mbar": 1442,
+    "handwritten lines Protocol/ODone": 63,
+    "handwritten lines Protocol/OFinal": 257,
+    "handwritten lines Protocol/P": 246,
+    "handwritten lines Protocol/S": 77,
+    "handwritten lines Protocol/Shared": 4993,
+    "handwritten lines Protocol/Tc": 520,
+    "handwritten lines Protocol/Tmem": 3723,
+    "handwritten lines Protocol/Values": 7705,
+    "handwritten lines Protocol/Warp": 203,
+    "handwritten lines Softmax": 33050,
+    "handwritten lines Startup": 1370,
+    "handwritten lines Top/.": 275,
+    "handwritten lines Top/Prog": 2164,
+    "handwritten lines Top/Result": 379,
+    "handwritten lines Top/Safe": 2222,
+    "generated files outside Gen": 0,
+    "modules unreachable from the top": 5,
+    "common imports of role internals": 114,
+    "copied proof lines zone A": 0,
+    "copied proof lines zone B": 0,
+    "handwritten lines Protocol/Life": 940,
+    "producer global HasUb": 0,
+    "handwritten lines Protocol/Alpha": 340,
+    "handwritten lines .": 45
+  },
+  "premises": {},
+  "iface": {
+    "CommitAfterPV": {
+      "producer": "W",
+      "status": "row-proved",
+      "domain": "complete"
+    },
+    "BaseRead": {
+      "producer": "C",
+      "domain": "consistent",
+      "status": "proved"
+    },
+    "KvPreload": {
+      "producer": "P",
+      "status": "row-proved",
+      "domain": "consistent",
+      "ahead": true
+    },
+    "MbarRow.Startup": {
+      "producer": "C",
+      "status": "row-proved",
+      "domain": "consistent",
+      "ahead": true
+    },
+    "MbarRow.Prologue": {
+      "producer": "P",
+      "status": "row-proved",
+      "domain": "consistent",
+      "ahead": true
+    },
+    "MbarRow.Softmax": {
+      "producer": "S",
+      "status": "row-proved",
+      "domain": "consistent",
+      "ahead": true
+    },
+    "MbarRow.Dispatch": {
+      "producer": "W",
+      "status": "row-proved",
+      "domain": "consistent",
+      "ahead": true
+    },
+    "MbarRow.Loader": {
+      "producer": "W",
+      "status": "row-proved",
+      "domain": "consistent",
+      "ahead": true
+    },
+    "MbarRow.Mma": {
+      "producer": "W",
+      "status": "row-proved",
+      "domain": "consistent",
+      "ahead": true
+    },
+    "MbarRow.Epilogue": {
+      "producer": "E",
+      "status": "row-proved",
+      "domain": "consistent",
+      "ahead": true
+    },
+    "MbarRow.Place": {
+      "producer": "C",
+      "status": "row-proved",
+      "domain": "consistent",
+      "ahead": true
+    },
+    "GlobalReads": {
+      "producer": "W",
+      "domain": "consistent",
+      "status": "proved"
+    },
+    "QueryTile": {
+      "producer": "W",
+      "status": "proved",
+      "domain": "consistent"
+    },
+    "KvCopyForm": {
+      "producer": "W",
+      "status": "proved",
+      "domain": "consistent"
+    },
+    "PWords": {
+      "producer": "W",
+      "status": "stated",
+      "domain": "consistent"
+    },
+    "RescaleWords": {
+      "producer": "W",
+      "status": "stated",
+      "domain": "consistent"
+    },
+    "LateValues": {
+      "producer": "W",
+      "status": "proved",
+      "domain": "consistent"
+    }
+  },
+  "lanes": {
+    "C": [
+      "Common/",
+      "Top/",
+      "Startup/",
+      "Kernels/InklingRelDecode/tree.json",
+      "Lib/",
+      "Iface/",
+      "Kernels/InklingRelDecode/Gen/",
+      "Tests/",
+      "Lemmas/"
+    ],
+    "W": [
+      "Dispatch/",
+      "Loader/",
+      "Mma/",
+      "Protocol/KV/",
+      "Lib/",
+      "Iface/",
+      "Kernels/InklingRelDecode/Gen/",
+      "Common/",
+      "Kernels/InklingRelDecode/tree.json",
+      "Tests/",
+      "Lemmas/",
+      "Protocol/",
+      "Top/",
+      "Softmax/",
+      "Prologue/",
+      "Epilogue/",
+      "Startup/",
+      "Tools/",
+      "tests/"
+    ],
+    "P": [
+      "Prologue/",
+      "Lib/",
+      "Iface/",
+      "Kernels/InklingRelDecode/Gen/",
+      "Kernels/InklingRelDecode/tree.json",
+      "Tests/",
+      "Lemmas/"
+    ],
+    "S": [
+      "Softmax/",
+      "Lib/",
+      "Iface/",
+      "Kernels/InklingRelDecode/Gen/",
+      "Kernels/InklingRelDecode/tree.json",
+      "Tests/",
+      "Lemmas/"
+    ],
+    "N": [
+      "Softmax/Data/",
+      "Softmax/Gen/",
+      "Protocol/Values/",
+      "Top/Result/",
+      "Lib/",
+      "Iface/",
+      "Kernels/InklingRelDecode/Gen/",
+      "Kernels/InklingRelDecode/tree.json",
+      "Tests/",
+      "Lemmas/"
+    ],
+    "E": [
+      "Epilogue/",
+      "Lib/",
+      "Iface/",
+      "Kernels/InklingRelDecode/Gen/",
+      "Kernels/InklingRelDecode/tree.json",
+      "Tests/",
+      "Lemmas/"
+    ],
+    "R": [
+      "Protocol/",
+      "Lib/",
+      "Iface/",
+      "Kernels/InklingRelDecode/Gen/",
+      "Kernels/InklingRelDecode/tree.json",
+      "Tests/",
+      "Lemmas/"
+    ],
+    "L": [
+      "Lemmas/",
+      "Tools/",
+      "tests/",
+      "Tests/",
+      "Kernels/InklingRelDecode/tree.json"
+    ]
+  },
+  "budget": {
+    "Common": 3000,
+    "Startup": 800,
+    "Lib": 3300,
+    "Prologue": 5800,
+    "Softmax": 12200,
+    "Epilogue": 3900,
+    "Dispatch": 800,
+    "Loader": 3200,
+    "Mma": 3500,
+    "Top": 4300,
+    "Progress": 1100,
+    "Bound": 400,
+    "Protocol/Mbar": 1200,
+    "Protocol/KV": 2200,
+    "Protocol/S": 500,
+    "Protocol/P": 1000,
+    "Protocol/ODone": 500,
+    "Protocol/OFinal": 300,
+    "Protocol/Life": 1100,
+    "Protocol/Bar": 2300,
+    "Protocol/Warp": 1400,
+    "Protocol/Tmem": 2900,
+    "Protocol/Shared": 4000,
+    "Protocol/Values": 3300
+  },
+  "bundles": [
+    "Inputs",
+    "Rows"
+  ],
+  "patterns": [
+    [
+      "producer global HasUb",
+      [
+        "Startup",
+        "Prologue",
+        "Softmax",
+        "Epilogue",
+        "Dispatch",
+        "Loader",
+        "Mma",
+        "Common",
+        "Protocol"
+      ],
+      "¬ ?HasUb",
+      false
+    ]
+  ],
+  "lower_lines": false
+}

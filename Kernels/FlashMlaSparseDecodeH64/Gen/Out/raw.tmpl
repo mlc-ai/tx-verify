@@ -1,0 +1,32 @@
+-- shape: cvt.u16.u64 shr.u64 cvt.u16.u64 shr.u64 cvt.u16.u64 shr.u64 cvt.u16.u64
+/-- **The halfwords of the raw word of `${run}`** (pcs ${start} to ${end}): every outcome is
+defined and the four halfwords are those of the word `w`. -/
+theorem ${name} {w : Nat} (hw : w < 2 ^ 64) {V : Nat → Value}
+    (hV : V ${s0_0} = .bits 64 (BitVec.ofNat 64 w)) :
+    ${run}_cond V ∧ ${v0} V = bits16 (byteAt w 0 + 256 * byteAt w 1) ∧
+      ${v2} V = bits16 (byteAt w 2 + 256 * byteAt w 3) ∧
+      ${v4} V = bits16 (byteAt w 4 + 256 * byteAt w 5) ∧
+      ${v6} V = bits16 (byteAt w 6 + 256 * byteAt w 7) := by
+  have c0 := cvt16_val (d := ${d0}) (a := ${s0_0}) hw
+  have s1 := shr_val (d := ${d1}) (a := ${s0_0}) 16 (by decide) hw
+  have s2 := shr_val (d := ${d3}) (a := ${s0_0}) 32 (by decide) hw
+  have s3 := shr_val (d := ${d5}) (a := ${s0_0}) 48 (by decide) hw
+  have c1 := cvt16_val (d := ${d2}) (a := ${d1}) (div_lt hw 16)
+  have c2 := cvt16_val (d := ${d4}) (a := ${d3}) (div_lt hw 32)
+  have c3 := cvt16_val (d := ${d6}) (a := ${d5}) (div_lt hw 48)
+  have h0 := half_eq w 0
+  have h1 := half_eq w 1
+  have h2 := half_eq w 2
+  have h3 := half_eq w 3
+  simp only [Nat.mul_zero, pow_zero, Nat.div_one, Nat.mul_one, Nat.reduceMul, Nat.zero_add,
+    Nat.reduceAdd] at h0 h1 h2 h3
+  simp only [Nat.cast_ofNat] at s1 s2 s3
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · simp only [${run}_cond, ${run}_items0, ${run}_facts0, xCond, XItem.cond, XItem.upd,
+      XItem.vals, List.foldl, List.map, lookupD, List.lookup, Function.update_apply,
+      Nat.reduceBEq, Nat.reduceEqDiff, ↓reduceIte, Option.getD_some, ${op0}, ${op1}, ${op2},
+      ${op3}, ${op4}, ${op5}, ${op6}, hV, c0, s1, s2, s3, okVal, c1, c2, c3, Except.ok.injEq,
+      exists_eq', and_self]
+  all_goals simp only [${v0}, ${v1}, ${v2}, ${v3}, ${v4}, ${v5}, ${v6}, ${op0}, ${op1},
+    ${op2}, ${op3}, ${op4}, ${op5}, ${op6}, hV, c0, s1, s2, s3, okVal, c1, c2, c3, h0, h1, h2,
+    h3]
